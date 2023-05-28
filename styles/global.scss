@@ -1,0 +1,45 @@
+main {
+  min-height: 100vh;
+  position: relative;
+  background: white;
+}
+
+/* Customize website's scrollbar like Mac OS
+Not supports in Firefox and IE */
+
+/* total width */
+// body::-webkit-scrollbar {
+//   background-color: transparent;
+//   width: 6px;
+// }
+
+// /* background of the scrollbar except button or resizer */
+// body::-webkit-scrollbar-track {
+//   background-color: transparent;
+// }
+
+// /* scrollbar itself */
+// body::-webkit-scrollbar-thumb {
+//   background-color: rgba(255, 255, 255, 0.4);
+//   border-radius: 3px;
+//   cursor: pointer;
+//   &:hover {
+//     background-color: rgba(255, 255, 255, 0.3);
+//   }
+// }
+
+// /* set button(top and bottom of the scrollbar) */
+// body::-webkit-scrollbar-button {
+//   display: none;
+// }
+
+// input:-webkit-autofill,
+// input:-webkit-autofill:hover,
+// input:-webkit-autofill:focus,
+// input:-webkit-autofill:active {
+//   transition: background-color 9999s ease-in-out 0s !important;
+// }
+
+// input:-webkit-autofill {
+//   -webkit-text-fill-color: white !important;
+// }

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
+    <defs>
+        <linearGradient id="iupilcn06a" x1="-6.934" y1="10.216" x2="-6.934" y2="10.241" gradientUnits="objectBoundingBox">
+            <stop offset="0" stop-color="#0062e0"/>
+            <stop offset="1" stop-color="#19afff"/>
+        </linearGradient>
+    </defs>
+    <g data-name="Group 163">
+        <g data-name="Facebook_f_logo_(2021)">
+            <path data-name="Path 346" d="M10.438 24.874A12.525 12.525 0 0 1 12.5 0a12.525 12.525 0 0 1 2.062 24.874l-.687-.562h-2.75z" style="fill:url(#iupilcn06a)"/>
+            <path data-name="Path 347" d="m21.885 19.02.567-3.53h-3.34v-2.458c0-1.009.378-1.765 1.891-1.765h1.639V8.052a20.614 20.614 0 0 0-2.774-.252 4.568 4.568 0 0 0-4.917 4.917v2.773H11.8v3.53h3.152v8.888a11.535 11.535 0 0 0 4.16 0V19.02z" transform="translate(-4.472 -3.096)" style="fill:#fff"/>
+        </g>
+    </g>
+</svg>
