@@ -35,8 +35,8 @@ const Modal = () => {
           </ImgCircle>
           <Typography variant="h1">Pablo Escobar</Typography>
           <Labels className="labels-modal">
-            <Label />
-            <Label />
+            {/* <Label />
+            <Label /> */}
           </Labels>
           <Typography>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque pretium lectus id turpis. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas sollicitudin. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Praessto inelementum ultrices.</Typography>
           <ul>
@@ -65,7 +65,7 @@ const Modal = () => {
             </div>
           </ModalWinners>
         </ModalContentWrap>
-        <Galery modal />
+        {/* <Galery modal /> */}
       </ModalBody>
     </ModalS>
   )

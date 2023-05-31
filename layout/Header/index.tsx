@@ -26,8 +26,6 @@ const Header = () => {
 
   // const [isOpen, setOpen] = useState(false)
 
-  console.log(nav)
-
   return (
     <Container maxWidth="xl">
       <HeaderS>
