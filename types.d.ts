@@ -110,6 +110,7 @@ interface ILineup {
       labels: ILabels;
     }[]
   }
+  modal?: boolean
 }
 
 interface IVouchers {

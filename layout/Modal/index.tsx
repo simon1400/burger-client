@@ -9,21 +9,46 @@ import { Labels } from "styles/Labels"
 import Label from "components/Label"
 import { Typography } from "@mui/material"
 import Link from "next/link"
+import { useRouter } from "next/router"
+import { useEffect } from "react"
+import { useLazyQuery } from "@apollo/client"
+import { getSeller } from "queries/sellers"
+
+const APP_API = process.env.APP_API
 
 const Modal = () => {
 
   const dispatch = useDispatch()
 
   const {modal} = useSelector(selectAllState)
+  const [getData, {data, loading}] = useLazyQuery(getSeller)
 
   const handleClose = () => {
-    dispatch(changeModal(false))
+    dispatch(changeModal(""))
   }
 
+  useEffect(() => {
+    console.log(modal)
+    if(modal) {
+      getData({variables: {
+        slug: modal
+      }})
+    }
+  }, [modal])
+
+  if(!data?.sellers.data.length) {
+    return null
+  }
+
+  
+
+  const seller = data.sellers.data[0].attributes
+  console.log(seller)
   return (
     <ModalS
+      fullWidth
       maxWidth="lg"
-      open={modal}
+      open={!!modal.length}
       scroll="body"
       onClose={handleClose}
     >
@@ -31,41 +56,35 @@ const Modal = () => {
         <TimesIcon onClick={() => handleClose()} className="times-icon" />
         <ModalContentWrap>
           <ImgCircle className="logo-img">
-            <Image src="/img/winner.webp" fill alt="" />
+            <Image src={APP_API+seller.image.data.attributes.url} fill alt="" />
           </ImgCircle>
-          <Typography variant="h1">Pablo Escobar</Typography>
+          <Typography variant="h1">{seller.title}</Typography>
           <Labels className="labels-modal">
-            {/* <Label />
-            <Label /> */}
+            {seller.category.data.map((item: any, idx: number) => <Label data={item.attributes} />)}
+            {seller.labels.data.map((item: any, idx: number) => <Label data={item.attributes} />)}
           </Labels>
-          <Typography>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque pretium lectus id turpis. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas sollicitudin. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Praessto inelementum ultrices.</Typography>
-          <ul>
-            <li>
-              <Link href="/">odkaz</Link>
-            </li>
-            <li>
-              <Link href="/">odkaz</Link>
-            </li>
-            <li>
-              <Link href="/">odkaz</Link>
-            </li>
-          </ul>
+          <Typography component="div" dangerouslySetInnerHTML={{__html: seller.content}}/>
+          {!!seller.socials.length && <ul>
+            {seller.socials.map((item: any, idx: number) => <li key={idx}>
+              <Link href={item.link}>{item.text}</Link>
+            </li>)}
+          </ul>}
           <ModalWinners>
             <div>
-              <b>3x</b>
+              <b>{seller.festival1.data.length}x</b>
               <span>1. misto</span>
             </div>
             <div>
-              <b>3x</b>
-              <span>1. misto</span>
+              <b>{seller.festival2.data.length}x</b>
+              <span>2. misto</span>
             </div>
             <div>
-              <b>3x</b>
-              <span>1. misto</span>
+              <b>{seller.festival3.data.length}x</b>
+              <span>3. misto</span>
             </div>
           </ModalWinners>
         </ModalContentWrap>
-        {/* <Galery modal /> */}
+        <Galery images={seller.galery} modal />
       </ModalBody>
     </ModalS>
   )

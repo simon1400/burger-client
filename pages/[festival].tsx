@@ -50,7 +50,7 @@ const Festival: NextPage<{festival: IFestival}> = ({
       <Head data={festival.title} />
       <BlockContent time head={festival.place} content={festival.content} />
       <FacebookEvent single data={festival.social} />
-      <Lineup head="Lineup" data={festival.lineup.data.map((item: any) => item.attributes)} />
+      <Lineup head="Lineup" data={festival.lineup.data.map((item: any) => item.attributes)} modal />
       <Winners winner1={festival.winner1} winner2={festival.winner2} winner3={festival.winner3} />
       <Lineup head="Výherci voucherů" data={festival.vouchers} /> 
       {!!festival.galery.data?.length && <Galery images={festival.galery} />}

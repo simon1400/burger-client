@@ -4,18 +4,18 @@ import { HYDRATE } from "next-redux-wrapper";
 import { AppState } from 'stores';
 
 export interface State {
-  modal: boolean;
+  modal: string;
 }
 
 const initialState: State = {
-  modal: false
+  modal: ""
 }
 
 export const stateReducer = createSlice({
   name: 'state',
   initialState,
   reducers: {
-    changeModal: (state, action: PayloadAction<boolean>) => {
+    changeModal: (state, action: PayloadAction<string>) => {
       state.modal = action.payload
     },
   },

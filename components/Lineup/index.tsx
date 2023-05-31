@@ -5,7 +5,6 @@ import IconButton from "components/IconButton"
 import ArrowRight from 'public/img/arrow-right.svg'
 import Button from "components/Button"
 import FacebookEvent from "components/FacebookEvent"
-import IconType from 'public/img/type.svg'
 import Label from "components/Label"
 import { useDispatch } from "react-redux"
 import { changeModal } from "stores/slices/stateSlices"
@@ -17,13 +16,15 @@ const APP_API = process.env.APP_API
 
 const Lineup: FC<ILineup> = ({
   head,
-  data
+  data,
+  modal
 }) => {
 
   const dispatch = useDispatch()
 
-  const handleModal = () => {
-    dispatch(changeModal(true))
+  const handleModal = (slug: string) => {
+    console.log(slug)
+    dispatch(changeModal(slug))
   }
 
   return (
@@ -36,7 +37,7 @@ const Lineup: FC<ILineup> = ({
               {/* <span className="status"></span> */}
               {item.from && item.to && <time>{item.from} - {item.to}</time>}
               {item.category?.data && <div className="icon-type">
-                <Image src={APP_API+item.category.data.attributes.icon.data.attributes.url} width={30} height={30} alt="" />
+                <Image src={APP_API+item.category.data[0].attributes.icon.data.attributes.url} width={30} height={30} alt="" />
               </div>}
               {item.title && <p>{item.title}</p>}
               {item.name && <p>{item.name}</p>}
@@ -46,12 +47,12 @@ const Lineup: FC<ILineup> = ({
             </div>
             <div>
               {item.social && <FacebookEvent data={item.social} />}
-              {item.slug && <IconButton href={item.slug}>
+              {!modal && !!item.slug && <IconButton href={item.slug}>
                 <ArrowRight />
               </IconButton>}
-              {/* <IconButton onClick={handleModal}>
+              {!!modal && <IconButton onClick={() => handleModal(item.slug)}>
                 <ArrowRight />
-              </IconButton> */}
+              </IconButton>}
               {item?.number && <b>{item.number}</b>}
             </div>
           </li>)}

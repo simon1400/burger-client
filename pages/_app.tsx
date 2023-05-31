@@ -31,7 +31,7 @@ const MyApp: FC<MyAppProps> = ({ Component, ...rest }) => {
             <Header />
             <Component {...pageProps} />
             <Footer />
-            {/* <Modal /> */}
+            <Modal />
           </WithGraphQL>
         </ThemeProvider>
       </CacheProvider>
