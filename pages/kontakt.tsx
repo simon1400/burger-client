@@ -7,42 +7,58 @@ import ContactLine from "components/ContactLine"
 import { ContactLines } from "styles/ContactLines"
 import Times from 'public/img/times.svg'
 import ContactItem from "components/ContactItem"
+import { wrapper } from "stores"
+import { client } from "lib/api"
+import contactQuery from "queries/contact"
+import { changeDescription, changeTitle } from "stores/slices/metaSlices"
 
-const Contact: NextPage = () => {
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) => async (ctx) => {
+    const { data } = await client.query({
+      query: contactQuery,
+    });
+
+    const contact = data.contact.data.attributes;
+
+    store.dispatch(changeTitle(contact.meta?.title || 'Kontakt'))
+    store.dispatch(changeDescription(contact.meta?.description || ''))
+
+    return {
+      props: {
+        contact,
+      }
+    };
+  }
+);
+
+const Contact: NextPage<{contact: any}> = ({contact}) => {
+  console.log(contact)
   return (
     <Page>
-      <Head />
+      <Head data={contact.title}/>
       <Container>
         <CenterWrap>
-          <Typography component="div"><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Integer vulputate sem a nibh rutrum consequat. Aliquam id dolor. Nulla accumsan, elit sit amet varius semper, nulla mauris mollis quam</p></Typography>
+          <Typography component="div" dangerouslySetInnerHTML={{__html: contact.content}} />
           <ContactLines>
-            <ContactLine icon={<Times />} link="tel:+420774048983" />
-            <ContactLine icon={<Times />} link="tel:+420774048983" />
+            <ContactLine icon={<Times />} title={contact.phone} link={`tel:${contact.phone}`} />
+            <ContactLine icon={<Times />} title={contact.email} link={`mailto:${contact.email}`} />
           </ContactLines>
         </CenterWrap>
       </Container>
       <Container>
         <Grid container justifyContent="center">
           <Grid item xs={12}>
-            <ContactItem />
+            <ContactItem data={contact.item[0]} />
           </Grid>
-          <Grid item xs={4}>
-            <ContactItem />
-          </Grid><Grid item xs={4}>
-            <ContactItem />
-          </Grid><Grid item xs={4}>
-            <ContactItem />
-          </Grid><Grid item xs={4}>
-            <ContactItem />
-          </Grid><Grid item xs={4}>
-            <ContactItem />
-          </Grid>
+          {contact.item.slice(1, contact.item.length).map((item: any, idx: number) => <Grid key={idx} item xs={4}>
+            <ContactItem data={item} />
+          </Grid>)}
         </Grid>
       </Container>
       <Container>
         <CenterWrap>
-          <Typography variant="h2" marginTop={10}>Hlavní partner</Typography>
-          <Typography marginBottom={15}>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Integer vulputate sem a nibh rutrum consequat. Aliquam id dolor. Nulla accumsan, elit sit amet varius semper, nulla mauris mollis quam, tempor suscipit diam nulla vel leo. In sem justo, commodo ut, suscipit at, pharetra vitae, orci. Maecenas lorem. Duis ante orci, molestie vitae vehicula venenatis, tincidunt ac pede. Morbi scelerisque luctus velit. Nulla est. Integer imperdiet lectus quis justo. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Maecenas fermentum, sem in pharetra pellentesque, velit turpis volutpat ante, in pharetra metus odio a lectus. Maecenas sollicitudin. Aenean vel massa quis mauris vehicula lacinia. Integer pellentesque quam vel velit.</Typography>
+          <Typography variant="h2" marginTop={10}>{contact.title2}</Typography>
+          <Typography marginBottom={15} component="div" dangerouslySetInnerHTML={{__html: contact.content2}} />
         </CenterWrap>
       </Container>
     </Page>

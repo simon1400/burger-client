@@ -5,22 +5,25 @@ import { ImgSquare } from "styles/ImgSquare"
 import LabelBare from "components/LabelBare"
 import IconButton from "components/IconButton"
 import ArrowRight from 'public/img/arrow-right.svg'
+import { FC } from "react"
 
-const ArticleShort = () => {
+const APP_API = process.env.APP_API
+
+const ArticleShort: FC<{data: any}> = ({data}) => {
   return (
     <ArticleShortS>
       <Grid container alignItems="center">
         <Grid item xs={6}>
           <ImgSquare margin>
-            <Image src="/img/img.webp" fill alt="" />
+            <Image src={APP_API+data.image.data.attributes.url} fill alt="" />
           </ImgSquare>
         </Grid>
         <Grid item xs={6}>
           <ArticleContent>
-            <LabelBare />
-            <Typography variant="h2">Nadpis some</Typography>
-            <Typography className="short-content" component="div"><p>Nadpis some text</p></Typography>
-            <IconButton>
+            {data.label?.data && <LabelBare data={data.label.data.attributes.title}/>}
+            <Typography variant="h2">{data.title}</Typography>
+            <Typography className="short-content" component="div" dangerouslySetInnerHTML={{__html: data.content}}/>
+            <IconButton href={`/blog/${data.slug}`}>
               <ArrowRight />
             </IconButton>
           </ArticleContent>

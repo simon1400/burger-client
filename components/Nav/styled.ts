@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { Menu } from "@mui/material";
 import { candal } from "styles/typography/baseHead";
 
 export const NavS = styled.nav(({theme}) => `
@@ -39,6 +40,30 @@ export const NavS = styled.nav(({theme}) => `
           transition: all .2s ease;
           transform-origin: center;
         }
+        &.active-dropdown{
+          color: ${theme.palette.primary.main};
+          cursor: pointer;
+          svg{
+            transform: rotate(-180deg);
+          }
+        }
+      }
+    }
+  }
+`)
+
+
+export const MenuS = styled(Menu)(({theme}) => `
+  > .MuiPaper-root{
+    padding-top: 20px;
+    background: transparent;
+  }
+  ul{
+    background: black;
+    li{
+      a{
+        color: white;
+        text-decoration: none;
       }
     }
   }

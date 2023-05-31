@@ -14,7 +14,8 @@ export const baseBody = (theme: any) => ({
   },
   p: paragraph(theme),
   strong: {
-    color: theme.palette.primary.main,
+    color: "white",
+    fontWeight: "600"
   },
   ul: {
     padding: 0,

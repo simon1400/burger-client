@@ -1,6 +1,7 @@
 interface IBlockContent {
   time?: boolean;
-  content?: boolean;
+  content?: string;
+  head?: string;
   margin?: boolean;
 }
 
@@ -11,10 +12,29 @@ interface IButton {
 interface IContactLine {
   icon: ReactNode;
   link: string;
+  title: string;
 }
 
 interface IContactItem {
-  
+  data: any
+}
+
+interface IHead {
+  data: string;
+}
+
+interface ILineup {
+  head: string;
+  data: any;
+}
+
+interface IHomepage {
+  title: string;
+  title2: string;
+  content: string;
+  eventHead: string;
+  galery: IImages;
+  meta: IMeta;
 }
 
 interface ITopNav {
@@ -24,6 +44,7 @@ interface ITopNav {
 
 interface IGalery {
   modal?: boolean
+  images: IImages
 }
 
 interface IImageAttributes {
@@ -47,28 +68,12 @@ interface IMeta {
 
 interface IFacebookEvent {
   single?: boolean
+  data: string;
 }
 
 interface ILink {
   text: string;
   link: string;
-}
-
-interface IComponentArticles {
-  title: string;
-  image: IImage;
-  content: string;
-  link: ILink;
-}
-
-interface IComponentClients {
-  title: string;
-  images: IImages;
-}
-
-interface IPageTop {
-  title: string;
-  imageUrl: string;
 }
 
 interface IHomepage {
@@ -79,28 +84,61 @@ interface IHomepage {
   Components?: any
 }
 
-interface IIconItem {
+interface IFestivals {
   title: string;
-  content: string;
-  icon: IImage;
+  slug: string;
+  from: string;
+  to: string;
+  social: string;
 }
 
-interface IArticleShort {
-  title: string;
-  content: string;
-  link: ILink;
-  image: IImage;
+interface ILabels {
+  data: {
+    attributes: {
+      title: string;
+      image: IImage;
+    }
+  }
 }
 
-interface IComponentSmallItem {
-  title: string;
-  content: string;
+interface ILineup {
+  data: {
+    attributes: {
+      title: string;
+      slug: string;
+      image: IImage;
+      labels: ILabels;
+    }[]
+  }
 }
 
-interface IArticlePage {
+interface IVouchers {
+  name: string;
+  number: string;
+}
+
+interface IWinner {
+  data: {
+    attributes: {
+      title: string;
+      image: IImage;
+    }
+  }
+}
+
+interface IFestival {
   title: string;
   content: string;
-  meta: IMeta;
-  image: IImage;
-  components: any;
+  contentBefore: string;
+  contentAfter: string;
+  place: string;
+  galery: IImages;
+  from: string;
+  to: string;
+  lineup: ILineup;
+  social: string;
+  vouchers: IVouchers[];
+  winner1: IWinner;
+  winner2: IWinner;
+  winner3: IWinner;
 }

@@ -6,23 +6,56 @@ import Image from "next/image"
 import { CenterWrap } from "styles/CenterWrap"
 import LabelBare from "components/LabelBare"
 import { ImgSquare } from "styles/ImgSquare"
+import { wrapper } from "stores"
+import { client } from "lib/api"
+import { getPost } from "queries/blog"
+import { changeDescription, changeTitle } from "stores/slices/metaSlices"
 
-const Blog: NextPage = () => {
+const APP_API = process.env.APP_API
+
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) => async (ctx) => {
+    const { data } = await client.query({
+      query: getPost,
+      variables: {
+        slug: ctx.params?.slug
+      }
+    });
+
+    if(!data.posts.data.length) {
+      return {
+        notFound: true
+      }
+    }
+
+    const post = data.posts.data[0].attributes;
+
+    store.dispatch(changeTitle(post.meta?.title || ''))
+    store.dispatch(changeDescription(post.meta?.description || ''))
+
+    return {
+      props: {
+        post
+      }
+    };
+  }
+);
+
+const Blog: NextPage<{post: any}> = ({post}) => {
   return (
     <Page>
-      <Head />
-      <Container>
+      <Head data={post.title} />
+      {post.label?.data && <Container>
         <CenterWrap>
-          <LabelBare />
+          <LabelBare data={post.label.data.attributes.title} />
         </CenterWrap>
-      </Container>
+      </Container>}
       <Container maxWidth="md">
-        <Typography component="div"><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Integer vulputate sem a nibh rutrum consequat. Aliquam id dolor. Nulla accumsan, elit sit amet varius semper, nulla mauris mollis quam, tempor suscipit diam nulla vel leo. In sem justo, commodo ut, suscipit at, pharetra vitae, orci. Maecenas lorem. Duis ante orci, molestie vitae vehicula venenatis, tincidunt ac pede. Morbi scelerisque luctus velit. Nulla est. Integer imperdiet lectus quis justo. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Maecenas fermentum, sem in pharetra pellentesque, velit turpis volutpat ante, in pharetra metus odio a lectus. Maecenas sollicitudin. Aenean vel massa quis mauris vehicula lacinia. Integer pellentesque quam vel velit.</p></Typography>
-        <Typography component="div"><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Integer vulputate sem a nibh rutrum consequat. Aliquam id dolor. Nulla accumsan, elit sit amet varius semper, nulla mauris mollis quam, tempor suscipit diam nulla vel leo. In sem justo, commodo ut, suscipit at, pharetra vitae, orci. Maecenas lorem. Duis ante orci, molestie vitae vehicula venenatis, tincidunt ac pede. Morbi scelerisque luctus velit. Nulla est. Integer imperdiet lectus quis justo. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Maecenas fermentum, sem in pharetra pellentesque, velit turpis volutpat ante, in pharetra metus odio a lectus. Maecenas sollicitudin. Aenean vel massa quis mauris vehicula lacinia. Integer pellentesque quam vel velit.</p></Typography>
+        <Typography component="div" dangerouslySetInnerHTML={{__html: post.content}} />
       </Container>
       <Container maxWidth="xl">
         <ImgSquare>
-          <Image src="/img/img.webp" fill alt="" />
+          <Image src={APP_API+post.image.data.attributes.url} fill alt="" />
         </ImgSquare>
       </Container>
     </Page>

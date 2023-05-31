@@ -3,12 +3,13 @@ import { ContactLineS } from "./styled"
 
 const ContactLine: FC<IContactLine> = ({
   icon,
-  link
+  link,
+  title
 }) => {
   return (
     <ContactLineS href={link}>
       {icon}
-      <span>{link}</span>
+      <span>{title}</span>
     </ContactLineS>
   )
 }

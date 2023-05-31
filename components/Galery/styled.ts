@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const GaleryS = styled.div<IGalery>(({modal}) => `
+export const GaleryS = styled.div<{modal: boolean}>(({modal}) => `
   padding-top: 60px;
   padding-bottom: ${modal ? "0" : "60px"};
 `)

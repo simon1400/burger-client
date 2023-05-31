@@ -1,8 +1,9 @@
+import { FC } from "react"
 import { LabelBareS } from "./styled"
 
-const LabelBare = () => {
+const LabelBare: FC<{data: string}> = ({data}) => {
   return (
-    <LabelBareS>some text</LabelBareS>
+    <LabelBareS>{data}</LabelBareS>
   )
 }
 

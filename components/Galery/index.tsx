@@ -3,39 +3,27 @@ import { GaleryItem, GaleryS } from "./styled"
 import Image from "next/image"
 import { FC } from "react"
 
-const grid = () => {
+const APP_API = process.env.APP_API
+
+const grid = (images: IImages) => {
   return (
     <Grid container>
-      <Grid item xs={3}>
+      {images.data.map((item: IImageAttributes, idx: number) => <Grid key={idx} item xs={3}>
         <GaleryItem>
-          <Image src="/img/img.webp" fill alt="" />
+          <Image src={APP_API+item.attributes.url} fill alt="" />
         </GaleryItem>
-      </Grid>
-      <Grid item xs={3}>
-        <GaleryItem>
-          <Image src="/img/img.webp" fill alt="" />
-        </GaleryItem>
-      </Grid>
-      <Grid item xs={3}>
-        <GaleryItem>
-          <Image src="/img/img.webp" fill alt="" />
-        </GaleryItem>
-      </Grid>
-      <Grid item xs={3}>
-        <GaleryItem>
-          <Image src="/img/img.webp" fill alt="" />
-        </GaleryItem>
-      </Grid>
+      </Grid>)}
     </Grid>
   )
 }
 
 const Galery: FC<IGalery> = ({
-  modal = false
+  modal = false,
+  images
 }) => {
   return (
     <GaleryS modal={modal}>
-      {!modal ? <Container maxWidth="xl">{grid()}</Container> : grid()}
+      {!modal ? <Container maxWidth="xl">{grid(images)}</Container> : grid(images)}
     </GaleryS>
   )
 }

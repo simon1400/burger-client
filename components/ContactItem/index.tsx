@@ -5,15 +5,17 @@ import Image from "next/image"
 import { Typography } from "@mui/material"
 import Link from "next/link"
 
-const ContactItem: FC<IContactItem> = ({}) => {
+const APP_API = process.env.APP_API
+
+const ContactItem: FC<IContactItem> = ({data}) => {
   return (
     <ContactItemS>
       <ImgCircle>
-        <Image src="/img/winner.webp" fill alt="" />
+        <Image src={APP_API+data.image.data.attributes.url} fill alt="" />
       </ImgCircle>
-      <Typography variant="h3">Dimi Pechunka</Typography>
-      <Typography>jednatel</Typography>
-      <Link href="mailto:dmytro@pechunka.com">mail@gmail.com</Link>
+      <Typography variant="h3">{data.title}</Typography>
+      <Typography>{data.function}</Typography>
+      <Link href={`mailto:${data.email}`}>{data.email}</Link>
     </ContactItemS>
   )
 }

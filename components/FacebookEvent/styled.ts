@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import Link from "next/link";
 
-export const FacebookEventS = styled(Link)<IFacebookEvent>(({single}) => `
+export const FacebookEventS = styled(Link)<{single: boolean}>(({single}) => `
   display: flex;
   margin-right: ${single ? "0" : "40px"};
   margin-top: ${single ? "40px" : "0px"};
