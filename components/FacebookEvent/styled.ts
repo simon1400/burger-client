@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import Link from "next/link";
 
-export const FacebookEventS = styled(Link)<{single: boolean}>(({single}) => `
+export const FacebookEventS = styled(Link)<{single: boolean}>(({theme, single}) => `
   display: flex;
   margin-right: ${single ? "0" : "40px"};
   margin-top: ${single ? "40px" : "0px"};
@@ -11,5 +11,11 @@ export const FacebookEventS = styled(Link)<{single: boolean}>(({single}) => `
   justify-content: center;
   svg{
     margin-right: 7px;
+  }
+  ${theme.breakpoints.down("md")} {
+    margin-right: ${single ? "0" : "10px"};
+    span{
+      display: none;
+    }
   }
 `)

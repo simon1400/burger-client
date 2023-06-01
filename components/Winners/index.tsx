@@ -16,13 +16,13 @@ const Winners: FC<{
     <WinnersS>
       <Container maxWidth="md">
         <Grid container>
-          {winner1.data && <Grid item xs={4}>
+          {winner1.data && <Grid item xs={12} md={4}>
             <Winner place="1" data={winner1} />
           </Grid>}
-          {winner2.data && <Grid item xs={4}>
+          {winner2.data && <Grid item xs={12} md={4}>
             <Winner place="2" data={winner2} />
           </Grid>}
-          {winner3.data && <Grid item xs={4}>
+          {winner3.data && <Grid item xs={12} md={4}>
             <Winner place="3" data={winner3} />
           </Grid>}
         </Grid>

@@ -26,6 +26,7 @@ interface IHead {
 interface ILineup {
   head: string;
   data: any;
+  hp?: boolean;
 }
 
 interface IHomepage {

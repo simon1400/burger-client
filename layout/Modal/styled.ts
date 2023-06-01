@@ -34,6 +34,23 @@ export const ModalWinners = styled.div(({theme}) => `
       font-size: 23px;
     }
   }
+  ${theme.breakpoints.down("md")} {
+    > div{
+      text-align: center;
+      &:not(:first-of-type) {
+        margin-left: 15px;
+      }
+      &:not(:last-of-type) {
+        margin-right: 15px;
+      }
+      b{
+        font-size: 35px;
+      }
+      span{
+        font-size: 17px;
+      }
+    }
+  }
 `)
 
 export const ModalContentWrap = styled.div(({theme}) => `
@@ -80,6 +97,21 @@ export const ModalContentWrap = styled.div(({theme}) => `
           color: ${theme.palette.primary.main};
         }
       }
+    }
+  }
+  ${theme.breakpoints.down("md")} {
+    padding: 0 15px;
+    .logo-img{
+      width: 160px;
+      height: 160px;
+      margin-top: -80px;
+    }
+    .labels-modal{
+      margin-bottom: 30px;
+    }
+    >ul{
+      margin-top: 25px;
+      margin-bottom: 30px;
     }
   }
 `)

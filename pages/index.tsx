@@ -45,7 +45,7 @@ const Homepage: NextPage<{homepage: IHomepage; festivals: IFestivals}> = ({
     <Page>
       <Map />
       <Head data={homepage.title} />
-      <Events head={homepage.eventHead} data={festivals} />
+      <Events head={homepage.eventHead} data={festivals} hp />
       <BlockContent head={homepage.title2} content={homepage.content} />
       <Galery images={homepage.galery}/>
     </Page>

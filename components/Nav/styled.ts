@@ -50,6 +50,20 @@ export const NavS = styled.nav(({theme}) => `
       }
     }
   }
+  ${theme.breakpoints.down('md')} {
+    ul{
+      li{
+        a{
+          font-size: 24px!important;
+          svg{
+            /* margin-left: 10px;
+            transition: all .2s ease;
+            transform-origin: center; */
+          }
+        }
+      }
+    }
+  }
 `)
 
 

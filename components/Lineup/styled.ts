@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { candal } from "styles/typography/baseHead";
 
-export const LineupS = styled.div<{paddingTop?: boolean}>(({theme, paddingTop}) => `
+export const LineupS = styled.div<{paddingTop?: boolean; hp: boolean}>(({theme, paddingTop, hp}) => `
   text-align: center;
   margin-bottom: 120px;
   padding-top: ${paddingTop ? "40px" : "0"};
@@ -50,6 +50,26 @@ export const LineupS = styled.div<{paddingTop?: boolean}>(({theme, paddingTop}) 
       }
       .icon-type{
         margin-right: 30px;
+      }
+    }
+  }
+  ${theme.breakpoints.down("md")} {
+    .events-list li {
+      padding: 12px 5px;
+      .icon-type{
+        margin-right: 10px;
+      }
+      > div:first-child{
+        flex-wrap: ${hp ? "wrap" : "nowrap"};
+        time{
+          font-size: 15px;
+          width: 100%;
+          text-align: left;
+        }
+        p{
+          font-size: 15px;
+          display: inline-block;
+        }
       }
     }
   }

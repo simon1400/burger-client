@@ -8,7 +8,7 @@ const APP_API = process.env.APP_API
 const grid = (images: IImages) => {
   return (
     <Grid container>
-      {images.data.map((item: IImageAttributes, idx: number) => <Grid key={idx} item xs={3}>
+      {images.data.map((item: IImageAttributes, idx: number) => <Grid key={idx} item xs={6} md={3}>
         <GaleryItem>
           <Image src={APP_API+item.attributes.url} fill alt="" />
         </GaleryItem>

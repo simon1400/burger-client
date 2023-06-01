@@ -27,4 +27,20 @@ export const FooterBottomS = styled.div(({theme}) => `
       color: ${theme.palette.primary.main};
     }
   }
+  ${theme.breakpoints.down("md")} {
+    padding-top: 45px;
+    padding-bottom: 100px;
+    justify-content: center;
+    flex-wrap: wrap;
+    text-align: center;
+    a{
+      margin-bottom: 12px;
+      display: inline-block;
+      &:nth-of-type(2) {
+        margin-left: 0px;
+        margin-bottom: 35px;
+      }
+      
+    }
+  }
 `)

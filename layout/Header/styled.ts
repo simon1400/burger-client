@@ -4,22 +4,32 @@ export const HeaderS = styled.div(({theme}) => `
   display: flex;
   justify-content: space-between;
   padding-top: 15px;
-  /* ${theme.breakpoints.down('md')} {
-    padding: 0px 0;
-    svg{
-      width: 136px;
+  > a > svg{
+    width: 205px;
+    height: 200px;
+    position: relative;
+    z-index: 1001;
+  }
+  ${theme.breakpoints.down('md')} {
+    > a > svg{
+      width: 113px;
+      height: 110px;
     }
-  } */
+  }
+  .hamburger-react{
+    position: relative;
+    z-index: 1001;
+  }
 `)
 
 export const MobileNav = styled.div<{open: boolean}>(({open}) => `
-  /* position: absolute;
+  position: absolute;
   height: ${open ? '100vh' : '0'};
   width: 100vw;
   overflow: hidden;
   top: 0;
   left: 0;
-  background: white;
+  background: black;
   z-index: 1000;
   display: flex;
   align-items: center;
@@ -41,5 +51,5 @@ export const MobileNav = styled.div<{open: boolean}>(({open}) => `
         }
       }
     }
-  } */
+  }
 `)

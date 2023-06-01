@@ -1,11 +1,14 @@
 import styled from "@emotion/styled";
 
-export const GaleryS = styled.div<{modal: boolean}>(({modal}) => `
+export const GaleryS = styled.div<{modal: boolean}>(({modal, theme}) => `
   padding-top: 60px;
   padding-bottom: ${modal ? "0" : "60px"};
+  ${theme.breakpoints.down("md")} {
+    padding-top: ${modal ? "0" : "60px"};
+  }
 `)
 
-export const GaleryItem = styled.div`
+export const GaleryItem = styled.div(({theme}) => `
   position: relative;
   overflow: hidden;
   height: 285px;
@@ -21,4 +24,7 @@ export const GaleryItem = styled.div`
       transform: scale(1.05);
     }
   }
-`
+  ${theme.breakpoints.down("md")} {
+    height: 130px;
+  }
+`)

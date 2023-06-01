@@ -17,18 +17,18 @@ const APP_API = process.env.APP_API
 const Lineup: FC<ILineup> = ({
   head,
   data,
-  modal
+  modal,
+  hp = false
 }) => {
 
   const dispatch = useDispatch()
 
   const handleModal = (slug: string) => {
-    console.log(slug)
     dispatch(changeModal(slug))
   }
 
   return (
-    <LineupS>
+    <LineupS hp={hp}>
       <Container maxWidth="md">
         <Typography variant="h3">{head}</Typography>
         <ul className="events-list">

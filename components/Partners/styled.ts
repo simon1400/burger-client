@@ -7,6 +7,10 @@ export const PartnersS = styled.section(({theme}) => `
   h3{
     margin-bottom: 80px;
   }
+  ${theme.breakpoints.down("md")} {
+    padding-top: 55px;
+    padding-bottom: 35px;
+  }
 `)
 
 export const LogoWrap = styled.div(({theme}) => `
@@ -15,5 +19,8 @@ export const LogoWrap = styled.div(({theme}) => `
   img{
     object-fit: contain;
     object-position: center;
+  }
+  ${theme.breakpoints.down("md")} {
+    height: 90px;
   }
 `)

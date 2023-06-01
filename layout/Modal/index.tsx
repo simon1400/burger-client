@@ -59,9 +59,9 @@ const Modal = () => {
             <Image src={APP_API+seller.image.data.attributes.url} fill alt="" />
           </ImgCircle>
           <Typography variant="h1">{seller.title}</Typography>
-          <Labels className="labels-modal">
-            {seller.category.data.map((item: any, idx: number) => <Label data={item.attributes} />)}
-            {seller.labels.data.map((item: any, idx: number) => <Label data={item.attributes} />)}
+          <Labels className="labels-modal" modal>
+            {seller.category.data.map((item: any, idx: number) => <Label data={item.attributes} modal />)}
+            {seller.labels.data.map((item: any, idx: number) => <Label data={item.attributes} modal />)}
           </Labels>
           <Typography component="div" dangerouslySetInnerHTML={{__html: seller.content}}/>
           {!!seller.socials.length && <ul>

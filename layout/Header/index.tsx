@@ -1,18 +1,20 @@
-import { Container } from "@mui/material";
-import { HeaderS } from "./styled";
+import { Container, useMediaQuery } from "@mui/material";
+import { HeaderS, MobileNav } from "./styled";
 import Logo from "components/Logo";
 import Nav from "components/Nav";
 import navTopQuery from "queries/nav";
 import { useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
+import Hamburger from "hamburger-react";
+import { useRouter } from "next/router";
 
 const Header = () => {
 
   const [nav, setNav] = useState([])
 
   const {data, loading} = useQuery(navTopQuery)
-  // const mediaMd = useMediaQuery("(max-width: 940px)")
-  // const router = useRouter()
+  const mediaMd = useMediaQuery("(max-width: 940px)")
+  const router = useRouter()
 
   useEffect(() => {
     if(!loading) {
@@ -20,17 +22,21 @@ const Header = () => {
     }
   }, [loading])
 
-  // useEffect(() => {
-  //   setOpen(false)
-  // }, [router])
+  useEffect(() => {
+    setOpen(false)
+  }, [router])
 
-  // const [isOpen, setOpen] = useState(false)
+  const [isOpen, setOpen] = useState(false)
 
   return (
     <Container maxWidth="xl">
       <HeaderS>
         <Logo />
-        <Nav data={nav}/>
+        {!!nav.length && !mediaMd && <Nav data={nav} />}
+        {mediaMd && <Hamburger toggled={isOpen} toggle={setOpen} />}
+        {mediaMd && <MobileNav open={isOpen}>
+          <Nav data={nav} />
+        </MobileNav>}
       </HeaderS>
     </Container>
   );
