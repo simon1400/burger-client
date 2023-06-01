@@ -1,5 +1,7 @@
-import { Candal } from 'next/font/google';
-export const candal = Candal({ weight: "400", subsets: ['latin'] });
+// import { Candal } from 'next/font/google';
+import localFont from 'next/font/local';
+// export const candal = Candal({ weight: "400", subsets: ['latin'] });
+export const candal = localFont({ src: '../../public/fonts/Candal.woff' });
 
 export const baseHead = (theme: any) => ({
   fontWeight: "600",
