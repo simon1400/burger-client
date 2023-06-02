@@ -1,5 +1,8 @@
 interface IBlockContent {
-  time?: boolean;
+  time?: {
+    from: string;
+    to: string;
+  };
   content?: string;
   head?: string;
   margin?: boolean;

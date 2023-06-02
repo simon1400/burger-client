@@ -33,7 +33,7 @@ const GaleryPage: NextPage<{galeryData: any}> = ({galeryData}) => {
     <Page>
       {galeryData.map((item: any, idx: number) => <div key={idx}>
         <Head data={item.title} />
-        <BlockContent time head={item.place} />
+        <BlockContent time={{from: item.from, to: item.to}} head={item.place} />
         <Galery images={item.galery} />
       </div>)}
     </Page>

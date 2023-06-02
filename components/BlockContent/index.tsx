@@ -2,6 +2,7 @@ import { Container, Typography } from "@mui/material"
 import { BlockContentS, HeadWrap } from "./styled"
 import { FC } from "react"
 import { CenterWrap } from "styles/CenterWrap"
+import Time from "components/Time"
 
 const BlockContent: FC<IBlockContent> = ({
   time, 
@@ -14,7 +15,7 @@ const BlockContent: FC<IBlockContent> = ({
         <CenterWrap>
           <HeadWrap>
             {head && <Typography variant="h2">{head}</Typography>}
-            {time && <time>28.4. - 30.4. 2023</time>}
+            {time && <Time from={time.from} to={time.to} />}
           </HeadWrap>
           {content && <Typography component="div" dangerouslySetInnerHTML={{__html: content}}/>}
         </CenterWrap>

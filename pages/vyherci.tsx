@@ -29,14 +29,13 @@ export const getServerSideProps = wrapper.getServerSideProps(
 );
 
 const WinnersPage: NextPage<{winners: any}> = ({winners}) => {
-  console.log(winners)
   return (
     <Page>
       {winners.map((item: any, idx: number) => <div key={idx}>
         <Head data={item.title}/>
-        <BlockContent head={item.place} margin time />
+        <BlockContent head={item.place} margin time={{from: item.from, to: item.to}} />
         <Winners winner1={item.winner1} winner2={item.winner2} winner3={item.winner3} />
-        <Lineup head="Výherci voucherů" data={item.vouchers} />
+        {!!item.vouchers.length && <Lineup head="Výherci voucherů" data={item.vouchers} />}
       </div>)}
     </Page>
   )

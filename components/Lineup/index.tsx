@@ -11,6 +11,8 @@ import { changeModal } from "stores/slices/stateSlices"
 import { FC } from "react"
 import Image from "next/image"
 import { Labels } from "styles/Labels"
+import Time from "components/Time"
+import { InInterval } from "helpers/inInterval"
 
 const APP_API = process.env.APP_API
 
@@ -34,8 +36,8 @@ const Lineup: FC<ILineup> = ({
         <ul className="events-list">
           {data.map((item: any, idx: number) => <li key={idx}>
             <div>
-              {/* <span className="status"></span> */}
-              {item.from && item.to && <time>{item.from} - {item.to}</time>}
+              {InInterval(item.from, item.to) && <span className="status"></span>}
+              {item.from && item.to && <Time from={item.from} to={item.to} />}
               {item.category?.data && <div className="icon-type">
                 <Image src={APP_API+item.category.data[0].attributes.icon.data.attributes.url} width={30} height={30} alt="" />
               </div>}

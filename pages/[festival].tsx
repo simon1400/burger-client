@@ -48,11 +48,11 @@ const Festival: NextPage<{festival: IFestival}> = ({
   return (
     <Page>
       <Head data={festival.title} />
-      <BlockContent time head={festival.place} content={festival.content} />
-      <FacebookEvent single data={festival.social} />
-      <Lineup head="Lineup" data={festival.lineup.data.map((item: any) => item.attributes)} modal />
+      <BlockContent time={{from: festival.from, to: festival.to}} head={festival.place} content={festival.content} />
+      {festival.social && <FacebookEvent single data={festival.social} />}
+      {!!festival.lineup.data.length && <Lineup head="Lineup" data={festival.lineup.data.map((item: any) => item.attributes)} modal />}
       <Winners winner1={festival.winner1} winner2={festival.winner2} winner3={festival.winner3} />
-      <Lineup head="Výherci voucherů" data={festival.vouchers} /> 
+      {!!festival.vouchers.length && <Lineup head="Výherci voucherů" data={festival.vouchers} />}
       {!!festival.galery.data?.length && <Galery images={festival.galery} />}
     </Page>
   )

@@ -16,6 +16,32 @@ export const festivalsQuery = gql`
   }
 `
 
+export const festivalsPageQuery = gql`
+  query Festivals {
+    festivalsPage {
+      data {
+        attributes {
+          title
+          content
+          title2
+          content2
+          galery {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+          meta {
+            title
+            description
+          }
+        }
+      }
+    }
+  }
+`
+
 export const festivalsGaleryQuery = gql`
   query FestivalsGalery {
     festivals {

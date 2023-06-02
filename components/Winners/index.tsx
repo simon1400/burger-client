@@ -12,6 +12,11 @@ const Winners: FC<{
   winner2,
   winner3,
 }) => {
+
+  if(!winner1.data && !winner1.data && !winner1.data) {
+    return null
+  }
+
   return (
     <WinnersS>
       <Container maxWidth="md">
