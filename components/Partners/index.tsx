@@ -1,8 +1,11 @@
 import { Container, Grid, Typography, useMediaQuery } from "@mui/material"
 import { LogoWrap, PartnersS } from "./styled"
 import Image from "next/image"
+import { FC } from "react"
 
-const Partners = () => {
+const APP_API = process.env.APP_API
+
+const Partners: FC<{data: any}> = ({data}) => {
 
   const mediaMd = useMediaQuery("(max-width: 940px)")
 
@@ -10,27 +13,12 @@ const Partners = () => {
     <PartnersS>
       <Container>
         <Typography variant="h3">Partneři festivalu</Typography>
-        <Grid container spacing={mediaMd ? 10 : 25}>
-          <Grid item xs={6} md={3}>
+        <Grid container spacing={mediaMd ? 10 : 25} justifyContent="center">
+          {data.map((item: any, idx: number) => <Grid key={idx} item xs={6} md={3}>
             <LogoWrap>
-              <Image src={"/img/logo1.webp"} fill alt="" />
+              <Image src={APP_API+item.attributes.url} fill alt="" />
             </LogoWrap>
-          </Grid>
-          <Grid item xs={6} md={3}>
-            <LogoWrap>
-              <Image src={"/img/logo2.webp"} fill alt="" />
-            </LogoWrap>
-          </Grid>
-          <Grid item xs={6} md={3}>
-            <LogoWrap>
-              <Image src={"/img/logo3.webp"} fill alt="" />
-            </LogoWrap>
-          </Grid>
-          <Grid item xs={6} md={3}>
-            <LogoWrap>
-              <Image src={"/img/logo4.webp"} fill alt="" />
-            </LogoWrap>
-          </Grid>
+          </Grid>)}
         </Grid>
       </Container>
     </PartnersS>

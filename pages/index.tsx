@@ -10,6 +10,7 @@ import { client } from "lib/api";
 import homepageQuery from "queries/homepage";
 import { changeDescription, changeTitle } from "stores/slices/metaSlices";
 import {festivalsQuery} from "queries/festivals";
+import mapQuery from "queries/map";
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (ctx) => {
@@ -20,9 +21,14 @@ export const getServerSideProps = wrapper.getServerSideProps(
     const { data: festivalsData } = await client.query({
       query: festivalsQuery,
     });
+    
+    const { data: mapData } = await client.query({
+      query: mapQuery,
+    });
 
     const homepage = data.homepage.data.attributes;
     const festivals = festivalsData.festivals.data.map((item: any) => item.attributes)
+    const map = mapData.map.data.attributes
 
     store.dispatch(changeTitle(homepage.meta?.title || 'Úvod'))
     store.dispatch(changeDescription(homepage.meta?.description || ''))
@@ -30,20 +36,22 @@ export const getServerSideProps = wrapper.getServerSideProps(
     return {
       props: {
         homepage,
-        festivals
+        festivals,
+        map
       }
     };
   }
 );
 
-const Homepage: NextPage<{homepage: IHomepage; festivals: IFestivals}> = ({
+const Homepage: NextPage<{homepage: IHomepage; festivals: IFestivals; map: any}> = ({
   homepage,
-  festivals
+  festivals,
+  map
 }) => {
 
   return (
     <Page>
-      <Map />
+      <Map data={map}/>
       <Head data={homepage.title} />
       <Events head={homepage.eventHead} data={festivals} hp />
       <BlockContent head={homepage.title2} content={homepage.content} />

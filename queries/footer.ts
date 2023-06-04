@@ -2,21 +2,22 @@ import { gql } from "@apollo/client";
 
 const footerQuery = gql`
   query Footer {
-    footer {
+    global {
       data {
         attributes {
-          footer1 {
-            title
-            content
+          logoPartners{
+            data {
+              attributes{
+                url
+              }
+            }
           }
-          footer2 {
-            title
-            content
+          soc {
+            type
+            link
           }
-          footer3 {
-            title
-            content
-          }
+          phone
+          email
         }
       }
     }

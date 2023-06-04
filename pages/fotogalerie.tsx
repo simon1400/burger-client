@@ -16,8 +16,8 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
     const galeryData = data.festivals.data.map((item: any) => item.attributes);
 
-    // store.dispatch(changeTitle(homepage.meta?.title || 'Úvod'))
-    // store.dispatch(changeDescription(homepage.meta?.description || ''))
+    store.dispatch(changeTitle(galeryData.meta?.title || 'Fotogalerie'))
+    store.dispatch(changeDescription(galeryData.meta?.description || 'Fotogalerie'))
 
     return {
       props: {
@@ -28,13 +28,12 @@ export const getServerSideProps = wrapper.getServerSideProps(
 );
 
 const GaleryPage: NextPage<{galeryData: any}> = ({galeryData}) => {
-
   return (
     <Page>
       {galeryData.map((item: any, idx: number) => <div key={idx}>
         <Head data={item.title} />
         <BlockContent time={{from: item.from, to: item.to}} head={item.place} />
-        <Galery images={item.galery} />
+        {!!item.galery.data?.length && <Galery images={item.galery} />}
       </div>)}
     </Page>
   )

@@ -55,11 +55,6 @@ export const NavS = styled.nav(({theme}) => `
       li{
         a{
           font-size: 24px!important;
-          svg{
-            /* margin-left: 10px;
-            transition: all .2s ease;
-            transform-origin: center; */
-          }
         }
       }
     }
@@ -73,11 +68,17 @@ export const MenuS = styled(Menu)(({theme}) => `
     background: transparent;
   }
   ul{
-    background: black;
+    background: #141414;
+    border: 1px solid ${theme.palette.primary.main};
     li{
       a{
         color: white;
         text-decoration: none;
+        padding: 9px 30px;
+        font-family: ${candal.style.fontFamily};
+        text-align: center;
+        display: block;
+        width: 100%;
       }
     }
   }

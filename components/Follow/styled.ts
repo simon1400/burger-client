@@ -16,7 +16,6 @@ export const FollowS = styled.section`
         margin-right: 3.5px;
       }
       a{
-        background: #1773ea;
         width: 60px;
         height: 60px;
         display: flex;
@@ -26,12 +25,25 @@ export const FollowS = styled.section`
         &:hover{
           transform: scale(1.1);
         }
+        svg{
+          fill: white;
+          margin: auto;
+        }
+      }
+      &.soc-instagram {
+        a{
+          background-image: linear-gradient(133deg, #f58529 15%, #dd2a7b 39%, #8134af 65%, #515bd4 86%);
+        }
+      }
+      &.soc-facebook {
+        a{
+          background-color: #1773ea;
+          svg{
+            height: 29px;
+          }
+        }
       }
     }
   }
-  svg{
-    fill: white;
-    height: 30px;
-    margin: auto;
-  }
+  
 `

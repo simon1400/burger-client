@@ -1,4 +1,4 @@
-import { Container, useMediaQuery } from "@mui/material";
+import { Container } from "@mui/material";
 import { FooterS } from "./styled";
 import { useQuery } from "@apollo/client";
 import footerQuery from "queries/footer";
@@ -7,23 +7,24 @@ import Follow from "components/Follow";
 import FooterBottom from "components/FooterBottom";
 
 const Footer = () => {
-  // const {data, loading} = useQuery(footerQuery)
+  const {data, loading} = useQuery(footerQuery)
   // const mediaMd = useMediaQuery("(max-width: 940px)")
 
-  // if(loading) {
-  //   return <></>
-  // }
+  if(!data || loading) {
+    return null
+  }
 
-  // const footer = data.footer.data.attributes
+  console.log(data)
+  const footer = data.global.data.attributes
 
   return (
     <FooterS>
       <Container maxWidth="xl">
         <hr />
       </Container>
-      <Partners />
-      <Follow />
-      <FooterBottom />
+      <Partners data={footer.logoPartners.data} />
+      <Follow data={footer.soc} />
+      <FooterBottom email={footer.email} phone={footer.phone} />
     </FooterS>
   );
 };

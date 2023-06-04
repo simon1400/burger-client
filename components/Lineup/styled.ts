@@ -59,7 +59,7 @@ export const LineupS = styled.div<{paddingTop?: boolean; hp: boolean}>(({theme, 
       .icon-type{
         margin-right: 10px;
       }
-      > div:first-child{
+      > div:first-of-type{
         flex-wrap: ${hp ? "wrap" : "nowrap"};
         time{
           font-size: 15px;
