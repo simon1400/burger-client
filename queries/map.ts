@@ -8,7 +8,7 @@ const mapQuery = gql`
           map
           point {
             idLayer
-            festivals{
+            festival{
               data{
                 attributes{
                   slug

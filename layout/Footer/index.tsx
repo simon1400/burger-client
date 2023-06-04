@@ -8,13 +8,11 @@ import FooterBottom from "components/FooterBottom";
 
 const Footer = () => {
   const {data, loading} = useQuery(footerQuery)
-  // const mediaMd = useMediaQuery("(max-width: 940px)")
 
   if(!data || loading) {
     return null
   }
 
-  console.log(data)
   const footer = data.global.data.attributes
 
   return (

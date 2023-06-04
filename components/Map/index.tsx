@@ -1,9 +1,11 @@
 import { Container } from "@mui/material"
 import { MapS } from "./styled"
 import { FC, useEffect } from "react"
+import { useRouter } from "next/router"
 
 const Map: FC<{data: any}> = ({data}) => {
-  console.log(data)
+
+  const router = useRouter()
 
   useEffect(() => {
     if(data) {
@@ -15,7 +17,11 @@ const Map: FC<{data: any}> = ({data}) => {
   }, [data])
 
   const handleClick = (e: any) => {
-    console.log(e.target)
+    data.point.map((item: any) => {
+      if(e.target.id.split('-')[0] === item.idLayer) {
+        router.push(`/${item.festival.data.attributes.slug}`)
+      }
+    })
   }
 
   return (

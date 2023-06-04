@@ -11,6 +11,9 @@ export const MapS = styled.section`
       g{
         display: none;
         cursor: pointer;
+        rect{ 
+          cursor: pointer;
+        }
       }
     }
   }
