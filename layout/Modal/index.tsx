@@ -9,7 +9,6 @@ import { Labels } from "styles/Labels"
 import Label from "components/Label"
 import { Typography } from "@mui/material"
 import Link from "next/link"
-import { useRouter } from "next/router"
 import { useEffect } from "react"
 import { useLazyQuery } from "@apollo/client"
 import { getSeller } from "queries/sellers"
@@ -28,7 +27,6 @@ const Modal = () => {
   }
 
   useEffect(() => {
-    console.log(modal)
     if(modal) {
       getData({variables: {
         slug: modal
@@ -39,8 +37,6 @@ const Modal = () => {
   if(!data?.sellers.data.length) {
     return null
   }
-
-  
 
   const seller = data.sellers.data[0].attributes
 

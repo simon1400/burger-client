@@ -5,7 +5,7 @@ export const InInterval = (startDate: string, endDate: string) => {
   const start = parseDate(startDate);
   const end = parseDate(endDate);
   return isWithinInterval(new Date(), {
-    start: new Date(+start.year, +start.month - 1, +start.day),
-    end: new Date(+end.year, +end.month - 1, +end.day)
+    start: new Date(start.year, start.month, start.day),
+    end: new Date(end.year, end.month, end.day)
   })
 }

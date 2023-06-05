@@ -7,8 +7,8 @@ const Time: FC<{ from: string; to: string }> = ({ from, to }) => {
 
   return (
     <time>
-      {`${parseFrom.day}.${parseFrom.month}.`} -{" "}
-      {`${parseTo.day}.${parseTo.month}`} {parseFrom.year}
+      {`${parseFrom.day}.${parseFrom.month + 1}.`} -{" "}
+      {`${parseTo.day}.${parseTo.month + 1}`} {parseFrom.year}
     </time>
   );
 };

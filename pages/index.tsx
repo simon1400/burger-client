@@ -11,6 +11,7 @@ import homepageQuery from "queries/homepage";
 import { changeDescription, changeTitle } from "stores/slices/metaSlices";
 import {festivalsQuery} from "queries/festivals";
 import mapQuery from "queries/map";
+import { sortDate } from "helpers/sortDate";
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (ctx) => {
@@ -53,7 +54,7 @@ const Homepage: NextPage<{homepage: IHomepage; festivals: IFestivals; map: any}>
     <Page>
       <Map data={map}/>
       <Head data={homepage.title} />
-      <Events head={homepage.eventHead} data={festivals} hp />
+      <Events head={homepage.eventHead} data={sortDate(festivals)} hp />
       <BlockContent head={homepage.title2} content={homepage.content} />
       <Galery images={homepage.galery}/>
     </Page>
