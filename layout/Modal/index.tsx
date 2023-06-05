@@ -43,7 +43,7 @@ const Modal = () => {
   
 
   const seller = data.sellers.data[0].attributes
-  console.log(seller)
+
   return (
     <ModalS
       fullWidth
