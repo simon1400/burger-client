@@ -1,12 +1,20 @@
-import { useCallback } from "react"
+import { FC, useCallback } from "react"
 import {useDropzone} from 'react-dropzone'
 import { DropzoneS } from "./styled"
+import axios from "axios"
 
-const DropZone = () => {
+const APP_API = process.env.APP_API
+
+const DropZone: FC<{handleChange: (file: File, key: string) => void; idKey: string; state: any}> = ({
+  handleChange,
+  idKey,
+  state
+}) => {
 
   const onDrop = useCallback((acceptedFiles: any) => {
     // Do something with the files
-  }, [])
+    handleChange(acceptedFiles[0], idKey)
+  }, [state])
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
 
   return (

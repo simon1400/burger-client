@@ -32,7 +32,6 @@ export const getServerSideProps = wrapper.getServerSideProps(
 );
 
 const Contact: NextPage<{contact: any}> = ({contact}) => {
-  console.log(contact)
   return (
     <Page>
       <Head data={contact.title}/>

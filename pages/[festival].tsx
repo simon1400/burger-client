@@ -46,8 +46,6 @@ const Festival: NextPage<{festival: IFestival}> = ({
   festival
 }) => {
 
-  console.log(festival)
-
   return (
     <Page>
       <Head data={festival.title} />

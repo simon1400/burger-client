@@ -29,7 +29,6 @@ export const getServerSideProps = wrapper.getServerSideProps(
 );
 
 const GaleryPage: NextPage<{galeryData: any}> = ({galeryData}) => {
-  console.log(galeryData)
   return (
     <Page>
       {galeryData.map((item: any, idx: number) => {

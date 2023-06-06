@@ -10,65 +10,81 @@ const Form: FC<{
   state: any;
   setState: Dispatch<SetStateAction<{ festivals: never[] }>>;
 }> = ({ state, setState, data }) => {
-
   const handleChangeInput = (value: string, key: string) => {
     setState({ ...state, [key]: value });
   };
 
   const handleChangeSelect = (value: string, key: string) => {
-    let checkArr = state[key]
-    const hasIndex = checkArr.findIndex((item: any) => item === value)
-    if(hasIndex >= 0) {
-      checkArr = checkArr.splice(hasIndex, 1)
-    }else{
-      checkArr.push(value)
+    let checkArr = state[key];
+    const hasIndex = checkArr.findIndex((item: any) => item === value);
+    if (hasIndex >= 0) {
+      checkArr = checkArr.splice(hasIndex, 1);
+    } else {
+      checkArr.push(value);
     }
-    setState({...state, [key]: checkArr})
+    setState({ ...state, [key]: checkArr });
   };
 
   const handleChangeRadio = (value: string, key: string) => {
-    setState({...state, [key]: value})
+    setState({ ...state, [key]: value });
+  };
+
+  const handleUploudFile = (file: File, key: string) => {
+    // console.log(file)
+    // console.log(state)
+    // const obj = {...state, [key]: file}
+    // console.log(obj)
+    setState({ ...state, [key]: file });
   };
 
   return (
     <Container maxWidth="md">
       <form>
-        {state && data.fields.map((item: any, idx: number) => {
-          if (item.__typename === "ComponentFormTetxField")
-            return (
-              <Input
-                key={idx}
-                idKey={item.key}
-                value={state[item.key]}
-                name={item.key}
-                label={item.label}
-                handleChange={handleChangeInput}
-                helperText={item.helperText}
-                errorText={item.errorText}
-                placeholder={item.placeholder}
-              />
-            );
-          if (item.__typename === "ComponentFormSelect")
-            return (
-              <Select
-                key={idx}
-                data={item.item}
-                idKey={item.key}
-                handleChange={handleChangeSelect}
-              />
-            );
-          if (item.__typename === "ComponentFormRadio")
-            return (
-              <Radio
-                key={idx}
-                data={item.item}
-                idKey={item.key}
-                handleChange={handleChangeRadio}
-                value={state[item.key]}
-              />
-            );
-          // if (item.__typename === "ComponentFormUploud") return <DropZone key={idx} />;
-        })}
+        {state &&
+          data.fields.map((item: any, idx: number) => {
+            if (item.__typename === "ComponentFormTetxField")
+              return (
+                <Input
+                  key={idx}
+                  idKey={item.key}
+                  value={state[item.key]}
+                  name={item.key}
+                  label={item.label}
+                  handleChange={handleChangeInput}
+                  helperText={item.helperText}
+                  errorText={item.errorText}
+                  placeholder={item.placeholder}
+                />
+              );
+            if (item.__typename === "ComponentFormSelect")
+              return (
+                <Select
+                  key={idx}
+                  data={item.item}
+                  idKey={item.key}
+                  handleChange={handleChangeSelect}
+                />
+              );
+            if (item.__typename === "ComponentFormRadio")
+              return (
+                <Radio
+                  key={idx}
+                  data={item.item}
+                  idKey={item.key}
+                  handleChange={handleChangeRadio}
+                  value={state[item.key]}
+                />
+              );
+            if (item.__typename === "ComponentFormUploud")
+              return (
+                <DropZone
+                  key={idx}
+                  idKey={item.key}
+                  state={state}
+                  handleChange={handleUploudFile}
+                />
+              );
+          })}
       </form>
     </Container>
   );
