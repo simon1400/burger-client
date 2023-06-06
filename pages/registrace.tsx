@@ -87,15 +87,20 @@ const Registration: NextPage<{ festivals: any; form: any }> = ({
       if(dataSend[item] instanceof File) {
         let formData = new FormData();
         // @ts-ignore
-        formData.append("files", dataSend[item], dataSend[item].name);
-        axios.post(`${APP_API}/api/uploud`, formData).then(res => {
-          console.log('res --', res.data)
+        formData.append("files", dataSend[item]);
+        console.log(formData)
+        fetch(`${APP_API}/api/uploud`, {
+          method: 'post',
+          body: formData
+        }).then(res => {
+          console.log('res --', res)
           sendObj.push({
             key: item,
             // @ts-ignore
             value: `${dataSend[item]}`
           })
         }).catch(err => console.log('err -- ', err))
+        // axios.post(`${APP_API}/api/uploud`, formData)
       }else{
         sendObj.push({
           key: item,
