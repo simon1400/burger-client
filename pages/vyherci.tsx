@@ -31,12 +31,18 @@ export const getServerSideProps = wrapper.getServerSideProps(
 const WinnersPage: NextPage<{winners: any}> = ({winners}) => {
   return (
     <Page>
-      {winners.map((item: any, idx: number) => <div key={idx}>
-        <Head data={item.title}/>
-        <BlockContent head={item.place} margin time={{from: item.from, to: item.to}} />
-        <Winners winner1={item.winner1} winner2={item.winner2} winner3={item.winner3} />
-        {!!item.vouchers.length && <Lineup head="Výherci voucherů" data={item.vouchers} />}
-      </div>)}
+      {winners.map((item: any, idx: number) => {
+        if(item.winner1.data || item.winner2.data || item.winner3.data || item.vouchers.length) {
+          return <div key={idx}>
+            <Head data={item.title}/>
+            <BlockContent head={item.place} margin time={{from: item.from, to: item.to}} />
+            <Winners winner1={item.winner1} winner2={item.winner2} winner3={item.winner3} />
+            {!!item.vouchers.length && <Lineup head="Výherci voucherů" data={item.vouchers} />}
+          </div>  
+        }else{
+          return null
+        }
+      })}
     </Page>
   )
 }

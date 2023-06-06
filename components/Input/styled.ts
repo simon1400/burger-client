@@ -19,6 +19,7 @@ export const InputS = styled(TextField)(({theme, error, disabled}) => `
 `)
 
 export const InputWrap = styled.div<{error: boolean; disabled: boolean}>(({theme, error, disabled}) => `
+  margin-bottom: 20px;
   .label-wrap{
     display: flex;
     justify-content: space-between;

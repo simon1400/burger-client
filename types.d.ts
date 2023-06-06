@@ -30,6 +30,8 @@ interface ILineup {
   head: string;
   data: any;
   hp?: boolean;
+  registration?: boolean;
+  handleChange?: (arr: []) => void;
 }
 
 interface IHomepage {
@@ -127,6 +129,7 @@ interface IWinner {
     attributes: {
       title: string;
       image: IImage;
+      slug: string;
     }
   }
 }

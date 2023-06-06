@@ -15,13 +15,31 @@ export const LineupS = styled.div<{paddingTop?: boolean; hp: boolean}>(({theme, 
       align-items: center;
       justify-content: space-between;
       padding: 30px 15px;
-      border-bottom: 4px dotted grey;
+      border-bottom: 4px dotted #5a5a5a;
       &:first-of-type{
-        border-top: 4px dotted grey;
+        border-top: 4px dotted #5a5a5a;
+      }
+      &.select-all-wrap{
+        border-top: none;
+        > div{
+          padding-left: 13px;
+        }
       }
       > div{
         display: flex;
         align-items: center;
+        &:first-of-type.obsazeno{
+          position: relative;
+          opacity: .3;
+          &:after{
+            content: '';
+            display: block;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            z-index: 500;
+          }
+        }
       }
       .status {
         display: block;
@@ -50,6 +68,23 @@ export const LineupS = styled.div<{paddingTop?: boolean; hp: boolean}>(({theme, 
       }
       .icon-type{
         margin-right: 30px;
+      }
+      .lineup-title{
+        transition: all .2s ease;
+        color: white;
+        text-decoration: none;
+        &:hover{
+          color: ${theme.palette.primary.main};
+        }
+      }
+      .state{
+        border: 2px solid green;
+        border-radius: 20px;
+        padding: 2px 13px;
+        font-size: 18px;
+        &.obsazeno {
+          border-color: red;
+        }
       }
     }
   }

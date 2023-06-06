@@ -14,7 +14,7 @@ const BlockContent: FC<IBlockContent> = ({
       <Container maxWidth="md">
         <CenterWrap>
           <HeadWrap>
-            {head && <Typography variant="h2">{head}</Typography>}
+            {head && <Typography variant="h3" component="h2">{head}</Typography>}
             {time && <Time from={time.from} to={time.to} />}
           </HeadWrap>
           {content && <Typography component="div" dangerouslySetInnerHTML={{__html: content}}/>}

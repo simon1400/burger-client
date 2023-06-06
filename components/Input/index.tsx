@@ -3,7 +3,9 @@ import { FC } from "react";
 import { InputS, InputWrap } from "./styled";
 
 interface IInput extends StandardTextFieldProps {
-  errorText: string;
+  errorText?: string;
+  handleChange: (value: string, key: string) => void;
+  idKey: string;
 }
 
 const Input: FC<IInput> = ({
@@ -11,6 +13,8 @@ const Input: FC<IInput> = ({
   errorText,
   helperText,
   label,
+  idKey,
+  handleChange,
   disabled = false,
   ...rest
 }) => {
@@ -20,7 +24,15 @@ const Input: FC<IInput> = ({
         <label>{label}</label>
         {error && <span>{errorText}</span>}
       </div>
-      <InputS error={error} disabled={disabled} {...rest} label="" helperText="" variant="outlined" />
+      <InputS
+        error={error}
+        onChange={(e) => handleChange(e.target.value, idKey)}
+        disabled={disabled}
+        {...rest}
+        label=""
+        helperText=""
+        variant="outlined"
+      />
       <span className="helper-text">{helperText}</span>
     </InputWrap>
   );

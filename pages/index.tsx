@@ -12,6 +12,8 @@ import { changeDescription, changeTitle } from "stores/slices/metaSlices";
 import {festivalsQuery} from "queries/festivals";
 import mapQuery from "queries/map";
 import { sortDate } from "helpers/sortDate";
+import { CenterWrap } from "styles/CenterWrap";
+import Button from "components/Button";
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (ctx) => {
@@ -37,7 +39,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
     return {
       props: {
         homepage,
-        festivals,
+        festivals: sortDate(festivals),
         map
       }
     };
@@ -54,7 +56,11 @@ const Homepage: NextPage<{homepage: IHomepage; festivals: IFestivals; map: any}>
     <Page>
       <Map data={map}/>
       <Head data={homepage.title} />
-      <Events head={homepage.eventHead} data={sortDate(festivals)} hp />
+      {/* @ts-ignore */}
+      <Events head={homepage.eventHead} data={festivals.slice(0, 5)} hp />
+      <CenterWrap marginBottom={80}>
+        <Button href="/festivaly">další akce</Button>
+      </CenterWrap>
       <BlockContent head={homepage.title2} content={homepage.content} />
       <Galery images={homepage.galery}/>
     </Page>

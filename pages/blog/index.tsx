@@ -10,6 +10,7 @@ import { wrapper } from "stores"
 import { client } from "lib/api"
 import { blogPageQuery, postsQuery } from "queries/blog"
 import { changeDescription, changeTitle } from "stores/slices/metaSlices"
+import { ImgSquare } from "styles/ImgSquare"
 
 const APP_API = process.env.APP_API
 
@@ -43,11 +44,11 @@ const Blog: NextPage<{blogPage: any; posts: any}> = ({blogPage, posts}) => {
   return (
     <Page>
       <Head data={blogPage.title} />
-      <Container>
+      <Container sx={{mb: 20}}>
         <CenterWrap>
-          <ImgCircle>
+          <ImgSquare partners>
             <Image src={APP_API+blogPage.image.data.attributes.url} fill alt="" />
-          </ImgCircle>
+          </ImgSquare>
         </CenterWrap>
       </Container>
       <Container>

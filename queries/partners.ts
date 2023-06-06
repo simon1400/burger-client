@@ -37,10 +37,10 @@ const partnersQuery = gql`
               }
             }
           }
-          # meta{
-          #   title
-          #   description
-          # }
+          meta{
+            title
+            description
+          }
         }
       }
     }

@@ -10,6 +10,7 @@ import { wrapper } from "stores"
 import { client } from "lib/api"
 import partnersQuery from "queries/partners"
 import { changeDescription, changeTitle } from "stores/slices/metaSlices"
+import { ImgSquare } from "styles/ImgSquare"
 
 const APP_API = process.env.APP_API
 
@@ -56,9 +57,9 @@ const GaleryPage: NextPage<{partnersPage: any}> = ({
           <Typography variant="h2" marginTop={10}>{partnersPage.headTopPartner}</Typography>
           <Grid container justifyContent="center">
             {partnersPage.topPartners.data.map((item: any, idx: number) => <Grid key={idx} item xs={12} md={getColumn(topPartnerLength)}>
-              <ImgCircle big={topPartnerLength < 4}>
+              <ImgSquare big={topPartnerLength < 4} partners>
                 <Image src={APP_API+item.attributes.url} fill alt="" />
-              </ImgCircle>
+              </ImgSquare>
             </Grid>)}
           </Grid>
         </Container>
@@ -66,9 +67,9 @@ const GaleryPage: NextPage<{partnersPage: any}> = ({
           <Typography variant="h2" marginTop={10}>{partnersPage.headPartner}</Typography>
           <Grid container justifyContent="center">
             {partnersPage.partners.data.map((item: any, idx: number) => <Grid key={idx} item xs={12} md={getColumn(partnerLength)}>
-              <ImgCircle big={partnerLength < 4}>
+              <ImgSquare big={partnerLength < 4} partners>
                 <Image src={APP_API+item.attributes.url} fill alt="" />
-              </ImgCircle>
+              </ImgSquare>
             </Grid>)}
           </Grid>
         </Container>
@@ -76,9 +77,9 @@ const GaleryPage: NextPage<{partnersPage: any}> = ({
           <Typography variant="h2" marginTop={10}>{partnersPage.headSupport}</Typography>
           <Grid container justifyContent="center">
             {partnersPage.supported.data.map((item: any, idx: number) => <Grid key={idx} item xs={12} md={getColumn(supportedLength)}>
-              <ImgCircle big={supportedLength < 4}>
+              <ImgSquare big={supportedLength < 4} partners>
                 <Image src={APP_API+item.attributes.url} fill alt="" />
-              </ImgCircle>
+              </ImgSquare>
             </Grid>)}
           </Grid>
         </Container>

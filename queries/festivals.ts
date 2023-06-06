@@ -7,6 +7,7 @@ export const festivalsQuery = gql`
         attributes{
           title
           slug
+          state
           from
           to
           social
@@ -81,6 +82,7 @@ export const festivalsWinnersQuery = gql`
             data{
               attributes{
                 title
+                slug
                 image{
                   data{
                     attributes{
@@ -95,6 +97,7 @@ export const festivalsWinnersQuery = gql`
             data{
               attributes{
                 title
+                slug
                 image{
                   data{
                     attributes{
@@ -109,6 +112,7 @@ export const festivalsWinnersQuery = gql`
             data{
               attributes{
                 title
+                slug
                 image{
                   data{
                     attributes{
@@ -149,6 +153,7 @@ export const getFestival = gql`
               attributes{
                 title
                 slug
+                full
                 category{
                   data{
                     attributes{
@@ -188,6 +193,7 @@ export const getFestival = gql`
             data{
               attributes{
                 title
+                slug
                 image{
                   data{
                     attributes{
@@ -202,6 +208,7 @@ export const getFestival = gql`
             data{
               attributes{
                 title
+                slug
                 image{
                   data{
                     attributes{
@@ -216,6 +223,7 @@ export const getFestival = gql`
             data{
               attributes{
                 title
+                slug
                 image{
                   data{
                     attributes{

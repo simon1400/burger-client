@@ -9,8 +9,12 @@ export const FacebookEventS = styled(Link)<{single: boolean}>(({theme, single}) 
   color: rgba(255, 255, 255, 0.6);
   text-decoration: none;
   justify-content: center;
+  transition: all .2s ease;
   svg{
     margin-right: 7px;
+  }
+  &:hover{
+    color: white;
   }
   ${theme.breakpoints.down("md")} {
     margin-right: ${single ? "0" : "10px"};

@@ -11,4 +11,7 @@ export const ArticleContent = styled.div(({theme}) => `
   .short-content{
     margin-bottom: 30px;
   }
+  a{
+    text-decoration: none;
+  }
 `)

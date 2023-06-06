@@ -14,7 +14,7 @@ const Card: FC<{data: any}> = ({data}) => {
         <Image src={APP_API+data.image.data.attributes.url} fill alt="" />
       </ImgCard>
       <Typography variant="h4" component="h2">{data.title}</Typography>
-      <Price>{data.price}</Price>
+      <Price>{data.price} Kč</Price>
     </CardS>
   )
 }

@@ -6,6 +6,8 @@ import LabelBare from "components/LabelBare"
 import IconButton from "components/IconButton"
 import ArrowRight from 'public/img/arrow-right.svg'
 import { FC } from "react"
+import Link from "next/link"
+import { kitcut } from "helpers/kitkut"
 
 const APP_API = process.env.APP_API
 
@@ -14,15 +16,17 @@ const ArticleShort: FC<{data: any}> = ({data}) => {
     <ArticleShortS>
       <Grid container alignItems="center">
         <Grid item xs={6}>
-          <ImgSquare margin>
-            <Image src={APP_API+data.image.data.attributes.url} fill alt="" />
-          </ImgSquare>
+          <Link href={`/blog/${data.slug}`}>
+            <ImgSquare margin>
+              <Image src={APP_API+data.image.data.attributes.url} fill alt="" />
+            </ImgSquare>
+          </Link>
         </Grid>
         <Grid item xs={6}>
           <ArticleContent>
             {data.label?.data && <LabelBare data={data.label.data.attributes.title}/>}
-            <Typography variant="h2">{data.title}</Typography>
-            <Typography className="short-content" component="div" dangerouslySetInnerHTML={{__html: data.content}}/>
+            <Link href={`/blog/${data.slug}`}><Typography variant="h2">{kitcut(data.title, 50)}</Typography></Link>
+            <Typography className="short-content" component="div" dangerouslySetInnerHTML={{__html: kitcut(data.content, 150)}}/>
             <IconButton href={`/blog/${data.slug}`}>
               <ArrowRight />
             </IconButton>

@@ -4,7 +4,7 @@ export const MapS = styled.section`
   height: 713px;
   max-width: 100%;
   margin-bottom: 85px;
-  margin-top: -100px;
+  margin-top: -30px;
   svg{
     max-width: 100%;
     >#BODY {

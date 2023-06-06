@@ -44,7 +44,7 @@ const Modal = () => {
     <ModalS
       fullWidth
       maxWidth="lg"
-      open={!!modal.length}
+      open={!!modal?.length}
       scroll="body"
       onClose={handleClose}
     >
@@ -62,21 +62,21 @@ const Modal = () => {
           <Typography component="div" dangerouslySetInnerHTML={{__html: seller.content}}/>
           {!!seller.socials.length && <ul>
             {seller.socials.map((item: any, idx: number) => <li key={idx}>
-              <Link href={item.link}>{item.text}</Link>
+              <Link href={item.link} target="_blank">{item.text}</Link>
             </li>)}
           </ul>}
           <ModalWinners>
             <div>
-              <b>{seller.festival1.data.length}x</b>
-              <span>1. misto</span>
+              <b>{seller.festival1.data.length}×</b>
+              <span>1. místo</span>
             </div>
             <div>
-              <b>{seller.festival2.data.length}x</b>
-              <span>2. misto</span>
+              <b>{seller.festival2.data.length}×</b>
+              <span>2. místo</span>
             </div>
             <div>
-              <b>{seller.festival3.data.length}x</b>
-              <span>3. misto</span>
+              <b>{seller.festival3.data.length}×</b>
+              <span>3. místo</span>
             </div>
           </ModalWinners>
         </ModalContentWrap>

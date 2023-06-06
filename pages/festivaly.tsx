@@ -51,7 +51,7 @@ const Festival: NextPage<{festivalPage: any; festivals: any}> = ({
       <Head data={festivalPage.title} />
       <BlockContent content={festivalPage.content} />
       {!!filteredFestivals.future.length && <Lineup head="Nejbližší akce" data={filteredFestivals.future} hp />}
-      {!!filteredFestivals.old.length && <Lineup head="Již broběhlo" data={filteredFestivals.old} hp /> }
+      {!!filteredFestivals.old.length && <Lineup head="Již proběhlo" data={filteredFestivals.old} hp /> }
       <BlockContent head={festivalPage.title2} content={festivalPage.content2} />
       {!!festivalPage.galery?.data?.length && <Galery images={festivalPage.galery} />}
     </Page>

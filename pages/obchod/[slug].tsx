@@ -49,7 +49,7 @@ const Merch: NextPage<{merch: any}> = ({merch}) => {
   return (
     <Page>
       <Head data={merch.title} />
-      <Price big>{merch.price}</Price>
+      <Price big>{merch.price} Kč</Price>
       <Container>
         <ImgCard>
           <Image src={APP_API+merch.image.data.attributes.url} fill alt="" />

@@ -16,6 +16,7 @@
     "@mui/material": "^5.13.0",
     "@reduxjs/toolkit": "^1.9.5",
     "@svgr/webpack": "^8.0.1",
+    "axios": "^1.4.0",
     "date-fns": "^2.30.0",
     "graphql": "^16.6.0",
     "hamburger-react": "^2.5.0",
@@ -24,6 +25,7 @@
     "next-redux-wrapper": "^8.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-dropzone": "^14.2.3",
     "react-redux": "^8.0.5",
     "sass": "^1.62.1",
     "sharp": "^0.32.1"

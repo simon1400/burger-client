@@ -7,6 +7,7 @@ import { wrapper } from "stores"
 import { client } from "lib/api"
 import { festivalsGaleryQuery } from "queries/festivals"
 import { changeDescription, changeTitle } from "stores/slices/metaSlices"
+import { sortDate } from "helpers/sortDate"
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (ctx) => {
@@ -21,20 +22,27 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
     return {
       props: {
-        galeryData,
+        galeryData: sortDate(galeryData),
       }
     };
   }
 );
 
 const GaleryPage: NextPage<{galeryData: any}> = ({galeryData}) => {
+  console.log(galeryData)
   return (
     <Page>
-      {galeryData.map((item: any, idx: number) => <div key={idx}>
-        <Head data={item.title} />
-        <BlockContent time={{from: item.from, to: item.to}} head={item.place} />
-        {!!item.galery.data?.length && <Galery images={item.galery} />}
-      </div>)}
+      {galeryData.map((item: any, idx: number) => {
+        if(!!item.galery.data?.length) {
+          return <div key={idx}>
+            <Head data={item.title} />
+            <BlockContent time={{from: item.from, to: item.to}} head={item.place} />
+            <Galery images={item.galery} />
+          </div>
+        }else{
+          return null
+        }
+      })}
     </Page>
   )
 }

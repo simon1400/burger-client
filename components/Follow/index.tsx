@@ -11,7 +11,7 @@ const Follow: FC<{data: any}> = ({data}) => {
       <Typography variant="h3">Sledujte nás</Typography>
       <ul>
         {data.map((item: any, idx: number) => <li key={idx} className={`soc-${item.type}`}>
-          <Link href={item.link}>
+          <Link href={item.link} target="_blank">
             {item.type === 'facebook' && <FacebookIcon />}
             {item.type === 'instagram' && <InstagramIcon />}
           </Link>
