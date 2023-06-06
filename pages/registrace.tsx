@@ -6,7 +6,6 @@ import Form from "components/Form";
 import Head from "components/Head";
 import Lineup from "components/Lineup";
 import { filterEvents } from "helpers/filterEvents";
-import { filterReg } from "helpers/filterReg";
 import { sortDate } from "helpers/sortDate";
 import Page from "layout/Page";
 import { client } from "lib/api";
@@ -79,40 +78,34 @@ const Registration: NextPage<{ festivals: any; form: any }> = ({
     setDataSend({ ...dataSend, festivals: arrFestivals });
   }
 
-  const handleSend = () => {
+  const handleSend = async () => {
     const sendObj: any = []
-    console.log(dataSend)
-    Object.keys(dataSend).map((item: string) => {
+    const keysData = Object.keys(dataSend)
+    for(let i = 0; i < keysData.length; i++) {
       // @ts-ignore
-      if(dataSend[item] instanceof File) {
+      if(dataSend[keysData[i]] instanceof File) {
         let formData = new FormData();
         // @ts-ignore
-        formData.append("files", dataSend[item]);
-        console.log(formData)
-        fetch(`${APP_API}/api/uploud`, {
-          method: 'post',
-          body: formData
-        }).then(res => {
-          console.log('res --', res)
-          sendObj.push({
-            key: item,
-            // @ts-ignore
-            value: `${dataSend[item]}`
-          })
-        }).catch(err => console.log('err -- ', err))
-        // axios.post(`${APP_API}/api/uploud`, formData)
+        formData.append("files", dataSend[keysData[i]]);
+        const uploudImg = await axios.post(`${APP_API}/api/upload`, formData).catch(err => console.log('err uploud image -- ', err))
+        sendObj.push({
+          // @ts-ignore
+          key: keysData[i],
+          // @ts-ignore
+          value: `${APP_API}${uploudImg.data[0].url}`
+        })
       }else{
         sendObj.push({
-          key: item,
           // @ts-ignore
-          value: `${dataSend[item]}`
+          key: keysData[i],
+          // @ts-ignore
+          value: `${dataSend[keysData[i]]}`
         })
       }
-      
-    })
-    // axios.post(`${APP_API}/api/applications`, {data: {result: sendObj}}).then(res => {
-    //   console.log('res - ', res.data)
-    // }).catch(err => console.log('err', err))
+    }
+    await axios.post(`${APP_API}/api/applications`, {data: {result: sendObj}}).then(res => {
+      console.log('res - ', res.data)
+    }).catch(err => console.log('err save form -- ', err))
   }
 
   return (
