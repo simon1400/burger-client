@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const MapS = styled.section`
+export const MapS = styled.section(({theme}) => `
   height: 713px;
   max-width: 100%;
   margin-bottom: 85px;
@@ -17,4 +17,14 @@ export const MapS = styled.section`
       }
     }
   }
-`
+  ${theme.breakpoints.down("md")} {
+    height: auto;
+    overflow-x: scroll;
+    padding-top: 50px;
+    svg{
+      height: auto;
+      width: 200%;
+      max-width: none;
+    }
+  }
+`)

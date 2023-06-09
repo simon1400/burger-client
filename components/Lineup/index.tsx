@@ -79,7 +79,7 @@ const Lineup: FC<ILineup> = ({
             <div></div>
           </li>}
           {data.map((item: any, idx: number) => <li key={idx}>
-            <div className={item.state}>
+            <div className={registration ? item.state : ""}>
               {/* @ts-ignore */}
               {registration && <CheckboxS onClick={() => handleCheck(item.from+" - "+item.to+" - "+item.title)} checked={stateCheck.indexOf(item.from+" - "+item.to+" - "+item.title) >= 0} sx={{ '& .MuiSvgIcon-root': { fontSize: 26 } }} />}
               {item.from && item.to && InInterval(item.from, item.to) && <span className="status"></span>}

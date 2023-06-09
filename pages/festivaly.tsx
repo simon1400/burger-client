@@ -18,12 +18,6 @@ export const getServerSideProps = wrapper.getServerSideProps(
       query: festivalsQuery,
     });
 
-    // if(!data.festivals.data.length) {
-    //   return {
-    //     notFound: true
-    //   }
-    // }
-
     const festivalPage = data.festivalsPage.data.attributes;
     const festivals = festivalsData.festivals.data.map((item: any) => item.attributes)
 

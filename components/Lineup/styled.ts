@@ -28,16 +28,18 @@ export const LineupS = styled.div<{paddingTop?: boolean; hp: boolean}>(({theme, 
       > div{
         display: flex;
         align-items: center;
-        &:first-of-type.obsazeno{
-          position: relative;
-          opacity: .3;
-          &:after{
-            content: '';
-            display: block;
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            z-index: 500;
+        &:first-of-type{
+          &.obsazeno{
+            position: relative;
+            opacity: .3;
+            &:after{
+              content: '';
+              display: block;
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              z-index: 500;
+            }
           }
         }
       }
@@ -68,6 +70,7 @@ export const LineupS = styled.div<{paddingTop?: boolean; hp: boolean}>(({theme, 
       }
       .icon-type{
         margin-right: 30px;
+        display: flex;
       }
       .lineup-title{
         transition: all .2s ease;
@@ -96,6 +99,7 @@ export const LineupS = styled.div<{paddingTop?: boolean; hp: boolean}>(({theme, 
       }
       > div:first-of-type{
         flex-wrap: ${hp ? "wrap" : "nowrap"};
+        width: 100%;
         time{
           font-size: 15px;
           width: 100%;

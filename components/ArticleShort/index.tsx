@@ -15,14 +15,14 @@ const ArticleShort: FC<{data: any}> = ({data}) => {
   return (
     <ArticleShortS>
       <Grid container alignItems="center">
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           <Link href={`/blog/${data.slug}`}>
             <ImgSquare margin>
               <Image src={APP_API+data.image.data.attributes.url} fill alt="" />
             </ImgSquare>
           </Link>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           <ArticleContent>
             {data.label?.data && <LabelBare data={data.label.data.attributes.title}/>}
             <Link href={`/blog/${data.slug}`}><Typography variant="h2">{kitcut(data.title, 50)}</Typography></Link>

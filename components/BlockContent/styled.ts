@@ -5,7 +5,7 @@ export const BlockContentS = styled.section<{margin: boolean}>(({theme, margin})
   margin-bottom: ${margin ? "30px" : "0"};
 `)
 
-export const HeadWrap = styled.div`
+export const HeadWrap = styled.div(({theme}) => `
   h2{
     margin-bottom: 0;
   }
@@ -14,4 +14,9 @@ export const HeadWrap = styled.div`
     margin-top: 15px;
     display: block;
   }
-`
+  ${theme.breakpoints.down('md')} {
+    time {
+      font-size: 20px;
+    }
+  }
+`)
