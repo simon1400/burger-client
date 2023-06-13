@@ -11,6 +11,7 @@ import { client } from "lib/api"
 import partnersQuery from "queries/partners"
 import { changeDescription, changeTitle } from "stores/slices/metaSlices"
 import { ImgSquare } from "styles/ImgSquare"
+import Link from "next/link"
 
 const APP_API = process.env.APP_API
 
@@ -37,9 +38,9 @@ const GaleryPage: NextPage<{partnersPage: any}> = ({
   partnersPage
 }) => {
 
-  const topPartnerLength = partnersPage.topPartners.data.length
-  const partnerLength = partnersPage.partners.data.length
-  const supportedLength = partnersPage.supported.data.length
+  const topPartnerLength = partnersPage.topPartners.length
+  const partnerLength = partnersPage.partners.length
+  const supportedLength = partnersPage.supported.length
 
   const getColumn = (count: number) => {
     return count === 1 ? 12 : count === 2 ? 6 : count === 3 ? 4 : 3;
@@ -56,30 +57,36 @@ const GaleryPage: NextPage<{partnersPage: any}> = ({
         <Container>
           <Typography variant="h2" marginTop={10}>{partnersPage.headTopPartner}</Typography>
           <Grid container justifyContent="center">
-            {partnersPage.topPartners.data.map((item: any, idx: number) => <Grid key={idx} item xs={12} md={getColumn(topPartnerLength)}>
-              <ImgSquare big={topPartnerLength < 4} partners>
-                <Image src={APP_API+item.attributes.url} fill alt="" />
-              </ImgSquare>
+            {partnersPage.topPartners.map((item: any, idx: number) => <Grid key={idx} item xs={12} md={getColumn(topPartnerLength)}>
+              <Link href={item.link}>
+                <ImgSquare big={topPartnerLength < 4} partners>
+                  <Image src={APP_API+item.image.data.attributes.url} fill alt="" />
+                </ImgSquare>
+              </Link>
             </Grid>)}
           </Grid>
         </Container>
         <Container>
           <Typography variant="h2" marginTop={10}>{partnersPage.headPartner}</Typography>
           <Grid container justifyContent="center">
-            {partnersPage.partners.data.map((item: any, idx: number) => <Grid key={idx} item xs={12} md={getColumn(partnerLength)}>
-              <ImgSquare big={partnerLength < 4} partners>
-                <Image src={APP_API+item.attributes.url} fill alt="" />
-              </ImgSquare>
+            {partnersPage.partners.map((item: any, idx: number) => <Grid key={idx} item xs={12} md={getColumn(partnerLength)}>
+              <Link href={item.link}>
+                <ImgSquare big={partnerLength < 4} partners>
+                  <Image src={APP_API+item.image.data.attributes.url} fill alt="" />
+                </ImgSquare>
+              </Link>
             </Grid>)}
           </Grid>
         </Container>
         <Container>
           <Typography variant="h2" marginTop={10}>{partnersPage.headSupport}</Typography>
           <Grid container justifyContent="center">
-            {partnersPage.supported.data.map((item: any, idx: number) => <Grid key={idx} item xs={12} md={getColumn(supportedLength)}>
-              <ImgSquare big={supportedLength < 4} partners>
-                <Image src={APP_API+item.attributes.url} fill alt="" />
-              </ImgSquare>
+            {partnersPage.supported.map((item: any, idx: number) => <Grid key={idx} item xs={12} md={getColumn(supportedLength)}>
+              <Link href={item.link}>
+                <ImgSquare big={supportedLength < 4} partners>
+                  <Image src={APP_API+item.image.data.attributes.url} fill alt="" />
+                </ImgSquare>
+              </Link>
             </Grid>)}
           </Grid>
         </Container>

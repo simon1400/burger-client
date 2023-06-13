@@ -17,25 +17,34 @@ const partnersQuery = gql`
             link
           }
           topPartners {
-            data{
-              attributes {
-                url
+            image{
+              data{
+                attributes {
+                  url
+                }
               }
             }
+            link
           }
           partners {
-            data{
-              attributes {
-                url
+            image{
+              data{
+                attributes {
+                  url
+                }
               }
             }
+            link
           }
           supported {
-            data{
-              attributes {
-                url
+            image{
+              data{
+                attributes {
+                  url
+                }
               }
             }
+            link
           }
           meta{
             title
