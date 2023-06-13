@@ -5,6 +5,8 @@ export const HeadS = styled.div(({theme}) => `
   margin-bottom: 30px;
   h1{
     margin-bottom: 30px;
+    padding-left: 60px;
+    padding-right: 60px;
   }
   svg{
     width: 236px;
