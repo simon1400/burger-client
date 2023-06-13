@@ -14,6 +14,7 @@ import mapQuery from "queries/map";
 import { sortDate } from "helpers/sortDate";
 import { CenterWrap } from "styles/CenterWrap";
 import Button from "components/Button";
+import { filterEvents } from "helpers/filterEvents";
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (ctx) => {
@@ -39,7 +40,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
     return {
       props: {
         homepage,
-        festivals: sortDate(festivals),
+        festivals: filterEvents(festivals),
         map
       }
     };
@@ -57,7 +58,7 @@ const Homepage: NextPage<{homepage: IHomepage; festivals: IFestivals; map: any}>
       <Map data={map}/>
       <Head data={homepage.title} />
       {/* @ts-ignore */}
-      <Events head={homepage.eventHead} data={festivals.slice(0, 5)} hp />
+      <Events head={homepage.eventHead} data={festivals.futures.slice(0, 5)} hp />
       <CenterWrap marginBottom={80}>
         <Button href="/festivaly">další akce</Button>
       </CenterWrap>
