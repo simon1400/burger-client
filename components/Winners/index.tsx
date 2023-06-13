@@ -1,7 +1,9 @@
-import { Container, Grid } from "@mui/material"
+import { Container, Grid, useMediaQuery } from "@mui/material"
 import Winner from "components/Winner"
 import { WinnersS } from "./styled"
 import { FC } from "react"
+import {Swiper, SwiperSlide} from "swiper/react"
+import "swiper/css";
 
 const Winners: FC<{
   winner1: IWinner;
@@ -13,6 +15,8 @@ const Winners: FC<{
   winner3,
 }) => {
 
+  const mediaMd = useMediaQuery("(max-width: 940px)")
+
   if(!winner1.data && !winner1.data && !winner1.data) {
     return null
   }
@@ -20,17 +24,24 @@ const Winners: FC<{
   return (
     <WinnersS>
       <Container maxWidth="md">
-        <Grid container>
-          {winner1.data && <Grid item xs={12} md={4}>
+        <Swiper
+          slidesPerView={mediaMd ? 1 : 3}
+          spaceBetween={30}
+          pagination={{
+            clickable: true,
+          }}
+          className="mySwiper"
+        >
+          {winner1.data && <SwiperSlide>
             <Winner place="1" data={winner1} />
-          </Grid>}
-          {winner2.data && <Grid item xs={12} md={4}>
+          </SwiperSlide>}
+          {winner2.data && <SwiperSlide>
             <Winner place="2" data={winner2} />
-          </Grid>}
-          {winner3.data && <Grid item xs={12} md={4}>
+          </SwiperSlide>}
+          {winner3.data && <SwiperSlide>
             <Winner place="3" data={winner3} />
-          </Grid>}
-        </Grid>
+          </SwiperSlide>}
+        </Swiper>
       </Container>
     </WinnersS>
   )

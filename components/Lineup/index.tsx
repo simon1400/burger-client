@@ -33,7 +33,8 @@ const Lineup: FC<ILineup> = ({
   const [stateCheck, setStateCheck] = useState([])
   const [stateCheckAll, setStateCheckAll] = useState(false)
 
-  const handleModal = (slug: string) => {
+  const handleModal = (e: any, slug: string) => {
+    e.preventDefault()
     dispatch(changeModal(slug))
   }
 
@@ -67,6 +68,20 @@ const Lineup: FC<ILineup> = ({
     setStateCheck(stateArr)
   }
 
+  const getState = (state: string) => {
+    if(state === "volno") {
+      return "volno"
+    }else if(state === "obsazeno"){
+      return "obsazeno"
+    }else if(state === "nahradnik"){
+      return "náhradník"
+    }else if(state === "zbyva_1_misto") {
+      return "zbývá 1 místo"
+    }
+
+    return null
+  }
+
   return (
     <LineupS hp={hp}>
       <Container maxWidth="md">
@@ -88,7 +103,8 @@ const Lineup: FC<ILineup> = ({
                 <Image src={APP_API+item.category.data[0].attributes.icon.data.attributes.url} width={30} height={30} alt="" />
               </div>}
               {item.title && !modal && !!item.slug && <Link className="lineup-title" href={item.slug}><p>{item.title}</p></Link>}
-              {item.title && modal && <p>{item.title}</p>}
+              {item.title && !!modal && !!item.slug && <Link className="lineup-title" href={item.slug} onClick={(e) => handleModal(e, item.slug)}><p>{item.title}</p></Link>}
+              {/* {item.title && modal && <p>{item.title}</p>} */}
               {item.name && <p>{item.name}</p>}
               {item.labels?.data && <Labels>
                 {item.labels.data.map((label: any, idx: number) => <Label key={idx} data={label.attributes} />)}
@@ -99,13 +115,13 @@ const Lineup: FC<ILineup> = ({
               {!modal && !!item.slug && <IconButton href={item.slug}>
                 <ArrowRight />
               </IconButton>}
-              {!!modal && item.full !== false && <IconButton onClick={() => handleModal(item.slug)}>
+              {!!modal && item.full !== false && <IconButton onClick={(e) => handleModal(e, item.slug)}>
                 <ArrowRight />
               </IconButton>}
               {item?.number && <b>{item.number}</b>}
             </div>}
             {registration && <div className={`state ${item.state}`}>
-              <label>{item.state || "volno"}</label>  
+              <label>{getState(item.state) || "volno"}</label>  
             </div>}
           </li>)}
         </ul>

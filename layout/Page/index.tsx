@@ -3,6 +3,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { selectAllMeta } from "stores/slices/metaSlices";
+import Script from "next/script";
 
 interface IPage {
   children: ReactNode | ReactNode[];
@@ -110,14 +111,14 @@ const Page: FC<IPage> = ({ children, className = "", id = "" }) => {
       </Head>
 
       {/* <!-- Google tag (gtag.js) --> */}
-      {/* <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-2CMP76GFG2" />
+      <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-2CMP76GFG2" />
       <Script id="gtag" strategy="afterInteractive">
-        {`window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-2CMP76GFG2');`}
-      </Script> */}
+        {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer','GTM-MPJ6DQS');`}
+      </Script>
 
       {/* Hotjar Tracking Code for my site */}
       {/* <Script id="hotjar">

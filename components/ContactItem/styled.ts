@@ -32,4 +32,9 @@ export const ContactItemS = styled.div(({theme}) => `
       color: #d9291c;
     }
   }
+  /* ${theme.breakpoints.down("md")} {
+    a{
+      text-align: center;
+    }
+  } */
 `)

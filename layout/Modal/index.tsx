@@ -40,6 +40,10 @@ const Modal = () => {
 
   const seller = data.sellers.data[0].attributes
 
+  const winner1 = seller.festival1.data.length;
+  const winner2 = seller.festival2.data.length;
+  const winner3 = seller.festival3.data.length;
+
   return (
     <ModalS
       fullWidth
@@ -65,20 +69,20 @@ const Modal = () => {
               <Link href={item.link} target="_blank">{item.text}</Link>
             </li>)}
           </ul>}
-          <ModalWinners>
-            <div>
-              <b>{seller.festival1.data.length}×</b>
+          {(winner1 > 0 || winner2 > 0 || winner3 > 0) && <ModalWinners>
+            {winner1 > 0 && <div>
+              <b>{winner1}×</b>
               <span>1. místo</span>
-            </div>
-            <div>
-              <b>{seller.festival2.data.length}×</b>
+            </div>}
+            {winner2 > 0 && <div>
+              <b>{winner2}×</b>
               <span>2. místo</span>
-            </div>
-            <div>
-              <b>{seller.festival3.data.length}×</b>
+            </div>}
+            {winner3 > 0 && <div>
+              <b>{winner3}×</b>
               <span>3. místo</span>
-            </div>
-          </ModalWinners>
+            </div>}
+          </ModalWinners>}
         </ModalContentWrap>
         <Galery images={seller.galery} modal />
       </ModalBody>

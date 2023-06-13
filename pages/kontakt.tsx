@@ -5,12 +5,13 @@ import { CenterWrap } from "styles/CenterWrap"
 import { Container, Grid, Typography } from "@mui/material"
 import ContactLine from "components/ContactLine"
 import { ContactLines } from "styles/ContactLines"
-import Times from 'public/img/times.svg'
 import ContactItem from "components/ContactItem"
 import { wrapper } from "stores"
 import { client } from "lib/api"
 import contactQuery from "queries/contact"
 import { changeDescription, changeTitle } from "stores/slices/metaSlices"
+import Phone from 'public/img/phone-solid.svg'
+import Envelope from 'public/img/envelope-regular.svg'
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (ctx) => {
@@ -39,8 +40,8 @@ const Contact: NextPage<{contact: any}> = ({contact}) => {
         <CenterWrap>
           <Typography component="div" dangerouslySetInnerHTML={{__html: contact.content}} />
           <ContactLines>
-            <ContactLine icon={<Times />} title={contact.phone} link={`tel:${contact.phone}`} />
-            <ContactLine icon={<Times />} title={contact.email} link={`mailto:${contact.email}`} />
+            <ContactLine icon={<Phone />} title={contact.phone} link={`tel:${contact.phone}`} />
+            <ContactLine icon={<Envelope />} title={contact.email} link={`mailto:${contact.email}`} />
           </ContactLines>
         </CenterWrap>
       </Container>
@@ -49,7 +50,7 @@ const Contact: NextPage<{contact: any}> = ({contact}) => {
           <Grid item xs={12}>
             <ContactItem data={contact.item[0]} />
           </Grid>
-          {contact.item.slice(1, contact.item.length).map((item: any, idx: number) => <Grid key={idx} item xs={4}>
+          {contact.item.slice(1, contact.item.length).map((item: any, idx: number) => <Grid key={idx} item xs={12} md={4}>
             <ContactItem data={item} />
           </Grid>)}
         </Grid>

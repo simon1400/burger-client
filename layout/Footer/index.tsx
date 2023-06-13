@@ -5,9 +5,12 @@ import footerQuery from "queries/footer";
 import Partners from "components/Partners";
 import Follow from "components/Follow";
 import FooterBottom from "components/FooterBottom";
+import { useRouter } from "next/router";
 
 const Footer = () => {
   const {data, loading} = useQuery(footerQuery)
+
+  const router = useRouter()
 
   if(!data || loading) {
     return null
@@ -20,7 +23,7 @@ const Footer = () => {
       <Container maxWidth="xl">
         <hr />
       </Container>
-      <Partners data={footer.logoPartners.data} />
+      {router.asPath === "/partneri" ? null :<Partners data={footer.logoPartners.data} />}
       <Follow data={footer.soc} />
       <FooterBottom email={footer.email} phone={footer.phone} />
     </FooterS>

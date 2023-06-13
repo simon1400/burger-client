@@ -86,7 +86,10 @@ export const LineupS = styled.div<{paddingTop?: boolean; hp: boolean}>(({theme, 
         padding: 2px 13px;
         font-size: 18px;
         &.obsazeno {
-          border-color: red;
+          border-color: #D82A1C;
+        }
+        &.nahradnik {
+          border-color: #FE5600;
         }
       }
     }
