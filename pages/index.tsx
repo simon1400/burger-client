@@ -58,7 +58,7 @@ const Homepage: NextPage<{homepage: IHomepage; festivals: IFestivals; map: any}>
       <Map data={map}/>
       <Head data={homepage.title} />
       {/* @ts-ignore */}
-      <Events head={homepage.eventHead} data={festivals.futures.slice(0, 5)} hp />
+      <Events head={homepage.eventHead} data={festivals.future.slice(0, 5)} hp />
       <CenterWrap marginBottom={80}>
         <Button href="/festivaly">další akce</Button>
       </CenterWrap>
