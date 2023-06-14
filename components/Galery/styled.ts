@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
-export const GaleryS = styled.div<{modal: boolean}>(({modal, theme}) => `
-  padding-top: 60px;
+export const GaleryS = styled.div<{modal: boolean; removePadding: boolean}>(({modal, theme, removePadding}) => `
+  padding-top: ${removePadding ? "0" : "60px"};
   padding-bottom: ${modal ? "0" : "60px"};
   ${theme.breakpoints.down("md")} {
     padding-top: ${modal ? "0" : "60px"};

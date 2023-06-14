@@ -1,4 +1,5 @@
-import { Container } from "@mui/material";
+import { Box, CircularProgress, Container } from "@mui/material";
+import { green } from "@mui/material/colors";
 import axios from "axios";
 import BlockContent from "components/BlockContent";
 import Button from "components/Button";
@@ -60,6 +61,7 @@ const Registration: NextPage<{ page: any; festivals: any; form: any }> = ({
   page
 }) => {
   const [dataSend, setDataSend] = useState({});
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     const formObj = {};
@@ -80,6 +82,7 @@ const Registration: NextPage<{ page: any; festivals: any; form: any }> = ({
   }
 
   const handleSend = async () => {
+    setLoading(true)
     const sendObj: any = []
     const keysData = Object.keys(dataSend)
     for(let i = 0; i < keysData.length; i++) {
@@ -105,7 +108,7 @@ const Registration: NextPage<{ page: any; festivals: any; form: any }> = ({
       }
     }
     await axios.post(`${APP_API}/api/applications`, {data: {result: sendObj}}).then(res => {
-      console.log('res - ', res.data)
+      setLoading(false)
     }).catch(err => console.log('err save form -- ', err))
   }
 
@@ -117,7 +120,25 @@ const Registration: NextPage<{ page: any; festivals: any; form: any }> = ({
       {form.fields.length && (
         <Form data={form} state={dataSend} setState={setDataSend} />
       )}
-      <Container maxWidth="md"><Button onClick={() => handleSend()}>odeslat žádost</Button></Container>
+      <Container maxWidth="md">
+        <Box sx={{ m: 1, position: 'relative', display: "inline-block" }}>
+          <Button disabled={loading} onClick={() => handleSend()}>odeslat žádost</Button>
+          {loading && (
+            <CircularProgress
+              size={24}
+              sx={{
+                color: green[500],
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                marginTop: '-12px',
+                marginLeft: '-12px',
+              }}
+            />
+          )}
+        </Box>
+        
+      </Container>
       <BlockContent content={page.content2} />
     </Page>
   );

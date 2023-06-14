@@ -52,7 +52,7 @@ const Festival: NextPage<{festival: IFestival}> = ({
       {!beforeDate(festival.to) &&<BlockContent content={festival.contentAfter} />}
       {festival.social && <FacebookEvent single data={festival.social} />}
       {!!festival.lineup.data.length && <Lineup head="Lineup" data={festival.lineup.data.map((item: any) => item.attributes)} modal />}
-      <Winners winner1={festival.winner1} winner2={festival.winner2} winner3={festival.winner3} />
+      <Winners winner1={festival.winner1} winner2={festival.winner2} winner3={festival.winner3} margin />
       {!!festival.vouchers.length && <Lineup head="Výherci voucherů" data={festival.vouchers} />}
       {!!festival.galery.data?.length && <Galery images={festival.galery} />}
     </Page>

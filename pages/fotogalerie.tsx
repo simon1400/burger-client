@@ -8,6 +8,7 @@ import { client } from "lib/api"
 import { festivalsGaleryQuery } from "queries/festivals"
 import { changeDescription, changeTitle } from "stores/slices/metaSlices"
 import { sortDate } from "helpers/sortDate"
+import { CenterWrap } from "styles/CenterWrap"
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (ctx) => {
@@ -36,7 +37,8 @@ const GaleryPage: NextPage<{galeryData: any}> = ({galeryData}) => {
           return <div key={idx}>
             <Head data={item.title} />
             <BlockContent time={{from: item.from, to: item.to}} head={item.place} />
-            <Galery images={item.galery} />
+            <Galery removePadding images={item.galery} />
+            <CenterWrap marginBottom={100}></CenterWrap>
           </div>
         }else{
           return null

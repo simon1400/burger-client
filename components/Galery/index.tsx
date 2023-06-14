@@ -19,10 +19,11 @@ const grid = (images: IImages) => {
 
 const Galery: FC<IGalery> = ({
   modal = false,
-  images
+  images,
+  removePadding = false
 }) => {
   return (
-    <GaleryS modal={modal}>
+    <GaleryS modal={modal} removePadding={removePadding}>
       {!modal ? <Container maxWidth="xl">{grid(images)}</Container> : grid(images)}
     </GaleryS>
   )

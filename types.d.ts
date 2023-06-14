@@ -51,6 +51,7 @@ interface ITopNav {
 interface IGalery {
   modal?: boolean
   images: IImages
+  removePadding?: boolean;
 }
 
 interface IImageAttributes {

@@ -9,6 +9,8 @@ import { client } from "lib/api"
 import { festivalsWinnersQuery } from "queries/festivals"
 import { changeDescription, changeTitle } from "stores/slices/metaSlices"
 import { sortDate } from "helpers/sortDate"
+import Button from "components/Button"
+import { CenterWrap } from "styles/CenterWrap"
 
 
 export const getServerSideProps = wrapper.getServerSideProps(
@@ -31,6 +33,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
 );
 
 const WinnersPage: NextPage<{winners: any}> = ({winners}) => {
+  console.log(winners)
   return (
     <Page>
       {winners.map((item: any, idx: number) => {
@@ -38,8 +41,12 @@ const WinnersPage: NextPage<{winners: any}> = ({winners}) => {
           return <div key={idx}>
             <Head data={item.title}/>
             <BlockContent head={item.place} margin time={{from: item.from, to: item.to}} />
+            <CenterWrap marginBottom={80}>
+              <Button href={`/${item.slug}`}>Detail akce</Button>
+            </CenterWrap>
             <Winners winner1={item.winner1} winner2={item.winner2} winner3={item.winner3} />
             {!!item.vouchers.length && <Lineup head="Výherci voucherů" data={item.vouchers} />}
+            <CenterWrap marginBottom={200}></CenterWrap>
           </div>  
         }else{
           return null

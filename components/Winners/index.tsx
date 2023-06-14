@@ -9,10 +9,12 @@ const Winners: FC<{
   winner1: IWinner;
   winner2: IWinner;
   winner3: IWinner;
+  margin?: boolean
 }> = ({
   winner1,
   winner2,
   winner3,
+  margin = false
 }) => {
 
   const mediaMd = useMediaQuery("(max-width: 940px)")
@@ -22,7 +24,7 @@ const Winners: FC<{
   }
 
   return (
-    <WinnersS>
+    <WinnersS margin={margin}>
       <Container maxWidth="md">
         <Swiper
           slidesPerView={mediaMd ? 1 : 3}

@@ -74,6 +74,7 @@ export const festivalsWinnersQuery = gql`
           from
           to
           place
+          slug
           vouchers{
             name
             number
