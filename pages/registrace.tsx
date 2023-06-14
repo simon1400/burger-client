@@ -11,7 +11,7 @@ import Page from "layout/Page";
 import { client } from "lib/api";
 import { NextPage } from "next";
 import { festivalsQuery } from "queries/festivals";
-import formQuery from "queries/form";
+import formQuery, { formPage } from "queries/form";
 import homepageQuery from "queries/homepage";
 import { useEffect, useState } from "react";
 import { wrapper } from "stores";
@@ -22,7 +22,7 @@ const APP_API = process.env.APP_API
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (ctx) => {
     const { data } = await client.query({
-      query: homepageQuery,
+      query: formPage,
     });
 
     const { data: festivalsData } = await client.query({
@@ -33,20 +33,20 @@ export const getServerSideProps = wrapper.getServerSideProps(
       query: formQuery,
     });
 
-    const homepage = data.homepage.data.attributes;
+    const page = data.applicationPage.data.attributes;
     const form = formsData.form.data.attributes;
     const festivals = festivalsData.festivals.data.map(
       (item: any) => item.attributes
     );
 
-    store.dispatch(changeTitle(homepage.meta?.title || "Registrace"));
+    store.dispatch(changeTitle(page.meta?.title || page.title));
     store.dispatch(
-      changeDescription(homepage.meta?.description || "Registrace")
+      changeDescription(page.meta?.description || "Registrace")
     );
 
     return {
       props: {
-        homepage,
+        page,
         festivals: filterEvents(sortDate(festivals)),
         form,
       },
@@ -54,9 +54,10 @@ export const getServerSideProps = wrapper.getServerSideProps(
   }
 );
 
-const Registration: NextPage<{ festivals: any; form: any }> = ({
+const Registration: NextPage<{ page: any; festivals: any; form: any }> = ({
   festivals,
   form,
+  page
 }) => {
   const [dataSend, setDataSend] = useState({});
 
@@ -110,13 +111,14 @@ const Registration: NextPage<{ festivals: any; form: any }> = ({
 
   return (
     <Page>
-      <Head data="Přihláška na festival" />
-      <BlockContent content="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Integer vulputate sem a nibh rutrum consequat. Aliquam id dolor. Nulla accumsan, elit sit amet varius semper, nulla mauris mollis quam" />
+      <Head data={page.title} />
+      <BlockContent content={page.content} />
       <Lineup head="" data={festivals.future} handleChange={handleChangeFestivals} registration />
       {form.fields.length && (
         <Form data={form} state={dataSend} setState={setDataSend} />
       )}
       <Container maxWidth="md"><Button onClick={() => handleSend()}>odeslat žádost</Button></Container>
+      <BlockContent content={page.content2} />
     </Page>
   );
 };

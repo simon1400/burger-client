@@ -3,12 +3,8 @@ import Page from "layout/Page"
 import { NextPage } from "next"
 import { Container, Typography } from "@mui/material"
 import Image from "next/image"
-import { CenterWrap } from "styles/CenterWrap"
-import LabelBare from "components/LabelBare"
-import { ImgSquare } from "styles/ImgSquare"
 import { wrapper } from "stores"
 import { client } from "lib/api"
-import { getPost } from "queries/blog"
 import { changeDescription, changeTitle } from "stores/slices/metaSlices"
 import { getMerch } from "queries/merch"
 import { Price } from "styles/Price"
@@ -34,7 +30,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
     const merch = data.merches.data[0].attributes;
 
-    store.dispatch(changeTitle(merch.meta?.title || 'Merch'))
+    store.dispatch(changeTitle(merch.meta?.title || merch.title))
     store.dispatch(changeDescription(merch.meta?.description || 'Merch'))
 
     return {
@@ -52,7 +48,7 @@ const Merch: NextPage<{merch: any}> = ({merch}) => {
       <Price big>{merch.price} Kč</Price>
       <Container>
         <ImgCard>
-          <Image src={APP_API+merch.image.data.attributes.url} fill alt="" />
+          <Image src={APP_API+merch.image.data.attributes.url+"?format=webp&width=1200"} fill alt="" />
         </ImgCard>
       </Container>
       <Container maxWidth="md">

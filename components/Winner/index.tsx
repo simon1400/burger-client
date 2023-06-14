@@ -16,7 +16,7 @@ const Winner: FC<{data: IWinner; place: string}> = ({data, place}) => {
   return (
     <WinnerS onClick={() => handleModal(data.data.attributes.slug)}>
       <ImgCircle>
-        <Image src={APP_API+data.data.attributes.image.data.attributes.url} fill alt="" />
+        <Image src={APP_API+data.data.attributes.image.data.attributes.url+"?format=webp&resize=220x220"} fill alt="" />
       </ImgCircle>
       <Typography>{place}. místo</Typography>
       <b>{data.data.attributes.title}</b>

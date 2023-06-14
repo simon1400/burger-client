@@ -1,4 +1,4 @@
-import { Container, Grid, useMediaQuery } from "@mui/material"
+import { Container, useMediaQuery } from "@mui/material"
 import Winner from "components/Winner"
 import { WinnersS } from "./styled"
 import { FC } from "react"

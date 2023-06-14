@@ -3,7 +3,6 @@ import Page from "layout/Page"
 import { NextPage } from "next"
 import { Container, Grid, Typography } from "@mui/material"
 import Button from "components/Button"
-import { ImgCircle } from "styles/ImgCircle"
 import Image from "next/image"
 import { CenterWrap } from "styles/CenterWrap"
 import { wrapper } from "stores"
@@ -23,7 +22,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
     const partners = data.partner.data.attributes;
 
-    store.dispatch(changeTitle(partners.meta?.title || 'Úvod'))
+    store.dispatch(changeTitle(partners.meta?.title || partners.title))
     store.dispatch(changeDescription(partners.meta?.description || ''))
 
     return {
@@ -34,7 +33,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
   }
 );
 
-const GaleryPage: NextPage<{partnersPage: any}> = ({
+const PartnersPage: NextPage<{partnersPage: any}> = ({
   partnersPage
 }) => {
 
@@ -60,7 +59,7 @@ const GaleryPage: NextPage<{partnersPage: any}> = ({
             {partnersPage.topPartners.map((item: any, idx: number) => <Grid key={idx} item xs={12} md={getColumn(topPartnerLength)}>
               <Link href={item.link}>
                 <ImgSquare big={topPartnerLength < 4} partners>
-                  <Image src={APP_API+item.image.data.attributes.url} fill alt="" />
+                  <Image src={APP_API+item.image.data.attributes.url+"?format=webp&resize=330x330"} fill alt="" />
                 </ImgSquare>
               </Link>
             </Grid>)}
@@ -72,7 +71,7 @@ const GaleryPage: NextPage<{partnersPage: any}> = ({
             {partnersPage.partners.map((item: any, idx: number) => <Grid key={idx} item xs={12} md={getColumn(partnerLength)}>
               <Link href={item.link}>
                 <ImgSquare big={partnerLength < 4} partners>
-                  <Image src={APP_API+item.image.data.attributes.url} fill alt="" />
+                  <Image src={APP_API+item.image.data.attributes.url+"?format=webp&resize=330x330"} fill alt="" />
                 </ImgSquare>
               </Link>
             </Grid>)}
@@ -84,7 +83,7 @@ const GaleryPage: NextPage<{partnersPage: any}> = ({
             {partnersPage.supported.map((item: any, idx: number) => <Grid key={idx} item xs={12} md={getColumn(supportedLength)}>
               <Link href={item.link}>
                 <ImgSquare big={supportedLength < 4} partners>
-                  <Image src={APP_API+item.image.data.attributes.url} fill alt="" />
+                  <Image src={APP_API+item.image.data.attributes.url+"?format=webp&resize=330x330"} fill alt="" />
                 </ImgSquare>
               </Link>
             </Grid>)}
@@ -99,4 +98,4 @@ const GaleryPage: NextPage<{partnersPage: any}> = ({
   )
 }
 
-export default GaleryPage
+export default PartnersPage

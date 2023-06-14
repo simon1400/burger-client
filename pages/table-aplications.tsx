@@ -39,8 +39,6 @@ export const getServerSideProps = wrapper.getServerSideProps(
     store.dispatch(changeTitle('Result page'))
     store.dispatch(changeDescription('Result page'))
 
-    
-
     return {
       props: {
         result

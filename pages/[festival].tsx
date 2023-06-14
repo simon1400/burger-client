@@ -4,8 +4,6 @@ import FacebookEvent from "components/FacebookEvent"
 import Head from "components/Head"
 import Page from "layout/Page"
 import { NextPage } from "next"
-import { Container, Grid } from "@mui/material"
-import Winner from "components/Winner"
 import Galery from "components/Galery"
 import Winners from "components/Winners"
 import { changeDescription, changeTitle } from "stores/slices/metaSlices"
@@ -31,7 +29,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
     const festival = data.festivals.data[0].attributes;
 
-    store.dispatch(changeTitle(festival.meta?.title || ''))
+    store.dispatch(changeTitle(festival.meta?.title || festival.title))
     store.dispatch(changeDescription(festival.meta?.description || ''))
 
     return {

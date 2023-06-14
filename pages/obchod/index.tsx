@@ -22,7 +22,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
     const merchPage = data.mercPage.data.attributes;
     const merches = merchesData.merches.data.map((item: any) => item.attributes);
 
-    store.dispatch(changeTitle(merchPage.meta?.title || 'Obchod'))
+    store.dispatch(changeTitle(merchPage.meta?.title || merchPage.title))
     store.dispatch(changeDescription(merchPage.meta?.description || 'Obchod'))
 
     return {

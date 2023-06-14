@@ -11,7 +11,6 @@ import homepageQuery from "queries/homepage";
 import { changeDescription, changeTitle } from "stores/slices/metaSlices";
 import {festivalsQuery} from "queries/festivals";
 import mapQuery from "queries/map";
-import { sortDate } from "helpers/sortDate";
 import { CenterWrap } from "styles/CenterWrap";
 import Button from "components/Button";
 import { filterEvents } from "helpers/filterEvents";

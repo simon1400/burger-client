@@ -16,7 +16,7 @@ const Partners: FC<{data: any}> = ({data}) => {
         <Grid container spacing={mediaMd ? 10 : 25} justifyContent="center">
           {data.map((item: any, idx: number) => <Grid key={idx} item xs={6} md={3}>
             <LogoWrap>
-              <Image src={APP_API+item.attributes.url} fill alt="" />
+              <Image src={APP_API+item.attributes.url+"?format=webp&resize=200x200"} fill alt="" />
             </LogoWrap>
           </Grid>)}
         </Grid>

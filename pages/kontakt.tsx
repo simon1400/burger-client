@@ -21,7 +21,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
     const contact = data.contact.data.attributes;
 
-    store.dispatch(changeTitle(contact.meta?.title || 'Kontakt'))
+    store.dispatch(changeTitle(contact.meta?.title || contact.title))
     store.dispatch(changeDescription(contact.meta?.description || ''))
 
     return {

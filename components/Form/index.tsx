@@ -30,10 +30,7 @@ const Form: FC<{
   };
 
   const handleUploudFile = (file: File, key: string) => {
-    // console.log(file)
-    // console.log(state)
     // const obj = {...state, [key]: file}
-    // console.log(obj)
     setState({ ...state, [key]: file });
   };
 

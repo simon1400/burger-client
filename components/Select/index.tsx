@@ -1,6 +1,6 @@
 import Checkbox from "components/Checkbox";
 import { SelectS } from "./styled";
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import { FormControlLabel } from "@mui/material";
 
 const Select: FC<{

@@ -21,7 +21,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
     const festivalPage = data.festivalsPage.data.attributes;
     const festivals = festivalsData.festivals.data.map((item: any) => item.attributes)
 
-    store.dispatch(changeTitle(festivalPage.meta?.title || 'Festivals'))
+    store.dispatch(changeTitle(festivalPage.meta?.title || festivalPage.title))
     store.dispatch(changeDescription(festivalPage.meta?.description || 'Festivals'))
 
     return {

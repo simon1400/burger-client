@@ -56,7 +56,7 @@ const Modal = () => {
         <TimesIcon onClick={() => handleClose()} className="times-icon" />
         <ModalContentWrap>
           <ImgCircle className="logo-img">
-            <Image src={APP_API+seller.image.data.attributes.url} fill alt="" />
+            <Image src={APP_API+seller.image.data.attributes.url+"?format=webp&resize=220x220"} fill alt="" />
           </ImgCircle>
           <Typography variant="h1">{seller.title}</Typography>
           <Labels className="labels-modal" modal>

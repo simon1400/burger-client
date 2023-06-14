@@ -2,7 +2,6 @@ import Head from "components/Head"
 import Page from "layout/Page"
 import { NextPage } from "next"
 import { Container } from "@mui/material"
-import { ImgCircle } from "styles/ImgCircle"
 import Image from "next/image"
 import { CenterWrap } from "styles/CenterWrap"
 import ArticleShort from "components/ArticleShort"
@@ -47,7 +46,7 @@ const Blog: NextPage<{blogPage: any; posts: any}> = ({blogPage, posts}) => {
       <Container sx={{mb: 20}}>
         <CenterWrap>
           <ImgSquare partners>
-            <Image src={APP_API+blogPage.image.data.attributes.url} fill alt="" />
+            <Image src={APP_API+blogPage.image.data.attributes.url+"?format=svg&resize=220x220"} fill alt="" />
           </ImgSquare>
         </CenterWrap>
       </Container>

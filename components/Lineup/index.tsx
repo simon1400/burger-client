@@ -3,7 +3,6 @@ import { LineupS } from "./styled"
 
 import IconButton from "components/IconButton"
 import ArrowRight from 'public/img/arrow-right.svg'
-import Button from "components/Button"
 import FacebookEvent from "components/FacebookEvent"
 import Label from "components/Label"
 import { useDispatch } from "react-redux"
@@ -100,7 +99,7 @@ const Lineup: FC<ILineup> = ({
               {item.from && item.to && InInterval(item.from, item.to) && <span className="status"></span>}
               {item.from && item.to && <Time from={item.from} to={item.to} />}
               {item.category?.data && <div className="icon-type">
-                <Image src={APP_API+item.category.data[0].attributes.icon.data.attributes.url} width={30} height={30} alt="" />
+                <Image src={APP_API+item.category.data[0].attributes.icon.data.attributes.url+"?format=svg&resize=30x30"} width={30} height={30} alt="" />
               </div>}
               {item.title && !modal && !!item.slug && <Link className="lineup-title" href={item.slug}><p>{item.title}</p></Link>}
               {item.title && !!modal && !!item.slug && <Link className="lineup-title" href={item.slug} onClick={(e) => handleModal(e, item.slug)}><p>{item.title}</p></Link>}

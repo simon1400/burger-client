@@ -7,6 +7,7 @@ import Winners from "components/Winners"
 import { wrapper } from "stores"
 import { client } from "lib/api"
 import { festivalsWinnersQuery } from "queries/festivals"
+import { changeDescription, changeTitle } from "stores/slices/metaSlices"
 
 
 export const getServerSideProps = wrapper.getServerSideProps(
@@ -17,8 +18,8 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
     const winners = data.festivals.data.map((item: any) => item.attributes);
 
-    // store.dispatch(changeTitle(homepage.meta?.title || 'Úvod'))
-    // store.dispatch(changeDescription(homepage.meta?.description || ''))
+    store.dispatch(changeTitle('Výherci'))
+    store.dispatch(changeDescription(''))
 
     return {
       props: {

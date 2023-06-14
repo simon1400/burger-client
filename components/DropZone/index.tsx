@@ -1,9 +1,6 @@
 import { FC, useCallback, useState } from "react"
 import {useDropzone} from 'react-dropzone'
 import { DropzoneS } from "./styled"
-import axios from "axios"
-
-const APP_API = process.env.APP_API
 
 const DropZone: FC<{handleChange: (file: File, key: string) => void; idKey: string; state: any}> = ({
   handleChange,

@@ -30,7 +30,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
     const post = data.posts.data[0].attributes;
 
-    store.dispatch(changeTitle(post.meta?.title || ''))
+    store.dispatch(changeTitle(post.meta?.title || post.title))
     store.dispatch(changeDescription(post.meta?.description || ''))
 
     return {
@@ -55,7 +55,7 @@ const Blog: NextPage<{post: any}> = ({post}) => {
       </Container>
       <Container maxWidth="xl">
         <ImgSquare>
-          <Image src={APP_API+post.image.data.attributes.url} fill alt="" />
+          <Image src={APP_API+post.image.data.attributes.url+"?format=webp&width=1440"} fill alt="" />
         </ImgSquare>
       </Container>
     </Page>

@@ -32,6 +32,7 @@ export const postsQuery = gql`
           title
           slug
           content
+          datePublication
           label {
             data{
               attributes{
