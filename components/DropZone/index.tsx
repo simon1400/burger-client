@@ -19,7 +19,7 @@ const DropZone: FC<{handleChange: (file: File, key: string) => void; idKey: stri
 
   return (
     <DropzoneS>
-      <label>File uploud</label>
+      <label>{idKey}</label>
       <div className="zone" {...getRootProps()}>
         <input {...getInputProps()} />
         {

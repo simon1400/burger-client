@@ -7,15 +7,30 @@ export const MapS = styled.section(({theme}) => `
   margin-top: -30px;
   svg{
     max-width: 100%;
-    >#BODY {
+    > #BODY {
       g{
         display: none;
         cursor: pointer;
         rect{ 
           cursor: pointer;
         }
+        path {
+          transition: all .2s ease;
+        }
+        &:hover{
+          path:nth-of-type(1){
+            fill: white;
+          }
+          path:nth-of-type(2){
+            fill: ${theme.palette.primary.main};
+          }
+          path:not(:nth-of-type(1),:nth-of-type(2)){
+            fill: ${theme.palette.primary.main};
+          }
+        }
       }
     }
+    
   }
   ${theme.breakpoints.down("md")} {
     height: auto;

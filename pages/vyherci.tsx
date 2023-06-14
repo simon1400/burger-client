@@ -8,6 +8,7 @@ import { wrapper } from "stores"
 import { client } from "lib/api"
 import { festivalsWinnersQuery } from "queries/festivals"
 import { changeDescription, changeTitle } from "stores/slices/metaSlices"
+import { sortDate } from "helpers/sortDate"
 
 
 export const getServerSideProps = wrapper.getServerSideProps(
@@ -23,7 +24,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
     return {
       props: {
-        winners,
+        winners: sortDate(winners),
       }
     };
   }
