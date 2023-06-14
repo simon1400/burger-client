@@ -8,7 +8,9 @@ const Radio: FC<{
   handleChange: (value: string, idKey: string) => void;
   value: string;
   idKey: string;
-}> = ({ data, handleChange, value, idKey, ...rest }) => {
+  errorText?: string;
+  error?: boolean;
+}> = ({ data, handleChange, value, idKey, errorText, error, ...rest }) => {
   return (
     <RadioS
       aria-labelledby="demo-controlled-radio-buttons-group"
@@ -17,6 +19,10 @@ const Radio: FC<{
       onChange={(e) => handleChange(e.target.value, idKey)}
       {...rest}
     >
+      <div className="label-wrap">
+        <label>{idKey}</label>
+        {error && <span>{errorText}</span>}
+      </div>
       {data.map((item: any, idx: number) => (
         <FormControlLabel
           key={idx}

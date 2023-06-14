@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { RadioGroup } from "@mui/material";
+import { candal } from "styles/typography/baseHead";
 
 export const RadioS = styled(RadioGroup)(({theme}) => `
   margin-bottom: 20px;
@@ -11,6 +12,18 @@ export const RadioS = styled(RadioGroup)(({theme}) => `
     }
     svg{
       fill: white;
+    }
+  }
+  .label-wrap{
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    label{
+      color: white;
+      font-family: ${candal.style.fontFamily};
+    }
+    span{
+      color: ${theme.palette.primary.main};
     }
   }
 `)

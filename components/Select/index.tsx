@@ -7,10 +7,16 @@ const Select: FC<{
   data: any;
   idKey: string;
   handleChange: (value: string, idKey: string) => void;
-}> = ({ data, idKey, handleChange }) => {
+  errorText?: string;
+  error?: boolean;
+}> = ({ data, idKey, handleChange, errorText, error }) => {
 
   return (
     <SelectS>
+      <div className="label-wrap">
+        <label>{idKey}</label>
+        {error && <span>{errorText}</span>}
+      </div>
       {data.map((item: any, idx: number) => (
         <FormControlLabel
           key={idx}
