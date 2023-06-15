@@ -9,6 +9,7 @@ import { festivalsGaleryQuery } from "queries/festivals"
 import { changeDescription, changeTitle } from "stores/slices/metaSlices"
 import { sortDate } from "helpers/sortDate"
 import { CenterWrap } from "styles/CenterWrap"
+import { getMetaGalery } from "queries/meta"
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (ctx) => {
@@ -16,10 +17,15 @@ export const getServerSideProps = wrapper.getServerSideProps(
       query: festivalsGaleryQuery,
     });
 
-    const galeryData = data.festivals.data.map((item: any) => item.attributes);
+    const { data: metaData } = await client.query({
+      query: getMetaGalery,
+    });
 
-    store.dispatch(changeTitle(galeryData.meta?.title || 'Fotogalerie'))
-    store.dispatch(changeDescription(galeryData.meta?.description || 'Fotogalerie'))
+    const galeryData = data.festivals.data.map((item: any) => item.attributes);
+    const meta = metaData.global.data.attributes.metaGalery;
+
+    store.dispatch(changeTitle(meta?.title || 'Fotogalerie'))
+    store.dispatch(changeDescription(meta?.description || 'Fotogalerie'))
 
     return {
       props: {

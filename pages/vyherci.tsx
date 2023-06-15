@@ -11,6 +11,7 @@ import { changeDescription, changeTitle } from "stores/slices/metaSlices"
 import { sortDate } from "helpers/sortDate"
 import Button from "components/Button"
 import { CenterWrap } from "styles/CenterWrap"
+import { getMetaWinners } from "queries/meta"
 
 
 export const getServerSideProps = wrapper.getServerSideProps(
@@ -18,11 +19,16 @@ export const getServerSideProps = wrapper.getServerSideProps(
     const { data } = await client.query({
       query: festivalsWinnersQuery,
     });
+    
+    const { data: metaData } = await client.query({
+      query: getMetaWinners,
+    });
 
     const winners = data.festivals.data.map((item: any) => item.attributes);
+    const meta = metaData.global.data.attributes.metaWinners;
 
-    store.dispatch(changeTitle('Výherci'))
-    store.dispatch(changeDescription(''))
+    store.dispatch(changeTitle(meta?.title || 'Výherci'))
+    store.dispatch(changeDescription(meta?.description || ''))
 
     return {
       props: {
@@ -33,7 +39,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
 );
 
 const WinnersPage: NextPage<{winners: any}> = ({winners}) => {
-  console.log(winners)
+
   return (
     <Page>
       {winners.map((item: any, idx: number) => {
