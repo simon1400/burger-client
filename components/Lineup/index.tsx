@@ -82,8 +82,6 @@ const Lineup: FC<ILineup> = ({
     return null
   }
 
-  console.log(data)
-
   return (
     <LineupS hp={hp}>
       <Container maxWidth="md">

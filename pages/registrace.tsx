@@ -68,10 +68,10 @@ const Registration: NextPage<{ page: any; festivals: any; form: any }> = ({
     form.fields.map((item: any) => {
       if (item.__typename === "ComponentFormSelect") {
         // @ts-ignore
-        formObj[item.key] = [];
+        formObj[item.label] = [];
       } else {
         // @ts-ignore
-        formObj[item.key] = "";
+        formObj[item.label] = "";
       }
     });
     setDataSend({ festivals: [], ...formObj });

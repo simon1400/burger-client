@@ -30,7 +30,6 @@ const Form: FC<{
   };
 
   const handleUploudFile = (file: File, key: string) => {
-    // const obj = {...state, [key]: file}
     setState({ ...state, [key]: file });
   };
 
@@ -43,9 +42,9 @@ const Form: FC<{
               return (
                 <Input
                   key={idx}
-                  idKey={item.key}
-                  value={state[item.key]}
-                  name={item.key}
+                  idKey={item.label}
+                  value={state[item.label]}
+                  name={item.label}
                   label={item.label}
                   handleChange={handleChangeInput}
                   helperText={item.helperText}
@@ -58,7 +57,7 @@ const Form: FC<{
                 <Select
                   key={idx}
                   data={item.item}
-                  idKey={item.key}
+                  idKey={item.label}
                   handleChange={handleChangeSelect}
                 />
               );
@@ -67,16 +66,16 @@ const Form: FC<{
                 <Radio
                   key={idx}
                   data={item.item}
-                  idKey={item.key}
+                  idKey={item.label}
                   handleChange={handleChangeRadio}
-                  value={state[item.key]}
+                  value={state[item.label]}
                 />
               );
             if (item.__typename === "ComponentFormUploud")
               return (
                 <DropZone
                   key={idx}
-                  idKey={item.key}
+                  idKey={item.label}
                   state={state}
                   handleChange={handleUploudFile}
                 />
