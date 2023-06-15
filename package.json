@@ -26,6 +26,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-dropzone": "^14.2.3",
+    "react-lightgallery": "^0.9.0",
     "react-redux": "^8.0.5",
     "sass": "^1.62.1",
     "sharp": "^0.32.1",
