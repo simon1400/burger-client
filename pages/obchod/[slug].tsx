@@ -10,6 +10,11 @@ import { getMerch } from "queries/merch"
 import { Price } from "styles/Price"
 import { ImgCard } from "styles/ImgCard"
 import BlockContent from "components/BlockContent"
+import { Swiper, SwiperSlide } from "swiper/react"
+import { Navigation } from "swiper";
+import "swiper/css";
+import "swiper/css/navigation";
+import styled from "@emotion/styled"
 
 const APP_API = process.env.APP_API
 
@@ -47,9 +52,13 @@ const Merch: NextPage<{merch: any}> = ({merch}) => {
       <Head data={merch.title} />
       <Price big>{merch.price} Kč</Price>
       <Container>
-        <ImgCard>
-          <Image src={APP_API+merch.image.data.attributes.url+"?format=webp&width=1200"} fill alt="" />
-        </ImgCard>
+        <SwiperS navigation={true} modules={[Navigation]}>
+          {merch.image.data.map((image: any, idx: number) => <SwiperSlide key={idx}>
+            <ImgCard>
+              <Image src={APP_API+image.attributes.url+"?format=webp&width=1200"} fill alt="" />
+            </ImgCard>
+          </SwiperSlide>)}
+        </SwiperS>
       </Container>
       <Container maxWidth="md">
         <Typography textAlign="center" marginTop={12} marginBottom={12} component="div" dangerouslySetInnerHTML={{__html: merch.content}} />
@@ -60,3 +69,15 @@ const Merch: NextPage<{merch: any}> = ({merch}) => {
 }
 
 export default Merch
+
+const SwiperS = styled(Swiper)(({theme}) => `
+  .swiper-button-prev, .swiper-button-next {
+    color: ${theme.palette.primary.main};
+  }
+  .swiper-button-prev{
+    left: 50px;
+  }
+  .swiper-button-next{
+    right: 50px;
+  }
+`)
