@@ -8,6 +8,7 @@ export const festivalsQuery = gql`
           title
           slug
           state
+          showAddLabel
           from
           to
           social

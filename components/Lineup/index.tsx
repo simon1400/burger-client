@@ -15,6 +15,7 @@ import { InInterval } from "helpers/inInterval"
 import { CheckboxS } from "components/Checkbox/styled"
 import Checkbox from "components/Checkbox"
 import Link from "next/link"
+import AdditionalLabel from "components/AdditionalLabel"
 
 const APP_API = process.env.APP_API
 
@@ -81,6 +82,8 @@ const Lineup: FC<ILineup> = ({
     return null
   }
 
+  console.log(data)
+
   return (
     <LineupS hp={hp}>
       <Container maxWidth="md">
@@ -110,6 +113,7 @@ const Lineup: FC<ILineup> = ({
               </Labels>}
             </div>
             {!registration && <div>
+              {item.showAddLabel && <AdditionalLabel />}
               {item.social && <FacebookEvent data={item.social} />}
               {!modal && !!item.slug && <IconButton href={item.slug}>
                 <ArrowRight />
