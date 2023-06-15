@@ -9,27 +9,30 @@ const formQuery = gql`
             ... on ComponentFormTetxField {
               label
               helperText
-              key
               errorMessage
               placeholder
               required
             }
             ... on ComponentFormSelect {
-              key
+              label
+              required
+              errorMessage
               item {
                 label
                 disabled
               }
             }
             ... on ComponentFormRadio {
-              key
+              label
+              required
+              errorMessage
               item {
                 label
                 disabled
               }
             }
             ... on ComponentFormUploud {
-              key
+              label
             }
           }
         }
