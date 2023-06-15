@@ -8,9 +8,13 @@ import { Dispatch, FC, SetStateAction } from "react";
 const Form: FC<{
   data: any;
   state: any;
+  error: any;
   setState: Dispatch<SetStateAction<{ festivals: never[] }>>;
-}> = ({ state, setState, data }) => {
+  setError: Dispatch<SetStateAction<{ }>>;
+}> = ({ state, setState, data, error, setError }) => {
+
   const handleChangeInput = (value: string, key: string) => {
+    setError({...error, [key]: false})
     setState({ ...state, [key]: value });
   };
 
@@ -46,9 +50,11 @@ const Form: FC<{
                   value={state[item.label]}
                   name={item.label}
                   label={item.label}
+                  error={error[item.label]}
                   handleChange={handleChangeInput}
+                  required={item.required}
                   helperText={item.helperText}
-                  errorText={item.errorText}
+                  errorText={item.errorMessage}
                   placeholder={item.placeholder}
                 />
               );

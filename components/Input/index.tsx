@@ -16,12 +16,13 @@ const Input: FC<IInput> = ({
   idKey,
   handleChange,
   disabled = false,
+  required,
   ...rest
 }) => {
   return (
     <InputWrap error={error} disabled={disabled}>
       <div className="label-wrap">
-        <label>{label}</label>
+        <label>{label} {required && <span className="required">*</span>}</label>
         {error && <span>{errorText}</span>}
       </div>
       <InputS
