@@ -92,6 +92,15 @@ export const LineupS = styled.div<{paddingTop?: boolean; hp: boolean}>(({theme, 
           border-color: #FE5600;
         }
       }
+      .title-wrap{
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+      }
+      .basic-wrap {
+        display: flex;
+        align-items: center;
+      }
     }
   }
   ${theme.breakpoints.down("md")} {
@@ -105,13 +114,19 @@ export const LineupS = styled.div<{paddingTop?: boolean; hp: boolean}>(({theme, 
         width: 100%;
         time{
           font-size: 15px;
-          width: 100%;
           text-align: left;
         }
         p{
           font-size: 15px;
           display: inline-block;
         }
+      }
+      .state{
+        font-size: 15px;
+      }
+      .title-wrap{
+        align-items: start;
+        flex-direction: column;
       }
     }
   }

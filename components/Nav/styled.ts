@@ -3,8 +3,8 @@ import { Menu } from "@mui/material";
 import { candal } from "styles/typography/baseHead";
 
 export const NavS = styled.nav(({theme}) => `
-  ul{
-    li{
+  >ul{
+    >li{
       display: inline-block;
       &:not(:first-of-type) {
         margin-left: 15px;
@@ -48,6 +48,41 @@ export const NavS = styled.nav(({theme}) => `
           }
         }
       }
+      &.dropdown-parent{
+        position: relative;
+        &:hover{
+          .dropdown{
+            display: block;
+          }
+        }
+        .dropdown{
+          position: absolute;
+          display: none;
+          padding-top: 20px;
+          min-width: 176px;
+          left: 50%;
+          transform: translateX(-50%);
+          ul{
+            background: #141414;
+            border: 1px solid ${theme.palette.primary.main};
+            padding: 10px 0;
+            li{   
+              a{
+                color: white;
+                text-decoration: none;
+                padding: 9px 30px;
+                font-family: ${candal.style.fontFamily};
+                text-align: center;
+                display: block;
+                width: 100%;
+                &:hover{
+                  color: ${theme.palette.primary.main};
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
   ${theme.breakpoints.down('md')} {
@@ -56,29 +91,6 @@ export const NavS = styled.nav(({theme}) => `
         a{
           font-size: 24px!important;
         }
-      }
-    }
-  }
-`)
-
-
-export const MenuS = styled(Menu)(({theme}) => `
-  > .MuiPaper-root{
-    padding-top: 20px;
-    background: transparent;
-  }
-  ul{
-    background: #141414;
-    border: 1px solid ${theme.palette.primary.main};
-    li{
-      a{
-        color: white;
-        text-decoration: none;
-        padding: 9px 30px;
-        font-family: ${candal.style.fontFamily};
-        text-align: center;
-        display: block;
-        width: 100%;
       }
     }
   }

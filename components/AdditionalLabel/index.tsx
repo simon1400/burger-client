@@ -19,7 +19,7 @@ const AdditionalLabel: FC = () => {
 
   return (
     <AdditionalLabelS href={label.link}>
-      <Image src={APP_API+label.icon.data.attributes.url+"?format=svg&resize=45x45"} width="45" height="45" alt="" />
+      <Image src={APP_API+label.icon.data.attributes.url} width="45" height="45" alt="" />
       <span>{label.text}</span>
     </AdditionalLabelS>
   )

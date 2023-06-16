@@ -62,7 +62,7 @@ const Homepage: NextPage<{homepage: IHomepage; festivals: IFestivals; map: any}>
         <Button href="/festivaly">další akce</Button>
       </CenterWrap>
       <BlockContent head={homepage.title2} content={homepage.content} />
-      <Galery images={homepage.galery}/>
+      {/* <Galery images={homepage.galery}/> */}
     </Page>
   );
 };

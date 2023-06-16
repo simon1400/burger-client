@@ -27,7 +27,7 @@ const Winners: FC<{
     <WinnersS margin={margin}>
       <Container maxWidth="md">
         <Swiper
-          slidesPerView={mediaMd ? 1 : 3}
+          slidesPerView={mediaMd ? 1.5 : 3}
           spaceBetween={30}
           pagination={{
             clickable: true,

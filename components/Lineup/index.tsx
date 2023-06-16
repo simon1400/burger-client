@@ -98,14 +98,16 @@ const Lineup: FC<ILineup> = ({
               {/* @ts-ignore */}
               {registration && <CheckboxS onClick={() => handleCheck(item.from+" - "+item.to+" - "+item.title)} checked={stateCheck.indexOf(item.from+" - "+item.to+" - "+item.title) >= 0} sx={{ '& .MuiSvgIcon-root': { fontSize: 26 } }} />}
               {item.from && item.to && InInterval(item.from, item.to) && <span className="status"></span>}
-              {item.from && item.to && <Time from={item.from} to={item.to} />}
-              {item.category?.data && <div className="icon-type">
-                <Image src={APP_API+item.category.data[0].attributes.icon.data.attributes.url+"?format=svg&resize=30x30"} width={30} height={30} alt="" />
-              </div>}
-              {item.title && !modal && !!item.slug && <Link className="lineup-title" href={item.slug}><p>{item.title}</p></Link>}
-              {item.title && !!modal && !!item.slug && <Link className="lineup-title" href={item.slug} onClick={(e) => handleModal(e, item.slug)}><p>{item.title}</p></Link>}
-              {/* {item.title && modal && <p>{item.title}</p>} */}
-              {item.name && <p>{item.name}</p>}
+              <div className={item.category?.data ? "basic-wrap" : "title-wrap"}>
+                {item.from && item.to && <Time from={item.from} to={item.to} />}
+                {item.category?.data && <div className="icon-type">
+                  <Image src={APP_API+item.category.data[0].attributes.icon.data.attributes.url} width={30} height={30} alt="" />
+                </div>}
+                {item.title && !modal && !!item.slug && <Link className="lineup-title" href={item.slug}><p>{item.title}</p></Link>}
+                {item.title && !!modal && !!item.slug && <Link className="lineup-title" href={item.slug} onClick={(e) => handleModal(e, item.slug)}><p>{item.title}</p></Link>}
+                {/* {item.title && modal && <p>{item.title}</p>} */}
+                {item.name && <p>{item.name}</p>}
+              </div>
               {item.labels?.data && <Labels>
                 {item.labels.data.map((label: any, idx: number) => <Label key={idx} data={label.attributes} />)}
               </Labels>}

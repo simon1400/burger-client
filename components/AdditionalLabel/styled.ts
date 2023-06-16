@@ -14,4 +14,12 @@ export const AdditionalLabelS = styled(Link)(({theme}) => `
   &:hover{
     color: white;
   }
+  ${theme.breakpoints.down("md")} {
+    img{
+      margin-right: 0px;
+    }
+    span{
+      display: none;
+    }
+  }
 `)
