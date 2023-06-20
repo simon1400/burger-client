@@ -1,15 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-import {orderMail} from '../../mail-templates/order';
+import {orderMail} from '../../mail-templates/form';
 import { MailerSend, EmailParams, Sender, Recipient } from "mailersend";
 
 const mailersend = new MailerSend({
   apiKey: process.env.MAILERSEND_TOKEN || '',
 });
 
-const sentFrom = new Sender("info@desua.cz", "Burger");
-
-// const APP_API = process.env.APP_API;
+const sentFrom = new Sender("vladek@bedy.cz", "Burger street festival");
 
 export default async function handler(
   req: NextApiRequest,
@@ -20,18 +18,23 @@ export default async function handler(
 
     const data = req.body
 
+    const email = data.map((item: any) => item.key === "E-mail" ? item.value : null)
+
     try{
       const recipients = [
-        new Recipient(data.shiping.email, "Recipient"),
+        new Recipient(email, "Recipient"),
+        new Recipient("vladek@bedy.cz", "Owner"),
+        new Recipient("daniel.kokes@gmail.com", "Designer"),
+        new Recipient("dmytro@pechunka.com", "Developer"),
       ];
   
       const emailParams = new EmailParams()
           .setFrom(sentFrom)
           .setReplyTo(sentFrom)
           .setTo(recipients)
-          .setSubject('Order №: ' + data.idOrder)
+          .setSubject('Registration form from web')
           .setHtml(orderMail(data))
-          .setText("New order");
+          .setText("New form from web");
   
       await mailersend.email.send(emailParams);
   
