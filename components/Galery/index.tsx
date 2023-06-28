@@ -9,10 +9,13 @@ import { LightgalleryProvider, LightgalleryItem } from "react-lightgallery";
 const APP_API = process.env.APP_API;
 
 const grid = (images: IImages) => {
+
+  const length = images.data.length
+
   return (
     <Grid container>
       {images.data.slice(0, 8).map((item: IImageAttributes, idx: number) => (
-        <Grid key={idx} item xs={6} md={3}>
+        <Grid key={idx} item xs={6} md={length > 3 ? 3 : length === 3 ? 4 : 6}>
           <LightgalleryItem
               group="any"
               component="div"
@@ -26,7 +29,7 @@ const grid = (images: IImages) => {
               <Image
                 src={`${
                   APP_API + item.attributes.url
-                }?format=webp&resize=360x285`}
+                }?format=webp&resize=${length > 3 ? "360" : length === 3 ? "410" : "600"}x285`}
                 fill
                 alt=""
               />

@@ -66,7 +66,9 @@ const Registration: NextPage<{ page: any; festivals: any; form: any }> = ({
 
   useEffect(() => {
     const formObj = {};
-    const err: any = {};
+    const err: any = {
+      festivals: false
+    };
     form.fields.map((item: any) => {
       if (item.required) {
         err[item.label] = false;
@@ -91,11 +93,13 @@ const Registration: NextPage<{ page: any; festivals: any; form: any }> = ({
     setLoading(true);
 
     const errState: any = { ...error };
+    console.log(errState)
     for (const [key, value] of Object.entries(errState)) {
       if (!dataSend[key].length) {
         errState[key] = true;
       }
     }
+    console.log(errState)
 
     setError(errState);
     if (Object.values(errState).indexOf(true) >= 0) {
