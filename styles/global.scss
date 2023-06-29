@@ -1,7 +1,9 @@
-main {
-  min-height: 100vh;
-  position: relative;
-  background: white;
+.lg-outer.lg-visible{
+  z-index: 1500;
+}
+
+.lg-backdrop{
+  z-index: 1200;
 }
 
 /* Customize website's scrollbar like Mac OS

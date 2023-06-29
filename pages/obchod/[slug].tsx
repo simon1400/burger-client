@@ -51,11 +51,11 @@ const Merch: NextPage<{merch: any}> = ({merch}) => {
     <Page>
       <Head data={merch.title} />
       <Price big>{merch.price} Kč</Price>
-      <Container>
+      <Container maxWidth="sm">
         <SwiperS navigation={true} modules={[Navigation]}>
           {merch.image.data.map((image: any, idx: number) => <SwiperSlide key={idx}>
             <ImgCard>
-              <Image src={APP_API+image.attributes.url+"?format=webp&width=1200"} fill alt="" />
+              <Image src={APP_API+image.attributes.url+"?format=webp&width=700"} fill alt="" />
             </ImgCard>
           </SwiperSlide>)}
         </SwiperS>

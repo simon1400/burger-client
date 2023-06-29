@@ -12,6 +12,8 @@ import { wrapper } from 'stores';
 import theme from 'styles/theme';
 import { globalVariables } from 'styles/var';
 
+import 'styles/global.scss'
+
 interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
 }

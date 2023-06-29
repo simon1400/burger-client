@@ -30,7 +30,7 @@ const ArticleShort: FC<{data: any}> = ({data}) => {
           <ArticleContent>
             <div>
               {data.label?.data && <LabelBare data={data.label.data.attributes.title}/>}
-              {date && <time style={{marginLeft: "20px"}}>{`${date.day}.${date.month}.${date.year}`}</time>}
+              {date && <time style={{marginLeft: "20px"}}>{`${date.day}.${date.month+1}.${date.year}`}</time>}
             </div>
             <Link href={`/blog/${data.slug}`}><Typography variant="h2">{kitcut(data.title, 50)}</Typography></Link>
             <Typography className="short-content" dangerouslySetInnerHTML={{__html: kitcut(data.content.replace(/(<([^>]+)>)/gi, ""), 150)}} />

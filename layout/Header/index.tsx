@@ -13,7 +13,7 @@ const Header = () => {
   const [nav, setNav] = useState([])
 
   const {data, loading} = useQuery(navTopQuery)
-  const mediaMd = useMediaQuery("(max-width: 940px)")
+  const mediaMd = useMediaQuery("(max-width: 1100px)")
   const router = useRouter()
 
   useEffect(() => {

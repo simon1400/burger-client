@@ -103,8 +103,8 @@ const Lineup: FC<ILineup> = ({
                 {item.category?.data && <div className="icon-type">
                   <Image src={APP_API+item.category.data[0].attributes.icon.data.attributes.url} width={30} height={30} alt="" />
                 </div>}
-                {item.title && !modal && !!item.slug && <Link className="lineup-title" href={item.slug}><p>{item.title}</p></Link>}
-                {item.title && !!modal && !!item.slug && <Link className="lineup-title" href={item.slug} onClick={(e) => handleModal(e, item.slug)}><p>{item.title}</p></Link>}
+                {item.title && !modal && !!item.slug && item.full !== false ? <Link className="lineup-title" href={item.slug}><p>{item.title}</p></Link> : item.full === false ? <p>{item.title}</p> : null}
+                {item.title && !!modal && !!item.slug && item.full !== false && <Link className="lineup-title" href={item.slug} onClick={(e) => handleModal(e, item.slug)}><p>{item.title}</p></Link>}
                 {/* {item.title && modal && <p>{item.title}</p>} */}
                 {item.name && <p>{item.name}</p>}
               </div>

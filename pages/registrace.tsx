@@ -3,6 +3,7 @@ import { green } from "@mui/material/colors";
 import axios from "axios";
 import BlockContent from "components/BlockContent";
 import Button from "components/Button";
+import ErrorLabel from "components/ErrorLabel";
 import Form from "components/Form";
 import Head from "components/Head";
 import Lineup from "components/Lineup";
@@ -64,6 +65,8 @@ const Registration: NextPage<{ page: any; festivals: any; form: any }> = ({
 
   const [error, setError] = useState({});
 
+  const [errorState, setErrorState] = useState(false)
+
   useEffect(() => {
     const formObj = {};
     const err: any = {
@@ -85,7 +88,20 @@ const Registration: NextPage<{ page: any; festivals: any; form: any }> = ({
     setError(err);
   }, [form]);
 
+  useEffect(() => {
+    const errState: any = { ...error };
+    for (const [key, value] of Object.entries(errState)) {
+      if (!dataSend[key].length) {
+        errState[key] = true;
+      }
+    }
+    if (Object.values(errState).indexOf(true) < 0) {
+      setErrorState(false)
+    }
+  }, [error])
+
   const handleChangeFestivals = (arrFestivals: any) => {
+    setErrorState(false)
     setDataSend({ ...dataSend, festivals: arrFestivals });
   };
 
@@ -93,17 +109,16 @@ const Registration: NextPage<{ page: any; festivals: any; form: any }> = ({
     setLoading(true);
 
     const errState: any = { ...error };
-    console.log(errState)
     for (const [key, value] of Object.entries(errState)) {
       if (!dataSend[key].length) {
         errState[key] = true;
       }
     }
-    console.log(errState)
 
     setError(errState);
     if (Object.values(errState).indexOf(true) >= 0) {
       setLoading(false);
+      setErrorState(true)
       return;
     }
 
@@ -187,6 +202,7 @@ const Registration: NextPage<{ page: any; festivals: any; form: any }> = ({
             />
           )}
           {success && <SuccessLabel />}
+          {errorState && <ErrorLabel />}
         </Box>
       </Container>
       <BlockContent content={page.content2} />

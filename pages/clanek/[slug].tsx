@@ -43,7 +43,9 @@ const Article: NextPage<{article: any}> = ({article}) => {
     <Page>
       <Head data={article.title} />
       <Container maxWidth="md">
-        <Typography component="div" dangerouslySetInnerHTML={{__html: article.content}} />
+        <CenterWrap>
+          <Typography component="div" dangerouslySetInnerHTML={{__html: article.content}} />
+        </CenterWrap>
         <CenterWrap marginTop={50}>
           <Button href={article.button.link}>{article.button.text}</Button>
         </CenterWrap>

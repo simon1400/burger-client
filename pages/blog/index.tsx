@@ -10,6 +10,7 @@ import { client } from "lib/api"
 import { blogPageQuery, postsQuery } from "queries/blog"
 import { changeDescription, changeTitle } from "stores/slices/metaSlices"
 import { ImgSquare } from "styles/ImgSquare"
+import { sortDate } from "helpers/sortDate"
 
 const APP_API = process.env.APP_API
 
@@ -51,7 +52,7 @@ const Blog: NextPage<{blogPage: any; posts: any}> = ({blogPage, posts}) => {
         </CenterWrap>
       </Container>
       <Container>
-        {posts.map((item: any, idx: number) => <ArticleShort key={idx} data={item} />)}
+        {sortDate(posts).map((item: any, idx: number) => <ArticleShort key={idx} data={item} />)}
       </Container>
     </Page>
   )

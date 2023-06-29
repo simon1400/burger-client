@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { Menu } from "@mui/material";
 import { candal } from "styles/typography/baseHead";
 
 export const NavS = styled.nav(({theme}) => `
@@ -60,8 +59,8 @@ export const NavS = styled.nav(({theme}) => `
           display: none;
           padding-top: 20px;
           min-width: 176px;
-          left: 50%;
-          transform: translateX(-50%);
+          right: 50%;
+          transform: translateX(50%);
           ul{
             background: #141414;
             border: 1px solid ${theme.palette.primary.main};
@@ -85,11 +84,44 @@ export const NavS = styled.nav(({theme}) => `
       }
     }
   }
-  ${theme.breakpoints.down('md')} {
+  ${theme.breakpoints.down('lg')} {
+    ul{
+      li{
+        a{
+          font-size: 14px!important;
+        }
+      }
+    }
+  }
+  @media(max-width: 1100px) {
     ul{
       li{
         a{
           font-size: 24px!important;
+        }
+        &.dropdown-parent{
+          position: relative;
+          a{
+            display: block;
+          }
+          
+          &:hover{
+            .dropdown{
+              display: none;
+            }
+          }
+          &.active{
+            .dropdown{
+              display: inline-block;
+            }
+          }
+          .dropdown{
+            position: relative;
+            display: none;
+            width: 200px;
+            right: 0;
+            transform: translateX(0);
+          }
         }
       }
     }
