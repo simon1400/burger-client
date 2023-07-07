@@ -9,7 +9,7 @@ import { ImgSquare } from "styles/ImgSquare"
 import { wrapper } from "stores"
 import { client } from "lib/api"
 import { getPost } from "queries/blog"
-import { changeDescription, changeTitle } from "stores/slices/metaSlices"
+import { changeDescription, changeImage, changeTitle } from "stores/slices/metaSlices"
 
 const APP_API = process.env.APP_API
 
@@ -32,6 +32,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
     store.dispatch(changeTitle(post.meta?.title || post.title))
     store.dispatch(changeDescription(post.meta?.description || ''))
+    store.dispatch(changeImage(APP_API+post.image.data.attributes.url+"?format=webp&width=1440" || ''))
 
     return {
       props: {

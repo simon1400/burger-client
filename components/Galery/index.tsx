@@ -22,21 +22,21 @@ const grid = (images: IImages) => {
               component="div"
               src={APP_API + item.attributes.url}
             >
-          <GaleryItem>
-            <a
-              href={APP_API + item.attributes.url}
-              onClick={(e) => e.preventDefault()}
-            >
-              <Image
-                src={`${
-                  APP_API + item.attributes.url
-                }?format=webp&resize=${length > 3 ? "360" : length === 3 ? "410" : "600"}x285`}
-                fill
-                alt=""
-              />
-              {length > 8 && idx === 7 && <LabelMore data={images.data.slice(8, length).length} />}
-            </a>
-          </GaleryItem>
+            <GaleryItem>
+              <a
+                href={APP_API + item.attributes.url}
+                onClick={(e) => e.preventDefault()}
+              >
+                <Image
+                  src={`${
+                    APP_API + item.attributes.url
+                  }?format=webp&resize=${length > 3 ? "360" : length === 3 ? "410" : "600"}x285`}
+                  fill
+                  alt=""
+                />
+                {length > 8 && idx === 7 && <LabelMore data={images.data.slice(8, length).length} />}
+              </a>
+            </GaleryItem>
           </LightgalleryItem>
         </Grid>
       ))}
