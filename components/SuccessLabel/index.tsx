@@ -3,7 +3,7 @@ import { SuccessLabelS } from "./styled"
 const SuccessLabel = () => {
   return (
     <SuccessLabelS>
-      Formular byl uspesne odeslan
+      Vaše přihláška byla úspěšně odeslána.
     </SuccessLabelS>
   )
 }

@@ -74,6 +74,13 @@ export const getPost = gql`
               }
             }
           }
+          galery {
+            data{
+              attributes {
+                url
+              }
+            }
+          }
           meta{
             title
             description

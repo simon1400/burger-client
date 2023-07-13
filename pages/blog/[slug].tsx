@@ -10,6 +10,7 @@ import { wrapper } from "stores"
 import { client } from "lib/api"
 import { getPost } from "queries/blog"
 import { changeDescription, changeImage, changeTitle } from "stores/slices/metaSlices"
+import Galery from "components/Galery"
 
 const APP_API = process.env.APP_API
 
@@ -59,6 +60,7 @@ const Blog: NextPage<{post: any}> = ({post}) => {
           <Image src={APP_API+post.image.data.attributes.url+"?format=webp&width=1440"} fill alt="" />
         </ImgSquare>
       </Container>
+      {!!post.galery.data.length && <Galery images={post.galery}/>}
     </Page>
   )
 }
