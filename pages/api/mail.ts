@@ -23,14 +23,16 @@ export default async function handler(
     try{
       const recipients = [
         new Recipient(email, "Recipient"),
-        new Recipient("vladek@bedy.cz", "Owner"),
-        new Recipient("daniel.kokes@gmail.com", "Designer"),
-        new Recipient("dmytro@pechunka.com", "Developer")
+        new Recipient("vladek@bedy.cz", "Owner")
+      ];
+
+      const bcc = [
+        new Recipient("hardart.cz@gmail.com", "Hard art")
       ];
   
       const emailParams = new EmailParams()
           .setFrom(sentFrom)
-          .setReplyTo(sentFrom)
+          .setBcc(bcc)
           .setTo(recipients)
           .setSubject('Registration form from web')
           .setHtml(orderMail(data))
