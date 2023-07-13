@@ -46,9 +46,9 @@ const Article: NextPage<{article: any}> = ({article}) => {
         <CenterWrap>
           <Typography component="div" dangerouslySetInnerHTML={{__html: article.content}} />
         </CenterWrap>
-        <CenterWrap marginTop={50}>
-          <Button href={article.button.link}>{article.button.text}</Button>
-        </CenterWrap>
+        {article.button && <CenterWrap marginTop={50}>
+          <Button href={article.button?.link || "/"}>{article.button?.text || "Empty text"}</Button>
+        </CenterWrap>}
       </Container>
       {!!article.galery.data.length && <Galery images={article.galery}/>}
     </Page>

@@ -33,7 +33,7 @@ const initialState: NavState = {
   ogDescription: "",
   contentType: "website",
   themeColor: "#d9291c",
-  siteName: 'Burger',
+  siteName: 'Burger Street Festival',
   siteUrl: process.env.APP_DOMAIN || ""
 }
 
