@@ -4,10 +4,10 @@ import {orderMail} from '../../mail-templates/form';
 import { MailerSend, EmailParams, Sender, Recipient } from "mailersend";
 
 const mailersend = new MailerSend({
-  apiKey: process.env.MAILERSEND_TOKEN || '',
+  apiKey: process.env.MAILERSEND_TOKEN || 'mlsn.feb4325cca30f99ad800df0ca4ed3bf2da81ed1b8c7a7b2c02d960d27fd6a394',
 });
 
-const sentFrom = new Sender("vladek@bedy.cz", "Burger street festival");
+const sentFrom = new Sender("info@burgerstreetfestival.cz", "Burger street festival");
 
 export default async function handler(
   req: NextApiRequest,
@@ -25,7 +25,7 @@ export default async function handler(
         new Recipient(email, "Recipient"),
         new Recipient("vladek@bedy.cz", "Owner"),
         new Recipient("daniel.kokes@gmail.com", "Designer"),
-        new Recipient("dmytro@pechunka.com", "Developer"),
+        new Recipient("dmytro@pechunka.com", "Developer")
       ];
   
       const emailParams = new EmailParams()

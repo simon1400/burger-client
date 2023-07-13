@@ -4,6 +4,7 @@ const nextConfig = {
   env: {
     APP_API: process.env.APP_API,
     APP_DOMAIN: process.env.APP_DOMAIN,
+    MAILERSEND_TOKEN: process.env.MAILERSEND_TOKEN,
   },
   webpack(config) {
     config.module.rules.push({
