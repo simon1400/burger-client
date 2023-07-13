@@ -52,7 +52,7 @@ const Blog: NextPage<{post: any}> = ({post}) => {
         </CenterWrap>
       </Container>}
       <Container maxWidth="md">
-        <Typography component="div" dangerouslySetInnerHTML={{__html: post.content}} />
+        <Typography component="div" dangerouslySetInnerHTML={{__html: post.content.replace(/\/uploads/g, "https://burger-strapi.hardart.cz/uploads")}} />
       </Container>
       <Container maxWidth="xl">
         <ImgSquare>

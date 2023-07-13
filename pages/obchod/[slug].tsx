@@ -61,7 +61,7 @@ const Merch: NextPage<{merch: any}> = ({merch}) => {
         </SwiperS>
       </Container>
       <Container maxWidth="md">
-        <Typography textAlign="center" marginTop={12} marginBottom={12} component="div" dangerouslySetInnerHTML={{__html: merch.content}} />
+        <Typography textAlign="center" marginTop={12} marginBottom={12} component="div" dangerouslySetInnerHTML={{__html: merch.content.replace(/\/uploads/g, "https://burger-strapi.hardart.cz/uploads")}} />
       </Container>
       <BlockContent head={merch.title2} content={merch.content2} />
     </Page>

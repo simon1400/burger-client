@@ -50,7 +50,7 @@ const PartnersPage: NextPage<{partnersPage: any}> = ({
       <CenterWrap>
         <Head data={partnersPage.title} />
         <Container>
-          <Typography marginBottom={10} component="div" dangerouslySetInnerHTML={{__html: partnersPage.content}}/>
+          <Typography marginBottom={10} component="div" dangerouslySetInnerHTML={{__html: partnersPage.content.replace(/\/uploads/g, "https://burger-strapi.hardart.cz/uploads")}}/>
           <Button href={partnersPage.button.link}>{partnersPage.button.text}</Button>
         </Container>
         <Container>
@@ -91,7 +91,7 @@ const PartnersPage: NextPage<{partnersPage: any}> = ({
         </Container>
         <Container maxWidth="md">
           <Typography variant="h2" marginTop={10}>{partnersPage.title2}</Typography>
-          <Typography marginBottom={15} component="div" dangerouslySetInnerHTML={{__html: partnersPage.content2}}/>
+          <Typography marginBottom={15} component="div" dangerouslySetInnerHTML={{__html: partnersPage.content2.replace(/\/uploads/g, "https://burger-strapi.hardart.cz/uploads")}}/>
         </Container>
       </CenterWrap>
     </Page>

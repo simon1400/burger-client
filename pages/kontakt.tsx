@@ -38,7 +38,7 @@ const Contact: NextPage<{contact: any}> = ({contact}) => {
       <Head data={contact.title}/>
       <Container>
         <CenterWrap>
-          <Typography component="div" dangerouslySetInnerHTML={{__html: contact.content}} />
+          <Typography component="div" dangerouslySetInnerHTML={{__html: contact.content.replace(/\/uploads/g, "https://burger-strapi.hardart.cz/uploads")}} />
           <ContactLines>
             <ContactLine icon={<Phone />} title={contact.phone} link={`tel:${contact.phone}`} />
             <ContactLine icon={<Envelope />} title={contact.email} link={`mailto:${contact.email}`} />
@@ -58,7 +58,7 @@ const Contact: NextPage<{contact: any}> = ({contact}) => {
       <Container>
         <CenterWrap>
           <Typography variant="h2" marginTop={10}>{contact.title2}</Typography>
-          <Typography marginBottom={15} component="div" dangerouslySetInnerHTML={{__html: contact.content2}} />
+          <Typography marginBottom={15} component="div" dangerouslySetInnerHTML={{__html: contact.content2.replace(/\/uploads/g, "https://burger-strapi.hardart.cz/uploads")}} />
         </CenterWrap>
       </Container>
     </Page>

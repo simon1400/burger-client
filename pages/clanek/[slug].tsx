@@ -44,7 +44,7 @@ const Article: NextPage<{article: any}> = ({article}) => {
       <Head data={article.title} />
       <Container maxWidth="md">
         <CenterWrap>
-          <Typography component="div" dangerouslySetInnerHTML={{__html: article.content}} />
+          <Typography component="div" dangerouslySetInnerHTML={{__html: article.content.replace(/\/uploads/g, "https://burger-strapi.hardart.cz/uploads")}} />
         </CenterWrap>
         {article.button && <CenterWrap marginTop={50}>
           <Button href={article.button?.link || "/"}>{article.button?.text || "Empty text"}</Button>

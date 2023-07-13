@@ -17,7 +17,7 @@ const BlockContent: FC<IBlockContent> = ({
             {head && <Typography variant="h3" component="h2">{head}</Typography>}
             {time && <Time from={time.from} to={time.to} />}
           </HeadWrap>
-          {content && <Typography component="div" dangerouslySetInnerHTML={{__html: content}}/>}
+          {content && <Typography component="div" dangerouslySetInnerHTML={{__html: content.replace(/\/uploads/g, "https://burger-strapi.hardart.cz/uploads")}}/>}
         </CenterWrap>
       </Container>
     </BlockContentS>
