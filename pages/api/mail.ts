@@ -4,7 +4,7 @@ import {orderMail} from '../../mail-templates/form';
 import { MailerSend, EmailParams, Sender, Recipient } from "mailersend";
 
 const mailersend = new MailerSend({
-  apiKey: process.env.MAILERSEND_TOKEN || 'mlsn.feb4325cca30f99ad800df0ca4ed3bf2da81ed1b8c7a7b2c02d960d27fd6a394',
+  apiKey: process.env.MAILERSEND_TOKEN || '',
 });
 
 const sentFrom = new Sender("info@burgerstreetfestival.cz", "Burger street festival");
@@ -18,7 +18,7 @@ export default async function handler(
 
     const data = req.body
 
-    const email = data.map((item: any) => item.key === "E-mail" ? item.value : null)
+    const email = data.filter((item: any) => item.key === "E-mail")[0].value
 
     try{
       const recipients = [
