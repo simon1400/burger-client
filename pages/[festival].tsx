@@ -48,7 +48,7 @@ const Festival: NextPage<{festival: IFestival}> = ({
     <Page>
       <Head data={festival.title} />
       <BlockContent time={{from: festival.from, to: festival.to}} head={festival.place} content={festival.content} />
-      {beforeDate(festival.from) && <BlockContent content={festival.contentBefore} />}
+      {beforeDate(festival.to) && <BlockContent content={festival.contentBefore} />}
       {!beforeDate(festival.to) &&<BlockContent content={festival.contentAfter} />}
       {festival.social && <FacebookEvent single data={festival.social} />}
       {!!festival.lineup.data.length && <Lineup head="Lineup" data={festival.lineup.data.map((item: any) => item.attributes)} modal />}
