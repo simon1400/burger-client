@@ -8,7 +8,8 @@ const BlockContent: FC<IBlockContent> = ({
   time, 
   content, 
   head,
-  margin}) => {
+  margin
+}) => {
   return (
     <BlockContentS margin>
       <Container maxWidth="md">
