@@ -12,7 +12,8 @@ const FooterBottom: FC<{phone: string, email: string}> = ({phone, email}) => {
           <Link href={`tel:${phone}`}>{phone}</Link>
         </div>
         <div>
-          <Link href="/">nastavení cookies</Link>
+          <div><Link href="/clanek/kariera">kariéra</Link></div>
+          <div><Link href="/">nastavení cookies</Link></div>
         </div>
       </FooterBottomS>
     </Container>

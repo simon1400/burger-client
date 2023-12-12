@@ -5,6 +5,14 @@ export const FooterBottomS = styled.div(({theme}) => `
   justify-content: space-between;
   padding-top: 115px;
   padding-bottom: 25px;
+  > div:last-of-type{
+    display: flex;
+    >div{
+      &:not(:last-of-type){
+        margin-right: 20px;
+      }
+    }
+  }
   a{
     color: white;
     text-decoration: none;
@@ -33,14 +41,22 @@ export const FooterBottomS = styled.div(({theme}) => `
     justify-content: center;
     flex-wrap: wrap;
     text-align: center;
-    a{
-      margin-bottom: 12px;
-      display: inline-block;
-      &:nth-of-type(2) {
-        margin-left: 0px;
-        margin-bottom: 35px;
+    > div{
+      &:last-of-type{
+        display: block;
+        >div:not(:last-of-type){
+          margin-right: 0px;
+        }
       }
-      
+      a{
+        margin-bottom: 12px;
+        display: inline-block;
+        width: auto;
+        &:nth-of-type(2) {
+          margin-left: 0px;
+          margin-bottom: 35px;
+        }
+      }
     }
   }
 `)
