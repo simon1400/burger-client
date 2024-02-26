@@ -12,6 +12,8 @@ export const festivalsQuery = gql`
           from
           to
           social
+          content
+          place
         }
       }
     }
@@ -159,6 +161,7 @@ export const getFestival = gql`
                 category{
                   data{
                     attributes{
+                      title
                       icon{
                         data{
                           attributes{
