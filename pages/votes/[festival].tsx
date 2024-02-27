@@ -1,7 +1,6 @@
 import { Box, CircularProgress, Container, FormControlLabel } from "@mui/material";
 import { green } from "@mui/material/colors";
 import axios from "axios";
-import BlockContent from "components/BlockContent";
 import Button from "components/Button";
 import ErrorLabel from "components/ErrorLabel";
 import Head from "components/Head";
@@ -12,7 +11,7 @@ import Page from "layout/Page";
 import { client } from "lib/api";
 import { NextPage } from "next";
 import { getFestival } from "queries/festivals";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { wrapper } from "stores";
 import { changeDescription, changeTitle } from "stores/slices/metaSlices";
 import codes from 'helpers/codes.json'
@@ -21,6 +20,9 @@ import Input from "components/Input";
 import Radio from "components/Radio";
 import styled from "@emotion/styled";
 import Checkbox from "components/Checkbox";
+import { useLazyQuery } from "@apollo/client";
+import { getCodeQuery } from "queries/votes";
+import { useRouter } from "next/router";
 
 const APP_API = process.env.APP_API;
 
@@ -50,7 +52,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
     }))
 
     const codesNew: any = codes
-    var i = 0;
+    var i = 477661;
     while(i < codesNew.length) {
       await axios
         .post(`${APP_API}/api/codes`, { data: {code: codesNew[i]} })
@@ -60,24 +62,13 @@ export const getServerSideProps = wrapper.getServerSideProps(
         }).catch((err) => console.log("err save form -- ", err));
     }
 
-    
-
-    console.log('after axios')
-
     store.dispatch(changeTitle("Hlasovani"));
     store.dispatch(changeDescription("Hlasovani"));
 
-    
-    // await axios
-    //   .post(`${APP_API}/api/votes`, { data: dataToSend })
-    //   .then(() => {
-    //     setLoading(false);
-    //     setSuccess(true);
-    //   }).catch((err) => console.log("err save form -- ", err));
-
     return {
       props: {
-        festivalBurgers: transformFestivalBurgers
+        festivalBurgers: transformFestivalBurgers,
+        votes: true
       },
     };
   }
@@ -88,6 +79,10 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
 }) => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+
+  const router = useRouter()
+
+  const [getCode] = useLazyQuery(getCodeQuery);
 
   const [state, setState] = useState({
     name: "Dmytro Pechunka",
@@ -115,7 +110,6 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
   const handleChangeCode = (value: any, key: string) => {
     const stateCopy: any = {...state}
     stateCopy.code[key].value = value
-    stateCopy.code[key].check = codes.findIndex((el: string) => el === value)
     setState(stateCopy)
   }
 
@@ -141,18 +135,39 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
       festivaly: 38
     }
 
+    var i = 0;
+    while(i < state.code.length) {
+      await axios
+        .delete(`${APP_API}/api/codes/` + state.code[i].check)
+        .then(() => {
+          i++;
+        }).catch((err) => console.log("err delete code -- ", err));
+    }
+
     await axios
       .post(`${APP_API}/api/votes`, { data: dataToSend })
       .then(() => {
         setLoading(false);
         setSuccess(true);
+        router.push('/votes/dekujem')
       }).catch((err) => console.log("err save form -- ", err));
   };
+
+  const handleOnBlur = async (value: string, idx: number) => {
+    if(value.length === 6) {
+      const data: any = await getCode({ variables: { code: value } })
+      console.log(data)
+      if(data.codes.data.length){
+        const stateCopy = {...state}
+        stateCopy.code[idx].check = data.codes.data[0].id
+        setState(stateCopy)
+      }
+    }
+  }
 
   return (
     <Page>
       <Head data={"Hlasování"} />
-      <BlockContent content={"Zajimavy popis"} />
       <Container maxWidth="md">
         <form style={{marginBottom: "20px"}}>
           <Input
@@ -162,7 +177,6 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
             label={"Jméno a příjmení"}
             error={false}
             handleChange={handleChange}
-            required={true}
             errorText={"Chyba"}
           />
           <Input
@@ -172,7 +186,6 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
             label={"Email"}
             error={false}
             handleChange={handleChange}
-            required={true}
             errorText={"Chyba"}
           />
           <Input
@@ -182,7 +195,6 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
             label={"Telefon"}
             error={false}
             handleChange={handleChange}
-            required={true}
             errorText={"Chyba"}
           />
           <Radio
@@ -197,6 +209,7 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
                 idKey={`${idx}`}
                 value={code.value}
                 name={"code_"+idx}
+                onBlur={(e: any) => handleOnBlur(e.target.value, idx)}
                 label={!idx ? "Kód z hlasovacího lístku" : ""}
                 handleChange={handleChangeCode}
               />

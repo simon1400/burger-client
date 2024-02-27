@@ -66,13 +66,6 @@ const Page: FC<IPage> = ({ children, className = "", id = "" }) => {
 
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{theTitle}</title>
-        {/* {localizations.map((item, idx) => <link
-            key={idx}
-            rel="alternate"
-            hrefLang={item.locale}
-            href={DOMAIN + "/" + item.locale + (router.asPath !== "/" ? "/"+item.slug : "")}
-          />
-        )} */}
         
         <link
           rel="canonical"
@@ -119,20 +112,6 @@ const Page: FC<IPage> = ({ children, className = "", id = "" }) => {
           'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
           })(window,document,'script','dataLayer','GTM-MPJ6DQS');`}
       </Script>
-
-      {/* Hotjar Tracking Code for my site */}
-      {/* <Script id="hotjar">
-        {`(function(h,o,t,j,a,r){
-              h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-              h._hjSettings={hjid:3452190,hjsv:6};
-              a=o.getElementsByTagName('head')[0];
-              r=o.createElement('script');r.async=1;
-              r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-              a.appendChild(r);
-          })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`}
-      </Script> */}
-
-      {/* <Script type="text/javascript" src="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v2.8.0/dist/cookieconsent.js" /> */}
 
       <main id={id} className={className}>{children}</main>
     </>

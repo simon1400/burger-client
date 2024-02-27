@@ -30,10 +30,10 @@ const MyApp: FC<MyAppProps> = ({ Component, ...rest }) => {
         <ThemeProvider theme={{ ...theme, ...globalVariables }}>
           <CssBaseline />
           <WithGraphQL>
-            <Header />
+            {!pageProps.votes && <Header />}
             <Component {...pageProps} />
-            <Footer />
-            <Modal />
+            {!pageProps.votes && <Footer />}
+            {!pageProps.votes && <Modal />}
           </WithGraphQL>
         </ThemeProvider>
       </CacheProvider>
