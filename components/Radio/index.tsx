@@ -10,7 +10,8 @@ const Radio: FC<{
   idKey: string;
   errorText?: string;
   error?: boolean;
-}> = ({ data, handleChange, value, idKey, errorText, error, ...rest }) => {
+  required?: boolean;
+}> = ({ data, handleChange, value, idKey, errorText, error = false, required = false, ...rest }) => {
   return (
     <RadioS
       aria-labelledby="demo-controlled-radio-buttons-group"
@@ -20,7 +21,7 @@ const Radio: FC<{
       {...rest}
     >
       <div className="label-wrap">
-        <label>{idKey}</label>
+        <label>{idKey} {required && <span className="required">*</span>}</label>
         {error && <span>{errorText}</span>}
       </div>
       {data.map((item: any, idx: number) => (

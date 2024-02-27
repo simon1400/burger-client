@@ -16,7 +16,7 @@ const Input: FC<IInput> = ({
   idKey,
   handleChange,
   disabled = false,
-  required,
+  required = false,
   ...rest
 }) => {
   return (

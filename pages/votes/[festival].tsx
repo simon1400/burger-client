@@ -51,16 +51,16 @@ export const getServerSideProps = wrapper.getServerSideProps(
       disabled: false
     }))
 
-    const codesNew: any = codes
-    var i = 477661;
-    while(i < codesNew.length) {
-      await axios
-        .post(`${APP_API}/api/codes`, { data: {code: codesNew[i]} })
-        .then(() => {
-          console.log('Success -- ', i, ' -- ', codesNew[i])
-          i++;
-        }).catch((err) => console.log("err save form -- ", err));
-    }
+    // const codesNew: any = codes
+    // var i = 477661;
+    // while(i < codesNew.length) {
+    //   await axios
+    //     .post(`${APP_API}/api/codes`, { data: {code: codesNew[i]} })
+    //     .then(() => {
+    //       console.log('Success -- ', i, ' -- ', codesNew[i])
+    //       i++;
+    //     }).catch((err) => console.log("err save form -- ", err));
+    // }
 
     store.dispatch(changeTitle("Hlasovani"));
     store.dispatch(changeDescription("Hlasovani"));
@@ -84,13 +84,16 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
 
   const [getCode] = useLazyQuery(getCodeQuery);
 
+  // FS7RG9
+  // ZYBI9H
+
   const [state, setState] = useState({
     name: "Dmytro Pechunka",
     email: "dmytro@pechunka.com",
     phone: "774048983",
     code: [
-      {check: 0, value: "FS7RG9"},
-      {check: 2, value: "ZYBI9H"},
+      {check: 2057, value: "FS7RG9"},
+      {check: 2059, value: "ZYBI9H"},
     ],
     aggree: true,
     gdpr: true,
@@ -99,6 +102,7 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
 
   const [selectBurgerShop, setSelectBurgerShop] = useState<string>("JJ Grill Bill")
 
+  // const [error, setError] = useState({});
   const [errorState, setErrorState] = useState(false)
 
   const handleChange = (value: string | boolean, key: string) => {
@@ -119,29 +123,51 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
 
   const handleAddCode = () => {
     const stateCopy: any = {...state}
-    stateCopy.code.push({check: -1, value: ""})
+    stateCopy.code.push({check: 0, value: ""})
+    setState(stateCopy)
+  }
+
+  const handleRemoveCode = (e: any) => {
+    e.preventDefault()
+    const stateCopy: any = {...state}
+    stateCopy.code.pop()
     setState(stateCopy)
   }
 
   const handleSend = async () => {
     setLoading(true);
 
+    const filteredCodes = state.code.filter((code: any) => {
+      if(code.check > 0) {
+        return ({
+          code: code.value
+        })
+      }
+      return false
+    })
+
     const dataToSend = {
       name: state.name,
       email: state.email,
       phone: state.phone,
-      codes: state.code.map((code: any) => ({code: code.value})),
+      codes: filteredCodes,
       shop: selectBurgerShop,
       festivaly: 38
     }
 
+    console.log(filteredCodes)
+
     var i = 0;
-    while(i < state.code.length) {
-      await axios
-        .delete(`${APP_API}/api/codes/` + state.code[i].check)
-        .then(() => {
-          i++;
-        }).catch((err) => console.log("err delete code -- ", err));
+    while(i < filteredCodes.length) {
+      if(filteredCodes[i].check > 0) {
+        await axios
+          .delete(`${APP_API}/api/codes/` + filteredCodes[i].check)
+          .then(() => {
+            i++;
+          }).catch((err) => console.log("err delete code -- ", err));
+      }else{
+        i++;
+      }
     }
 
     await axios
@@ -149,7 +175,7 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
       .then(() => {
         setLoading(false);
         setSuccess(true);
-        router.push('/votes/dekujem')
+        // router.push('/votes/dekujem')
       }).catch((err) => console.log("err save form -- ", err));
   };
 
@@ -157,11 +183,13 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
     if(value.length === 6) {
       const data: any = await getCode({ variables: { code: value } })
       console.log(data)
+      const stateCopy = {...state}
       if(data.codes.data.length){
-        const stateCopy = {...state}
         stateCopy.code[idx].check = data.codes.data[0].id
-        setState(stateCopy)
+      }else{
+        stateCopy.code[idx].check = -1
       }
+      setState(stateCopy)
     }
   }
 
@@ -176,6 +204,7 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
             name={"name"}
             label={"Jméno a příjmení"}
             error={false}
+            required
             handleChange={handleChange}
             errorText={"Chyba"}
           />
@@ -184,6 +213,7 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
             value={state.email}
             name={"email"}
             label={"Email"}
+            required
             error={false}
             handleChange={handleChange}
             errorText={"Chyba"}
@@ -194,12 +224,14 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
             name={"phone"}
             label={"Telefon"}
             error={false}
+            required
             handleChange={handleChange}
             errorText={"Chyba"}
           />
           <Radio
             data={festivalBurgers}
             idKey={"Burgrárna pro kterou chcete hlasovat"}
+            required
             handleChange={handleChangeRadio}
             value={selectBurgerShop}
           />
@@ -213,17 +245,22 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
                 label={!idx ? "Kód z hlasovacího lístku" : ""}
                 handleChange={handleChangeCode}
               />
-              {code.check > -1 && <CheckIcon />}
+              {code.check > 0 && <CheckIcon />}
+              {code.check < 0 && <span>neplatný kód</span>}
             </CodeInput>
           })}
-          <PulusS onClick={() => handleAddCode()}>
-            <PlusIcon />
-            <span>přidat další kód</span>
-          </PulusS>
+          <div style={{display: "flex"}}>
+            <PulusS onClick={() => handleAddCode()}>
+              <PlusIcon />
+              <span>přidat další kód</span>
+            </PulusS>
+            {state.code.length > 1 && <a onClick={(e: any) => handleRemoveCode(e)} href="/">smazat</a>}
+          </div>
           <div>
             <FormControlLabel
               onClick={() => handleChange(!state.aggree, 'aggree')}
               control={<Checkbox />}
+              required
               label={<p>souhlas s <a href="/obchidni">obchodními podmínkami</a></p>}
             />
           </div>
@@ -231,6 +268,7 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
             <FormControlLabel
               onClick={() => handleChange(!state.gdpr, 'gdpr')}
               control={<Checkbox />}
+              required
               label={<p>souhlas s <a href="/obchidni">GDPR</a></p>}
             />
           </div>
@@ -238,6 +276,7 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
             <FormControlLabel
               onClick={() => handleChange(!state.marketing, 'marketing')}
               control={<Checkbox />}
+              required
               label={<p>souhlas s marketing účely</p>}
             />
           </div>
@@ -252,9 +291,7 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
             alignItems: "center",
           }}
         >
-          <Button disabled={loading || success} onClick={() => handleSend()}>
-            {"Hlasovat"}
-          </Button>
+          <Button disabled={loading || success} onClick={() => handleSend()}>{"Hlasovat"}</Button>
           {loading && (
             <CircularProgress
               size={24}
