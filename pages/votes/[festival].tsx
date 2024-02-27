@@ -4,7 +4,6 @@ import axios from "axios";
 import BlockContent from "components/BlockContent";
 import Button from "components/Button";
 import ErrorLabel from "components/ErrorLabel";
-import Form from "components/Form";
 import Head from "components/Head";
 import SuccessLabel from "components/SuccessLabel";
 import PlusIcon from 'public/img/plus.svg'
@@ -12,8 +11,7 @@ import CheckIcon from 'public/img/check.svg'
 import Page from "layout/Page";
 import { client } from "lib/api";
 import { NextPage } from "next";
-import { festivalsQuery, getFestival } from "queries/festivals";
-import { formPage } from "queries/form";
+import { getFestival } from "queries/festivals";
 import { useEffect, useState } from "react";
 import { wrapper } from "stores";
 import { changeDescription, changeTitle } from "stores/slices/metaSlices";
@@ -22,7 +20,6 @@ import codes from 'helpers/codes.json'
 import Input from "components/Input";
 import Radio from "components/Radio";
 import styled from "@emotion/styled";
-import Select from "components/Select";
 import Checkbox from "components/Checkbox";
 
 const APP_API = process.env.APP_API;
@@ -52,8 +49,31 @@ export const getServerSideProps = wrapper.getServerSideProps(
       disabled: false
     }))
 
+    const codesNew: any = codes
+    var i = 0;
+    while(i < codesNew.length) {
+      await axios
+        .post(`${APP_API}/api/codes`, { data: {code: codesNew[i]} })
+        .then(() => {
+          console.log('Success -- ', i, ' -- ', codesNew[i])
+          i++;
+        }).catch((err) => console.log("err save form -- ", err));
+    }
+
+    
+
+    console.log('after axios')
+
     store.dispatch(changeTitle("Hlasovani"));
     store.dispatch(changeDescription("Hlasovani"));
+
+    
+    // await axios
+    //   .post(`${APP_API}/api/votes`, { data: dataToSend })
+    //   .then(() => {
+    //     setLoading(false);
+    //     setSuccess(true);
+    //   }).catch((err) => console.log("err save form -- ", err));
 
     return {
       props: {
@@ -63,64 +83,28 @@ export const getServerSideProps = wrapper.getServerSideProps(
   }
 );
 
-const Registration: NextPage<{ festivalBurgers: any; }> = ({
+const Votes: NextPage<{ festivalBurgers: any; }> = ({
   festivalBurgers
 }) => {
-
-  const [dataSend, setDataSend] = useState<any>({});
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
   const [state, setState] = useState({
-    name: "",
-    email: "",
-    phone: "",
+    name: "Dmytro Pechunka",
+    email: "dmytro@pechunka.com",
+    phone: "774048983",
     code: [
-      {check: -1, value: ""}
+      {check: 0, value: "FS7RG9"},
+      {check: 2, value: "ZYBI9H"},
     ],
-    aggree: false,
-    gdpr: false,
-    marketing: false
+    aggree: true,
+    gdpr: true,
+    marketing: true
   });
 
-  const [selectBurgerShop, setSelectBurgerShop] = useState<string>("")
-
-  const [error, setError] = useState({});
+  const [selectBurgerShop, setSelectBurgerShop] = useState<string>("JJ Grill Bill")
 
   const [errorState, setErrorState] = useState(false)
-
-  const handleSend = async () => {
-    setLoading(true);
-
-    const errState: any = { ...error };
-    for (const [key, value] of Object.entries(errState)) {
-      if (!dataSend[key].length) {
-        errState[key] = true;
-      }
-    }
-
-    setError(errState);
-    if (Object.values(errState).indexOf(true) >= 0) {
-      setLoading(false);
-      setErrorState(true)
-      return;
-    }
-
-    const sendObj: any = [];
-    const keysData = Object.keys(dataSend);
-
-    // await axios
-    //   .post(`${APP_API}/api/applications`, { data: { result: sendObj } })
-    //   .then(() => {
-    //     setLoading(false);
-    //     setSuccess(true);
-    //     axios
-    //       .post("/api/mail", sendObj)
-    //       .then((res) => console.log(res))
-    //       .catch((err) => console.log(err.response));
-    //   })
-    //   .catch((err) => console.log("err save form -- ", err));
-  };
 
   const handleChange = (value: string | boolean, key: string) => {
     const stateCopy: any = {...state}
@@ -131,7 +115,7 @@ const Registration: NextPage<{ festivalBurgers: any; }> = ({
   const handleChangeCode = (value: any, key: string) => {
     const stateCopy: any = {...state}
     stateCopy.code[key].value = value
-    stateCopy.code[key].check = codes.findIndex((el) => el === value)
+    stateCopy.code[key].check = codes.findIndex((el: string) => el === value)
     setState(stateCopy)
   }
 
@@ -145,9 +129,29 @@ const Registration: NextPage<{ festivalBurgers: any; }> = ({
     setState(stateCopy)
   }
 
+  const handleSend = async () => {
+    setLoading(true);
+
+    const dataToSend = {
+      name: state.name,
+      email: state.email,
+      phone: state.phone,
+      codes: state.code.map((code: any) => ({code: code.value})),
+      shop: selectBurgerShop,
+      festivaly: 38
+    }
+
+    await axios
+      .post(`${APP_API}/api/votes`, { data: dataToSend })
+      .then(() => {
+        setLoading(false);
+        setSuccess(true);
+      }).catch((err) => console.log("err save form -- ", err));
+  };
+
   return (
     <Page>
-      <Head data={"Hlasovani"} />
+      <Head data={"Hlasování"} />
       <BlockContent content={"Zajimavy popis"} />
       <Container maxWidth="md">
         <form style={{marginBottom: "20px"}}>
@@ -188,7 +192,7 @@ const Registration: NextPage<{ festivalBurgers: any; }> = ({
             value={selectBurgerShop}
           />
           {state.code.map((code: any, idx: number) => {
-            return <CodeInput>
+            return <CodeInput key={idx}>
               <Input
                 idKey={`${idx}`}
                 value={code.value}
@@ -259,7 +263,7 @@ const Registration: NextPage<{ festivalBurgers: any; }> = ({
   );
 };
 
-export default Registration;
+export default Votes;
 
 const CodeInput = styled.div`
   position: relative;
