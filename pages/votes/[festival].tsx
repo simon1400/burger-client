@@ -299,7 +299,7 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
             </ControledCodesS>
             <ControlCheckbox>
               <FormControlLabel
-                onClick={() => setAggreeCheck(!aggreeCheck)}
+                onChange={() => setAggreeCheck(!aggreeCheck)}
                 value={aggreeCheck}
                 control={<Checkbox />}
                 label={<div className="label-checkbox">
@@ -310,7 +310,7 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
             </ControlCheckbox>
             <ControlCheckbox>
               <FormControlLabel
-                onClick={() => setGdprCheck(!gdprCheck)}
+                onChange={() => setGdprCheck(!gdprCheck)}
                 value={gdprCheck}
                 control={<Checkbox />}
                 label={<div className="label-checkbox">
@@ -321,7 +321,7 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
             </ControlCheckbox>
             <ControlCheckbox>
               <FormControlLabel
-                onClick={() => setMarketingCheck(!marketingCheck)}
+                onChange={() => setMarketingCheck(!marketingCheck)}
                 value={marketingCheck}
                 control={<Checkbox />}
                 label={<div className="label-checkbox">
