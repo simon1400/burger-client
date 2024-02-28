@@ -80,11 +80,14 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
     phone: "",
     code: [
       {check: 0, value: ""},
-    ],
+    ]
+  });
+
+  const [stateCheck, setStateCheck] = useState({
     aggree: false,
     gdpr: false,
     marketing: false
-  });
+  })
 
   const [selectBurgerShop, setSelectBurgerShop] = useState<string>("")
 
@@ -98,6 +101,18 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
     setError({})
     setErrorState(false)
   }
+
+  const handleChangeCheck = (value: boolean, key: string) => {
+    const stateCopy: any = {...stateCheck}
+    stateCopy[key] = value
+    setStateCheck(stateCopy)
+    setError({})
+    setErrorState(false)
+  }
+
+  useEffect(() => {
+    console.log(stateCheck)
+  }, [stateCheck])
 
   const handleChangeCode = (value: any, key: string) => {
     const stateCopy: any = {...state}
@@ -129,6 +144,8 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
 
     const errState: any = { ...error };
 
+    console.log(stateCheck)
+
     if(state.name.length < 4) {
       errState.name = true
     }
@@ -138,13 +155,13 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
     if(state.phone.length < 4){
       errState.phone = true
     }
-    if(!state.aggree){
+    if(!stateCheck.aggree){
       errState.aggree = true
     }
-    if(!state.gdpr){
+    if(!stateCheck.gdpr){
       errState.gdpr = true
     }
-    if(!state.marketing){
+    if(!stateCheck.marketing){
       errState.marketing = true
     }
     if(!selectBurgerShop.length){
@@ -278,8 +295,8 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
             </ControledCodesS>
             <ControlCheckbox>
               <FormControlLabel
-                onChange={() => handleChange(!state.aggree, 'aggree')}
-                value={state.aggree}
+                onClick={() => handleChangeCheck(!stateCheck.aggree, 'aggree')}
+                value={stateCheck.aggree}
                 control={<Checkbox />}
                 label={<div className="label-checkbox">
                   <p>souhlas s <a href="/clanek/obchodni-podminky" target="_blank">obchodními podmínkami</a></p>
@@ -289,8 +306,8 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
             </ControlCheckbox>
             <ControlCheckbox>
               <FormControlLabel
-                onChange={() => handleChange(!state.gdpr, 'gdpr')}
-                value={state.gdpr}
+                onClick={() => handleChangeCheck(!stateCheck.gdpr, 'gdpr')}
+                value={stateCheck.gdpr}
                 control={<Checkbox />}
                 label={<div className="label-checkbox">
                   <p>souhlas s <a href="/clanek/informace-o-zpracovani-osobnich-udaju" target="_blank">GDPR</a></p>
@@ -300,8 +317,8 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
             </ControlCheckbox>
             <ControlCheckbox>
               <FormControlLabel
-                onChange={() => handleChange(!state.marketing, 'marketing')}
-                value={state.marketing}
+                onClick={() => handleChangeCheck(!stateCheck.marketing, 'marketing')}
+                value={stateCheck.marketing}
                 control={<Checkbox />}
                 label={<div className="label-checkbox">
                   <p>souhlas s marketing účely</p>
