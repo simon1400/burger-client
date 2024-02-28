@@ -18,7 +18,7 @@ const Dekujem: NextPage = () => {
     <Page>
       <div style={{margin: '40px 0 100px'}}>
         <Head data={"Děkujeme!"}/>
-        <BlockContent margin content={"<p>Tvoje hlasování jsme zaznamenali. Výsledky najdeš nejpozději v pondělí na webu <a href='burgerfestival.cz'>burgerfestival.cz</a> a v události na Facebooku. Výherce budeme zároveň kontaktovat na e-mailu.</p>"} />
+        <BlockContent margin content={"<p>Tvoje hlasování jsme zaznamenali. Výsledky najdeš nejpozději v pondělí na webu <a href='https://burgerfestival.cz'>burgerfestival.cz</a> a v události na Facebooku. Výherce budeme zároveň kontaktovat na e-mailu.</p>"} />
       </div>
     </Page>
   )
