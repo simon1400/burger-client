@@ -17,6 +17,7 @@ export const RadioS = styled(RadioGroup)(({theme}) => `
   .label-wrap{
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
     font-size: 18px;
     label{
       color: white;
@@ -24,6 +25,7 @@ export const RadioS = styled(RadioGroup)(({theme}) => `
     }
     span{
       color: ${theme.palette.primary.main};
+      padding-bottom: 10px
     }
   }
 `)

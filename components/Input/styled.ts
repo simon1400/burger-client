@@ -23,6 +23,7 @@ export const InputWrap = styled.div<{error: boolean; disabled: boolean}>(({theme
   .label-wrap{
     display: flex;
     justify-content: space-between;
+    align-items: center;
     font-size: 18px;
     label{
       color: ${disabled ? "rgba(255, 255, 255, 0.4)" : error ? theme.palette.primary.main : "white"};

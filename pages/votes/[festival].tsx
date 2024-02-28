@@ -14,7 +14,6 @@ import { getFestival } from "queries/festivals";
 import { useState } from "react";
 import { wrapper } from "stores";
 import { changeDescription, changeTitle } from "stores/slices/metaSlices";
-import codes from 'helpers/codes.json'
 
 import Input from "components/Input";
 import Radio from "components/Radio";
@@ -51,17 +50,6 @@ export const getServerSideProps = wrapper.getServerSideProps(
       disabled: false
     }))
 
-    // const codesNew: any = codes
-    // var i = 477661;
-    // while(i < codesNew.length) {
-    //   await axios
-    //     .post(`${APP_API}/api/codes`, { data: {code: codesNew[i]} })
-    //     .then(() => {
-    //       console.log('Success -- ', i, ' -- ', codesNew[i])
-    //       i++;
-    //     }).catch((err) => console.log("err save form -- ", err));
-    // }
-
     store.dispatch(changeTitle("Hlasovani"));
     store.dispatch(changeDescription("Hlasovani"));
 
@@ -88,27 +76,28 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
   // ZYBI9H
 
   const [state, setState] = useState({
-    name: "Dmytro Pechunka",
-    email: "dmytro@pechunka.com",
-    phone: "774048983",
+    name: "",
+    email: "",
+    phone: "",
     code: [
-      {check: 2057, value: "FS7RG9"},
-      {check: 2059, value: "ZYBI9H"},
+      {check: 0, value: ""},
     ],
-    aggree: true,
-    gdpr: true,
-    marketing: true
+    aggree: false,
+    gdpr: false,
+    marketing: false
   });
 
-  const [selectBurgerShop, setSelectBurgerShop] = useState<string>("JJ Grill Bill")
+  const [selectBurgerShop, setSelectBurgerShop] = useState<string>("")
 
-  // const [error, setError] = useState({});
+  const [error, setError] = useState<any>({});
   const [errorState, setErrorState] = useState(false)
 
   const handleChange = (value: string | boolean, key: string) => {
     const stateCopy: any = {...state}
     stateCopy[key] = value
     setState(stateCopy)
+    setError({})
+    setErrorState(false)
   }
 
   const handleChangeCode = (value: any, key: string) => {
@@ -137,25 +126,41 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
   const handleSend = async () => {
     setLoading(true);
 
-    const filteredCodes = state.code.filter((code: any) => {
-      if(code.check > 0) {
-        return ({
-          code: code.value
-        })
-      }
-      return false
-    })
+    const errState: any = { ...error };
 
-    const dataToSend = {
-      name: state.name,
-      email: state.email,
-      phone: state.phone,
-      codes: filteredCodes,
-      shop: selectBurgerShop,
-      festivaly: 38
+    if(state.name.length < 4) {
+      errState.name = true
+    }
+    if(state.email.length < 4){
+      errState.email = true
+    }
+    if(state.phone.length < 4){
+      errState.phone = true
+    }
+    if(!state.aggree){
+      errState.aggree = true
+    }
+    if(!state.gdpr){
+      errState.gdpr = true
+    }
+    if(!state.marketing){
+      errState.marketing = true
+    }
+    if(!selectBurgerShop.length){
+      errState.selectBurgerShop = true
     }
 
-    console.log(filteredCodes)
+    console.log(state)
+    console.log(errState)
+
+    setError(errState);
+    if (Object.values(errState).indexOf(true) >= 0) {
+      setLoading(false);
+      setErrorState(true)
+      return;
+    }
+
+    let filteredCodes: any = state.code.filter((code: any) => code.check > 0)
 
     var i = 0;
     while(i < filteredCodes.length) {
@@ -170,159 +175,209 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
       }
     }
 
+    filteredCodes = filteredCodes.map((item: any) => ({
+      code: item.value
+    }))
+
+    const dataToSend = {
+      name: state.name,
+      email: state.email,
+      phone: state.phone,
+      codes: filteredCodes,
+      shop: selectBurgerShop,
+      festivaly: 38
+    }
+
     await axios
       .post(`${APP_API}/api/votes`, { data: dataToSend })
       .then(() => {
         setLoading(false);
         setSuccess(true);
-        // router.push('/votes/dekujem')
+        router.push('/votes/dekujem')
       }).catch((err) => console.log("err save form -- ", err));
   };
 
   const handleOnBlur = async (value: string, idx: number) => {
+    const stateCopy = {...state}
     if(value.length === 6) {
-      const data: any = await getCode({ variables: { code: value } })
-      console.log(data)
-      const stateCopy = {...state}
+      const {data}: any = await getCode({ variables: { code: value } })
       if(data.codes.data.length){
         stateCopy.code[idx].check = data.codes.data[0].id
       }else{
         stateCopy.code[idx].check = -1
       }
-      setState(stateCopy)
+    }else{
+      stateCopy.code[idx].check = -1
     }
+    setState(stateCopy)
   }
 
   return (
     <Page>
-      <Head data={"Hlasování"} />
-      <Container maxWidth="md">
-        <form style={{marginBottom: "20px"}}>
-          <Input
-            idKey={"name"}
-            value={state.name}
-            name={"name"}
-            label={"Jméno a příjmení"}
-            error={false}
-            required
-            handleChange={handleChange}
-            errorText={"Chyba"}
-          />
-          <Input
-            idKey={"email"}
-            value={state.email}
-            name={"email"}
-            label={"Email"}
-            required
-            error={false}
-            handleChange={handleChange}
-            errorText={"Chyba"}
-          />
-          <Input
-            idKey={"phone"}
-            value={state.phone}
-            name={"phone"}
-            label={"Telefon"}
-            error={false}
-            required
-            handleChange={handleChange}
-            errorText={"Chyba"}
-          />
-          <Radio
-            data={festivalBurgers}
-            idKey={"Burgrárna pro kterou chcete hlasovat"}
-            required
-            handleChange={handleChangeRadio}
-            value={selectBurgerShop}
-          />
-          {state.code.map((code: any, idx: number) => {
-            return <CodeInput key={idx}>
-              <Input
-                idKey={`${idx}`}
-                value={code.value}
-                name={"code_"+idx}
-                onBlur={(e: any) => handleOnBlur(e.target.value, idx)}
-                label={!idx ? "Kód z hlasovacího lístku" : ""}
-                handleChange={handleChangeCode}
+      <div style={{margin: '50px 0'}}>
+        <Head data={"Hlasování"} />
+        <Container maxWidth="md">
+          <form style={{marginBottom: "20px"}}>
+            <Input
+              idKey={"name"}
+              value={state.name}
+              name={"name"}
+              label={"Jméno a příjmení"}
+              error={error.name}
+              required
+              handleChange={handleChange}
+              errorText={"Vyplňte údaj"}
+            />
+            <Input
+              idKey={"email"}
+              value={state.email}
+              name={"email"}
+              label={"Email"}
+              required
+              error={error.email}
+              handleChange={handleChange}
+              errorText={"Vyplňte údaj"}
+            />
+            <Input
+              idKey={"phone"}
+              value={state.phone}
+              name={"phone"}
+              label={"Telefon"}
+              error={error.phone}
+              required
+              handleChange={handleChange}
+              errorText={"Vyplňte údaj"}
+            />
+            <Radio
+              data={festivalBurgers}
+              idKey={"Burgrárna pro kterou chcete hlasovat"}
+              required
+              errorText={"Vyplňte údaj"}
+              error={error.selectBurgerShop}
+              handleChange={handleChangeRadio}
+              value={selectBurgerShop}
+            />
+            {state.code.map((code: any, idx: number) => {
+              return <CodeInput key={idx}>
+                <Input
+                  idKey={`${idx}`}
+                  value={code.value}
+                  name={"code_"+idx}
+                  onBlur={(e: any) => handleOnBlur(e.target.value, idx)}
+                  label={!idx ? "Kód z hlasovacího lístku" : ""}
+                  handleChange={handleChangeCode}
+                />
+                {code.check > 0 && <CheckIcon />}
+                {code.check < 0 && <span>neplatný kód</span>}
+              </CodeInput>
+            })}
+            <ControledCodesS>
+              <PulusS onClick={() => handleAddCode()}>
+                <PlusIcon />
+                <span>přidat další kód</span>
+              </PulusS>
+              {state.code.length > 1 && <a onClick={(e: any) => handleRemoveCode(e)} href="/">smazat</a>}
+            </ControledCodesS>
+            <ControlCheckbox>
+              <FormControlLabel
+                onChange={() => handleChange(!state.aggree, 'aggree')}
+                control={<Checkbox />}
+                label={<div className="label-checkbox">
+                  <p>souhlas s <a href="/obchidni">obchodními podmínkami</a></p>
+                  {error.aggree && <span>Vyplňte údaj</span>}
+                </div>}
               />
-              {code.check > 0 && <CheckIcon />}
-              {code.check < 0 && <span>neplatný kód</span>}
-            </CodeInput>
-          })}
-          <div style={{display: "flex"}}>
-            <PulusS onClick={() => handleAddCode()}>
-              <PlusIcon />
-              <span>přidat další kód</span>
-            </PulusS>
-            {state.code.length > 1 && <a onClick={(e: any) => handleRemoveCode(e)} href="/">smazat</a>}
-          </div>
-          <div>
-            <FormControlLabel
-              onClick={() => handleChange(!state.aggree, 'aggree')}
-              control={<Checkbox />}
-              required
-              label={<p>souhlas s <a href="/obchidni">obchodními podmínkami</a></p>}
-            />
-          </div>
-          <div>
-            <FormControlLabel
-              onClick={() => handleChange(!state.gdpr, 'gdpr')}
-              control={<Checkbox />}
-              required
-              label={<p>souhlas s <a href="/obchidni">GDPR</a></p>}
-            />
-          </div>
-          <div>
-            <FormControlLabel
-              onClick={() => handleChange(!state.marketing, 'marketing')}
-              control={<Checkbox />}
-              required
-              label={<p>souhlas s marketing účely</p>}
-            />
-          </div>
-        </form>
-      </Container>
-      <Container maxWidth="md">
-        <Box
-          sx={{
-            m: 1,
-            position: "relative",
-            display: "inline-flex",
-            alignItems: "center",
-          }}
-        >
-          <Button disabled={loading || success} onClick={() => handleSend()}>{"Hlasovat"}</Button>
-          {loading && (
-            <CircularProgress
-              size={24}
-              sx={{
-                color: green[500],
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                marginTop: "-12px",
-                marginLeft: "-12px",
-              }}
-            />
-          )}
-          {success && <SuccessLabel />}
-          {errorState && <ErrorLabel />}
-        </Box>
-      </Container>
+            </ControlCheckbox>
+            <ControlCheckbox>
+              <FormControlLabel
+                onChange={() => handleChange(!state.gdpr, 'gdpr')}
+                control={<Checkbox />}
+                label={<div className="label-checkbox">
+                  <p>souhlas s <a href="/obchidni">GDPR</a></p>
+                  {error.gdpr && <span>Vyplňte údaj</span>}
+                </div>}
+              />
+            </ControlCheckbox>
+            <ControlCheckbox>
+              <FormControlLabel
+                onChange={() => handleChange(!state.marketing, 'marketing')}
+                control={<Checkbox />}
+                label={<div className="label-checkbox">
+                  <p>souhlas s marketing účely</p>
+                  {error.marketing && <span>Vyplňte údaj</span>}
+                </div>}
+              />
+            </ControlCheckbox>
+          </form>
+        </Container>
+        <Container maxWidth="md">
+          <Box
+            sx={{
+              m: 1,
+              position: "relative",
+              display: "inline-flex",
+              alignItems: "center",
+            }}
+          >
+            <Button disabled={loading || success} onClick={() => handleSend()}>{"Hlasovat"}</Button>
+            {loading && (
+              <CircularProgress
+                size={24}
+                sx={{
+                  color: green[500],
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  marginTop: "-12px",
+                  marginLeft: "-12px",
+                }}
+              />
+            )}
+            {success && <SuccessLabel />}
+            {errorState && <ErrorLabel />}
+          </Box>
+        </Container>
+      </div>
     </Page>
   );
 };
 
 export default Votes;
 
-const CodeInput = styled.div`
+const ControlCheckbox = styled.div(({theme}) => `
+  .label-checkbox{
+    span{
+      display: block;
+      margin-top: -20px;
+      color: ${theme.palette.primary.main};
+    }
+  }
+`)
+const ControledCodesS = styled.div(({theme}) => `
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  a{
+    color: ${theme.palette.primary.main};
+  }
+`)
+
+
+const CodeInput = styled.div(({theme}) => `
   position: relative;
   svg{
     position: absolute;
     bottom: 10px;
     right: 20px;
   }
-`
+  >span{
+    position: absolute;
+    right: 10px;
+    bottom: 8px;
+    color: ${theme.palette.primary.main};
+  }
+`)
 
 const PulusS = styled.div`
   display: flex;
