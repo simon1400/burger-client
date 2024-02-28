@@ -94,7 +94,6 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
   const handleChange = (value: string | boolean, key: string) => {
     const stateCopy: any = {...state}
     stateCopy[key] = value
-    console.log('handleChange --', stateCopy)
     setState(stateCopy)
     setError({})
     setErrorState(false)
@@ -102,8 +101,7 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
 
   const handleChangeCode = (value: any, key: string) => {
     const stateCopy: any = {...state}
-    stateCopy.code[key].value = value
-    console.log('handleChangeCode --', stateCopy)
+    stateCopy.code[key].value = value.toUpperCase()
     setState(stateCopy)
   }
 
@@ -126,16 +124,10 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
     setState(stateCopy)
   }
 
-  useEffect(() => {
-    console.log('useEffect --', state)
-  }, [state])
-
   const handleSend = async () => {
     setLoading(true);
 
     const errState: any = { ...error };
-
-    console.log('handleSend --', state)
 
     if(state.name.length < 4) {
       errState.name = true
