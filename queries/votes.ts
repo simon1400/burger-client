@@ -10,3 +10,30 @@ export const getCodeQuery = gql`
   }
 `
 
+
+export const getAllVotes = gql`
+  query Votes {
+    votes {
+      data {
+        attributes{
+          name
+          email
+          phone
+          codes{
+            code
+          }
+          festivaly {
+            data{
+              attributes{
+                title
+                slug
+              }
+            }
+          }
+          shop
+        }
+      }
+    }
+  }
+`
+
