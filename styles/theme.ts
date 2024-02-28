@@ -3,9 +3,6 @@ import {createTheme} from '@mui/material'
 import { typography } from './typography';
 import { components } from './components';
 import { IBorderRadius, IGlobalGap, IGlobalPadding } from './types';
-import { PT_Mono } from 'next/font/google';
-
-const PtMono = PT_Mono({ weight: "400", subsets: ['latin'] });
 
 let theme = createTheme({
   breakpoints: {
@@ -28,7 +25,7 @@ let theme = createTheme({
     }
   },
   typography: {
-    fontFamily: PtMono.style.fontFamily,
+    fontFamily: "'PT Mono', monospace",
   },
   spacing: 5
 })

@@ -3,13 +3,19 @@ import Page from "layout/Page";
 import { client } from "lib/api";
 import { NextPage } from "next"
 import { getAllVotes } from "queries/votes";
+import { useEffect, useState } from "react";
 
 export const getServerSideProps = (async () => {
   const { data } = await client.query({
     query: getAllVotes
   });
 
-  return { props: { data: data.votes.data } }
+  return { 
+    props: { 
+      data: data.votes.data,
+      votes: true
+    } 
+}
 })
 
 const createData = (
@@ -22,6 +28,22 @@ const createData = (
 ) => ({ festival, shop, name, email, phone, codes })
 
 const ResultVotes: NextPage<{data?: any}> = ({data}) => {
+
+  const [hasPassword, setHasPassword] = useState(false)
+  
+
+  useEffect(() => {
+    if(!hasPassword) {
+      const enteredFood = prompt('Please enter password:')
+      if(enteredFood === "f5342wegstse5t3") {
+        setHasPassword(true)
+      }
+    }
+  }, [])
+
+  if(!hasPassword) {
+    return null
+  }
 
   const rows = [
     ...data.map((item: any) => {

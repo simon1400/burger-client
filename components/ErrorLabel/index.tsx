@@ -1,9 +1,10 @@
+import { FC } from "react"
 import { ErrorLabelS } from "./styled"
 
-const ErrorLabel = () => {
+const ErrorLabel: FC<{content: string}> = ({content}) => {
   return (
     <ErrorLabelS>
-      Nemáte vyplněné všechna povinná pole
+      {content}
     </ErrorLabelS>
   )
 }

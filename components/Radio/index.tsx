@@ -27,6 +27,7 @@ const Radio: FC<{
       {data.map((item: any, idx: number) => (
         <FormControlLabel
           key={idx}
+          style={{marginRight: 0, marginLeft: 0}}
           value={item.label}
           control={<RadioMui />}
           label={item.label}

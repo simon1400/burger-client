@@ -202,7 +202,7 @@ const Registration: NextPage<{ page: any; festivals: any; form: any }> = ({
             />
           )}
           {success && <SuccessLabel />}
-          {errorState && <ErrorLabel />}
+          {errorState && <ErrorLabel content="Nemáte vyplněné všechna povinná pole" />}
         </Box>
       </Container>
       <BlockContent content={page.content2} />

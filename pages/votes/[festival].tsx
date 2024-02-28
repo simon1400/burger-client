@@ -4,14 +4,13 @@ import axios from "axios";
 import Button from "components/Button";
 import ErrorLabel from "components/ErrorLabel";
 import Head from "components/Head";
-import SuccessLabel from "components/SuccessLabel";
 import PlusIcon from 'public/img/plus.svg'
 import CheckIcon from 'public/img/check.svg'
 import Page from "layout/Page";
 import { client } from "lib/api";
 import { NextPage } from "next";
 import { getFestival } from "queries/festivals";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { wrapper } from "stores";
 import { changeDescription, changeTitle } from "stores/slices/metaSlices";
 
@@ -50,8 +49,8 @@ export const getServerSideProps = wrapper.getServerSideProps(
       disabled: false
     }))
 
-    store.dispatch(changeTitle("Hlasovani"));
-    store.dispatch(changeDescription("Hlasovani"));
+    store.dispatch(changeTitle("Hlasování"));
+    store.dispatch(changeDescription("Hlasování"));
 
     return {
       props: {
@@ -95,6 +94,7 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
   const handleChange = (value: string | boolean, key: string) => {
     const stateCopy: any = {...state}
     stateCopy[key] = value
+    console.log('handleChange --', stateCopy)
     setState(stateCopy)
     setError({})
     setErrorState(false)
@@ -103,11 +103,14 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
   const handleChangeCode = (value: any, key: string) => {
     const stateCopy: any = {...state}
     stateCopy.code[key].value = value
+    console.log('handleChangeCode --', stateCopy)
     setState(stateCopy)
   }
 
   const handleChangeRadio = (value: string, idKey: string) => {
     setSelectBurgerShop(value)
+    setError({})
+    setErrorState(false)
   }
 
   const handleAddCode = () => {
@@ -123,10 +126,16 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
     setState(stateCopy)
   }
 
+  useEffect(() => {
+    console.log('useEffect --', state)
+  }, [state])
+
   const handleSend = async () => {
     setLoading(true);
 
     const errState: any = { ...error };
+
+    console.log('handleSend --', state)
 
     if(state.name.length < 4) {
       errState.name = true
@@ -211,7 +220,7 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
 
   return (
     <Page>
-      <div style={{margin: '50px 0'}}>
+      <div style={{margin: '40px 0 100px'}}>
         <Head data={"Hlasování"} />
         <Container maxWidth="md">
           <form style={{marginBottom: "20px"}}>
@@ -281,7 +290,7 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
                 value={state.aggree}
                 control={<Checkbox />}
                 label={<div className="label-checkbox">
-                  <p>souhlas s <a href="/obchidni">obchodními podmínkami</a></p>
+                  <p>souhlas s <a href="/clanek/obchodni-podminky" target="_blank">obchodními podmínkami</a></p>
                   {error.aggree && <span>Vyplňte údaj</span>}
                 </div>}
               />
@@ -292,7 +301,7 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
                 value={state.gdpr}
                 control={<Checkbox />}
                 label={<div className="label-checkbox">
-                  <p>souhlas s <a href="/obchidni">GDPR</a></p>
+                  <p>souhlas s <a href="/clanek/informace-o-zpracovani-osobnich-udaju" target="_blank">GDPR</a></p>
                   {error.gdpr && <span>Vyplňte údaj</span>}
                 </div>}
               />
@@ -315,7 +324,9 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
             sx={{
               m: 1,
               position: "relative",
-              display: "inline-flex",
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
               alignItems: "center",
             }}
           >
@@ -334,7 +345,7 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
               />
             )}
             {/* {success && <SuccessLabel />} */}
-            {errorState && <ErrorLabel />}
+            {errorState && <div style={{textAlign: 'center'}}><ErrorLabel content="Některá z položek nebyla vyplněna. Prosím zkontrolujte formůlář." /></div>}
           </Box>
         </Container>
       </div>
