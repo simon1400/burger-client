@@ -83,11 +83,9 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
     ]
   });
 
-  const [stateCheck, setStateCheck] = useState({
-    aggree: false,
-    gdpr: false,
-    marketing: false
-  })
+  const [aggreeCheck, setAggreeCheck] = useState<boolean>(false)
+  const [gdprCheck, setGdprCheck] = useState<boolean>(false)
+  const [marketingCheck, setMarketingCheck] = useState<boolean>(false)
 
   const [selectBurgerShop, setSelectBurgerShop] = useState<string>("")
 
@@ -102,17 +100,24 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
     setErrorState(false)
   }
 
-  const handleChangeCheck = (value: boolean, key: string) => {
-    const stateCopy: any = {...stateCheck}
-    stateCopy[key] = value
-    setStateCheck(stateCopy)
-    setError({})
-    setErrorState(false)
-  }
+  // const handleChangeAggree = (value: boolean) => {
+    
+    
+  // }
+  // const handleChangeGdpr = (value: boolean) => {
+  //   setGdprCheck(!value)
+    
+  // }
+  // const handleChangeMarketing = (value: boolean) => {
+  //   setMarketingCheck(!value)
+  //   setError({})
+  //   setErrorState(false)
+  // }
 
   useEffect(() => {
-    console.log(stateCheck)
-  }, [stateCheck])
+    setError({})
+    setErrorState(false)
+  }, [aggreeCheck, gdprCheck, marketingCheck])
 
   const handleChangeCode = (value: any, key: string) => {
     const stateCopy: any = {...state}
@@ -144,8 +149,6 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
 
     const errState: any = { ...error };
 
-    console.log(stateCheck)
-
     if(state.name.length < 4) {
       errState.name = true
     }
@@ -155,13 +158,14 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
     if(state.phone.length < 4){
       errState.phone = true
     }
-    if(!stateCheck.aggree){
+    console.log(aggreeCheck)
+    if(!aggreeCheck){
       errState.aggree = true
     }
-    if(!stateCheck.gdpr){
+    if(!gdprCheck){
       errState.gdpr = true
     }
-    if(!stateCheck.marketing){
+    if(!marketingCheck){
       errState.marketing = true
     }
     if(!selectBurgerShop.length){
@@ -295,8 +299,8 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
             </ControledCodesS>
             <ControlCheckbox>
               <FormControlLabel
-                onClick={() => handleChangeCheck(!stateCheck.aggree, 'aggree')}
-                value={stateCheck.aggree}
+                onClick={() => setAggreeCheck(!aggreeCheck)}
+                value={aggreeCheck}
                 control={<Checkbox />}
                 label={<div className="label-checkbox">
                   <p>souhlas s <a href="/clanek/obchodni-podminky" target="_blank">obchodními podmínkami</a></p>
@@ -306,8 +310,8 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
             </ControlCheckbox>
             <ControlCheckbox>
               <FormControlLabel
-                onClick={() => handleChangeCheck(!stateCheck.gdpr, 'gdpr')}
-                value={stateCheck.gdpr}
+                onClick={() => setGdprCheck(!gdprCheck)}
+                value={gdprCheck}
                 control={<Checkbox />}
                 label={<div className="label-checkbox">
                   <p>souhlas s <a href="/clanek/informace-o-zpracovani-osobnich-udaju" target="_blank">GDPR</a></p>
@@ -317,8 +321,8 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
             </ControlCheckbox>
             <ControlCheckbox>
               <FormControlLabel
-                onClick={() => handleChangeCheck(!stateCheck.marketing, 'marketing')}
-                value={stateCheck.marketing}
+                onClick={() => setMarketingCheck(!marketingCheck)}
+                value={marketingCheck}
                 control={<Checkbox />}
                 label={<div className="label-checkbox">
                   <p>souhlas s marketing účely</p>
