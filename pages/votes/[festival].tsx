@@ -278,6 +278,7 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
             <ControlCheckbox>
               <FormControlLabel
                 onChange={() => handleChange(!state.aggree, 'aggree')}
+                value={state.aggree}
                 control={<Checkbox />}
                 label={<div className="label-checkbox">
                   <p>souhlas s <a href="/obchidni">obchodními podmínkami</a></p>
@@ -288,6 +289,7 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
             <ControlCheckbox>
               <FormControlLabel
                 onChange={() => handleChange(!state.gdpr, 'gdpr')}
+                value={state.gdpr}
                 control={<Checkbox />}
                 label={<div className="label-checkbox">
                   <p>souhlas s <a href="/obchidni">GDPR</a></p>
@@ -298,6 +300,7 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
             <ControlCheckbox>
               <FormControlLabel
                 onChange={() => handleChange(!state.marketing, 'marketing')}
+                value={state.marketing}
                 control={<Checkbox />}
                 label={<div className="label-checkbox">
                   <p>souhlas s marketing účely</p>
