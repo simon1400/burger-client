@@ -150,9 +150,6 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
       errState.selectBurgerShop = true
     }
 
-    console.log(state)
-    console.log(errState)
-
     setError(errState);
     if (Object.values(errState).indexOf(true) >= 0) {
       setLoading(false);
@@ -333,7 +330,7 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
                 }}
               />
             )}
-            {success && <SuccessLabel />}
+            {/* {success && <SuccessLabel />} */}
             {errorState && <ErrorLabel />}
           </Box>
         </Container>
