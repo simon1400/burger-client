@@ -100,20 +100,6 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
     setErrorState(false)
   }
 
-  // const handleChangeAggree = (value: boolean) => {
-    
-    
-  // }
-  // const handleChangeGdpr = (value: boolean) => {
-  //   setGdprCheck(!value)
-    
-  // }
-  // const handleChangeMarketing = (value: boolean) => {
-  //   setMarketingCheck(!value)
-  //   setError({})
-  //   setErrorState(false)
-  // }
-
   useEffect(() => {
     setError({})
     setErrorState(false)
@@ -158,16 +144,15 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
     if(state.phone.length < 4){
       errState.phone = true
     }
-    console.log(aggreeCheck)
     if(!aggreeCheck){
       errState.aggree = true
     }
     if(!gdprCheck){
       errState.gdpr = true
     }
-    if(!marketingCheck){
-      errState.marketing = true
-    }
+    // if(!marketingCheck){
+    //   errState.marketing = true
+    // }
     if(!selectBurgerShop.length){
       errState.selectBurgerShop = true
     }
@@ -325,7 +310,7 @@ const Votes: NextPage<{ festivalBurgers: any; }> = ({
                 value={marketingCheck}
                 control={<Checkbox />}
                 label={<div className="label-checkbox">
-                  <p>souhlas s marketing účely</p>
+                  <p>souhlas s marketing. účely</p>
                   {error.marketing && <span>Vyplňte údaj</span>}
                 </div>}
               />
