@@ -1,4 +1,4 @@
-import { Container, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Container, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 import Page from "layout/Page";
 import { client } from "lib/api";
 import { NextPage } from "next"
@@ -30,8 +30,26 @@ const createData = (
 const ResultVotes: NextPage<{data?: any}> = ({data}) => {
 
   const [hasPassword, setHasPassword] = useState(false)
-  
+  const [score, setScore] = useState([])
 
+  const onlyUnique = (value: string, index: number, array: any) => array.indexOf(value) === index
+
+  const hadnelWinnerTable = (data: any) => {
+    const arrName = data.map((item: any) => item.attributes.shop)
+    var uniqueName = arrName.filter(onlyUnique);
+    // console.log(uniqueName)
+    const filtered: any = []
+    uniqueName.map((item: string, idx: number) => {
+      filtered.push({name: item, codes: 0})
+      for(let i = 0; i < data.length; i++) {
+        if(item === data[i].attributes.shop) {
+          filtered[idx].codes += data[i].attributes.codes.length
+        }
+      }
+    })
+    setScore(filtered.sort((a: any, b:any) => b.codes - a.codes))
+  }
+  
   useEffect(() => {
     if(!hasPassword) {
       const enteredFood = prompt('Please enter password:')
@@ -40,6 +58,10 @@ const ResultVotes: NextPage<{data?: any}> = ({data}) => {
       }
     }
   }, [])
+
+  useEffect(() => {
+    hadnelWinnerTable(data)
+  }, [hasPassword])
 
   if(!hasPassword) {
     return null
@@ -61,7 +83,37 @@ const ResultVotes: NextPage<{data?: any}> = ({data}) => {
 
   return (
     <Page>
+      {!!score.length && <Container>
+        <Typography variant="h1" style={{marginBottom: 20, marginTop: 100}}>Tabulka vyhercu</Typography>
+        <TableContainer style={{marginBottom: 100}}>
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>#</TableCell>
+                <TableCell>Shop</TableCell>
+                <TableCell>Score</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {score.map((row: any, idx: number) => (
+                <TableRow
+                  key={idx}
+                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {idx+1}
+                  </TableCell>
+                  <TableCell>{row.name}</TableCell>
+                  <TableCell><b>{row.codes}</b></TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Container>}
+
       <Container>
+        <Typography variant="h1" style={{marginBottom: 20}}>Result hlasovani</Typography>
         <TableContainer>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
