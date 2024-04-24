@@ -137,6 +137,7 @@ export const getFestival = gql`
   query Festival($slug: String!) {
     festivals(filters: {slug: {eq: $slug}}) {
       data {
+        id
         attributes{
           title
           content

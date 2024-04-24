@@ -10,10 +10,9 @@ export const getCodeQuery = gql`
   }
 `
 
-
 export const getAllVotes = gql`
-  query Votes {
-    votes {
+  query Votes ($festivalSlug: String!) {
+    votes(filters: {festivaly: {slug: {eq: $festivalSlug}}}) {
       data {
         attributes{
           name
