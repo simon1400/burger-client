@@ -18,6 +18,8 @@ export const getAllVotes = gql`
           name
           email
           phone
+          marketing
+          mailConfirm
           codes{
             code
           }

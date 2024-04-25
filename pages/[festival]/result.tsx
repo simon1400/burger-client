@@ -15,8 +15,6 @@ export const getServerSideProps = wrapper.getServerSideProps(
       }
     });
 
-    console.log(data.votes.data)
-
     return { 
       props: { 
         data: data.votes.data,
@@ -32,11 +30,14 @@ const createData = (
   email: string,
   phone: string,
   codes: string,
-) => ({ festival, shop, name, email, phone, codes })
+  marketing: boolean,
+  mailConfirm: boolean,
+) => ({ festival, shop, name, email, phone, codes, marketing, mailConfirm })
 
 const ResultVotes: NextPage<{data?: any}> = ({data}) => {
 
-  const [hasPassword, setHasPassword] = useState(false)
+  // const [hasPassword, setHasPassword] = useState(false)
+  const [hasPassword, setHasPassword] = useState(true)
   const [score, setScore] = useState([])
 
   const onlyUnique = (value: string, index: number, array: any) => array.indexOf(value) === index
@@ -46,22 +47,23 @@ const ResultVotes: NextPage<{data?: any}> = ({data}) => {
     var uniqueName = arrName.filter(onlyUnique);
     const filtered: any = []
     uniqueName.map((item: string, idx: number) => {
-      filtered.push({name: item, codes: 0})
+      filtered.push({name: item, codes: 0, globalScore: 0})
       for(let i = 0; i < data.length; i++) {
         if(item === data[i].attributes.shop) {
           filtered[idx].codes += data[i].attributes.codes.length
+          filtered[idx].globalScore += 1
         }
       }
     })
-    setScore(filtered.sort((a: any, b:any) => b.codes - a.codes))
+    setScore(filtered.sort((a: any, b:any) => b.globalScore - a.globalScore))
   }
   
   useEffect(() => {
     if(!hasPassword) {
       const enteredFood = prompt('Please enter password:')
-      if(enteredFood === "f5342wegstse5t3") {
-        setHasPassword(true)
-      }
+      // if(enteredFood === "f5342wegstse5t3") {
+      //   setHasPassword(true)
+      // }
     }
   }, [])
 
@@ -82,7 +84,9 @@ const ResultVotes: NextPage<{data?: any}> = ({data}) => {
         dataLocal.name, 
         dataLocal.email, 
         dataLocal.phone, 
-        [...dataLocal.codes.map((code: any) => code.code)].join(', ')
+        [...dataLocal.codes.map((code: any) => code.code)].join(', '),
+        dataLocal.marketing,
+        dataLocal.mailConfirm
       )
     })
   ];
@@ -90,7 +94,8 @@ const ResultVotes: NextPage<{data?: any}> = ({data}) => {
   return (
     <Page>
       {!!score.length && <Container>
-        <Typography variant="h1" style={{marginBottom: 20, marginTop: 100}}>Tabulka vyhercu</Typography>
+        <Typography variant="h1" style={{marginBottom: 20, marginTop: 100}}>Festival: {rows[0].festival}</Typography>
+        <Typography variant="h2" style={{marginBottom: 20, marginTop: 100}}>Tabulka výherců</Typography>
         <TableContainer style={{marginBottom: 100}}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
@@ -98,6 +103,7 @@ const ResultVotes: NextPage<{data?: any}> = ({data}) => {
                 <TableCell>#</TableCell>
                 <TableCell>Shop</TableCell>
                 <TableCell>Score</TableCell>
+                <TableCell>Global Score</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -111,6 +117,7 @@ const ResultVotes: NextPage<{data?: any}> = ({data}) => {
                   </TableCell>
                   <TableCell>{row.name}</TableCell>
                   <TableCell><b>{row.codes}</b></TableCell>
+                  <TableCell><b>{row.globalScore}</b></TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -119,18 +126,19 @@ const ResultVotes: NextPage<{data?: any}> = ({data}) => {
       </Container>}
 
       <Container>
-        <Typography variant="h1" style={{marginBottom: 20}}>Result hlasovani</Typography>
+        <Typography variant="h2" style={{marginBottom: 20}}>Výsledky hlasování</Typography>
       </Container>
       <TableContainer>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Festival</TableCell>
+              <TableCell>Name</TableCell>
               <TableCell align="right">Shop</TableCell>
-              <TableCell align="right">Name</TableCell>
               <TableCell align="right">Email</TableCell>
               <TableCell align="right">Phone</TableCell>
               <TableCell align="right">Codes</TableCell>
+              <TableCell align="right">Marketing</TableCell>
+              <TableCell align="right">Confirm mail</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -139,14 +147,13 @@ const ResultVotes: NextPage<{data?: any}> = ({data}) => {
                 key={row.name+idx}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
-                <TableCell component="th" scope="row">
-                  {row.festival}
-                </TableCell>
+                <TableCell>{row.name}</TableCell>
                 <TableCell align="right">{row.shop}</TableCell>
-                <TableCell align="right">{row.name}</TableCell>
                 <TableCell align="right">{row.email}</TableCell>
                 <TableCell align="right">{row.phone}</TableCell>
                 <TableCell align="right">{row.codes}</TableCell>
+                <TableCell align="right">{row.marketing ? 'Ano' : 'Ne'}</TableCell>
+                <TableCell align="right">{row.mailConfirm ? 'Ano' : 'Ne'}</TableCell>
               </TableRow>
             ))}
           </TableBody>

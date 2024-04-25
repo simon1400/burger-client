@@ -15,6 +15,7 @@ import Checkbox from "components/Checkbox";
 import Button from "components/Button";
 import ErrorLabel from "components/ErrorLabel";
 import { green } from "@mui/material/colors";
+import { sendEmail } from "helpers/sendMail";
 
 const APP_API = process.env.APP_API;
 
@@ -55,7 +56,7 @@ const VotesFestival: FC<{ festivalBurgers: any; idFestival: number }> = ({festiv
   useEffect(() => {
     setError({})
     setErrorState(false)
-  }, [aggreeCheck, gdprCheck, marketingCheck])
+  }, [aggreeCheck, gdprCheck])
 
   const handleChangeCode = (value: any, key: string) => {
     const stateCopy: any = {...state}
@@ -141,14 +142,18 @@ const VotesFestival: FC<{ festivalBurgers: any; idFestival: number }> = ({festiv
       phone: state.phone,
       codes: filteredCodes,
       shop: selectBurgerShop,
-      festivaly: idFestival
+      marketing: marketingCheck,
+      festivaly: idFestival,
+      mailConfirm: false
     }
+    // 0004HE
 
     await axios
       .post(`${APP_API}/api/votes`, { data: dataToSend })
-      .then(() => {
+      .then((res) => {
         setLoading(false);
         setSuccess(true);
+        sendEmail({...dataToSend, id: res.data.data.id})
         router.push('/votes/dekujem')
       }).catch((err) => console.log("err save form -- ", err));
   };
