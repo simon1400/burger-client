@@ -36,8 +36,8 @@ const createData = (
 
 const ResultVotes: NextPage<{data?: any}> = ({data}) => {
 
-  // const [hasPassword, setHasPassword] = useState(false)
-  const [hasPassword, setHasPassword] = useState(true)
+  const [hasPassword, setHasPassword] = useState(false)
+  // const [hasPassword, setHasPassword] = useState(true)
   const [score, setScore] = useState([])
 
   const onlyUnique = (value: string, index: number, array: any) => array.indexOf(value) === index
@@ -61,9 +61,9 @@ const ResultVotes: NextPage<{data?: any}> = ({data}) => {
   useEffect(() => {
     if(!hasPassword) {
       const enteredFood = prompt('Please enter password:')
-      // if(enteredFood === "f5342wegstse5t3") {
-      //   setHasPassword(true)
-      // }
+      if(enteredFood === "f5342wegstse5t3") {
+        setHasPassword(true)
+      }
     }
   }, [])
 
