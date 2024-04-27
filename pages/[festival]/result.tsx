@@ -5,6 +5,8 @@ import { NextPage } from "next"
 import { getAllVotes } from "queries/votes";
 import { useEffect, useState } from "react";
 import { wrapper } from "stores";
+import { CSVLink } from "react-csv";
+import { useRouter } from "next/router";
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (ctx) => {
@@ -36,9 +38,11 @@ const createData = (
 
 const ResultVotes: NextPage<{data?: any}> = ({data}) => {
 
-  const [hasPassword, setHasPassword] = useState(false)
-  // const [hasPassword, setHasPassword] = useState(true)
+  // const [hasPassword, setHasPassword] = useState(false)
+  const [hasPassword, setHasPassword] = useState(true)
   const [score, setScore] = useState([])
+
+  const router = useRouter()
 
   const onlyUnique = (value: string, index: number, array: any) => array.indexOf(value) === index
 
@@ -47,11 +51,16 @@ const ResultVotes: NextPage<{data?: any}> = ({data}) => {
     var uniqueName = arrName.filter(onlyUnique);
     const filtered: any = []
     uniqueName.map((item: string, idx: number) => {
-      filtered.push({name: item, codes: 0, globalScore: 0})
+      filtered.push({name: item, codes: 0, globalScore: 0, mailScore: 0})
       for(let i = 0; i < data.length; i++) {
         if(item === data[i].attributes.shop) {
           filtered[idx].codes += data[i].attributes.codes.length
-          filtered[idx].globalScore += 1
+          if(data[i].attributes.codes.length) {
+            filtered[idx].globalScore += 1
+          }
+          if(data[i].attributes.mailConfirm){
+            filtered[idx].mailScore += 1
+          }
         }
       }
     })
@@ -91,6 +100,26 @@ const ResultVotes: NextPage<{data?: any}> = ({data}) => {
     })
   ];
 
+  const headersCSV = [
+    { label: "Burgrarna", key: "shop" },
+    { label: "Jmeno", key: "name" },
+    { label: "Email", key: "email" },
+    { label: "Telefon", key: "phone" },
+    { label: "Kody", key: "codes" },
+    { label: "Souhlas z marketingem", key: "marketing" },
+    { label: "Podtvrzeny mail", key: "mailConfirm" },
+  ];
+
+  const dataCSV = [...rows.map((item: any) => ({
+    shop: item.shop, 
+    name: item.name, 
+    email: item.email, 
+    phone: item.phone, 
+    codes: item.codes,
+    marketing: item.marketing,
+    mailConfirm: item.mailConfirm
+  }))]
+
   return (
     <Page>
       {!!score.length && <Container>
@@ -104,6 +133,7 @@ const ResultVotes: NextPage<{data?: any}> = ({data}) => {
                 <TableCell>Shop</TableCell>
                 <TableCell>Score</TableCell>
                 <TableCell>Global Score</TableCell>
+                <TableCell>Score confirm mail</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -118,6 +148,7 @@ const ResultVotes: NextPage<{data?: any}> = ({data}) => {
                   <TableCell>{row.name}</TableCell>
                   <TableCell><b>{row.codes}</b></TableCell>
                   <TableCell><b>{row.globalScore}</b></TableCell>
+                  <TableCell><b>{row.mailScore}</b></TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -126,7 +157,17 @@ const ResultVotes: NextPage<{data?: any}> = ({data}) => {
       </Container>}
 
       <Container>
-        <Typography variant="h2" style={{marginBottom: 20}}>Výsledky hlasování</Typography>
+        <div style={{
+          display: 'flex',
+          justifyContent: 'space-between'
+        }}>
+          <Typography variant="h2" style={{marginBottom: 20}}>
+            Výsledky hlasování 
+          </Typography>
+          <CSVLink className="csv-link-c" filename={`${router.query.festival}-results.csv`} data={dataCSV} headers={headersCSV}>
+            Stahnout CSV
+          </CSVLink>
+        </div>
       </Container>
       <TableContainer>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">

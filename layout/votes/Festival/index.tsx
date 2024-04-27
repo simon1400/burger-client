@@ -299,7 +299,7 @@ const VotesFestival: FC<{ festivalBurgers: any; idFestival: number }> = ({festiv
               />
             )}
             {/* {success && <SuccessLabel />} */}
-            {errorState && <div style={{textAlign: 'center'}}><ErrorLabel content="Některá z položek nebyla vyplněna. Prosím zkontrolujte formůlář." /></div>}
+            {errorState && <div style={{textAlign: 'center'}}><ErrorLabel content="Některá z položek nebyla vyplněna. Prosím zkontrolujte formulář." /></div>}
           </Box>
         </Container>
       </div>
