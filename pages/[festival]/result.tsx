@@ -38,8 +38,8 @@ const createData = (
 
 const ResultVotes: NextPage<{data?: any}> = ({data}) => {
 
-  // const [hasPassword, setHasPassword] = useState(false)
-  const [hasPassword, setHasPassword] = useState(true)
+  const [hasPassword, setHasPassword] = useState(false)
+  // const [hasPassword, setHasPassword] = useState(true)
   const [score, setScore] = useState([])
 
   const router = useRouter()
