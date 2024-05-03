@@ -1,7 +1,10 @@
 import { confirmMail } from 'mail-templates/confirm';
 import { NextApiRequest, NextApiResponse } from 'next';
-import nodemailer from 'nodemailer';
-import Mail from 'nodemailer/lib/mailer';
+import { MailerSend, EmailParams, Sender, Recipient } from "mailersend";
+
+const mailerSend = new MailerSend({
+  apiKey: "mlsn.eb252071563000d01a5e624c5879da6f8a8ca9d9d7dd5266146fc1d31d4663ba",
+});
 
 type ResponseData = {
   message: string
@@ -13,36 +16,22 @@ export default async function POST(
   ) {
   const { email, id } = req.body;
 
-  const transport = nodemailer.createTransport({
-    service: 'gmail',
-    /* 
-      setting service as 'gmail' is same as providing these setings:
-      host: "smtp.gmail.com",
-      port: 465,
-      secure: true
-      If you want to use a different email provider other than gmail, you need to provide these manually.
-      Or you can go use these well known services and their settings at
-      https://github.com/nodemailer/nodemailer/blob/master/lib/well-known/services.json
-  */
-    auth: {
-      user: 'burgerstreetfestivalcz@gmail.com',
-      pass: 'rids ebfk whok jkwp',
-    },
-  });
+  const sentFrom = new Sender("noreply@burgerfestival.cz", "Burger street festival");
+  const recipients = [
+    new Recipient(email, email)
+  ];
 
-  const mailOptions: Mail.Options = {
-    from: 'burgerstreetfestivalcz@gmail.com',
-    to: email,
-    // cc: email, (uncomment this line if you want to send a copy to the sender)
-    subject: `Potvrzení hlasování`,
-    html: confirmMail(id)
-  };
+  const emailParams = new EmailParams()
+  .setFrom(sentFrom)
+  .setTo(recipients)
+  .setSubject("Potvrzení hlasování")
+  .setHtml(confirmMail(id))
 
-  const sendMailPromise = () => transport.sendMail(mailOptions);
+  const sendMailPromise = async () => await mailerSend.email.send(emailParams);
 
   try {
     await sendMailPromise();
-    res.status(200)
+    res.status(200).send({message: "All good!"})
   } catch (err: any) {
     console.log(err)
     res.status(500).json(err)

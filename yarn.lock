@@ -2383,10 +2383,10 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
-mailersend@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/mailersend/-/mailersend-2.1.1.tgz#eac747ab89ed332a98443ab35c27003127b8e0ff"
-  integrity sha512-HSsWY6XJgTBzhZTFfio4B/PqNWU4xHpAIhflwQC3ol+8vbNCFB9i0Pl3CTtRDGv8AXs62cCTFAJACmyL+lnnNw==
+mailersend@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/mailersend/-/mailersend-2.2.0.tgz#faab708e95cfee9ea0e905e0f6024cb72b44fdd6"
+  integrity sha512-U5d2RseMDm7oQIXqvMo1Xfvimh2k4O+nC27TA2tR4cwMDoAiZ9e0JpnbQ8mbT7gJoNdUittLs3n/kfRapu5tZg==
   dependencies:
     gaxios "^5.0.1"
     isomorphic-unfetch "^3.1.0"
@@ -2503,11 +2503,6 @@ node-releases@^2.0.8:
   version "2.0.10"
   resolved "https://registry.npmjs.org/node-releases/-/node-releases-2.0.10.tgz"
   integrity sha512-5GFldHPXVG/YZmFzJvKK2zDSzPKhEp0+ZR5SVaoSag9fsL5YgHbUHDfnG5494ISANDcK4KwPXAx2xqVEydmd7w==
-
-nodemailer@^6.9.13:
-  version "6.9.13"
-  resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-6.9.13.tgz#5b292bf1e92645f4852ca872c56a6ba6c4a3d3d6"
-  integrity sha512-7o38Yogx6krdoBf3jCAqnIN4oSQFx+fMa0I7dK1D+me9kBxx12D+/33wSb+fhOCtIxvYJ+4x4IMEhmhCKfAiOA==
 
 normalize-path@^3.0.0, normalize-path@~3.0.0:
   version "3.0.0"
