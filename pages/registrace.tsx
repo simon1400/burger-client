@@ -150,7 +150,7 @@ const Registration: NextPage<{ page: any; festivals: any; form: any }> = ({
         setLoading(false);
         setSuccess(true);
         axios
-          .post("/api/mail", sendObj)
+          .post("/api/mailRegistration", sendObj)
           .then((res) => console.log(res))
           .catch((err) => console.log(err.response));
       })
