@@ -11,6 +11,7 @@ const partnersQuery = gql`
           content2
           headTopPartner
           headPartner
+          headPartner2
           headSupport
           button{
             text
@@ -27,6 +28,16 @@ const partnersQuery = gql`
             link
           }
           partners {
+            image{
+              data{
+                attributes {
+                  url
+                }
+              }
+            }
+            link
+          }
+          partners2 {
             image{
               data{
                 attributes {

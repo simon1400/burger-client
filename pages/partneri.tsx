@@ -39,6 +39,7 @@ const PartnersPage: NextPage<{partnersPage: any}> = ({
 
   const topPartnerLength = partnersPage.topPartners.length
   const partnerLength = partnersPage.partners.length
+  const partner2Length = partnersPage.partners2.length
   const supportedLength = partnersPage.supported.length
 
   const getColumn = (count: number) => {
@@ -83,6 +84,18 @@ const PartnersPage: NextPage<{partnersPage: any}> = ({
             {partnersPage.supported.map((item: any, idx: number) => <Grid key={idx} item xs={12} md={getColumn(supportedLength)}>
               <Link href={item.link}>
                 <ImgSquare big={supportedLength < 4} partners>
+                  <Image src={APP_API+item.image.data.attributes.url+"?format=webp&resize=330x330"} fill alt="" />
+                </ImgSquare>
+              </Link>
+            </Grid>)}
+          </Grid>
+        </Container>
+        <Container>
+          <Typography variant="h2" marginTop={10}>{partnersPage.headPartners2}</Typography>
+          <Grid container justifyContent="center">
+            {partnersPage.partners2.map((item: any, idx: number) => <Grid key={idx} item xs={12} md={getColumn(partner2Length)}>
+              <Link href={item.link}>
+                <ImgSquare big={partner2Length < 4} partners>
                   <Image src={APP_API+item.image.data.attributes.url+"?format=webp&resize=330x330"} fill alt="" />
                 </ImgSquare>
               </Link>
