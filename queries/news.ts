@@ -26,7 +26,7 @@ export const newsPageQuery = gql`
 
 export const newsQuery = gql`
   query News {
-    news {
+    newss {
       data {
         attributes {
           title
@@ -55,7 +55,7 @@ export const newsQuery = gql`
 
 export const getNews = gql`
   query News($slug: String!) {
-    news(filters: {slug: {eq: $slug}}) {
+    newss(filters: {slug: {eq: $slug}}) {
       data {
         attributes {
           title

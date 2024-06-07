@@ -12,7 +12,7 @@ import { parseDate } from "helpers/parseDate"
 
 const APP_API = process.env.APP_API
 
-const ArticleShort: FC<{data: any}> = ({data}) => {
+const ArticleShort: FC<{data: any, type?: string}> = ({data, type = 'blog'}) => {
 
   const date = data.datePublication ? parseDate(data.datePublication) : null
 
@@ -20,7 +20,7 @@ const ArticleShort: FC<{data: any}> = ({data}) => {
     <ArticleShortS>
       <Grid container alignItems="center">
         <Grid item xs={12} md={6}>
-          <Link href={`/blog/${data.slug}`}>
+          <Link href={`/${type}/${data.slug}`}>
             <ImgSquare margin>
               <Image src={APP_API+data.image.data.attributes.url+"?format=webp&resize=535x420"} fill alt="" />
             </ImgSquare>
@@ -32,9 +32,9 @@ const ArticleShort: FC<{data: any}> = ({data}) => {
               {data.label?.data && <LabelBare data={data.label.data.attributes.title}/>}
               {date && <time style={{marginLeft: "20px"}}>{`${date.day}.${date.month+1}.${date.year}`}</time>}
             </div>
-            <Link href={`/blog/${data.slug}`}><Typography variant="h2">{kitcut(data.title, 50)}</Typography></Link>
+            <Link href={`/${type}/${data.slug}`}><Typography variant="h2">{kitcut(data.title, 50)}</Typography></Link>
             <Typography className="short-content" dangerouslySetInnerHTML={{__html: kitcut(data.content.replace(/(<([^>]+)>)/gi, ""), 150)}} />
-            <IconButton href={`/blog/${data.slug}`}>
+            <IconButton href={`/${type}/${data.slug}`}>
               <ArrowRight />
             </IconButton>
           </ArticleContent>

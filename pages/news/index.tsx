@@ -25,7 +25,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
     });
 
     const newsPage = data.newsPage.data.attributes;
-    const news = newsData.news.data.map((item: any) => item.attributes);
+    const news = newsData.newss.data.map((item: any) => item.attributes);
 
     store.dispatch(changeTitle(newsPage.meta?.title || 'Blog'))
     store.dispatch(changeDescription(newsPage.meta?.description || ''))
@@ -52,7 +52,7 @@ const News: NextPage<{newsPage: any; news: any}> = ({newsPage, news}) => {
         </CenterWrap>
       </Container>
       <Container>
-        {sortDate(news).map((item: any, idx: number) => <ArticleShort key={idx} data={item} />)}
+        {sortDate(news).map((item: any, idx: number) => <ArticleShort type="news" key={idx} data={item} />)}
       </Container>
     </Page>
   )

@@ -8,28 +8,28 @@ import LabelBare from "components/LabelBare"
 import { ImgSquare } from "styles/ImgSquare"
 import { wrapper } from "stores"
 import { client } from "lib/api"
-import { getPost } from "queries/blog"
 import { changeDescription, changeImage, changeTitle } from "stores/slices/metaSlices"
 import Galery from "components/Galery"
+import { getNews } from "queries/news"
 
 const APP_API = process.env.APP_API
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (ctx) => {
     const { data } = await client.query({
-      query: getPost,
+      query: getNews,
       variables: {
         slug: ctx.params?.slug
       }
     });
 
-    if(!data.posts.data.length) {
+    if(!data.newss.data.length) {
       return {
         notFound: true
       }
     }
 
-    const post = data.posts.data[0].attributes;
+    const post = data.newss.data[0].attributes;
 
     store.dispatch(changeTitle(post.meta?.title || post.title))
     store.dispatch(changeDescription(post.meta?.description || ''))

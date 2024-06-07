@@ -14,7 +14,7 @@ export const NavS = styled.nav(({theme}) => `
       a{
         color: white;
         text-decoration: none;
-        font-size: 18px;
+        font-size: 16px;
         font-family: ${candal.style.fontFamily};
         position: relative;
         transition: all .2s ease;
