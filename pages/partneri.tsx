@@ -43,7 +43,7 @@ const PartnersPage: NextPage<{partnersPage: any}> = ({
   const supportedLength = partnersPage.supported.length
 
   const getColumn = (count: number) => {
-    return count === 1 ? 12 : count === 2 ? 6 : count === 3 ? 4 : 3;
+    return count === 1 ? 12 : 3;
   }
 
   return (
@@ -91,7 +91,7 @@ const PartnersPage: NextPage<{partnersPage: any}> = ({
           </Grid>
         </Container>
         <Container>
-          <Typography variant="h2" marginTop={10}>{partnersPage.headPartners2}</Typography>
+          <Typography variant="h2" marginTop={10}>{partnersPage.headPartner2}</Typography>
           <Grid container justifyContent="center">
             {partnersPage.partners2.map((item: any, idx: number) => <Grid key={idx} item xs={12} md={getColumn(partner2Length)}>
               <Link href={item.link}>

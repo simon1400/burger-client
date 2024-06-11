@@ -41,16 +41,19 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
 const News: NextPage<{newsPage: any; news: any}> = ({newsPage, news}) => {
 
+
+
   return (
     <Page>
       <Head data={newsPage.title} />
-      <Container sx={{mb: 20}}>
+      {!!newsPage.image.data && <Container sx={{mb: 20}}>
         <CenterWrap>
           <ImgSquare partners>
             <Image src={APP_API+newsPage.image.data.attributes.url+"?format=svg&resize=220x220"} fill alt="" />
           </ImgSquare>
         </CenterWrap>
-      </Container>
+      </Container>}
+      {/* Add heare container with text/description */}
       <Container>
         {sortDate(news).map((item: any, idx: number) => <ArticleShort type="news" key={idx} data={item} />)}
       </Container>
