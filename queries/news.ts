@@ -6,6 +6,7 @@ export const newsPageQuery = gql`
       data {
         attributes {
           title
+          content
           image {
             data{
               attributes {
@@ -60,6 +61,7 @@ export const getNews = gql`
         attributes {
           title
           content
+          youtube
           label {
             data{
               attributes{

@@ -53,6 +53,9 @@ const Blog: NextPage<{post: any}> = ({post}) => {
         </CenterWrap>
       </Container>}
       <Container maxWidth="md">
+      <iframe width="100%" style={{aspectRatio: "16 / 9"}} src={`https://www.youtube.com/embed/${post.youtube}`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen />
+      </Container>
+      <Container maxWidth="md">
         <Typography component="div" dangerouslySetInnerHTML={{__html: post.content.replace(/\/uploads/g, "https://burger-strapi.hardart.cz/uploads")}} />
       </Container>
       <Container maxWidth="xl">

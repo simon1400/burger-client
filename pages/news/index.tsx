@@ -11,6 +11,7 @@ import { changeDescription, changeTitle } from "stores/slices/metaSlices"
 import { ImgSquare } from "styles/ImgSquare"
 import { sortDate } from "helpers/sortDate"
 import { newsPageQuery, newsQuery } from "queries/news"
+import BlockContent from "components/BlockContent"
 
 const APP_API = process.env.APP_API
 
@@ -53,7 +54,7 @@ const News: NextPage<{newsPage: any; news: any}> = ({newsPage, news}) => {
           </ImgSquare>
         </CenterWrap>
       </Container>}
-      {/* Add heare container with text/description */}
+      <BlockContent content={newsPage.content} />
       <Container>
         {sortDate(news).map((item: any, idx: number) => <ArticleShort type="news" key={idx} data={item} />)}
       </Container>
