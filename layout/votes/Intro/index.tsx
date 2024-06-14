@@ -16,7 +16,8 @@ const Intro: FC<{link: string; festivals: any}> = ({link, festivals}) => {
             2. Zadej kód z hlasovacího lístku, který jsi dostal při nákupu burgeru.</br>
             3. Hlasuj pro tvého favorita.</br>
             4. Potvrď souhlas s podmínkami soutěže a zpracováním osobních údajů.</br>
-            5. Klikni na ODESLAT</p>
+            5. Klikni na ODESLAT
+            6. Potvrď svůj hlas přes email</p>
             <p><strong>A to je vše!</strong></p>
             <p>Křestní jméno výherce a výherní kód zveřejníme na webu <a href="http://burgerfestival.cz" title="smartCard-inline">http://burgerfestival.cz</a>  a na události festivalu na Facebooku nejpozději v pondělí po festivalu. Pokud jsi vyhrál, dáme ti vědět také mailem.</p>
             <p><strong>O co hrajeme?</strong></p>
