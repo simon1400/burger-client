@@ -21,7 +21,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
     return {
       props: {
-        festivals: filteredFestivals.future[1],
+        festivals: filteredFestivals.future[2],
         votes: true
       }
     };
