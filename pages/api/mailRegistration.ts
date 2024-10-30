@@ -27,7 +27,7 @@ export default async function handler(
       ];
 
       const bcc = [
-        new Recipient("hardart.cz@gmail.com", "Hard art")
+        new Recipient("supkova@bedy.cz", "Supkova")
       ];
   
       const emailParams = new EmailParams()
