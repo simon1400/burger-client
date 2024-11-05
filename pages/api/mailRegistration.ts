@@ -27,7 +27,8 @@ export default async function handler(
       ];
 
       const bcc = [
-        new Recipient("supkova@bedy.cz", "Supkova")
+        new Recipient("supkova@bedy.cz", "Supkova"),
+        new Recipient("info@burgerfestival.cz", "Burger street festival")
       ];
   
       const emailParams = new EmailParams()
