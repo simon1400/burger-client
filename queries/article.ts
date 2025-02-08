@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const getArticle = gql`
-  query Article($slug: String!) {
-    articles(filters: {slug: {eq: $slug}}) {
+  query Article($slug: String!, $locale: I18NLocaleCode!) {
+    articles(locale: $locale, filters: {slug: {eq: $slug}}) {
       data {
         attributes {
           title

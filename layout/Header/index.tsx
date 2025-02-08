@@ -10,9 +10,13 @@ import { useRouter } from "next/router";
 
 const Header = () => {
 
+  const { locale } = useRouter()
+
   const [nav, setNav] = useState([])
 
-  const {data, loading} = useQuery(navTopQuery)
+  const {data, loading} = useQuery(navTopQuery, {variables: {
+    locale
+  }})
   const mediaMd = useMediaQuery("(max-width: 1100px)")
   const router = useRouter()
 

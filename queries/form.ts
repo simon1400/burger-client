@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 const formQuery = gql`
-  query Form {
-    form {
+  query Form($locale: I18NLocaleCode!) {
+    form(locale: $locale) {
       data {
         attributes {
           fields{
@@ -42,8 +42,8 @@ const formQuery = gql`
 `
 
 export const formPage = gql`
-  query FormPage {
-    applicationPage {
+  query FormPage($locale: I18NLocaleCode!) {
+    applicationPage(locale: $locale) {
       data{
         attributes {
           title

@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const getMetaGalery = gql`
-  query MetaGalery {
-    global {
+  query MetaGalery($locale: I18NLocaleCode!) {
+    global(locale: $locale) {
       data {
         attributes {
           metaGalery{
@@ -16,8 +16,8 @@ export const getMetaGalery = gql`
 `
 
 export const getMetaWinners = gql`
-  query MetaWinners {
-    global {
+  query MetaWinners($locale: I18NLocaleCode!) {
+    global(locale: $locale) {
       data {
         attributes {
           metaWinners{

@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 const footerQuery = gql`
-  query Footer {
-    global {
+  query Footer($locale: I18NLocaleCode!) {
+    global(locale: $locale) {
       data {
         attributes {
           logoPartners{

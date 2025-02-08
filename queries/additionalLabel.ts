@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const additionalLabelQuery = gql`
-  query AdditionalLabel {
-    global {
+  query AdditionalLabel($locale: I18NLocaleCode!) {
+    global(locale: $locale) {
       data {
         attributes {
           additionalLabel{
