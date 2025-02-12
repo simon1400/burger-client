@@ -23,6 +23,7 @@ const Modal = () => {
   const { modal } = useSelector(selectAllState)
   const [getData, { data }] = useLazyQuery(getSeller, {
     variables: {
+      slug: '',
       locale: router.locale,
     },
   })
