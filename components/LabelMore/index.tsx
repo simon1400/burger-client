@@ -1,10 +1,12 @@
-import { FC } from "react"
-import { LabelMoreS } from "./styled"
+import type { FC } from 'react'
 
-const LabelMore: FC<{data: number}> = ({data}) => {
+import { LabelMoreS } from './styled'
+
+const LabelMore: FC<{ data: number }> = ({ data }) => {
   return (
     <LabelMoreS>
-      +{data}
+      {'+'}
+      {data}
     </LabelMoreS>
   )
 }

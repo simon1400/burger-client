@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 const partnersQuery = gql`
-  query Partners {
-    partner {
+  query Partners($locale: I18NLocaleCode!) {
+    partner(locale: $locale) {
       data {
         attributes {
           title

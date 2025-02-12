@@ -1,33 +1,36 @@
-import { NextPage } from "next"
-import { wrapper } from "stores"
-import { client } from "lib/api"
-import { festivalsQuery } from "queries/festivals"
-import { changeDescription, changeTitle } from "stores/slices/metaSlices"
-import { filterEvents } from "helpers/filterEvents"
-import Intro from "layout/votes/Intro"
+import type { NextPage } from 'next'
 
-export const getServerSideProps = wrapper.getServerSideProps(
-  (store) => async () => {
+import { filterEvents } from 'helpers/filterEvents'
+import Intro from 'layout/votes/Intro'
+import { client } from 'lib/api'
+import { festivalsQuery } from 'queries/festivals'
+import { wrapper } from 'stores'
+import { changeDescription, changeTitle } from 'stores/slices/metaSlices'
 
-    const { data } = await client.query({
-      query: festivalsQuery,
-    });
+export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
+  const { data } = await client.query({
+    query: festivalsQuery,
+    variables: {
+      locale: ctx.locale,
+    },
+  })
 
-    const festivals = data.festivals.data.map((item: any) => item.attributes)
-    const filteredFestivals = filterEvents(festivals)
+  const festivals = data.festivals.data.map((item: any) => item.attributes)
+  const filteredFestivals = filterEvents(festivals)
 
-    store.dispatch(changeTitle('Votes'))
-    store.dispatch(changeDescription(''))
+  store.dispatch(changeTitle('Votes'))
+  store.dispatch(changeDescription(''))
 
-    return {
-      props: {
-        festivals: filteredFestivals.future[1],
-        votes: true
-      }
-    };
+  return {
+    props: {
+      festivals: filteredFestivals.future[1],
+      votes: true,
+    },
   }
-);
+})
 
-const Votes: NextPage<{festivals: any}> = ({festivals}) => <Intro link="votes2" festivals={festivals} />
+const Votes: NextPage<{ festivals: any }> = ({ festivals }) => (
+  <Intro link={'votes2'} festivals={festivals} />
+)
 
 export default Votes

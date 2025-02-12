@@ -1,0 +1,29 @@
+{
+  "global": {
+    "viewPastEvents": "Zobrazit proběhlé akce",
+    "detailEvent": "Detail akce",
+    "voucherWinners": "Výherci voucherů",
+    "sendRequest": "odeslat žádost\r",
+    "allRequiredFileds": "Nemáte vyplněné všechna povinná pole",
+    "upcomingEvents": "Nejbližší akce",
+    "alreadyTaken": "Již proběhlo",
+    "festival": "Festival",
+    "winnersTable": "Tabulka výherců",
+    "votingResults": "Výsledky hlasování",
+    "downloadsCSV": "Stahnout CSV",
+    "yes": "Ano",
+    "no": "Ne",
+    "verificationTaken": "Ověření proběhlo!",
+    "verificationCorrectMessage": "Ověření proběhlo správně. Díky za tvůj hlas a přejeme, ať jsi mezi výherci!",
+    "currency": "Kč"
+  },
+  "resultData": {
+    "name": "Jmeno",
+    "shop": "Burgrárna",
+    "email": "Email",
+    "phone": "Telefon",
+    "codes": "Kody",
+    "marketing": "Souhlas z marketingem",
+    "mailConfirm": "Podtvrzeny mail"
+  }
+}

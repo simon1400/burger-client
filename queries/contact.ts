@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 const contactQuery = gql`
-  query Contact {
-    contact {
+  query Contact($locale: I18NLocaleCode!) {
+    contact(locale: $locale) {
       data {
         attributes {
           title

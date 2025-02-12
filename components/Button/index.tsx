@@ -1,8 +1,9 @@
-import { FC } from "react"
-import { ButtonS } from "./styled"
-import { ButtonProps } from "@mui/material"
+import type { ButtonProps } from '@mui/material'
+import type { FC } from 'react'
 
-const Button: FC<ButtonProps> = ({variant = 'contained', children, ...rest}) => {
+import { ButtonS } from './styled'
+
+const Button: FC<ButtonProps> = ({ variant = 'contained', children, ...rest }) => {
   return (
     <ButtonS variant={variant} {...rest}>
       {children}

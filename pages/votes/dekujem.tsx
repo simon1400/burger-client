@@ -1,13 +1,14 @@
-import VotesThankYou from "layout/votes/VotesThankYou"
-import { NextPage } from "next"
+import type { NextPage } from 'next'
 
-export const getServerSideProps = (async () => {
-  return { 
-    props: { 
-      votes: true
-    } 
+import VotesThankYou from 'layout/votes/VotesThankYou'
+
+export const getServerSideProps = async () => {
+  return {
+    props: {
+      votes: true,
+    },
   }
-})
+}
 
 const Dekujem: NextPage = () => <VotesThankYou />
 

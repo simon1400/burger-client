@@ -1,89 +1,41 @@
-import { Container, Grid } from "@mui/material";
-import { GaleryItem, GaleryS } from "./styled";
-import Image from "next/image";
-import { FC } from "react";
-import "lightgallery.js/dist/css/lightgallery.css";
-// @ts-ignore
-import { LightgalleryProvider, LightgalleryItem } from "react-lightgallery";
-import LabelMore from "components/LabelMore";
+import type { FC } from 'react'
 
-const APP_API = process.env.APP_API;
+import { Container, Grid } from '@mui/material'
+import { useEffect, useState } from 'react'
+// eslint-disable-next-line ts/ban-ts-comment
+// @ts-expect-error
+import { LightgalleryProvider } from 'react-lightgallery'
 
-const grid = (images: IImages) => {
+import GalleryGrid from './GaleryGrid'
+import { GaleryS } from './styled'
+import 'lightgallery.js/dist/css/lightgallery.css'
 
-  const length = images.data.length
+const Galery: FC<IGalery> = ({ modal = false, images, removePadding = false }) => {
+  const [appApi, setAppApi] = useState('')
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setAppApi(process.env.APP_API || '')
+    }
+  }, [])
+
+  if (!appApi) return null
 
   return (
-    <Grid container>
-      {images.data.slice(0, 8).map((item: IImageAttributes, idx: number) => (
-        <Grid key={idx} item xs={6} md={length > 3 ? 3 : length === 3 ? 4 : 6}>
-          <LightgalleryItem
-              group="any"
-              component="div"
-              src={APP_API + item.attributes.url}
-            >
-            <GaleryItem>
-              <a
-                href={APP_API + item.attributes.url}
-                onClick={(e) => e.preventDefault()}
-              >
-                <Image
-                  src={`${
-                    APP_API + item.attributes.url
-                  }?format=webp&resize=${length > 3 ? "360" : length === 3 ? "410" : "600"}x285`}
-                  fill
-                  alt=""
-                />
-                {length > 8 && idx === 7 && <LabelMore data={images.data.slice(8, length).length} />}
-              </a>
-            </GaleryItem>
-          </LightgalleryItem>
-        </Grid>
-      ))}
-      {length > 8 && images.data.slice(8, length).map((item: IImageAttributes, idx: number) => (
-        <Grid key={idx} item xs={6} md={length > 3 ? 3 : length === 3 ? 4 : 6} style={{display: "none"}}>
-          <LightgalleryItem
-              group="any"
-              component="div"
-              src={APP_API + item.attributes.url}
-            >
-          <GaleryItem>
-            <a
-              href={APP_API + item.attributes.url}
-              onClick={(e) => e.preventDefault()}
-            >
-              <Image
-                src={`${
-                  APP_API + item.attributes.url
-                }?format=webp&resize=${length > 3 ? "360" : length === 3 ? "410" : "600"}x285`}
-                fill
-                alt=""
-              />
-            </a>
-          </GaleryItem>
-          </LightgalleryItem>
-        </Grid>
-      ))}
-    </Grid>
-  );
-};
-
-const Galery: FC<IGalery> = ({
-  modal = false,
-  images,
-  removePadding = false,
-}) => {
-  return (
-    <LightgalleryProvider galleryClassName="lightbox-galery">
+    <LightgalleryProvider galleryClassName={'lightbox-galery'}>
       <GaleryS modal={modal} removePadding={removePadding}>
         {!modal ? (
-          <Container maxWidth="xl">{grid(images)}</Container>
+          <Container maxWidth={'xl'}>
+            <GalleryGrid images={images} appApi={appApi} />
+          </Container>
         ) : (
-          grid(images)
+          <Grid container>
+            <GalleryGrid images={images} appApi={appApi} />
+          </Grid>
         )}
       </GaleryS>
     </LightgalleryProvider>
-  );
-};
+  )
+}
 
-export default Galery;
+export default Galery

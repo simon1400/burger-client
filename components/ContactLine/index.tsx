@@ -1,11 +1,8 @@
-import { FC } from "react"
-import { ContactLineS } from "./styled"
+import type { FC } from 'react'
 
-const ContactLine: FC<IContactLine> = ({
-  icon,
-  link,
-  title
-}) => {
+import { ContactLineS } from './styled'
+
+const ContactLine: FC<IContactLine> = ({ icon, link, title }) => {
   return (
     <ContactLineS href={link}>
       {icon}

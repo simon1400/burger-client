@@ -1,24 +1,28 @@
-import { Container } from "@mui/material"
-import { MapS } from "./styled"
-import { FC, useEffect } from "react"
-import { useRouter } from "next/router"
+/* eslint-disable array-callback-return */
+import type { FC } from 'react'
 
-const Map: FC<{data: any}> = ({data}) => {
+import { Container } from '@mui/material'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 
+import { MapS } from './styled'
+
+const MapComponent: FC<{ data: any }> = ({ data }) => {
   const router = useRouter()
 
   useEffect(() => {
-    if(data) {
+    if (data) {
       data.point.map((item: any) => {
-        // @ts-ignore
+        // eslint-disable-next-line ts/ban-ts-comment
+        // @ts-expect-error
         document.getElementById(item.idLayer).style.display = 'block'
       })
-    } 
+    }
   }, [data])
 
   const handleClick = (e: any) => {
     data.point.map((item: any) => {
-      if(e.target.id.split('-')[0] === item.idLayer) {
+      if (e.target.id.split('-')[0] === item.idLayer) {
         router.push(`/${item.festival.data.attributes.slug}`)
       }
     })
@@ -27,10 +31,10 @@ const Map: FC<{data: any}> = ({data}) => {
   return (
     <Container>
       <MapS>
-        <div onClick={e => handleClick(e)} dangerouslySetInnerHTML={{__html: data.map}} />
+        <div onClick={(e) => handleClick(e)} dangerouslySetInnerHTML={{ __html: data.map }} />
       </MapS>
     </Container>
   )
 }
 
-export default Map
+export default MapComponent

@@ -3,7 +3,7 @@ import LogoIcon from 'public/img/burger-street-festival.svg'
 
 const Logo = () => {
   return (
-    <Link href="/">
+    <Link href={'/'}>
       <LogoIcon />
     </Link>
   )

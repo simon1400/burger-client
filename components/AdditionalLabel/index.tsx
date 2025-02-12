@@ -1,17 +1,23 @@
-import { FC } from "react"
-import { AdditionalLabelS } from "./styled"
-import Image from "next/image"
-import { useQuery } from "@apollo/client"
-import { additionalLabelQuery } from "queries/additionalLabel"
+import type { FC } from 'react'
+
+import { useQuery } from '@apollo/client'
+import Image from 'next/image'
+import { useRouter } from 'next/router'
+import { additionalLabelQuery } from 'queries/additionalLabel'
+
+import { AdditionalLabelS } from './styled'
 
 const APP_API = process.env.APP_API
 
 const AdditionalLabel: FC = () => {
+  const router = useRouter()
+  const { data, loading } = useQuery(additionalLabelQuery, {
+    variables: {
+      locale: router.locale,
+    },
+  })
 
-
-  const {data, loading} = useQuery(additionalLabelQuery)
-
-  if(loading) {
+  if (loading) {
     return null
   }
 
@@ -19,7 +25,7 @@ const AdditionalLabel: FC = () => {
 
   return (
     <AdditionalLabelS href={label.link}>
-      <Image src={APP_API+label.icon.data.attributes.url} width="45" height="45" alt="" />
+      <Image src={APP_API + label.icon.data.attributes.url} width={'45'} height={'45'} alt={''} />
       <span>{label.text}</span>
     </AdditionalLabelS>
   )

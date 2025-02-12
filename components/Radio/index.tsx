@@ -1,33 +1,46 @@
-import { FormControlLabel } from "@mui/material";
-import RadioMui from "@mui/material/Radio";
-import { FC } from "react";
-import { RadioS } from "./styled";
+import type { FC } from 'react'
+
+import { FormControlLabel } from '@mui/material'
+import RadioMui from '@mui/material/Radio'
+
+import { RadioS } from './styled'
 
 const Radio: FC<{
-  data: any;
-  handleChange: (value: string, idKey: string) => void;
-  value: string;
-  idKey: string;
-  errorText?: string;
-  error?: boolean;
-  required?: boolean;
-}> = ({ data, handleChange, value, idKey, errorText, error = false, required = false, ...rest }) => {
+  data: any
+  handleChange: (value: string, idKey: string) => void
+  value: string
+  idKey: string
+  errorText?: string
+  error?: boolean
+  required?: boolean
+}> = ({
+  data,
+  handleChange,
+  value,
+  idKey,
+  errorText,
+  error = false,
+  required = false,
+  ...rest
+}) => {
   return (
     <RadioS
-      aria-labelledby="demo-controlled-radio-buttons-group"
-      name="controlled-radio-buttons-group"
+      aria-labelledby={'demo-controlled-radio-buttons-group'}
+      name={'controlled-radio-buttons-group'}
       value={value}
       onChange={(e) => handleChange(e.target.value, idKey)}
       {...rest}
     >
-      <div className="label-wrap">
-        <label>{idKey} {required && <span className="required">*</span>}</label>
+      <div className={'label-wrap'}>
+        <label>
+          {idKey} {required && <span className={'required'}>{'*'}</span>}
+        </label>
         {error && <span>{errorText}</span>}
       </div>
       {data.map((item: any, idx: number) => (
         <FormControlLabel
           key={idx}
-          style={{marginRight: 0, marginLeft: 0}}
+          style={{ marginRight: 0, marginLeft: 0 }}
           value={item.label}
           control={<RadioMui />}
           label={item.label}
@@ -36,7 +49,7 @@ const Radio: FC<{
         />
       ))}
     </RadioS>
-  );
-};
+  )
+}
 
-export default Radio;
+export default Radio

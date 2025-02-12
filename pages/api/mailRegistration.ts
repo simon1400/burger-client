@@ -1,56 +1,54 @@
-import type { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiRequest, NextApiResponse } from 'next'
 
-import {orderMail} from '../../mail-templates/form';
-import { MailerSend, EmailParams, Sender, Recipient } from "mailersend";
+import { EmailParams, MailerSend, Recipient, Sender } from 'mailersend'
+
+import { orderMail } from '../../mail-templates/form'
 
 const mailersend = new MailerSend({
   apiKey: 'mlsn.eb252071563000d01a5e624c5879da6f8a8ca9d9d7dd5266146fc1d31d4663ba',
-});
+})
 
-const sentFrom = new Sender("noreply@burgerfestival.cz", "Burger street festival");
+const sentFrom = new Sender('noreply@burgerfestival.cz', 'Burger street festival')
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  if(req.method === 'POST') {
-    console.log('POST /SEND ORDER');
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  if (req.method === 'POST') {
+    console.log('POST /SEND ORDER')
 
     const data = req.body
 
-    const email = data.filter((item: any) => item.key === "E-mail")[0].value
+    const email = data.filter((item: any) => item.key === 'E-mail')[0].value
 
-    try{
+    try {
       const recipients = [
-        new Recipient(email, "Recipient"),
-        new Recipient("vladek@bedy.cz", "Owner")
-      ];
+        new Recipient(email, 'Recipient'),
+        new Recipient('vladek@bedy.cz', 'Owner'),
+      ]
 
       const bcc = [
-        new Recipient("supkova@bedy.cz", "Supkova"),
-        new Recipient("info@burgerfestival.cz", "Burger street festival")
-      ];
-  
+        new Recipient('supkova@bedy.cz', 'Supkova'),
+        new Recipient('info@burgerfestival.cz', 'Burger street festival'),
+      ]
+
       const emailParams = new EmailParams()
-          .setFrom(sentFrom)
-          .setBcc(bcc)
-          .setTo(recipients)
-          .setSubject('Registration form from web')
-          .setHtml(orderMail(data))
-          .setText("New form from web");
-  
-      await mailersend.email.send(emailParams);
-  
+        .setFrom(sentFrom)
+        .setBcc(bcc)
+        .setTo(recipients)
+        .setSubject('Registration from web')
+        .setHtml(orderMail(data))
+        .setText('New from web')
+
+      await mailersend.email.send(emailParams)
+
       res.status(200).send('Email sent')
-    } catch(err: any) {
+    } catch (err: any) {
       console.error('ERRORRR --- ', err)
-      if(err.response?.body){
-        res.status(err.code).json(err.response?.body);
-      }else{
-        res.status(err.code).json(err.response);
+      if (err.response?.body) {
+        res.status(err.code).json(err.response?.body)
+      } else {
+        res.status(err.code).json(err.response)
       }
     }
-  }else{
-    res.status(200).json({name: 'good'});
+  } else {
+    res.status(200).json({ name: 'good' })
   }
 }

@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const merchPageQuery = gql`
-  query MerchPage {
-    mercPage {
+  query MerchPage($locale: I18NLocaleCode!) {
+    mercPage(locale: $locale) {
       data {
         attributes {
           title
@@ -21,8 +21,8 @@ export const merchPageQuery = gql`
 
 
 export const merchesQuery = gql`
-  query Merches {
-    merches {
+  query Merches($locale: I18NLocaleCode!) {
+    merches(locale: $locale) {
       data {
         attributes {
           title
@@ -42,8 +42,8 @@ export const merchesQuery = gql`
 `
 
 export const getMerch = gql`
-  query Merch($slug: String!) {
-    merches(filters: {slug: {eq: $slug}}) {
+  query Merch($slug: String!, $locale: I18NLocaleCode!) {
+    merches(locale: $locale, filters: {slug: {eq: $slug}}) {
       data {
         attributes {
           title

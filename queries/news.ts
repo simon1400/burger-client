@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const newsPageQuery = gql`
-  query NewsPage {
-    newsPage {
+  query NewsPage($locale: I18NLocaleCode!) {
+    newsPage(locale: $locale) {
       data {
         attributes {
           title
@@ -26,8 +26,8 @@ export const newsPageQuery = gql`
 
 
 export const newsQuery = gql`
-  query News {
-    newss {
+  query News($locale: I18NLocaleCode!) {
+    newss(locale: $locale) {
       data {
         attributes {
           title
@@ -55,8 +55,8 @@ export const newsQuery = gql`
 `
 
 export const getNews = gql`
-  query News($slug: String!) {
-    newss(filters: {slug: {eq: $slug}}) {
+  query News($slug: String!, $locale: I18NLocaleCode!) {
+    newss(locale: $locale, filters: {slug: {eq: $slug}}) {
       data {
         attributes {
           title

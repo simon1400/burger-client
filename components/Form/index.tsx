@@ -1,48 +1,49 @@
-import { Container } from "@mui/material";
-import DropZone from "components/DropZone";
-import Input from "components/Input";
-import Radio from "components/Radio";
-import Select from "components/Select";
-import { Dispatch, FC, SetStateAction } from "react";
+/* eslint-disable array-callback-return */
+import type { Dispatch, FC, SetStateAction } from 'react'
+
+import { Container } from '@mui/material'
+import DropZone from 'components/DropZone'
+import Input from 'components/Input'
+import Radio from 'components/Radio'
+import Select from 'components/Select'
 
 const Form: FC<{
-  data: any;
-  state: any;
-  error: any;
-  setState: Dispatch<SetStateAction<{ festivals: never[] }>>;
-  setError: Dispatch<SetStateAction<{ }>>;
+  data: any
+  state: any
+  error: any
+  setState: Dispatch<SetStateAction<{ festivals: never[] }>>
+  setError: Dispatch<SetStateAction<object>>
 }> = ({ state, setState, data, error, setError }) => {
-
   const handleChangeInput = (value: string, key: string) => {
-    setError({...error, [key]: false})
-    setState({ ...state, [key]: value });
-  };
+    setError({ ...error, [key]: false })
+    setState({ ...state, [key]: value })
+  }
 
   const handleChangeSelect = (value: string, key: string) => {
-    let checkArr = state[key];
-    const hasIndex = checkArr.findIndex((item: any) => item === value);
+    let checkArr = state[key]
+    const hasIndex = checkArr.findIndex((item: any) => item === value)
     if (hasIndex >= 0) {
-      checkArr = checkArr.splice(hasIndex, 1);
+      checkArr = checkArr.splice(hasIndex, 1)
     } else {
-      checkArr.push(value);
+      checkArr.push(value)
     }
-    setState({ ...state, [key]: checkArr });
-  };
+    setState({ ...state, [key]: checkArr })
+  }
 
   const handleChangeRadio = (value: string, key: string) => {
-    setState({ ...state, [key]: value });
-  };
+    setState({ ...state, [key]: value })
+  }
 
   const handleUploudFile = (file: File, key: string) => {
-    setState({ ...state, [key]: file });
-  };
+    setState({ ...state, [key]: file })
+  }
 
   return (
-    <Container maxWidth="md">
+    <Container maxWidth={'md'}>
       <form>
         {state &&
           data.fields.map((item: any, idx: number) => {
-            if (item.__typename === "ComponentFormTetxField")
+            if (item.__typename === 'ComponentFormTetxField')
               return (
                 <Input
                   key={idx}
@@ -57,8 +58,8 @@ const Form: FC<{
                   errorText={item.errorMessage}
                   placeholder={item.placeholder}
                 />
-              );
-            if (item.__typename === "ComponentFormSelect")
+              )
+            if (item.__typename === 'ComponentFormSelect')
               return (
                 <Select
                   key={idx}
@@ -66,8 +67,8 @@ const Form: FC<{
                   idKey={item.label}
                   handleChange={handleChangeSelect}
                 />
-              );
-            if (item.__typename === "ComponentFormRadio")
+              )
+            if (item.__typename === 'ComponentFormRadio')
               return (
                 <Radio
                   key={idx}
@@ -76,8 +77,8 @@ const Form: FC<{
                   handleChange={handleChangeRadio}
                   value={state[item.label]}
                 />
-              );
-            if (item.__typename === "ComponentFormUploud")
+              )
+            if (item.__typename === 'ComponentFormUploud')
               return (
                 <DropZone
                   key={idx}
@@ -85,11 +86,11 @@ const Form: FC<{
                   state={state}
                   handleChange={handleUploudFile}
                 />
-              );
+              )
           })}
       </form>
     </Container>
-  );
-};
+  )
+}
 
-export default Form;
+export default Form

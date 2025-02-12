@@ -1,33 +1,35 @@
-import axios from "axios"
-import BlockContent from "components/BlockContent"
-import Head from "components/Head"
-import Page from "layout/Page"
+/* eslint-disable no-console */
+import axios from 'axios'
+import BlockContent from 'components/BlockContent'
+import Head from 'components/Head'
+import Page from 'layout/Page'
+import { useTranslations } from 'next-intl'
 
-const APP_API = process.env.APP_API;
+const APP_API = process.env.APP_API
 
-export const getServerSideProps = (async (ctx: any) => {
+export const getServerSideProps = async (ctx: any) => {
   axios
-    .put(`${APP_API}/api/votes/${ctx.params?.id}`, { data: {mailConfirm: true} })
+    .put(`${APP_API}/api/votes/${ctx.params?.id}`, { data: { mailConfirm: true } })
     .then(() => {
       console.log('Updated!')
-    }).catch((err) => console.log("err updated form -- ", err.response.data.error));
-  
-  return { 
-    props: { 
-      votes: true
-    } 
+    })
+    .catch((err) => console.log('err updated form -- ', err.response.data.error))
+
+  return {
+    props: {
+      votes: true,
+      messages: (await import(`../../messages/${ctx.locale}.json`)).default,
+    },
   }
-})
-
-
+}
 
 const ConfirmMail = () => {
-
+  const t = useTranslations('global')
   return (
     <Page>
-      <div style={{margin: '40px 0 100px'}}>
-        <Head data={"Ověření proběhlo!"}/>
-        <BlockContent margin content={"<p>Ověření proběhlo správně. Díky za tvůj hlas a přejeme, ať jsi mezi výherci!</p>"} />
+      <div style={{ margin: '40px 0 100px' }}>
+        <Head data={t('verificationTaken')} />
+        <BlockContent margin content={`<p>${t('verificationCorrectMessage')}</p>`} />
       </div>
     </Page>
   )

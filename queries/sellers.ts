@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const getSeller = gql`
-  query Seller($slug: String!) {
-    sellers(filters: {slug: {eq: $slug}}) {
+  query Seller($slug: String!, $locale: I18NLocaleCode!) {
+    sellers(locale: $locale, filters: {slug: {eq: $slug}}) {
       data {
         attributes{
           title

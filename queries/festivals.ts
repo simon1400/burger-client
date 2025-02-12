@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const festivalsQuery = gql`
-  query Festivals {
-    festivals {
+  query Festivals($locale: I18NLocaleCode!) {
+    festivals(locale: $locale) {
       data {
         attributes{
           title
@@ -21,8 +21,8 @@ export const festivalsQuery = gql`
 `
 
 export const festivalsPageQuery = gql`
-  query Festivals {
-    festivalsPage {
+  query Festivals($locale: I18NLocaleCode!) {
+    festivalsPage(locale: $locale) {
       data {
         attributes {
           title
@@ -47,8 +47,8 @@ export const festivalsPageQuery = gql`
 `
 
 export const festivalsGaleryQuery = gql`
-  query FestivalsGalery {
-    festivals {
+  query FestivalsGalery($locale: I18NLocaleCode!) {
+    festivals(locale: $locale) {
       data {
         attributes{
           title
@@ -69,8 +69,8 @@ export const festivalsGaleryQuery = gql`
 `
 
 export const festivalsWinnersQuery = gql`
-  query FestivalsWinners {
-    festivals {
+  query FestivalsWinners($locale: I18NLocaleCode!) {
+    festivals(locale: $locale) {
       data {
         attributes{
           title
@@ -134,8 +134,8 @@ export const festivalsWinnersQuery = gql`
 `
 
 export const getFestival = gql`
-  query Festival($slug: String!) {
-    festivals(filters: {slug: {eq: $slug}}) {
+  query Festival($slug: String!, $locale: I18NLocaleCode!) {
+    festivals(locale: $locale, filters: {slug: {eq: $slug}}) {
       data {
         id
         attributes{

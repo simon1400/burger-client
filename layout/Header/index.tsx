@@ -1,23 +1,29 @@
-import { Container, useMediaQuery } from "@mui/material";
-import { HeaderS, MobileNav } from "./styled";
-import Logo from "components/Logo";
-import Nav from "components/Nav";
-import navTopQuery from "queries/nav";
-import { useEffect, useState } from "react";
-import { useQuery } from "@apollo/client";
-import Hamburger from "hamburger-react";
-import { useRouter } from "next/router";
+import { useQuery } from '@apollo/client'
+import { Container, useMediaQuery } from '@mui/material'
+import Logo from 'components/Logo'
+import Nav from 'components/Nav'
+import Hamburger from 'hamburger-react'
+import { useRouter } from 'next/router'
+import navTopQuery from 'queries/nav'
+import { useEffect, useState } from 'react'
+
+import { HeaderS, MobileNav } from './styled'
 
 const Header = () => {
+  const { locale } = useRouter()
 
   const [nav, setNav] = useState([])
-
-  const {data, loading} = useQuery(navTopQuery)
-  const mediaMd = useMediaQuery("(max-width: 1100px)")
+  const [isOpen, setOpen] = useState(false)
+  const { data, loading } = useQuery(navTopQuery, {
+    variables: {
+      locale,
+    },
+  })
+  const mediaMd = useMediaQuery('(max-width: 1100px)')
   const router = useRouter()
 
   useEffect(() => {
-    if(!loading) {
+    if (!loading) {
       setNav(data.nav.data.attributes.topNav)
     }
   }, [loading])
@@ -26,20 +32,20 @@ const Header = () => {
     setOpen(false)
   }, [router])
 
-  const [isOpen, setOpen] = useState(false)
-
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth={'xl'}>
       <HeaderS>
         <Logo />
         {!!nav.length && !mediaMd && <Nav data={nav} />}
         {mediaMd && <Hamburger toggled={isOpen} toggle={setOpen} />}
-        {mediaMd && <MobileNav open={isOpen}>
-          <Nav data={nav} />
-        </MobileNav>}
+        {mediaMd && (
+          <MobileNav open={isOpen}>
+            <Nav data={nav} />
+          </MobileNav>
+        )}
       </HeaderS>
     </Container>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

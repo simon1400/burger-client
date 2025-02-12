@@ -1,6 +1,6 @@
-import { CheckboxS } from "./styled"
+import { CheckboxS } from './styled'
 
-const Checkbox = ({...rest}) => {
+const Checkbox = ({ ...rest }) => {
   return <CheckboxS {...rest} />
 }
 

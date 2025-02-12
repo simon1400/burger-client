@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const getCodeQuery = gql`
-  query Codes($code: String!) {
-    codes(filters: {code: {eq: $code}}) {
+  query Codes($code: String!, $locale: I18NLocaleCode!) {
+    codes(locale: $locale, filters: {code: {eq: $code}}) {
       data {
         id
       }
@@ -11,8 +11,8 @@ export const getCodeQuery = gql`
 `
 
 export const getAllVotes = gql`
-  query Votes ($festivalSlug: String!) {
-    votes(filters: {festivaly: {slug: {eq: $festivalSlug}}}) {
+  query Votes ($festivalSlug: String!, $locale: I18NLocaleCode!) {
+    votes(locale: $locale, filters: {festivaly: {slug: {eq: $festivalSlug}}}) {
       data {
         attributes{
           name
