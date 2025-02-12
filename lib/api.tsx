@@ -1,38 +1,38 @@
-import { ApolloClient, createHttpLink, InMemoryCache, ApolloProvider, DefaultOptions } from "@apollo/client";
-import { setContext } from '@apollo/client/link/context';
+import type { DefaultOptions } from '@apollo/client'
+
+import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client'
+import { setContext } from '@apollo/client/link/context'
 import Cookies from 'js-cookie'
 
 const APP_API = process.env.APP_API
 
-export function getStrapiURL(path = "") {
-  return `${
-    APP_API || "http://localhost:1346"
-  }${path}`;
+export function getStrapiURL(path = '') {
+  return `${APP_API || 'http://localhost:1346'}${path}`
 }
 
 // Helper to make GET requests to Strapi
 export async function fetchAPI(path: string) {
-  const requestUrl = getStrapiURL(path);
-  const response = await fetch(requestUrl);
-  const data = await response.json();
-  return data;
+  const requestUrl = getStrapiURL(path)
+  const response = await fetch(requestUrl)
+  const data = await response.json()
+  return data
 }
 
 const httpLink = createHttpLink({
   uri: `${APP_API}/graphql`,
-});
+})
 
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
-  const token = Cookies.get('token');
+  const token = Cookies.get('token')
   // return the headers to the context so httpLink can read them
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : "",
-    }
+      authorization: token ? `Bearer ${token}` : '',
+    },
   }
-});
+})
 
 const defaultOptions: DefaultOptions = {
   watchQuery: {
@@ -48,9 +48,9 @@ const defaultOptions: DefaultOptions = {
 export const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
-  defaultOptions: defaultOptions
-});
+  defaultOptions,
+})
 
 export const WithGraphQL = ({ children }: any) => {
-  return <ApolloProvider client={client}>{children}</ApolloProvider>;
-};
+  return <ApolloProvider client={client}>{children}</ApolloProvider>
+}

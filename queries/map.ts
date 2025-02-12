@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client'
 
 const mapQuery = gql`
   query Map($locale: I18NLocaleCode!) {
@@ -8,9 +8,9 @@ const mapQuery = gql`
           map
           point {
             idLayer
-            festival{
-              data{
-                attributes{
+            festival {
+              data {
+                attributes {
                   slug
                 }
               }

@@ -1,3 +1,4 @@
+/* eslint-disable react-dom/no-dangerously-set-innerhtml */
 import type { FC } from 'react'
 
 import { Grid, Typography } from '@mui/material'
@@ -47,6 +48,7 @@ const ArticleShort: FC<{ data: any; type?: string }> = ({ data, type = 'blog' })
             <Typography
               className={'short-content'}
               dangerouslySetInnerHTML={{
+                // eslint-disable-next-line sonarjs/slow-regex
                 __html: kitcut(data.content.replace(/(<([^>]+)>)/g, ''), 150),
               }}
             />

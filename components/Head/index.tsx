@@ -1,14 +1,14 @@
-import { Typography } from "@mui/material"
-import { HeadS } from "./styled"
-import Horizont from 'public/img/horizont.svg'
-import { FC } from "react"
+import type { FC } from 'react'
 
-const Head: FC<IHead> = ({
-  data
-}) => {
+import { Typography } from '@mui/material'
+import Horizont from 'public/img/horizont.svg'
+
+import { HeadS } from './styled'
+
+const Head: FC<IHead> = ({ data }) => {
   return (
     <HeadS>
-      <Typography variant="h1">{data}</Typography>
+      <Typography variant={'h1'}>{data}</Typography>
       <Horizont />
     </HeadS>
   )

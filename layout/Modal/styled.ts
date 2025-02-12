@@ -1,17 +1,20 @@
-import styled from "@emotion/styled";
-import { Dialog } from "@mui/material";
-import { candal } from "styles/typography/baseHead";
+import styled from '@emotion/styled'
+import { Dialog } from '@mui/material'
+import { candal } from 'styles/typography/baseHead'
 
-export const ModalS = styled(Dialog)(({theme}) => `
+export const ModalS = styled(Dialog)(
+  () => `
   >div{
     >div{
       margin-top: 150px;
       overflow: visible;
     }
   }
-`)
+`,
+)
 
-export const ModalWinners = styled.div(({theme}) => `
+export const ModalWinners = styled.div(
+  ({ theme }) => `
   display: flex;
   justify-content: center;
   margin-bottom: 30px;
@@ -34,7 +37,7 @@ export const ModalWinners = styled.div(({theme}) => `
       font-size: 23px;
     }
   }
-  ${theme.breakpoints.down("md")} {
+  ${theme.breakpoints.down('md')} {
     > div{
       text-align: center;
       &:not(:first-of-type) {
@@ -51,9 +54,11 @@ export const ModalWinners = styled.div(({theme}) => `
       }
     }
   }
-`)
+`,
+)
 
-export const ModalContentWrap = styled.div(({theme}) => `
+export const ModalContentWrap = styled.div(
+  ({ theme }) => `
   padding: 0 85px;
   h1{
     margin-bottom: 30px;
@@ -99,7 +104,7 @@ export const ModalContentWrap = styled.div(({theme}) => `
       }
     }
   }
-  ${theme.breakpoints.down("md")} {
+  ${theme.breakpoints.down('md')} {
     padding: 0 15px;
     .logo-img{
       width: 160px;
@@ -114,9 +119,11 @@ export const ModalContentWrap = styled.div(({theme}) => `
       margin-bottom: 30px;
     }
   }
-`)
+`,
+)
 
-export const ModalBody = styled.div(({theme}) => `
+export const ModalBody = styled.div(
+  ({ theme }) => `
   padding: 0;
   text-align: center;
   background: #0d0d0d;
@@ -126,4 +133,5 @@ export const ModalBody = styled.div(({theme}) => `
     top: 30px;
     cursor: pointer;
   }
-`)
+`,
+)

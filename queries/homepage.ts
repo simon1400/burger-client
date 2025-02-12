@@ -1,22 +1,23 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client'
 
 const homepageQuery = gql`
-  query Homepage ($locale: I18NLocaleCode!) {
+  query Homepage($locale: I18NLocaleCode!) {
     homepage(locale: $locale) {
       data {
+        id
         attributes {
           title
           title2
           content
           eventHead
           galery {
-            data{
+            data {
               attributes {
                 url
               }
             }
           }
-          meta{
+          meta {
             title
             description
           }

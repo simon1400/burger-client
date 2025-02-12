@@ -2,6 +2,7 @@ import type { FC } from 'react'
 
 import { useQuery } from '@apollo/client'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import { additionalLabelQuery } from 'queries/additionalLabel'
 
 import { AdditionalLabelS } from './styled'
@@ -9,7 +10,12 @@ import { AdditionalLabelS } from './styled'
 const APP_API = process.env.APP_API
 
 const AdditionalLabel: FC = () => {
-  const { data, loading } = useQuery(additionalLabelQuery)
+  const router = useRouter()
+  const { data, loading } = useQuery(additionalLabelQuery, {
+    variables: {
+      locale: router.locale,
+    },
+  })
 
   if (loading) {
     return null

@@ -1,3 +1,4 @@
+/* eslint-disable ts/ban-ts-comment */
 import type { NextPage } from 'next'
 
 import BlockContent from 'components/BlockContent'
@@ -9,6 +10,7 @@ import Map from 'components/Map'
 import { filterEvents } from 'helpers/filterEvents'
 import Page from 'layout/Page'
 import { client } from 'lib/api'
+import { useTranslations } from 'next-intl'
 import { festivalsQuery } from 'queries/festivals'
 import homepageQuery from 'queries/homepage'
 import mapQuery from 'queries/map'
@@ -50,6 +52,7 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
       homepage,
       festivals: filterEvents(festivals),
       map,
+      messages: (await import(`../messages/${ctx.locale}.json`)).default,
     },
   }
 })
@@ -59,14 +62,15 @@ const Homepage: NextPage<{ homepage: IHomepage; festivals: IFestivals; map: any 
   festivals,
   map,
 }) => {
+  const t = useTranslations('global')
   return (
     <Page>
       <Map data={map} />
       <Head data={homepage.title} />
-      {/* @ts-ignore */}
+      {/* @ts-expect-error */}
       <Events head={homepage.eventHead} data={festivals.future} hp />
       <CenterWrap marginBottom={80}>
-        <Button href={'/festivaly'}>{'Zobrazit proběhlé akce'}</Button>
+        <Button href={'/festivaly'}>{t('viewPastEvents')}</Button>
       </CenterWrap>
       <BlockContent head={homepage.title2} content={homepage.content} />
       <Galery images={homepage.galery} />

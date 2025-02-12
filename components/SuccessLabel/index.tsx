@@ -1,11 +1,7 @@
-import { SuccessLabelS } from "./styled"
+import { SuccessLabelS } from './styled'
 
 const SuccessLabel = () => {
-  return (
-    <SuccessLabelS>
-      Vaše přihláška byla úspěšně odeslána.
-    </SuccessLabelS>
-  )
+  return <SuccessLabelS>{'Vaše přihláška byla úspěšně odeslána.'}</SuccessLabelS>
 }
 
 export default SuccessLabel

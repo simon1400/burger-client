@@ -1,3 +1,5 @@
+/* eslint-disable ts/ban-ts-comment */
+/* eslint-disable array-callback-return */
 import type { FC } from 'react'
 
 import { Container, FormControlLabel, Typography } from '@mui/material'
@@ -31,7 +33,7 @@ const Lineup: FC<ILineup> = ({
 }) => {
   const dispatch = useDispatch()
 
-  const [stateCheck, setStateCheck] = useState([])
+  const [stateCheck, setStateCheck] = useState<string[]>([])
   const [stateCheckAll, setStateCheckAll] = useState(false)
 
   const handleModal = (e: any, slug: string) => {
