@@ -3,11 +3,11 @@ const nextConfig = {
   reactStrictMode: true,
   i18n: {
     locales: ['en', 'pl'],
-    defaultLocale: 'pl',
+    defaultLocale: 'en',
     localeDetection: false,
     domains: [
       {
-        domain: 'burgerfestival.cz',
+        domain: 'burgerstreetfestival.cz',
         defaultLocale: 'en',
       },
       {
