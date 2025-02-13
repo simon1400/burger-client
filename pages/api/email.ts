@@ -4,7 +4,7 @@ import { confirmMail } from 'mail-templates/confirm'
 import { EmailParams, MailerSend, Recipient, Sender } from 'mailersend'
 
 const mailerSend = new MailerSend({
-  apiKey: 'mlsn.eb252071563000d01a5e624c5879da6f8a8ca9d9d7dd5266146fc1d31d4663ba',
+  apiKey: process.env.MAILERSEND_TOKEN || '',
 })
 
 interface ResponseData {
