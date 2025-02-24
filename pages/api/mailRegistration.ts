@@ -6,7 +6,7 @@ import { orderMail } from '../../mail-templates/form'
 import { orderMailPl } from '../../mail-templates/formPl'
 
 const mailersend = new MailerSend({
-  apiKey: 'mlsn.eb252071563000d01a5e624c5879da6f8a8ca9d9d7dd5266146fc1d31d4663ba',
+  apiKey: process.env.MAILERSEND_TOKEN || '',
 })
 
 const sentFrom = new Sender('noreply@burgerfestival.cz', 'Burger street festival')
