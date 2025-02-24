@@ -33,11 +33,11 @@ const Page: FC<IPage> = ({ children, className = '', id = '' }) => {
   } = useSelector(selectAllMeta)
 
   const global = {
-    site_url: siteUrl,
+    site_url: router.locale === 'pl' ? process.env.APP_DOMAIN_PL : siteUrl,
     facebook_app_id: '',
     defaultTitle: siteName,
     defaultDescription: siteName,
-    defaultImage: siteUrl,
+    defaultImage: router.locale === 'pl' ? process.env.APP_DOMAIN_PL : siteUrl,
     defaultTwitter: '@burger',
     defaultSep: ' | ',
     gtm: '',
@@ -46,6 +46,8 @@ const Page: FC<IPage> = ({ children, className = '', id = '' }) => {
   const theTitle = title ? title + global.defaultSep + global.defaultTitle : global.defaultTitle
   const theDescription = description || global.defaultDescription
   const theImage = image || global.defaultImage
+
+  const url = global.site_url + (router.asPath !== '/' ? router.asPath : '')
 
   return (
     <>
@@ -73,10 +75,7 @@ const Page: FC<IPage> = ({ children, className = '', id = '' }) => {
         <meta name={'viewport'} content={'width=device-width, initial-scale=1'} />
         <title>{theTitle}</title>
 
-        <link
-          rel={'canonical'}
-          href={global.site_url + (router.asPath !== '/' ? router.asPath : '')}
-        />
+        <link rel={'canonical'} href={url} />
         <meta itemProp={'name'} content={theTitle} />
         <meta itemProp={'description'} content={theDescription} />
         <meta itemProp={'image'} content={theImage} />
@@ -88,10 +87,7 @@ const Page: FC<IPage> = ({ children, className = '', id = '' }) => {
         <meta name={'twitter:image:src'} content={theImage} />
         <meta property={'og:title'} content={ogTitle || theTitle} />
         <meta property={'og:type'} content={contentType} />
-        <meta
-          property={'og:url'}
-          content={global.site_url + (router.asPath !== '/' ? router.asPath : '')}
-        />
+        <meta property={'og:url'} content={url} />
         <meta property={'og:image'} content={theImage} />
         <meta property={'og:description'} content={ogDescription || theDescription} />
         <meta property={'og:site_name'} content={siteName.toUpperCase()} />

@@ -1,29 +1,55 @@
 {
   "global": {
-    "viewPastEvents": "Zobrazit proběhlé akce",
-    "detailEvent": "Detail akce",
-    "voucherWinners": "Výherci voucherů",
-    "sendRequest": "odeslat žádost\r",
-    "allRequiredFileds": "Nemáte vyplněné všechna povinná pole",
-    "upcomingEvents": "Nejbližší akce",
-    "alreadyTaken": "Již proběhlo",
-    "festival": "Festival",
-    "winnersTable": "Tabulka výherců",
-    "votingResults": "Výsledky hlasování",
-    "downloadsCSV": "Stahnout CSV",
-    "yes": "Ano",
-    "no": "Ne",
-    "verificationTaken": "Ověření proběhlo!",
-    "verificationCorrectMessage": "Ověření proběhlo správně. Díky za tvůj hlas a přejeme, ať jsi mezi výherci!",
-    "currency": "Kč"
+    "viewPastEvents": "Zobacz minione wydarzenia",
+    "detailEvent": "Szczegóły wydarzenia",
+    "voucherWinners": "Zwycięzcy voucherów",
+    "sendRequest": "wyślij prośbę",
+    "allRequiredFileds": "Nie wypełniłeś wszystkich wymaganych pól",
+    "upcomingEvents": "Nadchodzące wydarzenia",
+    "alreadyTaken": "Już się odbyło",
+    "festival": "Festiwal",
+    "winnersTable": "Tabela zwycięzców",
+    "votingResults": "Wyniki głosowania",
+    "downloadsCSV": "Pobierz CSV",
+    "yes": "Tak",
+    "no": "Nie",
+    "verificationTaken": "Weryfikacja zakończona!",
+    "verificationCorrectMessage": "Weryfikacja przebiegła pomyślnie. Dziękujemy za Twój głos i życzymy powodzenia w losowaniu!",
+    "currency": "zł",
+    "startVotes": "Rozpocznij głosowanie"
   },
   "resultData": {
-    "name": "Jmeno",
-    "shop": "Burgrárna",
+    "name": "Imię",
+    "shop": "Burgerownia",
     "email": "Email",
     "phone": "Telefon",
     "codes": "Kody",
-    "marketing": "Souhlas z marketingem",
-    "mailConfirm": "Podtvrzeny mail"
+    "marketing": "Zgoda na marketing",
+    "mailConfirm": "Potwierdzony email"
+  },
+  "votes": {
+    "thankYouPage": {
+      "title": "Dziękuję!",
+      "text": "<p>Aby dokończyć głosowanie, potwierdź swój głos w e-mailu. Wyniki znajdziesz najpóźniej w poniedziałek na stronie <a href='https://burgerfestival.pl'>burgerfestival.pl</a> oraz w wydarzeniu na Facebooku. Zwycięzca zostanie dodatkowo poinformowany e-mailem.</p>"
+    },
+    "intro": {
+      "text": "<p><strong>Zagłosuj na najlepszego burgera festiwalu! Dzięki Tobie twój ulubiony burger może zdobyć medal.</strong></p> <p><strong>Jak głosować?</strong></p> <p>1. Wypełnij swoje dane osobowe.</br> 2. Wpisz kod z karty do głosowania, którą otrzymałeś przy zakupie burgera.</br> 3. Zagłosuj na swojego faworyta.</br> 4. Potwierdź zgodę na warunki konkursu oraz przetwarzanie danych osobowych.</br> 5. Kliknij WYŚLIJ.</br> 6. Potwierdź swój głos poprzez e-mail.</p> <p><strong>I to wszystko!</strong></p> <p>Imię zwycięzcy oraz zwycięski kod opublikujemy na stronie <a href='http://burgerfestival.pl' title='smartCard-inline'>http://burgerfestival.pl</a> oraz w wydarzeniu festiwalowym na Facebooku najpóźniej w poniedziałek po festiwalu. Jeśli wygrasz, poinformujemy Cię również mailowo.</p> <p><strong>Co możesz wygrać?</strong></p> <p>1. miejsce – voucher o wartości 350 zł na burgery podczas festiwali w sezonie 2025 i 2026</br> 2. miejsce – voucher o wartości 200 zł na burgery podczas festiwali w sezonie 2025 i 2026</br> 3. miejsce – voucher o wartości 100 zł na burgery podczas festiwali w sezonie 2025 i 2026</p>"
+    },
+    "form": {
+      "title": "Głosowanie",
+      "requiredFields": "Uzupełnij dane",
+      "name": "Imię i nazwisko",
+      "shop": "Burgerownia, na którą chcesz zagłosować",
+      "code": "Kod z karty do głosowania",
+      "notValidCode": "nieprawidłowy kod",
+      "addMoreCode": "dodaj kolejny kod",
+      "deleteCode": "usuń",
+      "aggreeWith": "zgoda na",
+      "terms": "warunki konkursu",
+      "marketing": "zgoda na cele marketingowe",
+      "vote": "Głosuj",
+      "errorLabel": "Nie wszystkie pola zostały uzupełnione. Prosimy sprawdzić formularz."
+    }
   }
 }
+

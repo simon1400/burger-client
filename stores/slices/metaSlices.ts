@@ -1,40 +1,41 @@
-import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { HYDRATE } from "next-redux-wrapper";
-import { AppState } from 'stores';
+import type { AppState } from 'stores'
+
+import { createSlice } from '@reduxjs/toolkit'
+import { HYDRATE } from 'next-redux-wrapper'
 
 export interface NavState {
-  title: string;
-  description: string;
-  published: string;
-  category: string;
-  updated: string;
+  title: string
+  description: string
+  published: string
+  category: string
+  updated: string
   noCrawl: boolean
-  tags: string;
-  image: string;
-  ogTitle: string;
-  ogDescription: string;
-  contentType: string;
-  themeColor: string;
-  siteName: string;
-  siteUrl: string;
+  tags: string
+  image: string
+  ogTitle: string
+  ogDescription: string
+  contentType: string
+  themeColor: string
+  siteName: string
+  siteUrl: string
 }
 
 const initialState: NavState = {
-  title: "",
-  description: "",
-  published: "",
-  category: "",
-  updated: "",
+  title: '',
+  description: '',
+  published: '',
+  category: '',
+  updated: '',
   noCrawl: false,
-  tags: "",
-  image: "",
-  ogTitle: "",
-  ogDescription: "",
-  contentType: "website",
-  themeColor: "#d9291c",
+  tags: '',
+  image: '',
+  ogTitle: '',
+  ogDescription: '',
+  contentType: 'website',
+  themeColor: '#d9291c',
   siteName: 'Burger Street Festival',
-  siteUrl: process.env.APP_DOMAIN || ""
+  siteUrl: process.env.APP_DOMAIN_CZ || '',
 }
 
 export const metaReducer = createSlice({
@@ -78,12 +79,12 @@ export const metaReducer = createSlice({
       return {
         ...state,
         ...action.payload.meta,
-      };
-    }
+      }
+    },
   },
 })
 
-export const { 
+export const {
   changeTitle,
   changeDescription,
   changePublished,
@@ -93,9 +94,9 @@ export const {
   changeImage,
   changeOgTitle,
   changeOgDescription,
-  changeContentType
+  changeContentType,
 } = metaReducer.actions
 
-export const selectAllMeta = (state: AppState) => state.meta;
+export const selectAllMeta = (state: AppState) => state.meta
 
 export default metaReducer.reducer

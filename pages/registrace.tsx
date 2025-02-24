@@ -18,6 +18,7 @@ import { sortDate } from 'helpers/sortDate'
 import Page from 'layout/Page'
 import { client } from 'lib/api'
 import { useTranslations } from 'next-intl'
+import { useRouter } from 'next/router'
 import { festivalsQuery } from 'queries/festivals'
 import formQuery, { formPage } from 'queries/form'
 import { useEffect, useState } from 'react'
@@ -77,6 +78,8 @@ const Registration: NextPage<{ page: any; festivals: any; form: any }> = ({
   const [error, setError] = useState({})
 
   const [errorState, setErrorState] = useState(false)
+
+  const router = useRouter()
 
   useEffect(() => {
     const formObj = {}
@@ -161,7 +164,7 @@ const Registration: NextPage<{ page: any; festivals: any; form: any }> = ({
         setLoading(false)
         setSuccess(true)
         axios
-          .post('/api/mailRegistration', sendObj)
+          .post('/api/mailRegistration', { ...sendObj, locale: router.locale })
           .then((res) => console.log(res))
           .catch((err) => console.log(err.response))
       })

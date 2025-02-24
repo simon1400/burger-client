@@ -12,6 +12,7 @@ import Input from 'components/Input'
 import Radio from 'components/Radio'
 import { sendEmail } from 'helpers/sendMail'
 import Page from 'layout/Page'
+import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/router'
 import CheckIcon from 'public/img/check.svg'
 import PlusIcon from 'public/img/plus.svg'
@@ -28,6 +29,7 @@ const VotesFestival: FC<{ festivalBurgers: any; idFestival: number }> = ({
 }) => {
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
+  const tVotes = useTranslations('votes')
 
   const router = useRouter()
 
@@ -107,9 +109,6 @@ const VotesFestival: FC<{ festivalBurgers: any; idFestival: number }> = ({
     if (!gdprCheck) {
       errState.gdpr = true
     }
-    // if(!marketingCheck){
-    //   errState.marketing = true
-    // }
     if (!selectBurgerShop.length) {
       errState.selectBurgerShop = true
     }
@@ -158,7 +157,7 @@ const VotesFestival: FC<{ festivalBurgers: any; idFestival: number }> = ({
       .then((res) => {
         setLoading(false)
         setSuccess(true)
-        sendEmail({ ...dataToSend, id: res.data.data.id })
+        sendEmail({ ...dataToSend, id: res.data.data.id, locale: router.locale })
         router.push('/votes/dekujem')
       })
       .catch((err) => console.log('err save form -- ', err))
@@ -181,18 +180,18 @@ const VotesFestival: FC<{ festivalBurgers: any; idFestival: number }> = ({
   return (
     <Page>
       <div style={{ margin: '40px 0 100px' }}>
-        <Head data={'Hlasování'} />
+        <Head data={tVotes('form.title')} />
         <Container maxWidth={'md'}>
           <form style={{ marginBottom: '20px' }}>
             <Input
               idKey={'name'}
               value={state.name}
               name={'name'}
-              label={'Jméno a příjmení'}
+              label={tVotes('form.name')}
               error={error.name}
               required
               handleChange={handleChange}
-              errorText={'Vyplňte údaj'}
+              errorText={tVotes('form.requiredFields')}
             />
             <Input
               idKey={'email'}
@@ -202,7 +201,7 @@ const VotesFestival: FC<{ festivalBurgers: any; idFestival: number }> = ({
               required
               error={error.email}
               handleChange={handleChange}
-              errorText={'Vyplňte údaj'}
+              errorText={tVotes('form.requiredFields')}
             />
             <Input
               idKey={'phone'}
@@ -212,13 +211,13 @@ const VotesFestival: FC<{ festivalBurgers: any; idFestival: number }> = ({
               error={error.phone}
               required
               handleChange={handleChange}
-              errorText={'Vyplňte údaj'}
+              errorText={tVotes('form.requiredFields')}
             />
             <Radio
               data={festivalBurgers}
-              idKey={'Burgrárna, pro kterou chcete hlasovat'}
+              idKey={tVotes('form.shop')}
               required
-              errorText={'Vyplňte údaj'}
+              errorText={tVotes('form.requiredFields')}
               error={error.selectBurgerShop}
               handleChange={handleChangeRadio}
               value={selectBurgerShop}
@@ -231,22 +230,22 @@ const VotesFestival: FC<{ festivalBurgers: any; idFestival: number }> = ({
                     value={code.value}
                     name={`code_${idx}`}
                     onBlur={(e: any) => handleOnBlur(e.target.value, idx)}
-                    label={!idx ? 'Kód z hlasovacího lístku' : ''}
+                    label={!idx ? tVotes('form.code') : ''}
                     handleChange={handleChangeCode}
                   />
                   {code.check > 0 && <CheckIcon />}
-                  {code.check < 0 && <span>{'neplatný kód'}</span>}
+                  {code.check < 0 && <span>{tVotes('form.notValidCode')}</span>}
                 </CodeInput>
               )
             })}
             <ControledCodesS>
               <PulusS onClick={() => handleAddCode()}>
                 <PlusIcon />
-                <span>{'přidat další kód'}</span>
+                <span>{tVotes('form.addMoreCode')}</span>
               </PulusS>
               {state.code.length > 1 && (
                 <a onClick={(e: any) => handleRemoveCode(e)} href={'/'}>
-                  {'smazat\r'}
+                  {tVotes('form.deleteCode')}
                 </a>
               )}
             </ControledCodesS>
@@ -258,12 +257,12 @@ const VotesFestival: FC<{ festivalBurgers: any; idFestival: number }> = ({
                 label={
                   <div className={'label-checkbox'}>
                     <p>
-                      {'souhlas s'}{' '}
+                      {tVotes('form.aggreeWith')}{' '}
                       <a href={'/clanek/obchodni-podminky'} target={'_blank'}>
-                        {'obchodními podmínkami\r'}
+                        {tVotes('form.terms')}
                       </a>
                     </p>
-                    {error.aggree && <span>{'Vyplňte údaj'}</span>}
+                    {error.aggree && <span>{tVotes('form.requiredFields')}</span>}
                   </div>
                 }
               />
@@ -276,12 +275,12 @@ const VotesFestival: FC<{ festivalBurgers: any; idFestival: number }> = ({
                 label={
                   <div className={'label-checkbox'}>
                     <p>
-                      {'souhlas s'}{' '}
+                      {tVotes('form.aggreeWith')}{' '}
                       <a href={'/clanek/informace-o-zpracovani-osobnich-udaju'} target={'_blank'}>
                         {'GDPR\r'}
                       </a>
                     </p>
-                    {error.gdpr && <span>{'Vyplňte údaj'}</span>}
+                    {error.gdpr && <span>{tVotes('form.requiredFields')}</span>}
                   </div>
                 }
               />
@@ -293,8 +292,8 @@ const VotesFestival: FC<{ festivalBurgers: any; idFestival: number }> = ({
                 control={<Checkbox />}
                 label={
                   <div className={'label-checkbox'}>
-                    <p>{'souhlas s marketing. účely'}</p>
-                    {error.marketing && <span>{'Vyplňte údaj'}</span>}
+                    <p>{tVotes('form.marketing')}</p>
+                    {error.marketing && <span>{tVotes('form.requiredFields')}</span>}
                   </div>
                 }
               />
@@ -313,7 +312,7 @@ const VotesFestival: FC<{ festivalBurgers: any; idFestival: number }> = ({
             }}
           >
             <Button disabled={loading || success} onClick={() => handleSend()}>
-              {'Hlasovat'}
+              {tVotes('form.vote')}
             </Button>
             {loading && (
               <CircularProgress
@@ -331,9 +330,7 @@ const VotesFestival: FC<{ festivalBurgers: any; idFestival: number }> = ({
             {/* {success && <SuccessLabel />} */}
             {errorState && (
               <div style={{ textAlign: 'center' }}>
-                <ErrorLabel
-                  content={'Některá z položek nebyla vyplněna. Prosím zkontrolujte formulář.'}
-                />
+                <ErrorLabel content={tVotes('form.errorLabel')} />
               </div>
             )}
           </Box>

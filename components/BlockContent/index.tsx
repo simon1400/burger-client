@@ -24,7 +24,7 @@ const BlockContent: FC<IBlockContent> = ({ time, content, head }) => {
             <Typography
               component={'div'}
               dangerouslySetInnerHTML={{
-                __html: content.replace(/\/uploads/g, 'https://burger-strapi.hardart.cz/uploads'),
+                __html: content,
               }}
             />
           )}

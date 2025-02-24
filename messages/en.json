@@ -15,7 +15,8 @@
     "no": "Ne",
     "verificationTaken": "Ověření proběhlo!",
     "verificationCorrectMessage": "Ověření proběhlo správně. Díky za tvůj hlas a přejeme, ať jsi mezi výherci!",
-    "currency": "Kč"
+    "currency": "Kč",
+    "startVotes": "Začít hlasovat"
   },
   "resultData": {
     "name": "Jmeno",
@@ -25,5 +26,29 @@
     "codes": "Kody",
     "marketing": "Souhlas z marketingem",
     "mailConfirm": "Podtvrzeny mail"
+  },
+  "votes": {
+    "thankYouPage": {
+      "title": "Děkujeme!",
+      "text": "<p>Pro dokončení hlasování prosím potvrď svůj hlas v e-mailu. Výsledky najdeš nejpozději v pondělí na webu <a href='https://burgerfestival.cz'>burgerfestival.cz</a> a v události na Facebooku. Výherce budeme zároveň kontaktovat na e-mailu.</p>"
+    },
+    "intro": {
+      "text": "<p><strong>Hlasuj pro nejlepší burger na festivalu! I díky tobě třeba bude tvůj burgermaker mít medaili.</strong></p><p><strong>Jak na to?</strong></p><p>1. Vyplň svoje osobní údaje.</br>2. Zadej kód z hlasovacího lístku, který jsi dostal při nákupu burgeru.</br>3. Hlasuj pro tvého favorita.</br>4. Potvrď souhlas s podmínkami soutěže a zpracováním osobních údajů.</br>5. Klikni na ODESLAT</br>6. Potvrď svůj hlas přes email</p><p><strong>A to je vše!</strong></p><p>Křestní jméno výherce a výherní kód zveřejníme na webu <a href='http://burgerstreetfestival.cz' title='smartCard-inline'>http://burgerstreetfestival.cz</a>  a na události festivalu na Facebooku nejpozději v pondělí po festivalu. Pokud jsi vyhrál, dáme ti vědět také mailem.</p><p><strong>O co hrajeme?</strong></p><p>1. cena - voucher 2000 Kč na burgery pro festivaly v sezoně 2025 a 2026</br>2. cena - voucher 1000 Kč na burgery pro festivaly v sezoně 2025 a 2026</br>3. cena - voucher  500 Kč na burgery pro festivaly v sezoně 2025 a 2026</p>"
+    },
+    "form": {
+      "title": "Hlasování",
+      "requiredFields": "Vyplňte údaj",
+      "name": "Jméno a příjmení",
+      "shop": "Burgrárna, pro kterou chcete hlasovat",
+      "code": "Kód z hlasovacího lístku",
+      "notValidCode": "neplatný kód",
+      "addMoreCode": "přidat další kód",
+      "deleteCode": "smazat\r",
+      "aggreeWith": "souhlas s",
+      "terms": "obchodními podmínkami\r",
+      "marketing": "souhlas s marketing. účely",
+      "vote": "Hlasovat",
+      "errorLabel": "Některá z položek nebyla vyplněna. Prosím zkontrolujte formulář."
+    }
   }
 }

@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { EmailParams, MailerSend, Recipient, Sender } from 'mailersend'
 
 import { orderMail } from '../../mail-templates/form'
+import { orderMailPl } from '../../mail-templates/formPl'
 
 const mailersend = new MailerSend({
   apiKey: 'mlsn.eb252071563000d01a5e624c5879da6f8a8ca9d9d7dd5266146fc1d31d4663ba',
@@ -12,11 +13,10 @@ const sentFrom = new Sender('noreply@burgerfestival.cz', 'Burger street festival
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
-    console.log('POST /SEND ORDER')
-
     const data = req.body
 
     const email = data.filter((item: any) => item.key === 'E-mail')[0].value
+    const locale = data.locale
 
     try {
       const recipients = [
@@ -34,7 +34,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         .setBcc(bcc)
         .setTo(recipients)
         .setSubject('Registration from web')
-        .setHtml(orderMail(data))
+        .setHtml(locale === 'en' ? orderMail(data) : orderMailPl(data))
         .setText('New from web')
 
       await mailersend.email.send(emailParams)

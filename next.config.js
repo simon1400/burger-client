@@ -18,7 +18,8 @@ const nextConfig = {
   },
   env: {
     APP_API: process.env.APP_API,
-    APP_DOMAIN: process.env.APP_DOMAIN,
+    APP_DOMAIN_CZ: process.env.APP_DOMAIN_CZ,
+    APP_DOMAIN_PL: process.env.APP_DOMAIN_PL,
     MAILERSEND_TOKEN: process.env.MAILERSEND_TOKEN,
   },
   async rewrites() {
@@ -50,6 +51,10 @@ const nextConfig = {
       {
         source: '/kontakty',
         destination: '/kontakt',
+      },
+      {
+        source: '/sitemap/index.xml',
+        destination: 'https://burger-strapi.hardart.cz/sitemap/index.xml',
       },
     ]
   },
