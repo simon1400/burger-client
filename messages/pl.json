@@ -16,7 +16,18 @@
     "verificationTaken": "Weryfikacja zakończona!",
     "verificationCorrectMessage": "Weryfikacja przebiegła pomyślnie. Dziękujemy za Twój głos i życzymy powodzenia w losowaniu!",
     "currency": "zł",
-    "startVotes": "Rozpocznij głosowanie"
+    "startVotes": "Rozpocznij głosowanie",
+    "partners": "Śledź nas",
+    "event": "wydarzenie",
+    "carier": "kariera",
+    "settingCookies": "ustawianie plików cookie",
+    "busy": "zajęty",
+    "free": "wolne",
+    "replacing": "zamiennik",
+    "freeOnePlace": "pozostało 1 miejsce",
+    "selectAll": "wybierz wszystko",
+    "applicationSubbmited": "Twoja aplikacja została pomyślnie przesłana.",
+    "place": "miejsce"
   },
   "resultData": {
     "name": "Imię",
@@ -48,7 +59,9 @@
       "terms": "warunki konkursu",
       "marketing": "zgoda na cele marketingowe",
       "vote": "Głosuj",
-      "errorLabel": "Nie wszystkie pola zostały uzupełnione. Prosimy sprawdzić formularz."
+      "errorLabel": "Nie wszystkie pola zostały uzupełnione. Prosimy sprawdzić formularz.",
+      "uploudFile": "przesyłanie pliku",
+      "uploudFileHere": "prześlij plik tutaj ..."
     }
   }
 }

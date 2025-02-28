@@ -11,6 +11,7 @@ import IconButton from 'components/IconButton'
 import Label from 'components/Label'
 import Time from 'components/Time'
 import { InInterval } from 'helpers/inInterval'
+import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import Link from 'next/link'
 import ArrowRight from 'public/img/arrow-right.svg'
@@ -31,6 +32,7 @@ const Lineup: FC<ILineup> = ({
   handleChange,
   hp = false,
 }) => {
+  const t = useTranslations('global')
   const dispatch = useDispatch()
 
   const [stateCheck, setStateCheck] = useState<string[]>([])
@@ -46,7 +48,7 @@ const Lineup: FC<ILineup> = ({
     setStateCheckAll(!stateCheckAll)
     if (!stateCheckAll) {
       data.map((item: any) => {
-        if (item.state !== 'obsazeno') {
+        if (item.state !== t('busy')) {
           // @ts-ignore
           checkArr.push(`${item.from} - ${item.to} - ${item.title}`)
         }
@@ -73,13 +75,13 @@ const Lineup: FC<ILineup> = ({
 
   const getState = (state: string) => {
     if (state === 'volno') {
-      return 'volno'
+      return t('free')
     } else if (state === 'obsazeno') {
-      return 'obsazeno'
+      return t('busy')
     } else if (state === 'nahradnik') {
-      return 'náhradník'
+      return t('replacing')
     } else if (state === 'zbyva_1_misto') {
-      return 'zbývá 1 místo'
+      return t('freeOnePlace')
     }
 
     return null
@@ -97,7 +99,7 @@ const Lineup: FC<ILineup> = ({
                   onClick={() => handleCheckAll()}
                   checked={stateCheckAll}
                   control={<Checkbox />}
-                  label={'vybrat všechny'}
+                  label={t('selectAll')}
                 />
               </div>
               <div />
@@ -145,7 +147,6 @@ const Lineup: FC<ILineup> = ({
                       <p>{item.title}</p>
                     </Link>
                   )}
-                  {/* {item.title && modal && <p>{item.title}</p>} */}
                   {item.name && <p>{item.name}</p>}
                 </div>
                 {item.labels?.data && (

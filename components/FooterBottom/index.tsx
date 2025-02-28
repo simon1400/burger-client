@@ -1,11 +1,13 @@
 import type { FC } from 'react'
 
 import { Container } from '@mui/material'
+import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 
 import { FooterBottomS } from './styled'
 
 const FooterBottom: FC<{ phone: string; email: string }> = ({ phone, email }) => {
+  const t = useTranslations('global')
   return (
     <Container maxWidth={'xl'}>
       <FooterBottomS>
@@ -15,10 +17,10 @@ const FooterBottom: FC<{ phone: string; email: string }> = ({ phone, email }) =>
         </div>
         <div>
           <div>
-            <Link href={'/clanek/kariera'}>{'kariéra'}</Link>
+            <Link href={'/clanek/kariera'}>{t('carier')}</Link>
           </div>
           <div>
-            <Link href={'/'}>{'nastavení cookies'}</Link>
+            <Link href={'/'}>{t('settingCookies')}</Link>
           </div>
         </div>
       </FooterBottomS>

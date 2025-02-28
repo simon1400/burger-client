@@ -1,5 +1,6 @@
 import type { FC } from 'react'
 
+import { useTranslations } from 'next-intl'
 import { useCallback, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 
@@ -10,6 +11,7 @@ const DropZone: FC<{
   idKey: string
   state: any
 }> = ({ handleChange, idKey, state }) => {
+  const tVotes = useTranslations('votes')
   const [fileName, setFileName] = useState('')
 
   const onDrop = useCallback(
@@ -28,11 +30,11 @@ const DropZone: FC<{
       <div className={'zone'} {...getRootProps()}>
         <input {...getInputProps()} />
         {isDragActive ? (
-          <p>{'nahrát soubor tady ...'}</p>
+          <p>{tVotes('form.uploudFileHere')}</p>
         ) : fileName.length ? (
           <p>{fileName}</p>
         ) : (
-          <p>{'nahrát soubor'}</p>
+          <p>{tVotes('form.uploudFile')}</p>
         )}
       </div>
       <span className={'helper-text'}>{'.jpg .jpeg .png .gif max 5MB'}</span>

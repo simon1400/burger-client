@@ -1,6 +1,7 @@
 import type { FC } from 'react'
 
 import { Typography } from '@mui/material'
+import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { ImgCard } from 'styles/ImgCard'
 import { Price } from 'styles/Price'
@@ -10,6 +11,7 @@ import { CardS } from './styled'
 const APP_API = process.env.APP_API
 
 const Card: FC<{ data: any }> = ({ data }) => {
+  const t = useTranslations('global')
   return (
     <CardS href={`/obchod/${data.slug}`}>
       <ImgCard>
@@ -24,7 +26,7 @@ const Card: FC<{ data: any }> = ({ data }) => {
       </Typography>
       <Price>
         {data.price}
-        {' Kč'}
+        {` ${t('currency')}`}
       </Price>
     </CardS>
   )

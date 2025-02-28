@@ -40,6 +40,7 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
     props: {
       blogPage,
       posts,
+      messages: (await import(`../../messages/${ctx.locale}.json`)).default,
     },
   }
 })

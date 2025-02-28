@@ -41,6 +41,7 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
       festivalBurgers: transformFestivalBurgers,
       votes: true,
       idFestival,
+      messages: (await import(`../../messages/${ctx.locale}.json`)).default,
     },
   }
 })
