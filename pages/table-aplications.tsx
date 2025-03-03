@@ -56,6 +56,7 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
   return {
     props: {
       result,
+      messages: (await import(`../messages/${ctx.locale}.json`)).default,
     },
   }
 })

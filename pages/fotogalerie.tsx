@@ -36,6 +36,7 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
   return {
     props: {
       galeryData: sortDate(galeryData),
+      messages: (await import(`../messages/${ctx.locale}.json`)).default,
     },
   }
 })
