@@ -15,7 +15,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (req.method === 'POST') {
     const data = req.body
 
-    const email = data.filter((item: any) => item.key === 'E-mail')[0].value
+    const email = data.data.filter((item: any) => item.key === 'E-mail')[0].value
     const locale = data.locale
 
     try {
@@ -34,7 +34,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         .setBcc(bcc)
         .setTo(recipients)
         .setSubject('Registration from web')
-        .setHtml(locale === 'en' ? orderMail(data) : orderMailPl(data))
+        .setHtml(locale === 'en' ? orderMail(data.data) : orderMailPl(data.data))
         .setText('New from web')
 
       await mailersend.email.send(emailParams)

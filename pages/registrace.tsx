@@ -164,7 +164,7 @@ const Registration: NextPage<{ page: any; festivals: any; form: any }> = ({
         setLoading(false)
         setSuccess(true)
         axios
-          .post('/api/mailRegistration', { ...sendObj, locale: router.locale })
+          .post('/api/mailRegistration', { data: [...sendObj], locale: router.locale })
           .then((res) => console.log(res))
           .catch((err) => console.log(err.response))
       })
