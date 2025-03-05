@@ -29,7 +29,7 @@ const Footer = () => {
       </Container>
       {router.asPath === '/partneri' ? null : <Partners data={footer.logoPartners.data} />}
       <Follow data={footer.soc} />
-      <FooterBottom email={footer.email} phone={footer.phone} />
+      <FooterBottom email={footer.email} phone={footer.phone} lang={router.locale} />
     </FooterS>
   )
 }

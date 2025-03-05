@@ -1,13 +1,15 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client'
 
 const footerQuery = gql`
   query Footer($locale: I18NLocaleCode!) {
     global(locale: $locale) {
       data {
         attributes {
-          logoPartners{
+          phone
+          email
+          logoPartners {
             data {
-              attributes{
+              attributes {
                 url
               }
             }
@@ -16,8 +18,6 @@ const footerQuery = gql`
             type
             link
           }
-          phone
-          email
         }
       }
     }

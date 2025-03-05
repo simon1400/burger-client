@@ -21,7 +21,7 @@ const ContactItem: FC<IContactItem> = ({ data }) => {
       </ImgCircle>
       <Typography variant={'h3'}>{data.title}</Typography>
       <Typography>{data.function}</Typography>
-      <Link href={`mailto:${data.email}`}>{data.email}</Link>
+      {data.email && <Link href={`mailto:${data.email}`}>{data.email}</Link>}
     </ContactItemS>
   )
 }

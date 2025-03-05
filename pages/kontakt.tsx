@@ -52,12 +52,16 @@ const Contact: NextPage<{ contact: any }> = ({ contact }) => {
             }}
           />
           <ContactLines>
-            <ContactLine icon={<Phone />} title={contact.phone} link={`tel:${contact.phone}`} />
-            <ContactLine
-              icon={<Envelope />}
-              title={contact.email}
-              link={`mailto:${contact.email}`}
-            />
+            {contact.phone && (
+              <ContactLine icon={<Phone />} title={contact.phone} link={`tel:${contact.phone}`} />
+            )}
+            {contact.email && (
+              <ContactLine
+                icon={<Envelope />}
+                title={contact.email}
+                link={`mailto:${contact.email}`}
+              />
+            )}
           </ContactLines>
         </CenterWrap>
       </Container>

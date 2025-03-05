@@ -6,7 +6,11 @@ import Link from 'next/link'
 
 import { FooterBottomS } from './styled'
 
-const FooterBottom: FC<{ phone: string; email: string }> = ({ phone, email }) => {
+const FooterBottom: FC<{ phone: string; email: string; lang?: string }> = ({
+  phone,
+  email,
+  lang,
+}) => {
   const t = useTranslations('global')
   return (
     <Container maxWidth={'xl'}>
@@ -16,9 +20,11 @@ const FooterBottom: FC<{ phone: string; email: string }> = ({ phone, email }) =>
           <Link href={`tel:${phone}`}>{phone}</Link>
         </div>
         <div>
-          <div>
-            <Link href={'/clanek/kariera'}>{t('carier')}</Link>
-          </div>
+          {lang !== 'pl' && (
+            <div>
+              <Link href={'/clanek/kariera'}>{t('carier')}</Link>
+            </div>
+          )}
           <div>
             <Link href={'/'}>{t('settingCookies')}</Link>
           </div>
