@@ -159,7 +159,7 @@ const Registration: NextPage<{ page: any; festivals: any; form: any }> = ({
     }
 
     await axios
-      .post(`${APP_API}/api/applications`, { data: { result: sendObj } })
+      .post(`${APP_API}/api/applications`, { data: { result: sendObj, locale: router.locale } })
       .then(() => {
         setLoading(false)
         setSuccess(true)
