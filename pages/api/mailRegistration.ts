@@ -24,10 +24,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         new Recipient('vladek@bedy.cz', 'Owner'),
       ]
 
-      const bcc = [
-        new Recipient('supkova@bedy.cz', 'Supkova'),
-        new Recipient('info@burgerfestival.cz', 'Burger street festival'),
-      ]
+      const bcc =
+        locale === 'en'
+          ? [
+              new Recipient('supkova@bedy.cz', 'Supkova'),
+              new Recipient('info@burgerfestival.cz', 'Burger street festival'),
+            ]
+          : [
+              new Recipient('info@burgerfestival.pl', 'Burger street festival'),
+              new Recipient('supkova@bedy.cz', 'Supkova'),
+              new Recipient('snasel@bedy.cz', 'Snasel'),
+              new Recipient('oscar@bedy.cz', 'Oscar'),
+              new Recipient('grega@bedy.cz', 'Grega'),
+              new Recipient('j.roosinska@gmail.com', 'Grega'),
+            ]
 
       const emailParams = new EmailParams()
         .setFrom(sentFrom)
