@@ -21,7 +21,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try {
       const recipients = [new Recipient(email, 'Recipient')]
 
-      const cc =
+      const bcc =
         locale === 'en'
           ? [
               new Recipient('supkova@bedy.cz', 'Supkova'),
@@ -29,27 +29,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
               new Recipient('info@burgerfestival.cz', 'Burger street festival'),
             ]
           : [
-              // new Recipient('info@burgerfestival.pl', 'Burger street festival'),
-              // new Recipient('vladek@bedy.cz', 'Owner'),
-              // new Recipient('supkova@bedy.cz', 'Supkova'),
-              // new Recipient('snasel@bedy.cz', 'Snasel'),
-              // new Recipient('oscar@bedy.cz', 'Oscar'),
-              // new Recipient('grega@bedy.cz', 'Grega'),
-              // new Recipient('j.roosinska@gmail.com', 'Grega'),
-              new Recipient('pechunka11@gmail.com', 'My test'),
+              new Recipient('info@burgerfestival.pl', 'Burger street festival'),
+              new Recipient('vladek@bedy.cz', 'Owner'),
+              new Recipient('supkova@bedy.cz', 'Supkova'),
+              new Recipient('snasel@bedy.cz', 'Snasel'),
+              new Recipient('oscar@bedy.cz', 'Oscar'),
+              new Recipient('grega@bedy.cz', 'Grega'),
+              new Recipient('j.roosinska@gmail.com', 'Grega'),
             ]
-
-      console.log(cc)
 
       const emailParams = new EmailParams()
         .setFrom(sentFrom)
         .setTo(recipients)
-        .setBcc(cc)
+        .setBcc(bcc)
         .setSubject('Registration from web')
         .setHtml(locale === 'en' ? orderMail(data.data) : orderMailPl(data.data))
         .setText('New from web')
-
-      console.log('emailParams', emailParams)
 
       await mailersend.email.send(emailParams)
 
