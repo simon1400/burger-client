@@ -52,16 +52,18 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
       homepage,
       festivals: filterEvents(festivals),
       map,
+      locale: ctx.locale,
       messages: (await import(`../messages/${ctx.locale}.json`)).default,
     },
   }
 })
 
-const Homepage: NextPage<{ homepage: IHomepage; festivals: IFestivals; map: any }> = ({
-  homepage,
-  festivals,
-  map,
-}) => {
+const Homepage: NextPage<{
+  homepage: IHomepage
+  festivals: IFestivals
+  map: any
+  locale: string
+}> = ({ homepage, festivals, map, locale }) => {
   const t = useTranslations('global')
   return (
     <Page>
@@ -70,7 +72,7 @@ const Homepage: NextPage<{ homepage: IHomepage; festivals: IFestivals; map: any 
       {/* @ts-expect-error */}
       <Events head={homepage.eventHead} data={festivals.future} hp />
       <CenterWrap marginBottom={80}>
-        <Button href={'/festivaly'}>{t('viewPastEvents')}</Button>
+        <Button href={locale === 'en' ? '/festivaly' : '/festiwale'}>{t('viewPastEvents')}</Button>
       </CenterWrap>
       <BlockContent head={homepage.title2} content={homepage.content} />
       <Galery images={homepage.galery} />
