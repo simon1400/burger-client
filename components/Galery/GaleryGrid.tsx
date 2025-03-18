@@ -28,9 +28,16 @@ const GalleryGrid: FC<GalleryGridProps> = ({ images, appApi }) => {
 
         return (
           <Grid key={idx} item xs={6} md={getGridSize(length)}>
-            <LightgalleryItem group={'any'} component={'div'} src={imageUrl}>
+            <LightgalleryItem
+              group={'any'}
+              component={'div'}
+              src={`${appApi}${item.attributes.url}?format=webp&resize=1920x1200`}
+            >
               <GaleryItem>
-                <a href={imageUrl} onClick={(e) => e.preventDefault()}>
+                <a
+                  href={`${appApi}${item.attributes.url}?format=webp&resize=1920x1200`}
+                  onClick={(e) => e.preventDefault()}
+                >
                   <Image src={imageUrl} fill alt={''} />
                   {length > 8 && idx === 7 && <LabelMore data={hiddenImages.length} />}
                 </a>
@@ -51,9 +58,16 @@ const GalleryGrid: FC<GalleryGridProps> = ({ images, appApi }) => {
             md={getGridSize(length)}
             style={{ display: 'none' }}
           >
-            <LightgalleryItem group={'any'} component={'div'} src={imageUrl}>
+            <LightgalleryItem
+              group={'any'}
+              component={'div'}
+              src={`${appApi}${item.attributes.url}?format=webp&resize=1920x1200`}
+            >
               <GaleryItem>
-                <a href={imageUrl} onClick={(e) => e.preventDefault()}>
+                <a
+                  href={`${appApi}${item.attributes.url}?format=webp&resize=1920x1200`}
+                  onClick={(e) => e.preventDefault()}
+                >
                   <Image src={imageUrl} fill alt={''} />
                 </a>
               </GaleryItem>

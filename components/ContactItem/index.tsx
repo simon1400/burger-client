@@ -14,9 +14,9 @@ const ContactItem: FC<IContactItem> = ({ data }) => {
     <ContactItemS>
       <ImgCircle>
         <Image
-          src={`${APP_API + data.image.data.attributes.url}?format=webp&resize=210x210`}
+          src={`${APP_API + data.image.data.attributes.url}?format=webp&resize=300x300`}
           fill
-          alt={''}
+          alt={data.title}
         />
       </ImgCircle>
       <Typography variant={'h3'}>{data.title}</Typography>
