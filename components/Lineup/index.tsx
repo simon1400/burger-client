@@ -9,9 +9,9 @@ import { CheckboxS } from 'components/Checkbox/styled'
 import FacebookEvent from 'components/FacebookEvent'
 import IconButton from 'components/IconButton'
 import Label from 'components/Label'
-// import Time from 'components/Time'
+import Time from 'components/Time'
 import { InInterval } from 'helpers/inInterval'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import Image from 'next/image'
 import Link from 'next/link'
 import ArrowRight from 'public/img/arrow-right.svg'
@@ -32,6 +32,7 @@ const Lineup: FC<ILineup> = ({
   handleChange,
   hp = false,
 }) => {
+  const locale = useLocale()
   const t = useTranslations('global')
   const dispatch = useDispatch()
 
@@ -120,7 +121,9 @@ const Lineup: FC<ILineup> = ({
                   <span className={'status'} />
                 )}
                 <div className={item.category?.data ? 'basic-wrap' : 'title-wrap'}>
-                  {/* {item.from && item.to && <Time from={item.from} to={item.to} />} */}
+                  {locale === 'en' && item.from && item.to && (
+                    <Time from={item.from} to={item.to} />
+                  )}
                   {!!item.category?.data?.length && (
                     <div className={'icon-type'}>
                       <Image

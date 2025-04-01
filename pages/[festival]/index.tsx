@@ -48,7 +48,7 @@ const Festival: NextPage<{ festival: IFestival }> = ({ festival }) => {
     <Page>
       <Head data={festival.title} />
       <BlockContent
-        // time={{ from: festival.from, to: festival.to }}
+        time={{ from: festival.from, to: festival.to }}
         head={festival.place}
         content={festival.content}
       />
