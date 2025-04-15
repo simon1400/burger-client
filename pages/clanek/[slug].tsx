@@ -43,7 +43,7 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
 const Article: NextPage<{ article: any }> = ({ article }) => {
   return (
     <Page>
-      <Head data={article.title} />
+      <Head text={article.title} type={'h1'} />
       <Container maxWidth={'md'}>
         <CenterWrap>
           <Typography

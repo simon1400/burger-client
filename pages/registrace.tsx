@@ -175,7 +175,7 @@ const Registration: NextPage<{ page: any; festivals: any; form: any }> = ({
 
   return (
     <Page>
-      <Head data={page.title} />
+      <Head text={page.title} type={'h1'} />
       <BlockContent content={page.content} />
       <Lineup head={''} data={festivals.future} handleChange={handleChangeFestivals} registration />
       {form.fields.length && (

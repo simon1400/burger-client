@@ -48,7 +48,7 @@ const GaleryPage: NextPage<{ galeryData: any }> = ({ galeryData }) => {
         if (item.galery.data?.length) {
           return (
             <div key={item.title}>
-              <Head data={item.title} />
+              <Head text={item.title} type={'h1'} />
               <BlockContent time={{ from: item.from, to: item.to }} head={item.place} />
               <Galery removePadding images={item.galery} />
               <CenterWrap marginBottom={100} />

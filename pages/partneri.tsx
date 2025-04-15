@@ -50,7 +50,7 @@ const PartnersPage: NextPage<{ partnersPage: any }> = ({ partnersPage }) => {
   return (
     <Page>
       <CenterWrap>
-        <Head data={partnersPage.title} />
+        <Head text={partnersPage.title} type={'h1'} />
         <Container>
           <Typography
             marginBottom={10}
