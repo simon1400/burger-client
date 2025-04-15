@@ -180,7 +180,7 @@ const VotesFestival: FC<{ festivalBurgers: any; idFestival: number }> = ({
   return (
     <Page>
       <div style={{ margin: '40px 0 100px' }}>
-        <Head data={tVotes('form.title')} />
+        <Head text={tVotes('form.title')} type={'h1'} />
         <Container maxWidth={'md'}>
           <form style={{ marginBottom: '20px' }}>
             <Input

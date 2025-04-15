@@ -24,7 +24,7 @@ export const HeaderS = styled.div(({theme}) => `
     position: absolute;
     width: 100%;
     left: 50%;
-        transform: translateX(-50%);
+    transform: translateX(-50%);
     top: -15px;
     max-width: 1600px;
 

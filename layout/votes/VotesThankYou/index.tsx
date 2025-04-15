@@ -9,7 +9,7 @@ const VotesThankYou = () => {
   return (
     <Page>
       <div style={{ margin: '40px 0 100px' }}>
-        <Head data={t('thankYouPage.title')} />
+        <Head text={t('thankYouPage.title')} type={'h1'} />
         <BlockContent margin content={t('thankYouPage.text')} />
       </div>
     </Page>
