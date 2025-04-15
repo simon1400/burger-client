@@ -1,19 +1,21 @@
+/* eslint-disable perfectionist/sort-imports */
 /* eslint-disable ts/ban-ts-comment */
 /* eslint-disable array-callback-return */
 import type { FC } from 'react'
 
-import { Container, FormControlLabel, Typography } from '@mui/material'
+import { Container, FormControlLabel } from '@mui/material'
 import AdditionalLabel from 'components/AdditionalLabel'
 import Checkbox from 'components/Checkbox'
 import { CheckboxS } from 'components/Checkbox/styled'
 import FacebookEvent from 'components/FacebookEvent'
+import Head from 'components/Head'
 import IconButton from 'components/IconButton'
 import Label from 'components/Label'
 import Time from 'components/Time'
 import { InInterval } from 'helpers/inInterval'
-import { useLocale, useTranslations } from 'next-intl'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useLocale, useTranslations } from 'next-intl'
 import ArrowRight from 'public/img/arrow-right.svg'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
@@ -91,7 +93,7 @@ const Lineup: FC<ILineup> = ({
   return (
     <LineupS hp={hp}>
       <Container maxWidth={'md'}>
-        <Typography variant={'h3'}>{head}</Typography>
+        <Head text={head} type={'h2'} bg={'yellow1'} />
         <ul className={'events-list'}>
           {registration && (
             <li className={'select-all-wrap'}>

@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client'
-import { Container } from '@mui/material'
+// import { Container } from '@mui/material'
 import Follow from 'components/Follow'
 import FooterBottom from 'components/FooterBottom'
 import Partners from 'components/Partners'
@@ -24,9 +24,9 @@ const Footer = () => {
 
   return (
     <FooterS>
-      <Container maxWidth={'xl'}>
+      {/* <Container maxWidth={'xl'}>
         <hr />
-      </Container>
+      </Container> */}
       {router.asPath === '/partneri' ? null : <Partners data={footer.logoPartners.data} />}
       <Follow data={footer.soc} />
       <FooterBottom email={footer.email} phone={footer.phone} lang={router.locale} />

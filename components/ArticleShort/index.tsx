@@ -9,13 +9,16 @@ import { parseDate } from 'helpers/parseDate'
 import Image from 'next/image'
 import Link from 'next/link'
 import ArrowRight from 'public/img/arrow-right.svg'
+import ArticleBgPurple from 'public/img/backgrounds/articlePurple.svg'
+import ArticleBgRed from 'public/img/backgrounds/articleRed.svg'
+import ArticleBgYellow from 'public/img/backgrounds/articleYellow.svg'
 import { ImgSquare } from 'styles/ImgSquare'
 
 import { ArticleContent, ArticleShortS } from './styled'
 
 const APP_API = process.env.APP_API
 
-const ArticleShort: FC<{ data: any; type?: string }> = ({ data, type = 'blog' }) => {
+const ArticleShort: FC<{ data: any; type?: string, bg?: 'red'|'yellow'|'purple' }> = ({ data, type = 'blog', bg }) => {
   const date = data.datePublication ? parseDate(data.datePublication) : null
 
   return (
@@ -34,6 +37,11 @@ const ArticleShort: FC<{ data: any; type?: string }> = ({ data, type = 'blog' })
         </Grid>
         <Grid item xs={12} md={6}>
           <ArticleContent>
+            {bg && <div className={'article-bg'}>
+              {bg === 'purple' && <ArticleBgPurple />}
+              {bg === 'red' && <ArticleBgRed />}
+              {bg === 'yellow' && <ArticleBgYellow />}
+            </div>}
             <div>
               {data.label?.data && <LabelBare data={data.label.data.attributes.title} />}
               {date && (

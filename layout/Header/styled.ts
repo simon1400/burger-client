@@ -20,6 +20,26 @@ export const HeaderS = styled.div(({theme}) => `
     position: relative;
     z-index: 1001;
   }
+  .header-bg-wrap{
+    position: absolute;
+    width: 100%;
+    left: 50%;
+        transform: translateX(-50%);
+    top: -15px;
+    max-width: 1600px;
+
+    .header-bg{
+      position: absolute;
+      &.header-bg-2{
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      &.header-bg-3{
+        right: 0;
+      }
+    }
+  }
+  
 `)
 
 export const MobileNav = styled.div<{open: boolean}>(({open}) => `

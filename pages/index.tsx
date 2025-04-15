@@ -68,7 +68,7 @@ const Homepage: NextPage<{
   return (
     <Page>
       <Map data={map} />
-      <Head data={homepage.title} />
+      <Head text={homepage.title} type={'h1'} bg={'red'} />
       {/* @ts-expect-error */}
       <Events head={homepage.eventHead} data={festivals.future} hp />
       <CenterWrap marginBottom={80}>

@@ -62,6 +62,7 @@ const Page: FC<IPage> = ({ children, className = '', id = '' }) => {
           href={'https://fonts.googleapis.com/css2?family=PT+Mono&display=swap'}
           rel={'stylesheet'}
         />
+        <link rel={'stylesheet'} href={'https://use.typekit.net/dtl7rtq.css'} />
 
         {/* FAVICON */}
         <link rel={'shortcut icon'} href={'/favicon/favicon.ico'} />

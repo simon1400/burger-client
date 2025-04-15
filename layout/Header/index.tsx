@@ -6,6 +6,9 @@ import Hamburger from 'hamburger-react'
 import { useRouter } from 'next/router'
 import navTopQuery from 'queries/nav'
 import { useEffect, useState } from 'react'
+import HeaderBgYellow from 'public/img/backgrounds/navYellow.svg'
+import HeaderBgPurple from 'public/img/backgrounds/navPurple.svg'
+import HeaderBgRed from 'public/img/backgrounds/navRed.svg'
 
 import { HeaderS, MobileNav } from './styled'
 
@@ -35,6 +38,17 @@ const Header = () => {
   return (
     <Container maxWidth={'xl'}>
       <HeaderS>
+        <div className={'header-bg-wrap'}>
+          <div className={'header-bg header-bg-1'}>
+            <HeaderBgYellow />
+          </div>
+          <div className={'header-bg header-bg-2'}>
+            <HeaderBgPurple />
+          </div>
+          <div className={'header-bg header-bg-3'}>
+            <HeaderBgRed />
+          </div>
+        </div>
         <Logo />
         {!!nav.length && !mediaMd && <Nav data={nav} />}
         {mediaMd && <Hamburger toggled={isOpen} toggle={setOpen} />}

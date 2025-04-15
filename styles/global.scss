@@ -24,6 +24,53 @@ img{
   line-height: 40px;
 }
 
+h1, h2, h3, h4{
+  font-family: 'veneer', sans-serif!important;
+}
+
+h1{
+  font-size: 86px;
+  line-height: 87px;
+}
+h2{
+  font-size: 46px;
+  line-height: 47px;
+}
+h3{
+  font-size: 36px;
+  line-height: 37px;
+}
+h4{
+  font-size: 29px;
+  line-height: 30px;
+}
+h5{
+  font-size: 24px;
+  line-height: 25px;
+}
+
+.footer-bg-purple{
+  position: relative;
+  svg{
+    width: 120%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+    z-index: -3;
+  }
+}
+.footer-bg-red{
+  position: relative;
+  svg{
+    width: 120%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+    z-index: -3;
+  }
+}
 /* Customize website's scrollbar like Mac OS
 Not supports in Firefox and IE */
 
