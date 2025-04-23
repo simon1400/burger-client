@@ -18,7 +18,11 @@ import { ArticleContent, ArticleShortS } from './styled'
 
 const APP_API = process.env.APP_API
 
-const ArticleShort: FC<{ data: any; type?: string, bg?: 'red'|'yellow'|'purple' }> = ({ data, type = 'blog', bg }) => {
+const ArticleShort: FC<{ data: any; type?: string; bg?: 'red' | 'yellow' | 'purple' }> = ({
+  data,
+  type = 'blog',
+  bg,
+}) => {
   const date = data.datePublication ? parseDate(data.datePublication) : null
 
   return (
@@ -36,12 +40,14 @@ const ArticleShort: FC<{ data: any; type?: string, bg?: 'red'|'yellow'|'purple' 
           </Link>
         </Grid>
         <Grid item xs={12} md={6}>
-          <ArticleContent>
-            {bg && <div className={'article-bg'}>
-              {bg === 'purple' && <ArticleBgPurple />}
-              {bg === 'red' && <ArticleBgRed />}
-              {bg === 'yellow' && <ArticleBgYellow />}
-            </div>}
+          <ArticleContent bg={bg}>
+            {bg && (
+              <div className={'article-bg'}>
+                {bg === 'purple' && <ArticleBgPurple />}
+                {bg === 'red' && <ArticleBgRed />}
+                {bg === 'yellow' && <ArticleBgYellow />}
+              </div>
+            )}
             <div>
               {data.label?.data && <LabelBare data={data.label.data.attributes.title} />}
               {date && (

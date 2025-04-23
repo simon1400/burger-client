@@ -68,7 +68,12 @@ const News: NextPage<{ newsPage: any; news: any }> = ({ newsPage, news }) => {
       <BlockContent content={newsPage.content} />
       <Container>
         {sortDate(news).map((item: any, idx: number) => (
-          <ArticleShort type={'news'} key={item.name + idx} bg={colors[idx % colors.length] as 'red'|'yellow'|'purple'} data={item} />
+          <ArticleShort
+            type={'news'}
+            key={item.name + idx}
+            bg={colors[idx % colors.length] as 'red' | 'yellow' | 'purple'}
+            data={item}
+          />
         ))}
       </Container>
     </Page>

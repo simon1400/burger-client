@@ -6,9 +6,10 @@ export const ArticleShortS = styled.div(
 `,
 )
 
-export const ArticleContent = styled.div(
-  ({ theme }) => `
+export const ArticleContent = styled.div<{ bg?: string }>(
+  ({ bg }) => `
   position: relative;
+  ${bg === 'yellow' ? 'color: black;' : ''}
   .article-bg{
     position: absolute;
     width: 100%;
@@ -26,12 +27,15 @@ export const ArticleContent = styled.div(
   }
   h2{
     margin-bottom: 30px;
+    ${bg === 'yellow' ? 'color: black;' : ''}
   }
   .short-content{
     margin-bottom: 30px;
+    ${bg === 'yellow' ? 'color: black;' : ''}
   }
   a{
     text-decoration: none;
+    ${bg === 'yellow' ? 'color: black;' : ''}
   }
 `,
 )

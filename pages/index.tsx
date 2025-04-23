@@ -11,6 +11,7 @@ import { filterEvents } from 'helpers/filterEvents'
 import Page from 'layout/Page'
 import { client } from 'lib/api'
 import { useTranslations } from 'next-intl'
+import ArrowRight from 'public/img/arrowRight.svg'
 import { festivalsQuery } from 'queries/festivals'
 import homepageQuery from 'queries/homepage'
 import mapQuery from 'queries/map'
@@ -72,9 +73,14 @@ const Homepage: NextPage<{
       {/* @ts-expect-error */}
       <Events head={homepage.eventHead} data={festivals.future} hp />
       <CenterWrap marginBottom={80}>
-        <Button href={locale === 'en' ? '/festivaly' : '/festiwale'}>{t('viewPastEvents')}</Button>
+        <Button href={locale === 'en' ? '/festivaly' : '/festiwale'}>
+          {t('viewPastEvents')}
+          <span className={'button-arrow'}>
+            <ArrowRight />
+          </span>
+        </Button>
       </CenterWrap>
-      <BlockContent head={homepage.title2} content={homepage.content} />
+      <BlockContent head={homepage.title2} content={homepage.content} bg={'purple'} />
       <Galery images={homepage.galery} />
     </Page>
   )
