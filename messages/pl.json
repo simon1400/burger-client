@@ -41,11 +41,7 @@
   },
   "votes": {
     "thankYouPage": {
-      "title": "Dziękuję!",
-      "text": "<p>Aby dokończyć głosowanie, potwierdź swój głos w e-mailu. Wyniki znajdziesz najpóźniej w poniedziałek na stronie <a href='https://burgerfestival.pl'>burgerfestival.pl</a> oraz w wydarzeniu na Facebooku. Zwycięzca zostanie dodatkowo poinformowany e-mailem.</p>"
-    },
-    "intro": {
-      "text": "<p><strong>Zagłosuj na najlepszego burgera festiwalu! Dzięki Tobie twój ulubiony burger może zdobyć medal.</strong></p> <p><strong>Jak głosować?</strong></p> <p>1. Wypełnij swoje dane osobowe.</br> 2. Wpisz kod z karty do głosowania, którą otrzymałeś przy zakupie burgera.</br> 3. Zagłosuj na swojego faworyta.</br> 4. Potwierdź zgodę na warunki konkursu oraz przetwarzanie danych osobowych.</br> 5. Kliknij WYŚLIJ.</br> 6. Potwierdź swój głos poprzez e-mail.</p> <p><strong>I to wszystko!</strong></p> <p>Imię zwycięzcy oraz zwycięski kod opublikujemy na stronie <a href='http://burgerfestival.pl' title='smartCard-inline'>http://burgerfestival.pl</a> oraz w wydarzeniu festiwalowym na Facebooku najpóźniej w poniedziałek po festiwalu. Jeśli wygrasz, poinformujemy Cię również mailowo.</p> <p><strong>Co możesz wygrać?</strong></p> <p>1. miejsce – voucher o wartości 350 zł na burgery podczas festiwali w sezonie 2025 i 2026</br> 2. miejsce – voucher o wartości 200 zł na burgery podczas festiwali w sezonie 2025 i 2026</br> 3. miejsce – voucher o wartości 100 zł na burgery podczas festiwali w sezonie 2025 i 2026</p>"
+      "title": "Dziękuję!"
     },
     "form": {
       "title": "Głosowanie",
