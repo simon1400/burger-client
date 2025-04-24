@@ -126,7 +126,7 @@ const VotesFestival: FC<{ festivalBurgers: any; idFestival: number }> = ({
     while (i < filteredCodes.length) {
       if (filteredCodes[i].check > 0) {
         await axios
-          .delete(`${APP_API}/api/codes/${filteredCodes[i].check}`)
+          .delete(`${APP_API}/api/codes/${filteredCodes[i].check}?locale=${router.locale}`)
           .then(() => {
             i++
           })
@@ -149,6 +149,7 @@ const VotesFestival: FC<{ festivalBurgers: any; idFestival: number }> = ({
       marketing: marketingCheck,
       festivaly: idFestival,
       mailConfirm: false,
+      locale: router.locale,
     }
     // 0004HE
 
@@ -166,7 +167,7 @@ const VotesFestival: FC<{ festivalBurgers: any; idFestival: number }> = ({
   const handleOnBlur = async (value: string, idx: number) => {
     const stateCopy = { ...state }
     if (value.length === 6) {
-      const { data }: any = await getCode({ variables: { code: value } })
+      const { data }: any = await getCode({ variables: { code: value, locale: router.locale } })
       if (data.codes.data.length) {
         stateCopy.code[idx].check = data.codes.data[0].id
       } else {
