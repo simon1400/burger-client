@@ -1,5 +1,5 @@
 export const confirmMailCz = (id: number) => {
-  const link = `https://burgerfstreetestival.cz/confirmMail/${id}`
+  const link = `https://burgerfstreetfestival.cz/confirmMail/${id}`
   // const link = 'http://localhost:3000/confirmMail/'+id
   return `
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
