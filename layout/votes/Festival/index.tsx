@@ -151,7 +151,6 @@ const VotesFestival: FC<{ festivalBurgers: any; idFestival: number }> = ({
       mailConfirm: false,
       locale: router.locale,
     }
-    // 0004HE
 
     await axios
       .post(`${APP_API}/api/votes`, { data: dataToSend })
