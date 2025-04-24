@@ -4,7 +4,7 @@ import Page from 'layout/Page'
 import { useLocale, useTranslations } from 'next-intl'
 
 const czContent =
-  "<p>Pro dokončení hlasování prosím potvrď svůj hlas v e-mailu. Výsledky najdeš nejpozději v pondělí na webu <a href='https://burgerfestival.cz'>burgerfestival.cz</a> a v události na Facebooku. Výherce budeme zároveň kontaktovat na e-mailu.</p>"
+  "<p>Pro dokončení hlasování prosím potvrď svůj hlas v e-mailu. Výsledky najdeš nejpozději v pondělí na webu <a href='https://burgerstreetfestival.cz'>burgerstreetfestival.cz</a> a v události na Facebooku. Výherce budeme zároveň kontaktovat na e-mailu.</p>"
 const plContent =
   "<p>Aby dokończyć głosowanie, potwierdź swój głos w e-mailu. Wyniki znajdziesz najpóźniej w poniedziałek na stronie <a href='https://burgerfestival.pl'>burgerfestival.pl</a> oraz w wydarzeniu na Facebooku. Zwycięzca zostanie dodatkowo poinformowany e-mailem.</p>"
 
