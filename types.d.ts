@@ -197,19 +197,3 @@ interface IFestival {
   winner2: IWinner
   winner3: IWinner
 }
-
-  title: string
-  content: string
-  contentBefore: string
-  contentAfter: string
-  place: string
-  galery: IImages
-  from: string
-  to: string
-  lineup: ILineup
-  social: string
-  vouchers: IVouchers[]
-  winner1: IWinner
-  winner2: IWinner
-  winner3: IWinner
-}
