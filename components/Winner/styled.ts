@@ -7,11 +7,7 @@ export const WinnerS = styled.div(
   margin-bottom: 60px;
   cursor: pointer;
   position: relative;
-  .winner-bg{
-    position: absolute;
-    z-index: 0;
-    width: 100%;
-  }
+  
   p{
     font-size: 23px;
     margin-bottom: 0;

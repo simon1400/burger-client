@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/pseudo-random */
 import type { FC } from 'react'
 
 import { Typography } from '@mui/material'
