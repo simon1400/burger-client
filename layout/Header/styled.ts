@@ -41,7 +41,9 @@ export const HeaderS = styled.div(
     }
     .header-bg-wrap{
       top: -25px;
+      z-index: 1001;
       .header-bg{
+        
         &.header-bg-1{
           left: -100px;
         }
