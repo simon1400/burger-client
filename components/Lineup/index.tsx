@@ -93,7 +93,11 @@ const Lineup: FC<ILineup> = ({
   return (
     <LineupS hp={hp}>
       <Container maxWidth={'md'}>
-        <Head text={head} type={'h2'} bg={'yellow1'} />
+        {!!head.length && (
+          <span className={'only-lineup-head'}>
+            <Head text={head} type={'h2'} bg={'yellow1'} />
+          </span>
+        )}
         <ul className={'events-list'}>
           {registration && (
             <li className={'select-all-wrap'}>

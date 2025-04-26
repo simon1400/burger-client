@@ -12,6 +12,13 @@ export const NavS = styled.nav(
       &:not(:last-of-type) {
         margin-right: 15px;
       }
+      &.active-url{
+        a{
+          &:after{
+            display: block;
+          }
+        }
+      }
       a{
         color: white;
         text-decoration: none;
@@ -27,7 +34,7 @@ export const NavS = styled.nav(
           left: 0;
           bottom: -5px;
           position: absolute;
-          background-color: ${theme.palette.primary.main};
+          background-color: black;
         }
         &:hover{
           color: black;

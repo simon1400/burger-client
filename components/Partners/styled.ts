@@ -23,8 +23,8 @@ export const LogoWrap = styled.div(
     object-fit: contain;
     object-position: center;
   }
-  ${theme.breakpoints.down('md')} {
-    height: 90px;
-  }
+  // ${theme.breakpoints.down('md')} {
+  //   // height: px;
+  // }
 `,
 )

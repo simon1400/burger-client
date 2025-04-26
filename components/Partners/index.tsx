@@ -22,7 +22,7 @@ const Partners: FC<{ data: any }> = ({ data }) => {
           <PurpleBackground />
         </div>
         <Head text={t('partners')} type={'h2'} bg={'yellow1'} />
-        <Grid container spacing={mediaMd ? 10 : 25} justifyContent={'center'}>
+        <Grid container spacing={mediaMd ? 5 : 25} justifyContent={'center'}>
           {data.map((item: any, idx: number) => (
             <Grid key={idx} item xs={6} md={3}>
               <LogoWrap>

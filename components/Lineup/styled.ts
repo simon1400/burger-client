@@ -1,12 +1,21 @@
-import styled from "@emotion/styled";
-import { candal } from "styles/typography/baseHead";
+import styled from '@emotion/styled'
+import { candal } from 'styles/typography/baseHead'
 
-export const LineupS = styled.div<{paddingTop?: boolean; hp: boolean}>(({theme, paddingTop, hp}) => `
+export const LineupS = styled.div<{ paddingTop?: boolean; hp: boolean }>(
+  ({ theme, paddingTop, hp }) => `
   text-align: center;
   margin-bottom: 120px;
-  padding-top: ${paddingTop ? "40px" : "0"};
+  padding-top: ${paddingTop ? '40px' : '0'};
   h3{
     margin-bottom: 30px;
+  }
+  .only-lineup-head{
+    h2{
+      padding: 60px 0;
+      ${theme.breakpoints.down('md')} {
+        padding: 30px 0;
+      }
+    }
   }
   .events-list{
     margin-bottom: 60px;
@@ -103,14 +112,14 @@ export const LineupS = styled.div<{paddingTop?: boolean; hp: boolean}>(({theme, 
       }
     }
   }
-  ${theme.breakpoints.down("md")} {
+  ${theme.breakpoints.down('md')} {
     .events-list li {
       padding: 12px 5px;
       .icon-type{
         margin-right: 10px;
       }
       > div:first-of-type{
-        flex-wrap: ${hp ? "wrap" : "nowrap"};
+        flex-wrap: ${hp ? 'wrap' : 'nowrap'};
         width: 100%;
         time{
           font-size: 15px;
@@ -130,4 +139,5 @@ export const LineupS = styled.div<{paddingTop?: boolean; hp: boolean}>(({theme, 
       }
     }
   }
-`)
+`,
+)

@@ -1,6 +1,7 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled'
 
-export const HeaderS = styled.div(({theme}) => `
+export const HeaderS = styled.div(
+  ({ theme }) => `
   display: flex;
   justify-content: space-between;
   padding-top: 15px;
@@ -9,12 +10,6 @@ export const HeaderS = styled.div(({theme}) => `
     height: 200px;
     position: relative;
     z-index: 1001;
-  }
-  ${theme.breakpoints.down('md')} {
-    > a > svg{
-      width: 113px;
-      height: 110px;
-    }
   }
   .hamburger-react{
     position: relative;
@@ -39,10 +34,32 @@ export const HeaderS = styled.div(({theme}) => `
       }
     }
   }
-  
-`)
+  ${theme.breakpoints.down('md')} {
+    > a > svg{
+      width: 113px;
+      height: 110px;
+    }
+    .header-bg-wrap{
+      top: -25px;
+      .header-bg{
+        &.header-bg-1{
+          left: -100px;
+        }
+        &.header-bg-2{
+          left: 75%;
+          transform: translateX(0);
+        }
+        &.header-bg-3{
+          display: none;
+        }
+      }
+    }
+  }
+`,
+)
 
-export const MobileNav = styled.div<{open: boolean}>(({open}) => `
+export const MobileNav = styled.div<{ open: boolean }>(
+  ({ open }) => `
   position: absolute;
   height: ${open ? '100vh' : '0'};
   width: 100vw;
@@ -72,4 +89,5 @@ export const MobileNav = styled.div<{open: boolean}>(({open}) => `
       }
     }
   }
-`)
+`,
+)

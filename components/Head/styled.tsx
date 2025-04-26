@@ -44,10 +44,79 @@ export const HeadS = styled.div(
     transform: translate(-50%, -50%);
     z-index: -1;
   }
-  ${theme.breakpoints.down('md')} {
+  .red-bg{
     svg{
-      width: 150px;
-      height: 13px;
+      width: 441px;
+      height: 137px;
+    }
+  }
+  .yellow1-bg{
+    
+    svg{
+      width: 326px;
+      height: 96px;
+      
+    }
+  }
+  .yellow2-bg{
+    svg{
+      width: 328px;
+      height: 93px;
+    }
+  }
+  .purple-bg{
+    svg{
+      width: 372px;
+      height: 93px;
+    }
+  }
+  ${theme.breakpoints.down('md')} {
+    .red-bg{
+      svg{
+        width: 270px;
+        height: 108px;
+      }
+    }
+    .yellow1-bg{
+      svg{
+        width: 208px;
+        height: 61px;
+      }
+    }
+    .yellow2-bg{
+      svg{
+        width: 227px;
+        height: 65px;
+      }
+    }
+    .purple-bg{
+      svg{
+        width: 250px;
+        height: 88px;
+      }
+    }
+    
+    h1{
+      font-size: 42px;
+      line-height: 42px;
+      padding-left: 25px;
+      padding-right: 25px;
+    }
+    h2{
+      font-size: 30px;
+      line-height: 31px;
+    }
+    h3{
+      font-size: 24px;
+      line-height: 25px;
+    }
+    h4{
+      font-size: 19px;
+      line-height: 20px;
+    }
+    h5{
+      font-size: 17px;
+      line-height: 18px;
     }
   }
 `,

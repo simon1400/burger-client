@@ -12,14 +12,26 @@ interface HeadProps {
 }
 
 const bgIcons: Record<NonNullable<HeadProps['bg']>, JSX.Element> = {
-  red: <HeadRedIcon />,
+  red: (
+    <span className={'red-bg'}>
+      <HeadRedIcon />
+    </span>
+  ),
   yellow1: (
     <span className={'yellow1-bg'}>
       <HeadYellow1Icon />
     </span>
   ),
-  yellow2: <HeadYellow2Icon />,
-  purple: <HeadPurpleIcon />,
+  yellow2: (
+    <span className={'yellow2-bg'}>
+      <HeadYellow2Icon />
+    </span>
+  ),
+  purple: (
+    <span className={'purple-bg'}>
+      <HeadPurpleIcon />
+    </span>
+  ),
 }
 
 const tagMap = {

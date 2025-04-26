@@ -3,9 +3,18 @@ import type { FC } from 'react'
 
 import { ButtonS } from './styled'
 
-const IconButton: FC<ButtonProps> = ({ variant = 'contained', children, ...rest }) => {
+interface IIconButton extends ButtonProps {
+  black?: boolean
+}
+
+const IconButton: FC<IIconButton> = ({
+  variant = 'contained',
+  children,
+  black = false,
+  ...rest
+}) => {
   return (
-    <ButtonS variant={variant} {...rest}>
+    <ButtonS variant={variant} {...rest} black={black}>
       {children}
     </ButtonS>
   )

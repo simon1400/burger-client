@@ -6,7 +6,6 @@ import IconButton from 'components/IconButton'
 import LabelBare from 'components/LabelBare'
 import { kitcut } from 'helpers/kitkut'
 import { parseDate } from 'helpers/parseDate'
-import Image from 'next/image'
 import Link from 'next/link'
 import ArrowRight from 'public/img/arrow-right.svg'
 import ArticleBgPurple from 'public/img/backgrounds/articlePurple.svg'
@@ -31,10 +30,10 @@ const ArticleShort: FC<{ data: any; type?: string; bg?: 'red' | 'yellow' | 'purp
         <Grid item xs={12} md={6}>
           <Link href={`/${type}/${data.slug}`}>
             <ImgSquare margin>
-              <Image
+              <img
                 src={`${APP_API + data.image.data.attributes.url}?format=webp&resize=535x420`}
-                fill
-                alt={''}
+                className={'absolute'}
+                alt={data.title}
               />
             </ImgSquare>
           </Link>
@@ -66,7 +65,7 @@ const ArticleShort: FC<{ data: any; type?: string; bg?: 'red' | 'yellow' | 'purp
                 __html: kitcut(data.content.replace(/(<([^>]+)>)/g, ''), 150),
               }}
             />
-            <IconButton href={`/${type}/${data.slug}`}>
+            <IconButton href={`/${type}/${data.slug}`} black>
               <ArrowRight />
             </IconButton>
           </ArticleContent>

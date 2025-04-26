@@ -47,7 +47,6 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
 })
 
 const Blog: NextPage<{ blogPage: any; posts: any }> = ({ blogPage, posts }) => {
-  console.log(blogPage.title)
   return (
     <Page>
       <Head text={blogPage.title} type={'h1'} />
