@@ -28,7 +28,7 @@ const ConfirmMail = () => {
   return (
     <Page>
       <div style={{ margin: '40px 0 100px' }}>
-        <Head data={t('verificationTaken')} />
+        <Head text={t('verificationTaken')} type={'h1'} />
         <BlockContent margin content={`<p>${t('verificationCorrectMessage')}</p>`} />
       </div>
     </Page>

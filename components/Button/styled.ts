@@ -1,8 +1,9 @@
-import styled from "@emotion/styled";
-import { Button } from "@mui/material";
-import { candal } from "styles/typography/baseHead";
+import styled from '@emotion/styled'
+import { Button } from '@mui/material'
+import { candal } from 'styles/typography/baseHead'
 
-export const ButtonS = styled(Button)(({theme}) => `
+export const ButtonS = styled(Button)(
+  ({ theme }) => `
   border-radius: 24px;
   height: 48px;
   min-width: 230px;
@@ -10,4 +11,8 @@ export const ButtonS = styled(Button)(({theme}) => `
   font-size: 20px;
   text-transform: none;
   font-family: ${candal.style.fontFamily};
-`)
+  ${theme.breakpoints.down('md')} {
+    font-size: 16px;
+  }
+`,
+)

@@ -50,7 +50,7 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
 const Blog: NextPage<{ post: any }> = ({ post }) => {
   return (
     <Page>
-      <Head data={post.title} />
+      <Head text={post.title} type={'h1'} />
       {post.label?.data && (
         <Container>
           <CenterWrap>

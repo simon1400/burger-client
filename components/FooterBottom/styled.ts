@@ -1,6 +1,7 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled'
 
-export const FooterBottomS = styled.div(({theme}) => `
+export const FooterBottomS = styled.div(
+  ({ theme }) => `
   display: flex;
   justify-content: space-between;
   padding-top: 115px;
@@ -32,10 +33,10 @@ export const FooterBottomS = styled.div(({theme}) => `
       background: ${theme.palette.primary.main};
     }
     &:hover{
-      color: ${theme.palette.primary.main};
+      color: black;
     }
   }
-  ${theme.breakpoints.down("md")} {
+  ${theme.breakpoints.down('md')} {
     padding-top: 45px;
     padding-bottom: 100px;
     justify-content: center;
@@ -59,4 +60,5 @@ export const FooterBottomS = styled.div(({theme}) => `
       }
     }
   }
-`)
+`,
+)

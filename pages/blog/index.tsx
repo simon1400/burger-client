@@ -32,6 +32,7 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
 
   const blogPage = data.blog.data.attributes
   const posts = postsData.posts.data.map((item: any) => item.attributes)
+  console.log(blogPage)
 
   store.dispatch(changeTitle(blogPage.meta?.title || 'Blog'))
   store.dispatch(changeDescription(blogPage.meta?.description || ''))
@@ -48,7 +49,7 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
 const Blog: NextPage<{ blogPage: any; posts: any }> = ({ blogPage, posts }) => {
   return (
     <Page>
-      <Head data={blogPage.title} />
+      <Head text={blogPage.title} type={'h1'} />
       <Container sx={{ mb: 20 }}>
         <CenterWrap>
           <ImgSquare partners>
@@ -61,8 +62,8 @@ const Blog: NextPage<{ blogPage: any; posts: any }> = ({ blogPage, posts }) => {
         </CenterWrap>
       </Container>
       <Container>
-        {sortDate(posts).map((item: any) => (
-          <ArticleShort key={item.name} data={item} />
+        {sortDate(posts).map((item: any, idx: number) => (
+          <ArticleShort key={item.name + idx} data={item} />
         ))}
       </Container>
     </Page>

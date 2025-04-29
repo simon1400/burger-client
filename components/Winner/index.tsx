@@ -8,6 +8,9 @@ import { changeModal } from 'stores/slices/stateSlices'
 import { ImgCircle } from 'styles/ImgCircle'
 
 import { WinnerS } from './styled'
+import WinnerRed2Icon from '/public/img/backgrounds/winnerRed2.svg'
+import WinnerRed3Icon from '/public/img/backgrounds/winnerRed3.svg'
+import WinnerRedIcon from '/public/img/backgrounds/winnerRed.svg'
 
 const APP_API = process.env.APP_API
 
@@ -19,6 +22,11 @@ const Winner: FC<{ data: IWinner; place: string }> = ({ data, place }) => {
   }
   return (
     <WinnerS onClick={() => handleModal(data.data.attributes.slug)}>
+      <div className={'winner-bg'}>
+        {place === '1' && <WinnerRedIcon />}
+        {place === '2' && <WinnerRed2Icon />}
+        {place === '3' && <WinnerRed3Icon />}
+      </div>
       <ImgCircle>
         <Image
           src={`${APP_API + data.data.attributes.image.data.attributes.url}?format=webp&resize=220x220`}

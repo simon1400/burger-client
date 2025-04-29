@@ -46,10 +46,11 @@ const Festival: NextPage<{ festival: IFestival }> = ({ festival }) => {
   const t = useTranslations('global')
   return (
     <Page>
-      <Head data={festival.title} />
+      <Head text={festival.title} type={'h1'} bg={'red'} />
       <BlockContent
         time={{ from: festival.from, to: festival.to }}
         head={festival.place}
+        bg={'yellow1'}
         content={festival.content}
       />
       {beforeDate(festival.to) && <BlockContent content={festival.contentBefore} />}

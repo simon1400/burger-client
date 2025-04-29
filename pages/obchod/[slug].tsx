@@ -68,7 +68,7 @@ const Merch: NextPage<{ merch: any }> = ({ merch }) => {
   const t = useTranslations('global')
   return (
     <Page>
-      <Head data={merch.title} />
+      <Head text={merch.title} type={'h1'} />
       <Price big>
         {merch.price}
         {` ${t('currency')}`}

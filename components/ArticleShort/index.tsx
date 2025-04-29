@@ -6,16 +6,22 @@ import IconButton from 'components/IconButton'
 import LabelBare from 'components/LabelBare'
 import { kitcut } from 'helpers/kitkut'
 import { parseDate } from 'helpers/parseDate'
-import Image from 'next/image'
 import Link from 'next/link'
 import ArrowRight from 'public/img/arrow-right.svg'
+import ArticleBgPurple from 'public/img/backgrounds/articlePurple.svg'
+import ArticleBgRed from 'public/img/backgrounds/articleRed.svg'
+import ArticleBgYellow from 'public/img/backgrounds/articleYellow.svg'
 import { ImgSquare } from 'styles/ImgSquare'
 
 import { ArticleContent, ArticleShortS } from './styled'
 
 const APP_API = process.env.APP_API
 
-const ArticleShort: FC<{ data: any; type?: string }> = ({ data, type = 'blog' }) => {
+const ArticleShort: FC<{ data: any; type?: string; bg?: 'red' | 'yellow' | 'purple' }> = ({
+  data,
+  type = 'blog',
+  bg,
+}) => {
   const date = data.datePublication ? parseDate(data.datePublication) : null
 
   return (
@@ -24,16 +30,23 @@ const ArticleShort: FC<{ data: any; type?: string }> = ({ data, type = 'blog' })
         <Grid item xs={12} md={6}>
           <Link href={`/${type}/${data.slug}`}>
             <ImgSquare margin>
-              <Image
+              <img
                 src={`${APP_API + data.image.data.attributes.url}?format=webp&resize=535x420`}
-                fill
-                alt={''}
+                className={'absolute'}
+                alt={data.title}
               />
             </ImgSquare>
           </Link>
         </Grid>
         <Grid item xs={12} md={6}>
-          <ArticleContent>
+          <ArticleContent bg={bg}>
+            {bg && (
+              <div className={'article-bg'}>
+                {bg === 'purple' && <ArticleBgPurple />}
+                {bg === 'red' && <ArticleBgRed />}
+                {bg === 'yellow' && <ArticleBgYellow />}
+              </div>
+            )}
             <div>
               {data.label?.data && <LabelBare data={data.label.data.attributes.title} />}
               {date && (
@@ -52,7 +65,7 @@ const ArticleShort: FC<{ data: any; type?: string }> = ({ data, type = 'blog' })
                 __html: kitcut(data.content.replace(/(<([^>]+)>)/g, ''), 150),
               }}
             />
-            <IconButton href={`/${type}/${data.slug}`}>
+            <IconButton href={`/${type}/${data.slug}`} black>
               <ArrowRight />
             </IconButton>
           </ArticleContent>

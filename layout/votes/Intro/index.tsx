@@ -18,7 +18,7 @@ const Intro: FC<{ link: string; festivals: any }> = ({ link, festivals }) => {
   return (
     <Page>
       <div style={{ margin: '40px 0 100px' }}>
-        <Head data={festivals.title} />
+        <Head text={festivals.title} type={'h1'} />
         <BlockContent
           head={festivals.place}
           margin

@@ -48,11 +48,11 @@ const WinnersPage: NextPage<{ winners: any }> = ({ winners }) => {
   const t = useTranslations('global')
   return (
     <Page>
-      {winners.map((item: any, idx: number) => {
+      {winners.map((item: any) => {
         if (item.winner1.data || item.winner2.data || item.winner3.data || item.vouchers.length) {
           return (
             <div key={item.title}>
-              <Head data={item.title} />
+              <Head text={item.title} type={'h1'} />
               <BlockContent head={item.place} margin time={{ from: item.from, to: item.to }} />
               <CenterWrap marginBottom={80}>
                 <Button href={`/${item.slug}`}>{t('detailEvent')}</Button>

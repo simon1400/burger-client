@@ -1,6 +1,7 @@
 import type { FC } from 'react'
 
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import ChevronDown from 'public/img/chevron-up.svg'
 import { useState } from 'react'
 
@@ -8,6 +9,7 @@ import { NavS } from './styled'
 
 const Nav: FC<{ data: any }> = ({ data }) => {
   const [activeDropdown, setActiveDropdown] = useState(false)
+  const router = useRouter()
 
   const handleOpen = (e: any) => {
     e.preventDefault()
@@ -35,7 +37,7 @@ const Nav: FC<{ data: any }> = ({ data }) => {
               </div>
             </li>
           ) : (
-            <li key={idx}>
+            <li key={idx} className={router.asPath.includes(item.link) ? 'active-url' : ''}>
               <Link href={item.link}>{item.title}</Link>
             </li>
           )

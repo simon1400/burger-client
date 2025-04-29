@@ -43,7 +43,7 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
 const MerchShort: NextPage<{ merchPage: any; merches: any }> = ({ merchPage, merches }) => {
   return (
     <Page>
-      <Head data={merchPage.title} />
+      <Head text={merchPage.title} type={'h1'} />
       <BlockContent content={merchPage.content} />
       <Container>
         <Grid container spacing={6} marginTop={12} marginBottom={12}>

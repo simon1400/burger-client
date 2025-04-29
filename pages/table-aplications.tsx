@@ -97,7 +97,7 @@ const GaleryPage: NextPage<{ result: any }> = ({ result }) => {
   return (
     <Page>
       <Container>
-        <Head data={'Data result table'} />
+        <Head text={'Data result table'} type={'h1'} />
         <TableWrap>
           <Table sx={{ minWidth: 650 }} size={'small'} aria-label={'a dense table'}>
             <TableHead>

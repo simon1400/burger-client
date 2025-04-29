@@ -48,7 +48,7 @@ const Festival: NextPage<{ festivalPage: any; festivals: any }> = ({ festivalPag
 
   return (
     <Page>
-      <Head data={festivalPage.title} />
+      <Head text={festivalPage.title} type={'h1'} />
       <BlockContent content={festivalPage.content} />
       {!!filteredFestivals.future.length && (
         <Lineup head={t('upcomingEvents')} data={filteredFestivals.future} hp />

@@ -1,6 +1,7 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled'
 
-export const HeaderS = styled.div(({theme}) => `
+export const HeaderS = styled.div(
+  ({ theme }) => `
   display: flex;
   justify-content: space-between;
   padding-top: 15px;
@@ -10,19 +11,60 @@ export const HeaderS = styled.div(({theme}) => `
     position: relative;
     z-index: 1001;
   }
+  .hamburger-react{
+    position: relative;
+    z-index: 1001;
+  }
+  .header-bg-wrap{
+    position: absolute;
+    width: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    top: -15px;
+    max-width: 1600px;
+
+    .header-bg{
+      position: absolute;
+      &.header-bg-2{
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      &.header-bg-3{
+        right: 0;
+      }
+    }
+  }
   ${theme.breakpoints.down('md')} {
     > a > svg{
       width: 113px;
       height: 110px;
     }
+    
   }
-  .hamburger-react{
-    position: relative;
-    z-index: 1001;
+  @media(max-width: 1100px) {
+    .header-bg-wrap{
+      top: -25px;
+      z-index: 1001;
+      .header-bg{
+        
+        &.header-bg-1{
+          left: -100px;
+        }
+        &.header-bg-2{
+          left: 75%;
+          transform: translateX(0);
+        }
+        &.header-bg-3{
+          display: none;
+        }
+      }
+    }
   }
-`)
+`,
+)
 
-export const MobileNav = styled.div<{open: boolean}>(({open}) => `
+export const MobileNav = styled.div<{ open: boolean }>(
+  ({ open }) => `
   position: absolute;
   height: ${open ? '100vh' : '0'};
   width: 100vw;
@@ -52,4 +94,5 @@ export const MobileNav = styled.div<{open: boolean}>(({open}) => `
       }
     }
   }
-`)
+`,
+)

@@ -1,7 +1,8 @@
-import styled from "@emotion/styled";
-import { candal } from "styles/typography/baseHead";
+import styled from '@emotion/styled'
+import { candal } from 'styles/typography/baseHead'
 
-export const NavS = styled.nav(({theme}) => `
+export const NavS = styled.nav(
+  ({ theme }) => `
   >ul{
     >li{
       display: inline-block;
@@ -10,6 +11,13 @@ export const NavS = styled.nav(({theme}) => `
       }
       &:not(:last-of-type) {
         margin-right: 15px;
+      }
+      &.active-url{
+        a{
+          &:after{
+            display: block;
+          }
+        }
       }
       a{
         color: white;
@@ -26,10 +34,10 @@ export const NavS = styled.nav(({theme}) => `
           left: 0;
           bottom: -5px;
           position: absolute;
-          background-color: ${theme.palette.primary.main};
+          background-color: black;
         }
         &:hover{
-          color: ${theme.palette.primary.main};
+          color: black;
           svg{
             transform: rotate(-180deg);
           }
@@ -126,4 +134,5 @@ export const NavS = styled.nav(({theme}) => `
       }
     }
   }
-`)
+`,
+)

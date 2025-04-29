@@ -1,9 +1,10 @@
-import styled from "@emotion/styled";
-import Link from "next/link";
+import styled from '@emotion/styled'
 
-export const ContactItemS = styled.div(({theme}) => `
+export const ContactItemS = styled.div(
+  ({ theme }) => `
   text-align: center;
   margin-bottom: 60px;
+  position: relative;
   p{
     font-size: 23px;
     margin-top: 5px;
@@ -32,9 +33,10 @@ export const ContactItemS = styled.div(({theme}) => `
       color: #d9291c;
     }
   }
-  /* ${theme.breakpoints.down("md")} {
+  /* ${theme.breakpoints.down('md')} {
     a{
       text-align: center;
     }
   } */
-`)
+`,
+)

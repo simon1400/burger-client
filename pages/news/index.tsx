@@ -46,10 +46,12 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
   }
 })
 
+const colors = ['red', 'purple', 'yellow']
+
 const News: NextPage<{ newsPage: any; news: any }> = ({ newsPage, news }) => {
   return (
     <Page>
-      <Head data={newsPage.title} />
+      <Head text={newsPage.title} type={'h1'} />
       {!!newsPage.image.data && (
         <Container sx={{ mb: 20 }}>
           <CenterWrap>
@@ -65,8 +67,13 @@ const News: NextPage<{ newsPage: any; news: any }> = ({ newsPage, news }) => {
       )}
       <BlockContent content={newsPage.content} />
       <Container>
-        {sortDate(news).map((item: any) => (
-          <ArticleShort type={'news'} key={item.name} data={item} />
+        {sortDate(news).map((item: any, idx: number) => (
+          <ArticleShort
+            type={'news'}
+            key={item.name + idx}
+            bg={colors[idx % colors.length] as 'red' | 'yellow' | 'purple'}
+            data={item}
+          />
         ))}
       </Container>
     </Page>
