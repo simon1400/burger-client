@@ -39,6 +39,9 @@ export const HeaderS = styled.div(
       width: 113px;
       height: 110px;
     }
+    
+  }
+  @media(max-width: 1100px) {
     .header-bg-wrap{
       top: -25px;
       z-index: 1001;
