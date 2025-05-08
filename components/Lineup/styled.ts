@@ -10,11 +10,12 @@ export const LineupS = styled.div<{ paddingTop?: boolean; hp: boolean }>(
     margin-bottom: 30px;
   }
   .only-lineup-head{
+    padding: 60px 0;
+    ${theme.breakpoints.down('md')} {
+      padding: 30px 0;
+    }
     h2{
-      padding: 60px 0;
-      ${theme.breakpoints.down('md')} {
-        padding: 30px 0;
-      }
+      margin-bottom: 0;
     }
   }
   .events-list{

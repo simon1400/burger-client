@@ -73,7 +73,7 @@ const Homepage: NextPage<{
       {/* @ts-expect-error */}
       <Events head={homepage.eventHead} data={festivals.future} hp />
       <CenterWrap marginBottom={80}>
-        <Button href={locale === 'en' ? '/festivaly' : '/festiwale'}>
+        <Button href={locale === 'en' ? '/festivaly#old-festival' : '/festiwale#old-festival'}>
           {t('viewPastEvents')}
           <span className={'button-arrow'}>
             <ArrowRight />

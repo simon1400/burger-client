@@ -18,7 +18,7 @@ const Follow: FC<{ data: any }> = ({ data }) => {
         <div className={'footer-bg-red'}>
           <RedBackground />
         </div>
-        <Head text={t('follow')} type={'h2'} bg={'yellow2'} />
+        <Head className={'footer-head'} text={t('follow')} type={'h2'} bg={'yellow2'} />
         <ul>
           {data.map((item: any, idx: number) => (
             <li key={idx} className={`soc-${item.type}`}>

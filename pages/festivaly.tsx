@@ -54,7 +54,9 @@ const Festival: NextPage<{ festivalPage: any; festivals: any }> = ({ festivalPag
         <Lineup head={t('upcomingEvents')} data={filteredFestivals.future} hp />
       )}
       {!!filteredFestivals.old.length && (
-        <Lineup head={t('alreadyTaken')} data={filteredFestivals.old} hp />
+        <div id={'old-festival'}>
+          <Lineup head={t('alreadyTaken')} data={filteredFestivals.old} hp />
+        </div>
       )}
       <BlockContent head={festivalPage.title2} content={festivalPage.content2} />
       {!!festivalPage.galery?.data?.length && <Galery images={festivalPage.galery} />}

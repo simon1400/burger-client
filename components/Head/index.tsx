@@ -8,6 +8,7 @@ import { HeadS } from './styled'
 interface HeadProps {
   type: 'h1' | 'h2' | 'h3' | 'h4' | 'h5'
   text: string
+  className?: string
   bg?: 'red' | 'yellow1' | 'yellow2' | 'purple'
 }
 
@@ -42,12 +43,12 @@ const tagMap = {
   h5: 'h5',
 } as const
 
-const Head = ({ type, text, bg }: HeadProps) => {
+const Head = ({ type, text, bg, className }: HeadProps) => {
   const isBlackColorText = bg === 'yellow1' || bg === 'yellow2'
   const Tag = tagMap[type] || 'div'
 
   return (
-    <HeadS>
+    <HeadS className={className}>
       <Tag className={isBlackColorText ? 'black-color' : ''}>{text}</Tag>
       {bg && bgIcons[bg]}
     </HeadS>

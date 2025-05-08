@@ -5,8 +5,11 @@ export const PartnersS = styled.section(
   padding-top: 120px;
   padding-bottom: 35px;
   text-align: center;
-  h2{
+  .footer-head{
     margin-bottom: 80px;
+    h2{
+      margin-bottom: 0;
+    }
   }
   ${theme.breakpoints.down('md')} {
     padding-top: 55px;
@@ -15,16 +18,11 @@ export const PartnersS = styled.section(
 `,
 )
 
-export const LogoWrap = styled.div(
-  ({ theme }) => `
+export const LogoWrap = styled.div`
   position: relative;
   height: 170px;
-  img{
+  img {
     object-fit: contain;
     object-position: center;
   }
-  // ${theme.breakpoints.down('md')} {
-  //   // height: px;
-  // }
-`,
-)
+`

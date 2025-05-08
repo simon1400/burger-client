@@ -21,7 +21,7 @@ const Partners: FC<{ data: any }> = ({ data }) => {
         <div className={'footer-bg-purple'}>
           <PurpleBackground />
         </div>
-        <Head text={t('partners')} type={'h2'} bg={'yellow1'} />
+        <Head className={'footer-head'} text={t('partners')} type={'h2'} bg={'yellow1'} />
         <Grid container spacing={mediaMd ? 5 : 25} justifyContent={'center'}>
           {data.map((item: any, idx: number) => (
             <Grid key={idx} item xs={6} md={3}>

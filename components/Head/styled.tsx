@@ -10,6 +10,9 @@ export const HeadS = styled.div(
     
     &.black-color{
       color: #141414;
+      background-color: rgb(240, 189, 19);
+      display: inline-block;
+      margin-top: 0;
     }
     
   }
