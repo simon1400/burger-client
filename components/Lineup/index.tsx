@@ -15,7 +15,7 @@ import Time from 'components/Time'
 import { InInterval } from 'helpers/inInterval'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useLocale, useTranslations } from 'next-intl'
+import { useTranslations } from 'next-intl'
 import ArrowRight from 'public/img/arrow-right.svg'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
@@ -34,7 +34,6 @@ const Lineup: FC<ILineup> = ({
   handleChange,
   hp = false,
 }) => {
-  const locale = useLocale()
   const t = useTranslations('global')
   const dispatch = useDispatch()
 
@@ -125,9 +124,7 @@ const Lineup: FC<ILineup> = ({
                   <span className={'status'} />
                 )}
                 <div className={item.category?.data ? 'basic-wrap' : 'title-wrap'}>
-                  {locale === 'en' && item.from && item.to && (
-                    <Time from={item.from} to={item.to} />
-                  )}
+                  {item.from && item.to && <Time from={item.from} to={item.to} />}
                   {!!item.category?.data?.length && (
                     <div className={'icon-type'}>
                       <Image
