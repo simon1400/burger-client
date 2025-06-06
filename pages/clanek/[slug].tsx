@@ -49,10 +49,9 @@ const Article: NextPage<{ article: any }> = ({ article }) => {
           <Typography
             component={'div'}
             dangerouslySetInnerHTML={{
-              __html: article.content.replace(
-                /\/uploads/g,
-                'https://burger-strapi.hardart.cz/uploads',
-              ),
+              __html: article.content.includes('https://')
+                ? article.content
+                : article.content.replace(/\/uploads/g, 'https://burger-strapi.hardart.cz/uploads'),
             }}
           />
         </CenterWrap>

@@ -31,11 +31,11 @@ const GalleryGrid: FC<GalleryGridProps> = ({ images, appApi }) => {
             <LightgalleryItem
               group={'any'}
               component={'div'}
-              src={`${appApi}${item.attributes.url}?format=webp&resize=1920x1200`}
+              src={`${appApi}${item.attributes.url}?format=webp`}
             >
               <GaleryItem>
                 <a
-                  href={`${appApi}${item.attributes.url}?format=webp&resize=1920x1200`}
+                  href={`${appApi}${item.attributes.url}?format=webp&resize=560x500`}
                   onClick={(e) => e.preventDefault()}
                 >
                   <Image src={imageUrl} fill alt={''} />
