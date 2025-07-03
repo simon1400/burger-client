@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client'
 
 const contactQuery = gql`
   query Contact($locale: I18NLocaleCode!) {
@@ -11,19 +11,20 @@ const contactQuery = gql`
           content2
           phone
           email
-          item{
+          item {
             title
             function
             email
-            image{
-              data{
-                attributes{
+            phone
+            image {
+              data {
+                attributes {
                   url
                 }
               }
             }
           }
-          meta{
+          meta {
             title
             description
           }

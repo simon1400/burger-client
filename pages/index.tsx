@@ -7,6 +7,7 @@ import Galery from 'components/Galery'
 import Head from 'components/Head'
 import Events from 'components/Lineup'
 import Map from 'components/Map'
+import { TopVideo } from 'components/TopVideo'
 import { filterEvents } from 'helpers/filterEvents'
 import Page from 'layout/Page'
 import { client } from 'lib/api'
@@ -68,7 +69,8 @@ const Homepage: NextPage<{
   const t = useTranslations('global')
   return (
     <Page>
-      <Map data={map} />
+      {locale === 'en' && <Map data={map} />}
+      {locale === 'pl' && <TopVideo />}
       <Head text={homepage.title} type={'h1'} bg={'red'} />
       {/* @ts-expect-error */}
       <Events head={homepage.eventHead} data={festivals.future} hp />

@@ -22,7 +22,7 @@ export const HeaderS = styled.div(
     transform: translateX(-50%);
     top: -15px;
     max-width: 1600px;
-
+    z-index: 1;
     .header-bg{
       position: absolute;
       &.header-bg-2{

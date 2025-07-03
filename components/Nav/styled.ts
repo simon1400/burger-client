@@ -3,6 +3,8 @@ import { candal } from 'styles/typography/baseHead'
 
 export const NavS = styled.nav(
   ({ theme }) => `
+  position: relative;
+  z-index: 2;
   >ul{
     >li{
       display: inline-block;

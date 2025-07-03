@@ -62,10 +62,10 @@ const Lineup: FC<ILineup> = ({
   }
 
   const handleCheck = (value: string) => {
-    let stateArr = [...stateCheck]
+    const stateArr = [...stateCheck]
     const hasIndex = stateArr.findIndex((item) => item === value)
     if (hasIndex >= 0) {
-      stateArr = stateArr.splice(hasIndex, 1)
+      stateArr.splice(hasIndex, 1)
     } else {
       // @ts-ignore
       stateArr.push(value)

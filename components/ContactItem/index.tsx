@@ -40,7 +40,8 @@ const ContactItem: FC<IContactItem> = ({ data }) => {
       </ImgCircle>
       <Typography variant={'h3'}>{data.title}</Typography>
       <Typography>{data.function}</Typography>
-      {data.email && <Link href={`mailto:${data.email}`}>{data.email}</Link>}
+      <div>{data.email && <Link href={`mailto:${data.email}`}>{data.email}</Link>}</div>
+      <div>{data.phone && <Link href={`tel:${data.phone}`}>{data.phone}</Link>}</div>
     </ContactItemS>
   )
 }

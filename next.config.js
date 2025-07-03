@@ -24,34 +24,6 @@ const nextConfig = {
   },
   async rewrites() {
     return [
-      // {
-      //   source: '/festiwale',
-      //   destination: '/festivaly',
-      // },
-      // {
-      //   source: '/czlonek/:slug',
-      //   destination: '/clanek/:slug',
-      // },
-      // {
-      //   source: '/rejestracja',
-      //   destination: '/registrace',
-      // },
-      // {
-      //   source: '/fanshop',
-      //   destination: '/obchod',
-      // },
-      // {
-      //   source: '/galeria-zdjec',
-      //   destination: '/fotogalerie',
-      // },
-      // {
-      //   source: '/partnerzy',
-      //   destination: '/partneri',
-      // },
-      // {
-      //   source: '/kontakty',
-      //   destination: '/kontakt',
-      // },
       {
         source: '/sitemap/index.xml',
         destination: 'https://burger-strapi.hardart.cz/sitemap/index.xml',
