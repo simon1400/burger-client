@@ -1,6 +1,6 @@
 /* eslint-disable sonarjs/no-nested-functions */
 /* eslint-disable array-callback-return */
-/* eslint-disable react-dom/no-dangerously-set-innerhtml */
+
 import type { NextPage } from 'next'
 
 import styled from '@emotion/styled'
@@ -20,6 +20,36 @@ import { aplicationsQuery } from 'queries/aplications'
 import { useEffect, useState } from 'react'
 import { wrapper } from 'stores'
 import { changeDescription, changeTitle } from 'stores/slices/metaSlices'
+
+function exportFestivalsToCSV(data: any[], filename = 'festivals.csv') {
+  if (!data.length) return
+
+  const keys = Object.keys(data[0])
+
+  const csvRows = data.map((row) => {
+    const rowCopy: any = { ...row }
+
+    // Преобразуем массив festivals (если он строка с запятыми)
+    if (typeof rowCopy.festivals === 'string') {
+      rowCopy.festivals = rowCopy.festivals.split(',').join(' | ')
+    }
+
+    return keys.map((k) => `"${(rowCopy[k] ?? '').toString().replace(/"/g, '""')}"`).join(',')
+  })
+
+  const csvHeader = keys.join(',')
+  const csvContent = [csvHeader, ...csvRows].join('\n')
+
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' })
+  const url = URL.createObjectURL(blob)
+
+  const link = document.createElement('a')
+  link.href = url
+  link.setAttribute('download', filename)
+  document.body.appendChild(link)
+  link.click()
+  document.body.removeChild(link)
+}
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
   const { data } = await client.query({
@@ -55,32 +85,34 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
 
   return {
     props: {
-      result,
+      result: result.splice(0, 100),
+      // result,
       messages: (await import(`../messages/${ctx.locale}.json`)).default,
     },
   }
 })
 
-const TableWrap = styled(TableContainer)(
-  ({ theme }) => `
+const TableWrap = styled(TableContainer)`
   background: transparent;
-  th{
+  th {
     font-weight: 800;
     font-size: 23px;
     white-space: nowrap;
   }
-  th, td{
-    &:first-of-type{
+  th,
+  td {
+    &:first-of-type {
       min-width: 500px;
     }
   }
-`,
-)
+`
 
 const GaleryPage: NextPage<{ result: any }> = ({ result }) => {
   const [hasPassword, setHasPassword] = useState(false)
 
   useEffect(() => {
+    // setHasPassword(true)
+    // exportFestivalsToCSV(result)
     if (!hasPassword) {
       // eslint-disable-next-line no-alert
       const enteredFood = prompt('Please enter password:')
@@ -111,9 +143,16 @@ const GaleryPage: NextPage<{ result: any }> = ({ result }) => {
             </TableHead>
             <TableBody>
               {result.map((row: any, idx: number) => (
-                <TableRow key={idx} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                <TableRow
+                  key={`row${idx}`}
+                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                >
                   {Object.values(row).map((rowItem: any, idxRow: number) => (
-                    <TableCell key={rowItem} align={!idxRow ? 'left' : 'right'} scope={'row'}>
+                    <TableCell
+                      key={rowItem + idxRow}
+                      align={!idxRow ? 'left' : 'right'}
+                      scope={'row'}
+                    >
                       <div dangerouslySetInnerHTML={{ __html: rowItem.replace(/,/g, '<br/>') }} />
                     </TableCell>
                   ))}

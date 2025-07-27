@@ -25,9 +25,9 @@ const FooterBottom: FC<{ phone: string; email: string; lang?: string }> = ({
               <Link href={'/clanek/kariera'}>{t('carier')}</Link>
             </div>
           )}
-          <div>
+          {/* <div>
             <Link href={'/'}>{t('settingCookies')}</Link>
-          </div>
+          </div> */}
         </div>
       </FooterBottomS>
     </Container>
