@@ -9,9 +9,11 @@ import Events from 'components/Lineup'
 import Map from 'components/Map'
 import { TopVideo } from 'components/TopVideo'
 import { filterEvents } from 'helpers/filterEvents'
+// import { uploadCodes } from 'helpers/uploudCodes'
 import Page from 'layout/Page'
 import { client } from 'lib/api'
 import { useTranslations } from 'next-intl'
+// import codes from 'public/codes_pl_array.json'
 import ArrowRight from 'public/img/arrowRight.svg'
 import { festivalsQuery } from 'queries/festivals'
 import homepageQuery from 'queries/homepage'
@@ -41,6 +43,10 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
       locale: ctx.locale,
     },
   })
+
+  // uploadCodes(codes, 'pl').then((summary) => {
+  //   console.log('SUMMARY:', summary)
+  // })
 
   const homepage = data.homepage.data.attributes
   const festivals = festivalsData.festivals.data.map((item: any) => item.attributes)

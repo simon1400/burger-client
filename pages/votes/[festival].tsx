@@ -22,7 +22,7 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
 
   festivalLinup.map((item: any) => {
     item.attributes.category.data.map((categoryItem: any) => {
-      if (categoryItem.attributes.title === 'Burgrárna') {
+      if (categoryItem.attributes.title === (ctx.locale === 'pl' ? 'Burgerownia' : 'Burgrárna')) {
         festivalBurgers.push(item)
       }
     })
