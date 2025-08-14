@@ -258,7 +258,14 @@ const VotesFestival: FC<{ festivalBurgers: any; idFestival: number }> = ({
                   <div className={'label-checkbox'}>
                     <p>
                       {tVotes('form.aggreeWith')}{' '}
-                      <a href={'/clanek/obchodni-podminky'} target={'_blank'}>
+                      <a
+                        href={
+                          router.locale === 'pl'
+                            ? '/czlonek/zasady-sprzedazy'
+                            : '/clanek/obchodni-podminky'
+                        }
+                        target={'_blank'}
+                      >
                         {tVotes('form.terms')}
                       </a>
                     </p>
@@ -276,7 +283,14 @@ const VotesFestival: FC<{ festivalBurgers: any; idFestival: number }> = ({
                   <div className={'label-checkbox'}>
                     <p>
                       {tVotes('form.aggreeWith')}{' '}
-                      <a href={'/clanek/informace-o-zpracovani-osobnich-udaju'} target={'_blank'}>
+                      <a
+                        href={
+                          router.locale === 'pl'
+                            ? '/czlonek/informacje-dla-sprzedawcow'
+                            : '/clanek/informace-o-zpracovani-osobnich-udaju'
+                        }
+                        target={'_blank'}
+                      >
                         {'GDPR\r'}
                       </a>
                     </p>
