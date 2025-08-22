@@ -286,7 +286,7 @@ const VotesFestival: FC<{ festivalBurgers: any; idFestival: number }> = ({
                       <a
                         href={
                           router.locale === 'pl'
-                            ? '/czlonek/informacje-dla-sprzedawcow'
+                            ? '/czlonek/informacje-o-przetwarzaniu-danych-osobowych'
                             : '/clanek/informace-o-zpracovani-osobnich-udaju'
                         }
                         target={'_blank'}
