@@ -15,7 +15,7 @@ export function middleware(req: NextRequest) {
     '/galeria-zdjec': '/fotogalerie',
     '/partnerzy': '/partneri',
     '/kontakty': '/kontakt',
-    '/vyherci': '/zwycięzcy',
+    '/vyherci': '/zwyciezcy',
   }
 
   // Чешские маршруты, которые должны отдавать 404 на польской версии
