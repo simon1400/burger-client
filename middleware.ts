@@ -15,12 +15,14 @@ export function middleware(req: NextRequest) {
     '/galeria-zdjec': '/fotogalerie',
     '/partnerzy': '/partneri',
     '/kontakty': '/kontakt',
+    '/vyherci': '/zwycięzcy',
   }
 
   // Чешские маршруты, которые должны отдавать 404 на польской версии
   const forbiddenPL = [
     '/clanek/',
     '/festivaly',
+    '/vyherci',
     '/registrace',
     '/obchod',
     '/fotogalerie',
