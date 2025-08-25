@@ -15,7 +15,7 @@ export function middleware(req: NextRequest) {
     '/galeria-zdjec': '/fotogalerie',
     '/partnerzy': '/partneri',
     '/kontakty': '/kontakt',
-    '/vyherci': '/zwyciezcy',
+    '/zwyciezcy': '/vyherci',
   }
 
   // Чешские маршруты, которые должны отдавать 404 на польской версии
@@ -59,6 +59,8 @@ export const config = {
     '/registrace',
     '/fanshop',
     '/obchod',
+    '/vyherci',
+    '/zwyciezcy',
     '/galeria-zdjec',
     '/fotogalerie',
     '/partnerzy',
