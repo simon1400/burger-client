@@ -18,11 +18,16 @@ export const PartnersS = styled.section(
 `,
 )
 
-export const LogoWrap = styled.div`
+export const LogoWrap = styled.div(
+  ({ theme }) => `
   position: relative;
-  height: 170px;
+  height: 120px;
   img {
     object-fit: contain;
     object-position: center;
   }
-`
+  ${theme.breakpoints.down('md')} {
+    height: 80px;
+  }
+`,
+)

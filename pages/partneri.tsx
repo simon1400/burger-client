@@ -89,7 +89,7 @@ const PartnersPage: NextPage<{ partnersPage: any }> = ({ partnersPage }) => {
             {partnersPage.headPartner}
           </Typography>
           <Grid container justifyContent={'center'}>
-            {partnersPage.partners.map((item: any, idx: number) => (
+            {partnersPage.partners.map((item: any) => (
               <Grid key={item.link} item xs={12} md={getColumn(partnerLength)}>
                 <Link href={item.link}>
                   <ImgSquare big={partnerLength < 4} partners>
@@ -109,7 +109,7 @@ const PartnersPage: NextPage<{ partnersPage: any }> = ({ partnersPage }) => {
             {partnersPage.headSupport}
           </Typography>
           <Grid container justifyContent={'center'}>
-            {partnersPage.supported.map((item: any, idx: number) => (
+            {partnersPage.supported.map((item: any) => (
               <Grid key={item.link} item xs={12} md={getColumn(supportedLength)}>
                 <Link href={item.link}>
                   <ImgSquare big={supportedLength < 4} partners>
