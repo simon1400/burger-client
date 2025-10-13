@@ -5,6 +5,9 @@ import type { NextPage } from 'next'
 
 import styled from '@emotion/styled'
 import {
+  Box,
+  // Button,
+  // CircularProgress,
   Container,
   Table,
   TableBody,
@@ -21,34 +24,65 @@ import { useEffect, useState } from 'react'
 import { wrapper } from 'stores'
 import { changeDescription, changeTitle } from 'stores/slices/metaSlices'
 
-function exportFestivalsToCSV(data: any[], filename = 'festivals.csv') {
-  if (!data.length) return
+function exportApplicationsToCSV(
+  data: any[],
+  filename = `applications_${new Date().toISOString().split('T')[0]}.csv`,
+) {
+  if (!data.length) {
+    console.warn('No data to export')
+    return
+  }
 
-  const keys = Object.keys(data[0])
+  try {
+    const keys = Object.keys(data[0])
 
-  const csvRows = data.map((row) => {
-    const rowCopy: any = { ...row }
+    // Обрабатываем данные порциями для лучшей производительности
+    const CHUNK_SIZE = 100
+    const csvRows: string[] = []
 
-    // Преобразуем массив festivals (если он строка с запятыми)
-    if (typeof rowCopy.festivals === 'string') {
-      rowCopy.festivals = rowCopy.festivals.split(',').join(' | ')
+    for (let i = 0; i < data.length; i += CHUNK_SIZE) {
+      const chunk = data.slice(i, i + CHUNK_SIZE)
+      const chunkRows = chunk.map((row) => {
+        const rowCopy: any = { ...row }
+
+        // Преобразуем массив festivals (если он строка с запятыми)
+        if (typeof rowCopy.festivals === 'string') {
+          rowCopy.festivals = rowCopy.festivals.split(',').join(' | ')
+        }
+
+        return keys
+          .map((k) => {
+            const value = (rowCopy[k] ?? '').toString().replace(/"/g, '""')
+            return `"${value}"`
+          })
+          .join(',')
+      })
+      csvRows.push(...chunkRows)
     }
 
-    return keys.map((k) => `"${(rowCopy[k] ?? '').toString().replace(/"/g, '""')}"`).join(',')
-  })
+    const csvHeader = keys.join(',')
+    const csvContent = [csvHeader, ...csvRows].join('\n')
 
-  const csvHeader = keys.join(',')
-  const csvContent = [csvHeader, ...csvRows].join('\n')
+    // Добавляем BOM для корректного отображения UTF-8 в Excel
+    const BOM = '\uFEFF'
+    const blob = new Blob([BOM + csvContent], { type: 'text/csv;charset=utf-8;' })
+    const url = URL.createObjectURL(blob)
 
-  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' })
-  const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.setAttribute('download', filename)
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
 
-  const link = document.createElement('a')
-  link.href = url
-  link.setAttribute('download', filename)
-  document.body.appendChild(link)
-  link.click()
-  document.body.removeChild(link)
+    // Освобождаем память
+    URL.revokeObjectURL(url)
+
+    return true
+  } catch (error) {
+    console.error('Error exporting CSV:', error)
+    return false
+  }
 }
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
@@ -85,8 +119,8 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
 
   return {
     props: {
-      result: result.splice(0, 100),
-      // result,
+      result: result.slice(0, 100),
+      fullResult: result,
       messages: (await import(`../messages/${ctx.locale}.json`)).default,
     },
   }
@@ -107,12 +141,12 @@ const TableWrap = styled(TableContainer)`
   }
 `
 
-const GaleryPage: NextPage<{ result: any }> = ({ result }) => {
+const GaleryPage: NextPage<{ result: any; fullResult: any }> = ({ result, fullResult }) => {
   const [hasPassword, setHasPassword] = useState(false)
+  // const [isExporting, setIsExporting] = useState(false)
+  // const [exportMessage, setExportMessage] = useState('')
 
   useEffect(() => {
-    // setHasPassword(true)
-    // exportFestivalsToCSV(result)
     if (!hasPassword) {
       // eslint-disable-next-line no-alert
       const enteredFood = prompt('Please enter password:')
@@ -120,7 +154,28 @@ const GaleryPage: NextPage<{ result: any }> = ({ result }) => {
         setHasPassword(true)
       }
     }
-  }, [])
+  }, [hasPassword])
+
+  // const handleExport = async () => {
+  //   setIsExporting(true)
+  //   setExportMessage('Preparing export...')
+
+  //   // Небольшая задержка для отображения UI
+  //   await new Promise((resolve) => setTimeout(resolve, 100))
+
+  //   const success = exportApplicationsToCSV(fullResult)
+
+  //   if (success) {
+  //     setExportMessage(`Successfully exported ${fullResult.length} records`)
+  //   } else {
+  //     setExportMessage('Export failed. Check console for details.')
+  //   }
+
+  //   setIsExporting(false)
+
+  //   // Очищаем сообщение через 3 секунды
+  //   setTimeout(() => setExportMessage(''), 3000)
+  // }
 
   if (!hasPassword) {
     return null
@@ -129,7 +184,30 @@ const GaleryPage: NextPage<{ result: any }> = ({ result }) => {
   return (
     <Page>
       <Container>
-        <Head text={'Data result table'} type={'h1'} />
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
+          <Head text={'Data result table'} type={'h1'} />
+          {/* <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+            {exportMessage && (
+              <Box
+                sx={{
+                  color: exportMessage.includes('Successfully') ? 'success.main' : 'error.main',
+                  fontSize: '14px',
+                }}
+              >
+                {exportMessage}
+              </Box>
+            )}
+            <Button
+              variant={'contained'}
+              color={'primary'}
+              onClick={handleExport}
+              disabled={isExporting}
+              startIcon={isExporting ? <CircularProgress size={20} /> : null}
+            >
+              {isExporting ? 'Exporting...' : `Export All (${fullResult.length} records)`}
+            </Button>
+          </Box> */}
+        </Box>
         <TableWrap>
           <Table sx={{ minWidth: 650 }} size={'small'} aria-label={'a dense table'}>
             <TableHead>
