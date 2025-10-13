@@ -2,7 +2,8 @@
 /* eslint-disable react-dom/no-missing-iframe-sandbox */
 import type { NextPage } from 'next'
 
-import { Container, Typography } from '@mui/material'
+import styled from '@emotion/styled'
+import { Container } from '@mui/material'
 import Galery from 'components/Galery'
 import Head from 'components/Head'
 import LabelBare from 'components/LabelBare'
@@ -14,6 +15,30 @@ import { changeDescription, changeImage, changeTitle } from 'stores/slices/metaS
 import { CenterWrap } from 'styles/CenterWrap'
 
 const APP_API = process.env.APP_API
+
+const ContentWrapper = styled.div`
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  figure {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  p {
+    img {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+`
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
   const { data } = await client.query({
@@ -74,10 +99,11 @@ const Blog: NextPage<{ post: any }> = ({ post }) => {
         )}
       </Container>
       <Container maxWidth={'md'}>
-        <Typography
-          component={'div'}
+        <ContentWrapper
           dangerouslySetInnerHTML={{
-            __html: post.content.replace(/\/uploads/g, 'https://burger-strapi.hardart.cz/uploads'),
+            __html: post.content.includes('https://')
+              ? post.content
+              : post.content.replace(/\/uploads/g, `${APP_API}/uploads`),
           }}
         />
       </Container>

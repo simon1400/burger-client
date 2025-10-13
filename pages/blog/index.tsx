@@ -32,7 +32,6 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
 
   const blogPage = data.blog.data.attributes
   const posts = postsData.posts.data.map((item: any) => item.attributes)
-  console.log(blogPage)
 
   store.dispatch(changeTitle(blogPage.meta?.title || 'Blog'))
   store.dispatch(changeDescription(blogPage.meta?.description || ''))
