@@ -2,6 +2,7 @@ import type { FC } from 'react'
 
 import { Container, Grid } from '@mui/material'
 import Head from 'components/Head'
+import { getOptimizedImageUrl } from 'lib/imageUrl'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import PurpleBackground from 'public/img/backgrounds/footerPurple.svg'
@@ -25,7 +26,10 @@ const Partners: FC<{ data: any }> = ({ data }) => {
             <Grid key={idx} item xs={4} md={2}>
               <LogoWrap>
                 <Image
-                  src={`${APP_API + item.attributes.url}?format=webp&resize=300x200`}
+                  src={getOptimizedImageUrl(APP_API + item.attributes.url, {
+                    format: 'webp',
+                    resize: '300x200',
+                  })}
                   fill
                   alt={''}
                   unoptimized
