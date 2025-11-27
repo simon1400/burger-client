@@ -26,7 +26,7 @@ const nextConfig = {
     return [
       {
         source: '/sitemap/index.xml',
-        destination: 'https://burger-strapi.hardart.cz/sitemap/index.xml',
+        destination: 'https://burger-strapi-demo.hardart.cz/sitemap/index.xml',
       },
     ]
   },
@@ -40,7 +40,9 @@ const nextConfig = {
     return config
   },
   images: {
-    domains: ['burger-strapi.hardart.cz', 'localhost'],
+    domains: ['burger-strapi.hardart.cz', 'burger-strapi-demo.hardart.cz', 'localhost'],
+    dangerouslyAllowSVG: true,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
 }
 
