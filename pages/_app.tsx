@@ -27,6 +27,17 @@ const MyApp: FC<MyAppProps> = ({ Component, ...rest }) => {
   const clientSideEmotionCache = createEmotionCache()
   const { emotionCache = clientSideEmotionCache, pageProps } = props
   const router = useRouter()
+  const defaultMessages = (() => {
+    try {
+      return require(`../messages/${router.locale}.json`)
+    } catch (e) {
+      try {
+        return require(`../messages/en.json`)
+      } catch {
+        return {}
+      }
+    }
+  })()
 
   return (
     <Provider store={store}>
@@ -35,7 +46,7 @@ const MyApp: FC<MyAppProps> = ({ Component, ...rest }) => {
           <NextIntlClientProvider
             locale={router.locale}
             timeZone={'Europe/Prague'}
-            messages={pageProps.messages}
+            messages={pageProps.messages || defaultMessages}
           >
             <CssBaseline />
             <WithGraphQL>
