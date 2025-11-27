@@ -41,8 +41,23 @@ const nextConfig = {
   },
   images: {
     domains: ['burger-strapi.hardart.cz', 'burger-strapi-demo.hardart.cz', 'localhost'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'burger-strapi-demo.hardart.cz',
+        port: '',
+        pathname: '/uploads/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'burger-strapi.hardart.cz',
+        port: '',
+        pathname: '/uploads/**',
+      },
+    ],
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    unoptimized: true,
   },
 }
 
