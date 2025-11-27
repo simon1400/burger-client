@@ -28,6 +28,7 @@ const Partners: FC<{ data: any }> = ({ data }) => {
                   src={`${APP_API + item.attributes.url}?format=webp&resize=300x200`}
                   fill
                   alt={''}
+                  unoptimized
                 />
               </LogoWrap>
             </Grid>
