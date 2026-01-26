@@ -6,7 +6,16 @@ import { Head, Html, Main, NextScript } from 'next/document'
 export default function Document({ locale }: { locale: string }) {
   return (
     <Html lang={locale}>
-      <Head />
+      <Head>
+        {/* Fonts */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=PT+Mono&display=swap"
+          rel="stylesheet"
+        />
+        <link rel="stylesheet" href="https://use.typekit.net/dtl7rtq.css" />
+      </Head>
       <body>
         {/* Google Tag Manager (noscript) */}
         <noscript>

@@ -124,7 +124,11 @@ const Lineup: FC<ILineup> = ({
                   <span className={'status'} />
                 )}
                 <div className={item.category?.data ? 'basic-wrap' : 'title-wrap'}>
-                  {item.from && item.to && <Time from={item.from} to={item.to} />}
+                  {item.from && item.to && (
+                    <Link className={'lineup-title'} href={item.slug}>
+                      <Time from={item.from} to={item.to} />
+                    </Link>
+                  )}
                   {!!item.category?.data?.length && (
                     <div className={'icon-type'}>
                       <Image

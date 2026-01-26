@@ -1,7 +1,9 @@
 import styled from '@emotion/styled'
 import { Button } from '@mui/material'
 
-export const ButtonS = styled(Button)<{ black?: boolean }>(
+export const ButtonS = styled(Button, {
+  shouldForwardProp: (prop) => prop !== 'black'
+})<{ black?: boolean }>(
   ({ black = false }) => `
   border-radius: 24px;
   height: 40px;

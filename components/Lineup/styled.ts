@@ -88,6 +88,9 @@ export const LineupS = styled.div<{ paddingTop?: boolean; hp: boolean }>(
         text-decoration: none;
         &:hover{
           color: ${theme.palette.primary.main};
+          time{
+            color: ${theme.palette.primary.main};
+          }
         }
       }
       .state{

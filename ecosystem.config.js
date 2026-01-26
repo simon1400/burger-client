@@ -1,18 +1,24 @@
 module.exports = {
-  apps : [{
-    name   : "Burger client",
-    script : "yarn start",
-    env_production: {}
-  }],
-
-  deploy : {
-    production : {
-      user : 'dimi',
-      host : ['89.221.216.23'],
-      ref  : 'origin/main',
-      repo : 'git@github.com:simon1400/burger-client.git',
-      path : '/var/www/burger/client',
-      'post-deploy' : 'yarn && yarn build && pm2 reload ecosystem.config.js --env production',
-    }
-  }
-};
+  apps: [
+    {
+      name: 'burger-client',
+      script: 'node_modules/next/dist/bin/next',
+      args: 'start',
+      cwd: '/opt/burger/client',
+      instances: 1,
+      exec_mode: 'fork',
+      autorestart: true,
+      watch: false,
+      max_memory_restart: '1G',
+      env: {
+        NODE_ENV: 'production',
+        PORT: 3006,
+      },
+      error_file: '/var/log/pm2/burger-client-error.log',
+      out_file: '/var/log/pm2/burger-client-out.log',
+      log_file: '/var/log/pm2/burger-client-combined.log',
+      time: true,
+      merge_logs: true,
+    },
+  ],
+}

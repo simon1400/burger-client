@@ -54,15 +54,6 @@ const Page: FC<IPage> = ({ children, className = '', id = '' }) => {
       <Head>
         <meta charSet={'utf-8'} />
 
-        {/* FONTY */}
-        {/* <link rel="stylesheet preload prefetch" href="https://use.typekit.net/vpe5tmu.css" as="style" type="text/css" crossOrigin="anonymous" /> */}
-        <link rel={'preconnect'} href={'https://fonts.googleapis.com'} />
-        <link rel={'preconnect'} href={'https://fonts.gstatic.com'} crossOrigin={''} />
-        <link
-          href={'https://fonts.googleapis.com/css2?family=PT+Mono&display=swap'}
-          rel={'stylesheet'}
-        />
-        <link rel={'stylesheet'} href={'https://use.typekit.net/dtl7rtq.css'} />
 
         {/* FAVICON */}
         <link rel={'shortcut icon'} href={'/favicon/favicon.ico'} />

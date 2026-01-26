@@ -65,9 +65,6 @@ const PartnersPage: NextPage<{ partnersPage: any }> = ({ partnersPage }) => {
           <Button href={partnersPage.button.link}>{partnersPage.button.text}</Button>
         </Container>
         <Container>
-          <Typography variant={'h2'} marginTop={10}>
-            {partnersPage.headTopPartner}
-          </Typography>
           <Grid container justifyContent={'center'}>
             {partnersPage.topPartners.map((item: any, idx: number) => (
               <Grid key={item.link} item xs={12} md={getColumn(topPartnerLength)}>
@@ -84,10 +81,13 @@ const PartnersPage: NextPage<{ partnersPage: any }> = ({ partnersPage }) => {
             ))}
           </Grid>
         </Container>
+        <Head
+          className={'partners-head'}
+          text={partnersPage.headPartner}
+          type={'h2'}
+          bg={'yellow1'}
+        />
         <Container>
-          <Typography variant={'h2'} marginTop={10}>
-            {partnersPage.headPartner}
-          </Typography>
           <Grid container justifyContent={'center'}>
             {partnersPage.partners.map((item: any) => (
               <Grid key={item.link} item xs={12} md={getColumn(partnerLength)}>
@@ -104,10 +104,13 @@ const PartnersPage: NextPage<{ partnersPage: any }> = ({ partnersPage }) => {
             ))}
           </Grid>
         </Container>
+        <Head
+          className={'partners-head'}
+          text={partnersPage.headSupport}
+          type={'h2'}
+          bg={'yellow1'}
+        />
         <Container>
-          <Typography variant={'h2'} marginTop={10}>
-            {partnersPage.headSupport}
-          </Typography>
           <Grid container justifyContent={'center'}>
             {partnersPage.supported.map((item: any) => (
               <Grid key={item.link} item xs={12} md={getColumn(supportedLength)}>
@@ -124,10 +127,13 @@ const PartnersPage: NextPage<{ partnersPage: any }> = ({ partnersPage }) => {
             ))}
           </Grid>
         </Container>
+        <Head
+          className={'partners-head'}
+          text={partnersPage.headPartner2}
+          type={'h2'}
+          bg={'yellow1'}
+        />
         <Container>
-          <Typography variant={'h2'} marginTop={10}>
-            {partnersPage.headPartner2}
-          </Typography>
           <Grid container justifyContent={'center'}>
             {partnersPage.partners2.map((item: any, idx: number) => (
               <Grid key={item.link} item xs={12} md={getColumn(partner2Length)}>
@@ -145,9 +151,7 @@ const PartnersPage: NextPage<{ partnersPage: any }> = ({ partnersPage }) => {
           </Grid>
         </Container>
         <Container maxWidth={'md'}>
-          <Typography variant={'h2'} marginTop={10}>
-            {partnersPage.title2}
-          </Typography>
+          <Head className={'partners-head'} text={partnersPage.title2} type={'h2'} bg={'yellow1'} />
           <Typography
             marginBottom={15}
             component={'div'}

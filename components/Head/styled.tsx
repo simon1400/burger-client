@@ -54,11 +54,11 @@ export const HeadS = styled.div(
     }
   }
   .yellow1-bg{
-    
+
     svg{
       width: 326px;
       height: 96px;
-      
+
     }
   }
   .yellow2-bg{

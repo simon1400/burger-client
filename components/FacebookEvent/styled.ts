@@ -1,7 +1,9 @@
 import styled from "@emotion/styled";
 import Link from "next/link";
 
-export const FacebookEventS = styled(Link)<{single: boolean}>(({theme, single}) => `
+export const FacebookEventS = styled(Link, {
+  shouldForwardProp: (prop) => prop !== 'single'
+})<{single: boolean}>(({theme, single}) => `
   display: flex;
   margin-right: ${single ? "0" : "40px"};
   margin-top: ${single ? "40px" : "0px"};

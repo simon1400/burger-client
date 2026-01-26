@@ -4,9 +4,6 @@ import { Grid } from '@mui/material'
 import LabelMore from 'components/LabelMore'
 import Image from 'next/image'
 import { useMemo } from 'react'
-// eslint-disable-next-line ts/ban-ts-comment
-// @ts-expect-error
-import { LightgalleryItem } from 'react-lightgallery'
 
 import { GaleryItem } from './styled'
 import { getGridSize, getImageUrl } from './utils'
@@ -14,9 +11,10 @@ import { getGridSize, getImageUrl } from './utils'
 interface GalleryGridProps {
   images: IImages
   appApi: string
+  onImageClick: (index: number) => void
 }
 
-const GalleryGrid: FC<GalleryGridProps> = ({ images, appApi }) => {
+const GalleryGrid: FC<GalleryGridProps> = ({ images, appApi, onImageClick }) => {
   const length = useMemo(() => images.data.length, [images])
   const visibleImages = useMemo(() => images.data.slice(0, 8), [images])
   const hiddenImages = useMemo(() => images.data.slice(8), [images])
@@ -28,27 +26,17 @@ const GalleryGrid: FC<GalleryGridProps> = ({ images, appApi }) => {
 
         return (
           <Grid key={idx} item xs={6} md={getGridSize(length)}>
-            <LightgalleryItem
-              group={'any'}
-              component={'div'}
-              src={`${appApi}${item.attributes.url}?format=webp`}
-            >
-              <GaleryItem>
-                <a
-                  href={`${appApi}${item.attributes.url}?format=webp&resize=560x500`}
-                  onClick={(e) => e.preventDefault()}
-                >
-                  <Image src={imageUrl} fill alt={''} />
-                  {length > 8 && idx === 7 && <LabelMore data={hiddenImages.length} />}
-                </a>
-              </GaleryItem>
-            </LightgalleryItem>
+            <GaleryItem onClick={() => onImageClick(idx)} style={{ cursor: 'pointer' }}>
+              <Image src={imageUrl} fill alt={''} />
+              {length > 8 && idx === 7 && <LabelMore data={hiddenImages.length} />}
+            </GaleryItem>
           </Grid>
         )
       })}
 
       {hiddenImages.map((item, idx) => {
         const imageUrl = getImageUrl(appApi, item.attributes.url, length)
+        const actualIndex = 8 + idx
 
         return (
           <Grid
@@ -58,20 +46,9 @@ const GalleryGrid: FC<GalleryGridProps> = ({ images, appApi }) => {
             md={getGridSize(length)}
             style={{ display: 'none' }}
           >
-            <LightgalleryItem
-              group={'any'}
-              component={'div'}
-              src={`${appApi}${item.attributes.url}?format=webp&resize=1920x1200`}
-            >
-              <GaleryItem>
-                <a
-                  href={`${appApi}${item.attributes.url}?format=webp&resize=1920x1200`}
-                  onClick={(e) => e.preventDefault()}
-                >
-                  <Image src={imageUrl} fill alt={''} />
-                </a>
-              </GaleryItem>
-            </LightgalleryItem>
+            <GaleryItem onClick={() => onImageClick(actualIndex)} style={{ cursor: 'pointer' }}>
+              <Image src={imageUrl} fill alt={''} />
+            </GaleryItem>
           </Grid>
         )
       })}
