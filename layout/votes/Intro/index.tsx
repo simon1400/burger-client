@@ -7,23 +7,31 @@ import Page from 'layout/Page'
 import { useLocale, useTranslations } from 'next-intl'
 import { CenterWrap } from 'styles/CenterWrap'
 
-const czContent =
-  "<p><strong>Hlasuj pro nejlepší burger na festivalu! I díky tobě třeba bude tvůj burgermaker mít medaili.</strong></p><p><strong>Jak na to?</strong></p><p>1. Vyplň svoje osobní údaje.</br>2. Zadej kód z hlasovacího lístku, který jsi dostal při nákupu burgeru.</br>3. Hlasuj pro tvého favorita.</br>4. Potvrď souhlas s podmínkami soutěže a zpracováním osobních údajů.</br>5. Klikni na ODESLAT</br>6. Potvrď svůj hlas přes email</p><p><strong>A to je vše!</strong></p><p>Křestní jméno výherce a výherní kód zveřejníme na webu <a href='http://burgerstreetfestival.cz' title='smartCard-inline'>http://burgerstreetfestival.cz</a>  a na události festivalu na Facebooku nejpozději v pondělí po festivalu. Pokud jsi vyhrál, dáme ti vědět také mailem.</p><p><strong>O co hrajeme?</strong></p><p>1. cena - voucher 2000 Kč na burgery pro festivaly v sezoně 2025 a 2026</br>2. cena - voucher 1000 Kč na burgery pro festivaly v sezoně 2025 a 2026</br>3. cena - voucher  500 Kč na burgery pro festivaly v sezoně 2025 a 2026</p>"
-const plContent =
-  "<p><strong>Zagłosuj na najlepszego burgera festiwalu! Dzięki Tobie twój ulubiony burger może zdobyć medal.</strong></p> <p><strong>Jak głosować?</strong></p> <p>1. Wypełnij swoje dane osobowe.</br> 2. Wpisz kod z karty do głosowania, którą otrzymałeś przy zakupie burgera.</br> 3. Zagłosuj na swojego faworyta.</br> 4. Potwierdź zgodę na warunki konkursu oraz przetwarzanie danych osobowych.</br> 5. Kliknij WYŚLIJ.</br> 6. Potwierdź swój głos poprzez e-mail.</p> <p><strong>I to wszystko!</strong></p> <p>Imię zwycięzcy oraz zwycięski kod opublikujemy na stronie <a href='http://burgerfestival.pl' title='smartCard-inline'>http://burgerfestival.pl</a> oraz w wydarzeniu festiwalowym na Facebooku najpóźniej w poniedziałek po festiwalu. Jeśli wygrasz, poinformujemy Cię również mailowo.</p> <p><strong>Co możesz wygrać?</strong></p><p><strong>Voucher o wartości 200 zł</strong></p> <p>Każdy setny kod z kart do głosowania otrzyma nagrodę – voucher o wartości 200 zł na konsumpcję burgerów. Nagrodę można wykorzystać podczas festiwali w latach 2025 i 2026.</p>"
+interface IntroProps {
+  link: string
+  festivals: any
+  votesIntroContent?: string | null
+}
 
-const Intro: FC<{ link: string; festivals: any }> = ({ link, festivals }) => {
+const Intro: FC<IntroProps> = ({ link, festivals, votesIntroContent }) => {
   const t = useTranslations('global')
   const locale = useLocale()
+
+  // контент для голосования: сначала пытаемся взять из Strapi, иначе падение назад на старый текст
+  const fallbackCzContent =
+    "<p><strong>Hlasuj pro nejlepší burger na festivalu! I díky tobě třeba bude tvůj burgermaker mít medaili.</strong></p><p><strong>Jak na to?</strong></p><p>1. Vyplň svoje osobní údaje.</br>2. Zadej kód z hlasovacího lístku, který jsi dostal při nákupu burgeru.</br>3. Hlasuj pro tvého favorita.</br>4. Potvrď souhlas s podmínkami soutěže a zpracováním osobních údajů.</br>5. Klikni na ODESLAT</br>6. Potvrď svůj hlas přes email</p><p><strong>A to je vše!</strong></p><p>Křestní jméno výherce a výherní kód zveřejníme na webu <a href='http://burgerstreetfestival.cz' title='smartCard-inline'>http://burgerstreetfestival.cz</a>  a na události festivalu na Facebooku nejpozději v pondělí po festivalu. Pokud jsi vyhrál, dáme ti vědět také mailem.</p><p><strong>O co hrajeme?</strong></p><p>1. cena - voucher 2000 Kč na burgery pro festivaly v sezoně 2025 a 2026</br>2. cena - voucher 1000 Kč na burgery pro festivaly v sezoně 2025 a 2026</br>3. cena - voucher  500 Kč na burgery pro festivaly v sezoně 2025 a 2026</p>"
+  const fallbackPlContent =
+    "<p><strong>Zagłosuj na najlepszego burgera festiwalu! Dzięki Tobie twój ulubiony burger może zdobyć medal.</strong></p> <p><strong>Jak głosować?</strong></p> <p>1. Wypełnij swoje dane osobowe.</br> 2. Wpisz kod z karty do głosowania, którą otrzymałeś przy zakupie burgera.</br> 3. Zagłosuj na swojego faworyta.</br> 4. Potwierdź zgodę na warunki konkursu oraz przetwarzanie danych osobowych.</br> 5. Kliknij WYŚLIJ.</br> 6. Potwierdź swój głos poprzez e-mail.</p> <p><strong>I to wszystko!</strong></p> <p>Imię zwycięzcy oraz zwycięski kod opublikujemy na stronie <a href='http://burgerfestival.pl' title='smartCard-inline'>http://burgerfestival.pl</a> oraz w wydarzeniu festiwalowym na Facebooku najpóźniej w poniedziałek po festiwalu. Jeśli wygrasz, poinformujemy Cię również mailowo.</p> <p><strong>Co możesz wygrać?</strong></p><p><strong>Voucher o wartości 200 zł</strong></p> <p>Każdy setny kod z kart do głosowania otrzyma nagrodę – voucher o wartości 200 zł na konsumpcję burgerów. Nagrodę można wykorzystać podczas festiwali w latach 2025 i 2026.</p>"
+
+  // глобальное поле из Strapi: votesIntroContent (локализованное, берётся из single-type страницы)
+  const contentFromStrapi =
+    votesIntroContent || (locale === 'en' ? fallbackCzContent : fallbackPlContent)
+
   return (
     <Page>
       <div style={{ margin: '40px 0 100px' }}>
         <Head text={festivals.title} type={'h1'} />
-        <BlockContent
-          head={festivals.place}
-          margin
-          content={locale === 'en' ? czContent : plContent}
-        />
+        <BlockContent head={festivals.place} margin content={contentFromStrapi} />
         <CenterWrap marginBottom={80}>
           <Button href={`/${link}/${festivals.slug}`}>{t('startVotes')}</Button>
         </CenterWrap>

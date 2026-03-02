@@ -14,6 +14,7 @@ export const festivalsQuery = gql`
           social
           content
           place
+          votesIntroContent
         }
       }
     }
@@ -29,6 +30,7 @@ export const festivalsPageQuery = gql`
           content
           title2
           content2
+          votesIntroContent
           galery {
             data {
               attributes {
