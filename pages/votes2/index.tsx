@@ -24,8 +24,7 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
 
   const festivals = data.festivals.data.map((item: any) => item.attributes)
   const filteredFestivals = filterEvents(festivals)
-  const votesIntroContent =
-    pageData.festivalsPage?.data?.attributes?.votesIntroContent ?? null
+  const votesIntroContent = pageData.festivalsPage?.data?.attributes?.votesIntroContent ?? null
 
   store.dispatch(changeTitle('Votes'))
   store.dispatch(changeDescription(''))
@@ -43,8 +42,6 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
 const Votes: NextPage<{ festivals: any; votesIntroContent?: string | null }> = ({
   festivals,
   votesIntroContent,
-}) => (
-  <Intro link={'votes2'} festivals={festivals} votesIntroContent={votesIntroContent} />
-)
+}) => <Intro link={'votes2'} festivals={festivals} votesIntroContent={votesIntroContent} />
 
 export default Votes
