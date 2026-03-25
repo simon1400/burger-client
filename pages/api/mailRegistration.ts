@@ -29,7 +29,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             ]
 
       await resend.emails.send({
-        from: 'Burger street festival <noreply@burgerfestival.cz>',
+        from: 'Burger street festival <noreply@burgerstreetfestival.cz>',
         to: [email],
         bcc,
         subject: 'Registration from web',

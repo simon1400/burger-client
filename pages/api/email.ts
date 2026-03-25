@@ -15,7 +15,7 @@ export default async function POST(req: NextApiRequest, res: NextApiResponse<Res
 
   try {
     await resend.emails.send({
-      from: 'Burger street festival <noreply@burgerfestival.cz>',
+      from: 'Burger street festival <noreply@burgerstreetfestival.cz>',
       to: [email],
       subject: 'Potvrzení hlasování',
       html: locale === 'en' ? confirmMailCz(id) : confirmMailPl(id),
