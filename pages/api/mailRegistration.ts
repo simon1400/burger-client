@@ -1,15 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import { EmailParams, MailerSend, Recipient, Sender } from 'mailersend'
+import { Resend } from 'resend'
 
 import { orderMail } from '../../mail-templates/form'
 import { orderMailPl } from '../../mail-templates/formPl'
 
-const mailersend = new MailerSend({
-  apiKey: process.env.MAILERSEND_TOKEN || '',
-})
-
-const sentFrom = new Sender('noreply@burgerfestival.cz', 'Burger street festival')
+const resend = new Resend(process.env.RESEND_API_KEY)
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
@@ -19,34 +15,26 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const locale = data.locale
 
     try {
-      const recipients = [new Recipient(email, 'Recipient')]
-
       const bcc =
         locale === 'en'
-          ? [
-              new Recipient('supkova@bedy.cz', 'Supkova'),
-              new Recipient('vladek@bedy.cz', 'Owner'),
-              new Recipient('info@burgerfestival.cz', 'Burger street festival'),
-            ]
+          ? ['supkova@bedy.cz', 'vladek@bedy.cz', 'info@burgerfestival.cz']
           : [
-              new Recipient('info@burgerfestival.pl', 'Burger street festival'),
-              new Recipient('vladek@bedy.cz', 'Owner'),
-              new Recipient('supkova@bedy.cz', 'Supkova'),
-              new Recipient('snasel@bedy.cz', 'Snasel'),
-              new Recipient('oscar@bedy.cz', 'Oscar'),
-              new Recipient('grega@bedy.cz', 'Grega'),
-              new Recipient('j.roosinska@gmail.com', 'Grega'),
+              'info@burgerfestival.pl',
+              'vladek@bedy.cz',
+              'supkova@bedy.cz',
+              'snasel@bedy.cz',
+              'oscar@bedy.cz',
+              'grega@bedy.cz',
+              'j.roosinska@gmail.com',
             ]
 
-      const emailParams = new EmailParams()
-        .setFrom(sentFrom)
-        .setTo(recipients)
-        .setBcc(bcc)
-        .setSubject('Registration from web')
-        .setHtml(locale === 'en' ? orderMail(data.data) : orderMailPl(data.data))
-        .setText('New from web')
-
-      await mailersend.email.send(emailParams)
+      await resend.emails.send({
+        from: 'Burger street festival <noreply@burgerfestival.cz>',
+        to: [email],
+        bcc,
+        subject: 'Registration from web',
+        html: locale === 'en' ? orderMail(data.data) : orderMailPl(data.data),
+      })
 
       res.status(200).send('Email sent')
     } catch (err: any) {

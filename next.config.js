@@ -20,7 +20,7 @@ const nextConfig = {
     APP_API: process.env.APP_API,
     APP_DOMAIN_CZ: process.env.APP_DOMAIN_CZ,
     APP_DOMAIN_PL: process.env.APP_DOMAIN_PL,
-    MAILERSEND_TOKEN: process.env.MAILERSEND_TOKEN,
+    RESEND_API_KEY: process.env.RESEND_API_KEY,
   },
   async rewrites() {
     return [
