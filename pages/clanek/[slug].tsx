@@ -6,14 +6,14 @@ import Button from 'components/Button'
 import Galery from 'components/Galery'
 import Head from 'components/Head'
 import Page from 'layout/Page'
-import { client } from 'lib/api'
+import { getClient } from 'lib/api'
 import { getArticle } from 'queries/article'
 import { wrapper } from 'stores'
 import { changeDescription, changeTitle } from 'stores/slices/metaSlices'
 import { CenterWrap } from 'styles/CenterWrap'
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
-  const { data } = await client.query({
+  const { data } = await getClient().query({
     query: getArticle,
     variables: {
       slug: ctx.params?.slug,

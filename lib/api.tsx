@@ -45,6 +45,16 @@ const defaultOptions: DefaultOptions = {
   },
 }
 
+// Fresh client per SSR request — prevents InMemoryCache from growing indefinitely
+export function getClient() {
+  return new ApolloClient({
+    link: authLink.concat(httpLink),
+    cache: new InMemoryCache(),
+    defaultOptions,
+  })
+}
+
+// Shared client for browser (ApolloProvider) — cache is bounded by tab lifetime
 export const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),

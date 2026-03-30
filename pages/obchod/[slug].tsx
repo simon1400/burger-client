@@ -6,7 +6,7 @@ import { Container, Typography } from '@mui/material'
 import BlockContent from 'components/BlockContent'
 import Head from 'components/Head'
 import Page from 'layout/Page'
-import { client } from 'lib/api'
+import { getClient } from 'lib/api'
 import { useTranslations } from 'next-intl'
 // eslint-disable-next-line import/order
 import Image from 'next/image'
@@ -23,7 +23,7 @@ import 'swiper/css/navigation'
 const APP_API = process.env.APP_API
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
-  const { data } = await client.query({
+  const { data } = await getClient().query({
     query: getMerch,
     variables: {
       slug: ctx.params?.slug,

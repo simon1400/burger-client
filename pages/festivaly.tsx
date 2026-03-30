@@ -6,21 +6,21 @@ import Head from 'components/Head'
 import Lineup from 'components/Lineup'
 import { filterEvents } from 'helpers/filterEvents'
 import Page from 'layout/Page'
-import { client } from 'lib/api'
+import { getClient } from 'lib/api'
 import { useTranslations } from 'next-intl'
 import { festivalsPageQuery, festivalsQuery } from 'queries/festivals'
 import { wrapper } from 'stores'
 import { changeDescription, changeTitle } from 'stores/slices/metaSlices'
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
-  const { data } = await client.query({
+  const { data } = await getClient().query({
     query: festivalsPageQuery,
     variables: {
       locale: ctx.locale,
     },
   })
 
-  const { data: festivalsData } = await client.query({
+  const { data: festivalsData } = await getClient().query({
     query: festivalsQuery,
     variables: {
       locale: ctx.locale,

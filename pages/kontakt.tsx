@@ -6,7 +6,7 @@ import ContactItem from 'components/ContactItem'
 import ContactLine from 'components/ContactLine'
 import Head from 'components/Head'
 import Page from 'layout/Page'
-import { client } from 'lib/api'
+import { getClient } from 'lib/api'
 import Envelope from 'public/img/envelope-regular.svg'
 import Phone from 'public/img/phone-solid.svg'
 import contactQuery from 'queries/contact'
@@ -16,7 +16,7 @@ import { CenterWrap } from 'styles/CenterWrap'
 import { ContactLines } from 'styles/ContactLines'
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
-  const { data } = await client.query({
+  const { data } = await getClient().query({
     query: contactQuery,
     variables: {
       locale: ctx.locale,

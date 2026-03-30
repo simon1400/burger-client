@@ -2,13 +2,13 @@
 import type { NextPage } from 'next'
 
 import VotesFestival from 'layout/votes/Festival'
-import { client } from 'lib/api'
+import { getClient } from 'lib/api'
 import { getFestival } from 'queries/festivals'
 import { wrapper } from 'stores'
 import { changeDescription, changeTitle } from 'stores/slices/metaSlices'
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
-  const { data } = await client.query({
+  const { data } = await getClient().query({
     query: getFestival,
     variables: {
       slug: ctx.params?.festival,

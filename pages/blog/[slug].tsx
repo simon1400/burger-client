@@ -6,7 +6,7 @@ import Galery from 'components/Galery'
 import Head from 'components/Head'
 import LabelBare from 'components/LabelBare'
 import Page from 'layout/Page'
-import { client } from 'lib/api'
+import { getClient } from 'lib/api'
 import Image from 'next/image'
 import { getPost } from 'queries/blog'
 import { wrapper } from 'stores'
@@ -17,7 +17,7 @@ import { ImgSquare } from 'styles/ImgSquare'
 const APP_API = process.env.APP_API
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
-  const { data } = await client.query({
+  const { data } = await getClient().query({
     query: getPost,
     variables: {
       slug: ctx.params?.slug,

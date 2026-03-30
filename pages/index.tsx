@@ -11,7 +11,7 @@ import { TopVideo } from 'components/TopVideo'
 import { filterEvents } from 'helpers/filterEvents'
 // import { uploadCodes } from 'helpers/uploudCodes'
 import Page from 'layout/Page'
-import { client } from 'lib/api'
+import { getClient } from 'lib/api'
 import { useTranslations } from 'next-intl'
 // import codes from 'public/codes_pl_array.json'
 import ArrowRight from 'public/img/arrowRight.svg'
@@ -23,21 +23,21 @@ import { changeDescription, changeTitle } from 'stores/slices/metaSlices'
 import { CenterWrap } from 'styles/CenterWrap'
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
-  const { data } = await client.query({
+  const { data } = await getClient().query({
     query: homepageQuery,
     variables: {
       locale: ctx.locale,
     },
   })
 
-  const { data: festivalsData } = await client.query({
+  const { data: festivalsData } = await getClient().query({
     query: festivalsQuery,
     variables: {
       locale: ctx.locale,
     },
   })
 
-  const { data: mapData } = await client.query({
+  const { data: mapData } = await getClient().query({
     query: mapQuery,
     variables: {
       locale: ctx.locale,

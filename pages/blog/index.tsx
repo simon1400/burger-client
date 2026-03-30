@@ -5,7 +5,7 @@ import ArticleShort from 'components/ArticleShort'
 import Head from 'components/Head'
 import { sortDate } from 'helpers/sortDate'
 import Page from 'layout/Page'
-import { client } from 'lib/api'
+import { getClient } from 'lib/api'
 import Image from 'next/image'
 import { blogPageQuery, postsQuery } from 'queries/blog'
 import { wrapper } from 'stores'
@@ -16,14 +16,14 @@ import { ImgSquare } from 'styles/ImgSquare'
 const APP_API = process.env.APP_API
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
-  const { data } = await client.query({
+  const { data } = await getClient().query({
     query: blogPageQuery,
     variables: {
       locale: ctx.locale,
     },
   })
 
-  const { data: postsData } = await client.query({
+  const { data: postsData } = await getClient().query({
     query: postsQuery,
     variables: {
       locale: ctx.locale,

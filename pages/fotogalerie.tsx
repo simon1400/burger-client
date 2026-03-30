@@ -5,7 +5,7 @@ import Galery from 'components/Galery'
 import Head from 'components/Head'
 import { sortDate } from 'helpers/sortDate'
 import Page from 'layout/Page'
-import { client } from 'lib/api'
+import { getClient } from 'lib/api'
 import { festivalsGaleryQuery } from 'queries/festivals'
 import { getMetaGalery } from 'queries/meta'
 import { wrapper } from 'stores'
@@ -13,14 +13,14 @@ import { changeDescription, changeTitle } from 'stores/slices/metaSlices'
 import { CenterWrap } from 'styles/CenterWrap'
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
-  const { data } = await client.query({
+  const { data } = await getClient().query({
     query: festivalsGaleryQuery,
     variables: {
       locale: ctx.locale,
     },
   })
 
-  const { data: metaData } = await client.query({
+  const { data: metaData } = await getClient().query({
     query: getMetaGalery,
     variables: {
       locale: ctx.locale,

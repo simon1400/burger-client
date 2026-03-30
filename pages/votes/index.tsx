@@ -2,20 +2,20 @@ import type { NextPage } from 'next'
 
 import { filterEvents } from 'helpers/filterEvents'
 import Intro from 'layout/votes/Intro'
-import { client } from 'lib/api'
+import { getClient } from 'lib/api'
 import { festivalsPageQuery, festivalsQuery } from 'queries/festivals'
 import { wrapper } from 'stores'
 import { changeDescription, changeTitle } from 'stores/slices/metaSlices'
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
-  const { data } = await client.query({
+  const { data } = await getClient().query({
     query: festivalsQuery,
     variables: {
       locale: ctx.locale,
     },
   })
 
-  const { data: pageData } = await client.query({
+  const { data: pageData } = await getClient().query({
     query: festivalsPageQuery,
     variables: {
       locale: ctx.locale,

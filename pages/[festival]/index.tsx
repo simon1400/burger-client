@@ -8,14 +8,14 @@ import Lineup from 'components/Lineup'
 import Winners from 'components/Winners'
 import { beforeDate } from 'helpers/beforeDate'
 import Page from 'layout/Page'
-import { client } from 'lib/api'
+import { getClient } from 'lib/api'
 import { useTranslations } from 'next-intl'
 import { getFestival } from 'queries/festivals'
 import { wrapper } from 'stores'
 import { changeDescription, changeTitle } from 'stores/slices/metaSlices'
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
-  const { data } = await client.query({
+  const { data } = await getClient().query({
     query: getFestival,
     variables: {
       slug: ctx.params?.festival,

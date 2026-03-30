@@ -5,7 +5,7 @@ import { Container, Grid, Typography } from '@mui/material'
 import Button from 'components/Button'
 import Head from 'components/Head'
 import Page from 'layout/Page'
-import { client } from 'lib/api'
+import { getClient } from 'lib/api'
 import Image from 'next/image'
 import Link from 'next/link'
 import partnersQuery from 'queries/partners'
@@ -17,7 +17,7 @@ import { ImgSquare } from 'styles/ImgSquare'
 const APP_API = process.env.APP_API
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
-  const { data } = await client.query({
+  const { data } = await getClient().query({
     query: partnersQuery,
     variables: {
       locale: ctx.locale,

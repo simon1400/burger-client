@@ -7,7 +7,7 @@ import Lineup from 'components/Lineup'
 import Winners from 'components/Winners'
 import { sortDate } from 'helpers/sortDate'
 import Page from 'layout/Page'
-import { client } from 'lib/api'
+import { getClient } from 'lib/api'
 import { useTranslations } from 'next-intl'
 import { festivalsWinnersQuery } from 'queries/festivals'
 import { getMetaWinners } from 'queries/meta'
@@ -16,14 +16,14 @@ import { changeDescription, changeTitle } from 'stores/slices/metaSlices'
 import { CenterWrap } from 'styles/CenterWrap'
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
-  const { data } = await client.query({
+  const { data } = await getClient().query({
     query: festivalsWinnersQuery,
     variables: {
       locale: ctx.locale,
     },
   })
 
-  const { data: metaData } = await client.query({
+  const { data: metaData } = await getClient().query({
     query: getMetaWinners,
     variables: {
       locale: ctx.locale,

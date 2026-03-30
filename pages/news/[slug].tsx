@@ -8,7 +8,7 @@ import Galery from 'components/Galery'
 import Head from 'components/Head'
 import LabelBare from 'components/LabelBare'
 import Page from 'layout/Page'
-import { client } from 'lib/api'
+import { getClient } from 'lib/api'
 import { getNews } from 'queries/news'
 import { wrapper } from 'stores'
 import { changeDescription, changeImage, changeTitle } from 'stores/slices/metaSlices'
@@ -41,7 +41,7 @@ const ContentWrapper = styled.div`
 `
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
-  const { data } = await client.query({
+  const { data } = await getClient().query({
     query: getNews,
     variables: {
       slug: ctx.params?.slug,

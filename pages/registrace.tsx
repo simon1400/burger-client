@@ -16,7 +16,7 @@ import SuccessLabel from 'components/SuccessLabel'
 import { filterEvents } from 'helpers/filterEvents'
 import { sortDate } from 'helpers/sortDate'
 import Page from 'layout/Page'
-import { client } from 'lib/api'
+import { getClient } from 'lib/api'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/router'
 import { festivalsQuery } from 'queries/festivals'
@@ -28,21 +28,21 @@ import { changeDescription, changeTitle } from 'stores/slices/metaSlices'
 const APP_API = process.env.APP_API
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
-  const { data } = await client.query({
+  const { data } = await getClient().query({
     query: formPage,
     variables: {
       locale: ctx.locale,
     },
   })
 
-  const { data: festivalsData } = await client.query({
+  const { data: festivalsData } = await getClient().query({
     query: festivalsQuery,
     variables: {
       locale: ctx.locale,
     },
   })
 
-  const { data: formsData } = await client.query({
+  const { data: formsData } = await getClient().query({
     query: formQuery,
     variables: {
       locale: ctx.locale,

@@ -5,20 +5,20 @@ import BlockContent from 'components/BlockContent'
 import Card from 'components/Card'
 import Head from 'components/Head'
 import Page from 'layout/Page'
-import { client } from 'lib/api'
+import { getClient } from 'lib/api'
 import { merchesQuery, merchPageQuery } from 'queries/merch'
 import { wrapper } from 'stores'
 import { changeDescription, changeTitle } from 'stores/slices/metaSlices'
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
-  const { data } = await client.query({
+  const { data } = await getClient().query({
     query: merchPageQuery,
     variables: {
       locale: ctx.locale,
     },
   })
 
-  const { data: merchesData } = await client.query({
+  const { data: merchesData } = await getClient().query({
     query: merchesQuery,
     variables: {
       locale: ctx.locale,

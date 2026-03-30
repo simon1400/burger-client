@@ -18,7 +18,7 @@ import {
 } from '@mui/material'
 import Head from 'components/Head'
 import Page from 'layout/Page'
-import { client } from 'lib/api'
+import { getClient } from 'lib/api'
 import { aplicationsQuery } from 'queries/aplications'
 import { useEffect, useState } from 'react'
 import { wrapper } from 'stores'
@@ -86,7 +86,7 @@ function exportApplicationsToCSV(
 }
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
-  const { data } = await client.query({
+  const { data } = await getClient().query({
     query: aplicationsQuery,
     variables: {
       locale: ctx.locale,

@@ -14,7 +14,7 @@ import {
   Typography,
 } from '@mui/material'
 import Page from 'layout/Page'
-import { client } from 'lib/api'
+import { getClient } from 'lib/api'
 import { useTranslations } from 'next-intl'
 // eslint-disable-next-line import/order
 import { useRouter } from 'next/router'
@@ -24,7 +24,7 @@ import { CSVLink } from 'react-csv'
 import { wrapper } from 'stores'
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
-  const { data } = await client.query({
+  const { data } = await getClient().query({
     query: getAllVotes,
     variables: {
       festivalSlug: ctx.params?.festival,
