@@ -28,6 +28,7 @@ export const NavS = styled.nav(
         font-family: ${candal.style.fontFamily};
         position: relative;
         transition: all .2s ease;
+        cursor: pointer;
         &:after{
           content: '';
           display: none;
@@ -38,10 +39,12 @@ export const NavS = styled.nav(
           position: absolute;
           background-color: black;
         }
-        &:hover{
-          color: black;
-          svg{
-            transform: rotate(-180deg);
+        @media (hover: hover) {
+          &:hover{
+            color: black;
+            svg{
+              transform: rotate(-180deg);
+            }
           }
         }
         svg{
@@ -75,7 +78,7 @@ export const NavS = styled.nav(
             background: #141414;
             border: 1px solid ${theme.palette.primary.main};
             padding: 10px 0;
-            li{   
+            li{
               a{
                 color: white;
                 text-decoration: none;
@@ -84,8 +87,10 @@ export const NavS = styled.nav(
                 text-align: center;
                 display: block;
                 width: 100%;
-                &:hover{
-                  color: ${theme.palette.primary.main};
+                @media (hover: hover) {
+                  &:hover{
+                    color: ${theme.palette.primary.main};
+                  }
                 }
               }
             }
@@ -114,7 +119,7 @@ export const NavS = styled.nav(
           a{
             display: block;
           }
-          
+
           &:hover{
             .dropdown{
               display: none;
@@ -122,15 +127,26 @@ export const NavS = styled.nav(
           }
           &.active{
             .dropdown{
-              display: inline-block;
+              display: block;
             }
           }
           .dropdown{
             position: relative;
             display: none;
-            width: 200px;
+            width: auto;
+            min-width: 0;
             right: 0;
-            transform: translateX(0);
+            transform: none;
+            ul{
+              li{
+                a{
+                  font-size: 16px!important;
+                  padding: 9px 20px;
+                  text-align: right;
+                  color: white;
+                }
+              }
+            }
           }
         }
       }

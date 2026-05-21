@@ -22,10 +22,17 @@ const Nav: FC<{ data: any }> = ({ data }) => {
         {data.map((item: any, idx: number) => {
           return item.child.length ? (
             <li key={idx} className={`dropdown-parent${activeDropdown ? ' active' : ''}`}>
-              <Link href={'/'} onClick={(e) => handleOpen(e)}>
+              <a
+                role={'button'}
+                tabIndex={0}
+                onClick={(e) => handleOpen(e)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') handleOpen(e)
+                }}
+              >
                 {item.title}
                 <ChevronDown />
-              </Link>
+              </a>
               <div className={'dropdown'}>
                 <ul>
                   {item.child.map((itemChild: any, idxChild: number) => (

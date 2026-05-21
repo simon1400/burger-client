@@ -74,12 +74,14 @@ export const MobileNav = styled.div<{ open: boolean }>(
   background: black;
   z-index: 1000;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  overflow-y: auto;
   transition: all .2s ease;
   nav{
     width: 100%;
     padding-left: 15px;
     padding-right: 25px;
+    padding-top: 140px;
     ul{
       width: 100%;
       li{
