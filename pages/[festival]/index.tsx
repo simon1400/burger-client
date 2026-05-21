@@ -8,6 +8,7 @@ import Galery from 'components/Galery'
 import GoogleMapsEvent from 'components/GoogleMapsEvent'
 import Head from 'components/Head'
 import Lineup from 'components/Lineup'
+import Partners from 'components/Partners'
 import Winners from 'components/Winners'
 import { beforeDate } from 'helpers/beforeDate'
 import Page from 'layout/Page'
@@ -86,6 +87,16 @@ const Festival: NextPage<{ festival: IFestival }> = ({ festival }) => {
       />
       {!!festival.vouchers.length && <Lineup head={t('voucherWinners')} data={festival.vouchers} />}
       {!!festival.galery.data?.length && <Galery images={festival.galery} />}
+      {!!festival.partners?.data?.length && (
+        <Partners
+          items={festival.partners.data
+            .filter((p) => p.attributes.logo?.data)
+            .map((p) => ({
+              url: p.attributes.logo.data!.attributes.url,
+              link: p.attributes.link || undefined,
+            }))}
+        />
+      )}
     </Page>
   )
 }

@@ -16,6 +16,25 @@ import { ImgSquare } from 'styles/ImgSquare'
 
 const APP_API = process.env.APP_API
 
+interface PartnerRecord {
+  id: string
+  attributes: {
+    name: string
+    link?: string | null
+    logo: {
+      data: {
+        attributes: {
+          url: string
+        }
+      } | null
+    }
+  }
+}
+
+interface PartnerRelation {
+  data: PartnerRecord[]
+}
+
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
   const { data } = await getClient().query({
     query: partnersQuery,
@@ -37,16 +56,55 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
   }
 })
 
+const getColumn = (count: number) => (count === 1 ? 12 : count === 2 ? 6 : count === 3 ? 4 : 3)
+
+interface SectionProps {
+  heading?: string
+  relation: PartnerRelation
+}
+
+const Section = ({ heading, relation }: SectionProps) => {
+  const items = (relation?.data ?? []).filter((p) => p.attributes.logo?.data)
+  if (!items.length) return null
+  const count = items.length
+
+  return (
+    <>
+      {heading && (
+        <Head className={'partners-head'} text={heading} type={'h2'} bg={'yellow1'} />
+      )}
+      <Container>
+        <Grid container justifyContent={'center'}>
+          {items.map((item) => {
+            const url = item.attributes.logo.data!.attributes.url
+            const square = (
+              <ImgSquare big={count < 4} partners>
+                <Image
+                  src={`${APP_API + url}?format=webp&resize=330x330`}
+                  fill
+                  alt={item.attributes.name}
+                />
+              </ImgSquare>
+            )
+            return (
+              <Grid key={item.id} item xs={12} md={getColumn(count)}>
+                {item.attributes.link ? (
+                  <Link href={item.attributes.link} target={'_blank'} rel={'noopener noreferrer'}>
+                    {square}
+                  </Link>
+                ) : (
+                  square
+                )}
+              </Grid>
+            )
+          })}
+        </Grid>
+      </Container>
+    </>
+  )
+}
+
 const PartnersPage: NextPage<{ partnersPage: any }> = ({ partnersPage }) => {
-  const topPartnerLength = partnersPage.topPartners.length
-  const partnerLength = partnersPage.partners.length
-  const partner2Length = partnersPage.partners2.length
-  const supportedLength = partnersPage.supported.length
-
-  const getColumn = (count: number) => {
-    return count === 1 ? 12 : 3
-  }
-
   return (
     <Page>
       <CenterWrap>
@@ -62,94 +120,14 @@ const PartnersPage: NextPage<{ partnersPage: any }> = ({ partnersPage }) => {
               ),
             }}
           />
-          <Button href={partnersPage.button.link}>{partnersPage.button.text}</Button>
+          {partnersPage.button && (
+            <Button href={partnersPage.button.link}>{partnersPage.button.text}</Button>
+          )}
         </Container>
-        <Container>
-          <Grid container justifyContent={'center'}>
-            {partnersPage.topPartners.map((item: any, idx: number) => (
-              <Grid key={item.link} item xs={12} md={getColumn(topPartnerLength)}>
-                <Link href={item.link}>
-                  <ImgSquare big={topPartnerLength < 4} partners>
-                    <Image
-                      src={`${APP_API + item.image.data.attributes.url}?format=webp&resize=330x330`}
-                      fill
-                      alt={''}
-                    />
-                  </ImgSquare>
-                </Link>
-              </Grid>
-            ))}
-          </Grid>
-        </Container>
-        <Head
-          className={'partners-head'}
-          text={partnersPage.headPartner}
-          type={'h2'}
-          bg={'yellow1'}
-        />
-        <Container>
-          <Grid container justifyContent={'center'}>
-            {partnersPage.partners.map((item: any) => (
-              <Grid key={item.link} item xs={12} md={getColumn(partnerLength)}>
-                <Link href={item.link}>
-                  <ImgSquare big={partnerLength < 4} partners>
-                    <Image
-                      src={`${APP_API + item.image.data.attributes.url}?format=webp&resize=330x330`}
-                      fill
-                      alt={''}
-                    />
-                  </ImgSquare>
-                </Link>
-              </Grid>
-            ))}
-          </Grid>
-        </Container>
-        <Head
-          className={'partners-head'}
-          text={partnersPage.headSupport}
-          type={'h2'}
-          bg={'yellow1'}
-        />
-        <Container>
-          <Grid container justifyContent={'center'}>
-            {partnersPage.supported.map((item: any) => (
-              <Grid key={item.link} item xs={12} md={getColumn(supportedLength)}>
-                <Link href={item.link}>
-                  <ImgSquare big={supportedLength < 4} partners>
-                    <Image
-                      src={`${APP_API + item.image.data.attributes.url}?format=webp&resize=330x330`}
-                      fill
-                      alt={''}
-                    />
-                  </ImgSquare>
-                </Link>
-              </Grid>
-            ))}
-          </Grid>
-        </Container>
-        <Head
-          className={'partners-head'}
-          text={partnersPage.headPartner2}
-          type={'h2'}
-          bg={'yellow1'}
-        />
-        <Container>
-          <Grid container justifyContent={'center'}>
-            {partnersPage.partners2.map((item: any, idx: number) => (
-              <Grid key={item.link} item xs={12} md={getColumn(partner2Length)}>
-                <Link href={item.link}>
-                  <ImgSquare big={partner2Length < 4} partners>
-                    <Image
-                      src={`${APP_API + item.image.data.attributes.url}?format=webp&resize=330x330`}
-                      fill
-                      alt={''}
-                    />
-                  </ImgSquare>
-                </Link>
-              </Grid>
-            ))}
-          </Grid>
-        </Container>
+        <Section relation={partnersPage.topPartners} />
+        <Section heading={partnersPage.headPartner} relation={partnersPage.partners} />
+        <Section heading={partnersPage.headSupport} relation={partnersPage.supported} />
+        <Section heading={partnersPage.headPartner2} relation={partnersPage.partners2} />
         <Container maxWidth={'md'}>
           <Head className={'partners-head'} text={partnersPage.title2} type={'h2'} bg={'yellow1'} />
           <Typography

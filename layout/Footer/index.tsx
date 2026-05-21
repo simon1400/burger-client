@@ -1,5 +1,4 @@
 import { useQuery } from '@apollo/client'
-// import { Container } from '@mui/material'
 import Follow from 'components/Follow'
 import FooterBottom from 'components/FooterBottom'
 import Partners from 'components/Partners'
@@ -21,10 +20,20 @@ const Footer = () => {
   }
 
   const footer = data.global.data.attributes
+  const hideGlobalPartners =
+    router.asPath === '/partneri' || router.pathname === '/[festival]'
+
+  const partnerItems =
+    footer.partnersFooter?.data
+      ?.filter((p: any) => p.attributes.logo?.data)
+      .map((p: any) => ({
+        url: p.attributes.logo.data.attributes.url,
+        link: p.attributes.link || undefined,
+      })) ?? []
 
   return (
     <FooterS>
-      {router.asPath === '/partneri' ? null : <Partners data={footer.logoPartners.data} />}
+      {!hideGlobalPartners && <Partners items={partnerItems} />}
       <Follow data={footer.soc} />
       <FooterBottom email={footer.email} phone={footer.phone} lang={router.locale} />
     </FooterS>

@@ -7,10 +7,19 @@ const footerQuery = gql`
         attributes {
           phone
           email
-          logoPartners {
+          partnersFooter(sort: "name:asc", pagination: { limit: 100 }) {
             data {
+              id
               attributes {
-                url
+                name
+                link
+                logo {
+                  data {
+                    attributes {
+                      url
+                    }
+                  }
+                }
               }
             }
           }

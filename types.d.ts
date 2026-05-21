@@ -181,6 +181,21 @@ interface IWinner {
   }
 }
 
+interface IFestivalPartner {
+  id: string
+  attributes: {
+    name: string
+    link?: string | null
+    logo: {
+      data: {
+        attributes: {
+          url: string
+        }
+      } | null
+    }
+  }
+}
+
 interface IFestival {
   title: string
   content: string
@@ -197,4 +212,7 @@ interface IFestival {
   winner1: IWinner
   winner2: IWinner
   winner3: IWinner
+  partners: {
+    data: IFestivalPartner[]
+  }
 }
