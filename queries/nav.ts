@@ -16,6 +16,16 @@ const navTopQuery = gql`
         }
       }
     }
+    global(locale: $locale) {
+      data {
+        attributes {
+          soc {
+            type
+            link
+          }
+        }
+      }
+    }
   }
 `
 

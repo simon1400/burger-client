@@ -11,6 +11,13 @@ export const HeaderS = styled.div(
     position: relative;
     z-index: 1001;
   }
+  .header-right{
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    position: relative;
+    z-index: 2;
+  }
   .hamburger-react{
     position: relative;
     z-index: 1001;
@@ -63,6 +70,55 @@ export const HeaderS = styled.div(
 `,
 )
 
+export const HeaderSoc = styled.ul`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin-top: 16px;
+  li{
+    display: flex;
+    a{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 27px;
+      height: 27px;
+      border-radius: 50%;
+      background: white;
+      transition: opacity .2s ease;
+      svg{
+        display: block;
+        width: 15px;
+        height: 15px;
+      }
+      @media (hover: hover) {
+        &:hover{
+          opacity: .8;
+        }
+      }
+    }
+  }
+  @media(max-width: 1100px) {
+    justify-content: flex-end;
+    padding-right: 25px;
+    padding-left: 15px;
+    margin-top: 20px;
+    gap: 12px;
+    li a{
+      width: 44px;
+      height: 44px;
+      svg{
+        width: 28px;
+        height: 28px;
+        display: block;
+      }
+    }
+  }
+`
+
 export const MobileNav = styled.div<{ open: boolean }>(
   ({ open }) => `
   position: absolute;
@@ -74,7 +130,8 @@ export const MobileNav = styled.div<{ open: boolean }>(
   background: black;
   z-index: 1000;
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: stretch;
   overflow-y: auto;
   transition: all .2s ease;
   nav{
