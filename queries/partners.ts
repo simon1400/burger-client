@@ -34,16 +34,16 @@ const partnersQuery = gql`
             text
             link
           }
-          topPartners(sort: "name:asc", pagination: { limit: 100 }) {
+          topPartners(pagination: { limit: 100 }) {
             ${partnerFragment}
           }
-          partners(sort: "name:asc", pagination: { limit: 100 }) {
+          partners(pagination: { limit: 100 }) {
             ${partnerFragment}
           }
-          partners2(sort: "name:asc", pagination: { limit: 100 }) {
+          partners2(pagination: { limit: 100 }) {
             ${partnerFragment}
           }
-          supported(sort: "name:asc", pagination: { limit: 100 }) {
+          supported(pagination: { limit: 100 }) {
             ${partnerFragment}
           }
           meta{

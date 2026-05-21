@@ -243,7 +243,7 @@ export const getFestival = gql`
               }
             }
           }
-          partners(sort: "name:asc", pagination: { limit: 100 }) {
+          partners(pagination: { limit: 100 }) {
             data {
               id
               attributes {

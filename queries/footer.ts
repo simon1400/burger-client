@@ -7,7 +7,7 @@ const footerQuery = gql`
         attributes {
           phone
           email
-          partnersFooter(sort: "name:asc", pagination: { limit: 100 }) {
+          partnersFooter(pagination: { limit: 100 }) {
             data {
               id
               attributes {
