@@ -146,6 +146,7 @@ export const getFestival = gql`
           contentBefore
           contentAfter
           place
+          googleMapsUrl
           galery {
             data {
               attributes {

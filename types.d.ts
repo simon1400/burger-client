@@ -187,6 +187,7 @@ interface IFestival {
   contentBefore: string
   contentAfter: string
   place: string
+  googleMapsUrl?: string
   galery: IImages
   from: string
   to: string

@@ -2,8 +2,10 @@ import type { NextPage } from 'next'
 
 import BlockContent from 'components/BlockContent'
 import CalendarEvent from 'components/CalendarEvent'
+import EventActions from 'components/EventActions'
 import FacebookEvent from 'components/FacebookEvent'
 import Galery from 'components/Galery'
+import GoogleMapsEvent from 'components/GoogleMapsEvent'
 import Head from 'components/Head'
 import Lineup from 'components/Lineup'
 import Winners from 'components/Winners'
@@ -60,8 +62,15 @@ const Festival: NextPage<{ festival: IFestival }> = ({ festival }) => {
       />
       {upcoming && <BlockContent content={festival.contentBefore} />}
       {!upcoming && <BlockContent content={festival.contentAfter} />}
-      {upcoming && slug && <CalendarEvent slug={slug} single />}
-      {festival.social && <FacebookEvent single data={festival.social} />}
+      {(upcoming || festival.social || festival.googleMapsUrl) && (
+        <EventActions>
+          {upcoming && slug && <CalendarEvent slug={slug} />}
+          {festival.social && <FacebookEvent single data={festival.social} />}
+          {festival.googleMapsUrl && (
+            <GoogleMapsEvent url={festival.googleMapsUrl} label={t('googleMaps')} />
+          )}
+        </EventActions>
+      )}
       {!!festival.lineup.data.length && (
         <Lineup
           head={'Lineup'}

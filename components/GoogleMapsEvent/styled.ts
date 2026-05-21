@@ -1,18 +1,18 @@
 import styled from '@emotion/styled'
 
-const SHAPE = 'polygon(0% 11%, 2.5% 100%, 44% 100%, 75% 89%, 100% 95%, 100% 0%, 58% 14%, 51% 0%)'
+const SHAPE = 'polygon(100% 93.2%, 96.8% 0%, 29.4% 12.8%, 1.5% 0%, 0% 100%, 68.2% 82.3%)'
 
-export const CalendarEventS = styled.a(
+export const GoogleMapsEventS = styled.a(
   ({ theme }) => `
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   height: 82px;
-  padding: 0 50px 0 75px;
+  padding: 0 35px 0 55px;
   color: white;
   text-decoration: none;
-  background-color: #d9291c;
+  background-color: #214518;
   -webkit-clip-path: ${SHAPE};
   clip-path: ${SHAPE};
   transition: filter .2s ease;
@@ -32,9 +32,10 @@ export const CalendarEventS = styled.a(
     white-space: nowrap;
     line-height: 1;
   }
+  > .content img,
   > .content svg{
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     flex-shrink: 0;
     display: block;
   }
@@ -43,13 +44,14 @@ export const CalendarEventS = styled.a(
   }
   ${theme.breakpoints.down('md')} {
     height: 68px;
-    padding: 0 40px 0 55px;
+    padding: 0 30px 0 45px;
     .label{
       font-size: 20px;
     }
+    > .content img,
     > .content svg{
-      width: 30px;
-      height: 30px;
+      width: 24px;
+      height: 24px;
     }
   }
 `,

@@ -5,14 +5,13 @@ import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/router'
 import CalendarIcon from 'public/img/calendar_icon.svg'
 
-import { CalendarEventS, CalendarEventWrap } from './styled'
+import { CalendarEventS } from './styled'
 
 interface CalendarEventProps {
   slug: string
-  single?: boolean
 }
 
-const CalendarEvent: FC<CalendarEventProps> = ({ slug, single = false }) => {
+const CalendarEvent: FC<CalendarEventProps> = ({ slug }) => {
   const t = useTranslations('global')
   const { locale } = useRouter()
   const href = getStrapiURL(
@@ -20,14 +19,12 @@ const CalendarEvent: FC<CalendarEventProps> = ({ slug, single = false }) => {
   )
 
   return (
-    <CalendarEventWrap single={single}>
-      <CalendarEventS href={href} className={'soc-events'}>
-        <span className={'content'}>
-          <CalendarIcon />
-          <span className={'label'}>{t('saveToCalendar')}</span>
-        </span>
-      </CalendarEventS>
-    </CalendarEventWrap>
+    <CalendarEventS href={href} className={'soc-events'}>
+      <span className={'content'}>
+        <CalendarIcon />
+        <span className={'label'}>{t('saveToCalendar')}</span>
+      </span>
+    </CalendarEventS>
   )
 }
 
