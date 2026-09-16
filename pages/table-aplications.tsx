@@ -160,7 +160,7 @@ const GaleryPage: NextPage<{ result: any; fullResult: any }> = ({ result, fullRe
     if (!hasPassword) {
       // eslint-disable-next-line no-alert
       const enteredFood = prompt('Please enter password:')
-      if (enteredFood === 'admin') {
+      if (enteredFood === 'HCD9T-2LpkU-fVAYU-P2JBQ') {
         setHasPassword(true)
       }
     }
