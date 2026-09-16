@@ -6,8 +6,8 @@ import type { NextPage } from 'next'
 import styled from '@emotion/styled'
 import {
   Box,
-  // Button,
-  // CircularProgress,
+  Button,
+  CircularProgress,
   Container,
   Table,
   TableBody,
@@ -19,18 +19,31 @@ import {
 import Head from 'components/Head'
 import Page from 'layout/Page'
 import { getClient } from 'lib/api'
+import { useRouter } from 'next/router'
 import { aplicationsQuery } from 'queries/aplications'
 import { useEffect, useState } from 'react'
 import { wrapper } from 'stores'
 import { changeDescription, changeTitle } from 'stores/slices/metaSlices'
 
-function exportApplicationsToCSV(
-  data: any[],
-  filename = `applications_${new Date().toISOString().split('T')[0]}.csv`,
-) {
+type ExportResult = 'ok' | 'empty' | 'error'
+
+const EXPORT_MESSAGES: Record<ExportResult, (count: number) => string> = {
+  ok: (count) => `Successfully exported ${count} records`,
+  empty: () => 'No records to export',
+  error: () => 'Export failed. Check console for details.',
+}
+
+// Данные из публичной формы: значение, начинающееся с = + - @ TAB CR, Excel выполнит как формулу
+// (CSV injection) — префиксуем апострофом. Кавычки удваиваем, ячейку оборачиваем в кавычки.
+const csvCell = (raw: unknown) => {
+  const value = (raw ?? '').toString()
+  const safe = /^[=+\-@\t\r]/.test(value) ? `'${value}` : value
+  return `"${safe.replace(/"/g, '""')}"`
+}
+
+function exportApplicationsToCSV(data: any[], filename: string): ExportResult {
   if (!data.length) {
-    console.warn('No data to export')
-    return
+    return 'empty'
   }
 
   try {
@@ -50,18 +63,14 @@ function exportApplicationsToCSV(
           rowCopy.festivals = rowCopy.festivals.split(',').join(' | ')
         }
 
-        return keys
-          .map((k) => {
-            const value = (rowCopy[k] ?? '').toString().replace(/"/g, '""')
-            return `"${value}"`
-          })
-          .join(',')
+        return keys.map((k) => csvCell(rowCopy[k])).join(';')
       })
       csvRows.push(...chunkRows)
     }
 
-    const csvHeader = keys.join(',')
-    const csvContent = [csvHeader, ...csvRows].join('\n')
+    // Чешский и польский Excel ждут `;` и CRLF — с запятой всё слипается в одну колонку
+    const csvHeader = keys.map(csvCell).join(';')
+    const csvContent = [csvHeader, ...csvRows].join('\r\n')
 
     // Добавляем BOM для корректного отображения UTF-8 в Excel
     const BOM = '\uFEFF'
@@ -78,10 +87,10 @@ function exportApplicationsToCSV(
     // Освобождаем память
     URL.revokeObjectURL(url)
 
-    return true
+    return 'ok'
   } catch (error) {
     console.error('Error exporting CSV:', error)
-    return false
+    return 'error'
   }
 }
 
@@ -143,8 +152,9 @@ const TableWrap = styled(TableContainer)`
 
 const GaleryPage: NextPage<{ result: any; fullResult: any }> = ({ result, fullResult }) => {
   const [hasPassword, setHasPassword] = useState(false)
-  // const [isExporting, setIsExporting] = useState(false)
-  // const [exportMessage, setExportMessage] = useState('')
+  const [isExporting, setIsExporting] = useState(false)
+  const [exportMessage, setExportMessage] = useState('')
+  const { locale } = useRouter()
 
   useEffect(() => {
     if (!hasPassword) {
@@ -156,26 +166,24 @@ const GaleryPage: NextPage<{ result: any; fullResult: any }> = ({ result, fullRe
     }
   }, [hasPassword])
 
-  // const handleExport = async () => {
-  //   setIsExporting(true)
-  //   setExportMessage('Preparing export...')
+  const handleExport = async () => {
+    setIsExporting(true)
+    setExportMessage('Preparing export...')
 
-  //   // Небольшая задержка для отображения UI
-  //   await new Promise((resolve) => setTimeout(resolve, 100))
+    // Небольшая задержка для отображения UI
+    await new Promise((resolve) => setTimeout(resolve, 100))
 
-  //   const success = exportApplicationsToCSV(fullResult)
+    // локаль `en` — чешский сайт burgerstreetfestival.cz, `pl` — burgerfestival.pl
+    const site = locale === 'pl' ? 'pl' : 'cz'
+    const date = new Date().toISOString().split('T')[0]
+    const status = exportApplicationsToCSV(fullResult, `prihlasky_${site}_${date}.csv`)
+    setExportMessage(EXPORT_MESSAGES[status](fullResult.length))
 
-  //   if (success) {
-  //     setExportMessage(`Successfully exported ${fullResult.length} records`)
-  //   } else {
-  //     setExportMessage('Export failed. Check console for details.')
-  //   }
+    setIsExporting(false)
 
-  //   setIsExporting(false)
-
-  //   // Очищаем сообщение через 3 секунды
-  //   setTimeout(() => setExportMessage(''), 3000)
-  // }
+    // Очищаем сообщение через 3 секунды
+    setTimeout(() => setExportMessage(''), 3000)
+  }
 
   if (!hasPassword) {
     return null
@@ -186,7 +194,7 @@ const GaleryPage: NextPage<{ result: any; fullResult: any }> = ({ result, fullRe
       <Container>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
           <Head text={'Data result table'} type={'h1'} />
-          {/* <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
             {exportMessage && (
               <Box
                 sx={{
@@ -206,7 +214,7 @@ const GaleryPage: NextPage<{ result: any; fullResult: any }> = ({ result, fullRe
             >
               {isExporting ? 'Exporting...' : `Export All (${fullResult.length} records)`}
             </Button>
-          </Box> */}
+          </Box>
         </Box>
         <TableWrap>
           <Table sx={{ minWidth: 650 }} size={'small'} aria-label={'a dense table'}>
