@@ -42,6 +42,7 @@
     "mailConfirm": "Podtvrzeny mail"
   },
   "votes": {
+    "notActive": "Hlasování momentálně není aktivní",
     "thankYouPage": {
       "title": "Děkujeme!"
     },

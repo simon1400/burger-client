@@ -16,8 +16,13 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
     },
   })
 
-  const festivalLinup = data.festivals.data[0].attributes.lineup.data
-  const idFestival = data.festivals.data[0].id
+  const festival = data.festivals.data[0]
+  if (!festival) {
+    return { notFound: true }
+  }
+
+  const festivalLinup = festival.attributes.lineup.data
+  const idFestival = festival.id
   const festivalBurgers: any = []
 
   festivalLinup.map((item: any) => {

@@ -1,3 +1,4 @@
+import type { VotesFestival } from 'helpers/votesSlots'
 import type { FC } from 'react'
 
 import BlockContent from 'components/BlockContent'
@@ -9,12 +10,13 @@ import { CenterWrap } from 'styles/CenterWrap'
 
 interface IntroProps {
   link: string
-  festivals: any
+  festival: VotesFestival | null
   votesIntroContent?: string | null
 }
 
-const Intro: FC<IntroProps> = ({ link, festivals, votesIntroContent }) => {
+const Intro: FC<IntroProps> = ({ link, festival, votesIntroContent }) => {
   const t = useTranslations('global')
+  const tVotes = useTranslations('votes')
   const locale = useLocale()
 
   const fallbackCzContent =
@@ -25,13 +27,23 @@ const Intro: FC<IntroProps> = ({ link, festivals, votesIntroContent }) => {
   const contentFromStrapi =
     votesIntroContent || (locale === 'en' ? fallbackCzContent : fallbackPlContent)
 
+  if (!festival) {
+    return (
+      <Page>
+        <div style={{ margin: '40px 0 100px' }}>
+          <Head text={tVotes('notActive')} type={'h1'} />
+        </div>
+      </Page>
+    )
+  }
+
   return (
     <Page>
       <div style={{ margin: '40px 0 100px' }}>
-        <Head text={festivals.title} type={'h1'} />
-        <BlockContent head={festivals.place} margin content={contentFromStrapi} />
+        <Head text={festival.title} type={'h1'} />
+        <BlockContent head={festival.place ?? undefined} margin content={contentFromStrapi} />
         <CenterWrap marginBottom={80}>
-          <Button href={`/${link}/${festivals.slug}`}>{t('startVotes')}</Button>
+          <Button href={`/${link}/${festival.slug}`}>{t('startVotes')}</Button>
         </CenterWrap>
       </div>
     </Page>

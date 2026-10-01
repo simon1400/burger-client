@@ -1,47 +1,13 @@
+import type { VotesIntroPageProps } from 'lib/votesPage'
 import type { NextPage } from 'next'
 
-import { filterEvents } from 'helpers/filterEvents'
 import Intro from 'layout/votes/Intro'
-import { getClient } from 'lib/api'
-import { festivalsPageQuery, festivalsQuery } from 'queries/festivals'
-import { wrapper } from 'stores'
-import { changeDescription, changeTitle } from 'stores/slices/metaSlices'
+import { getVotesIntroProps } from 'lib/votesPage'
 
-export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
-  const { data } = await getClient().query({
-    query: festivalsQuery,
-    variables: {
-      locale: ctx.locale,
-    },
-  })
+export const getServerSideProps = getVotesIntroProps(1)
 
-  const { data: pageData } = await getClient().query({
-    query: festivalsPageQuery,
-    variables: {
-      locale: ctx.locale,
-    },
-  })
-
-  const festivals = data.festivals.data.map((item: any) => item.attributes)
-  const filteredFestivals = filterEvents(festivals)
-  const votesIntroContent = pageData.festivalsPage?.data?.attributes?.votesIntroContent ?? null
-
-  store.dispatch(changeTitle('Votes'))
-  store.dispatch(changeDescription(''))
-
-  return {
-    props: {
-      festivals: filteredFestivals.future[1],
-      votesIntroContent,
-      votes: true,
-      messages: (await import(`../../messages/${ctx.locale}.json`)).default,
-    },
-  }
-})
-
-const Votes: NextPage<{ festivals: any; votesIntroContent?: string | null }> = ({
-  festivals,
-  votesIntroContent,
-}) => <Intro link={'votes2'} festivals={festivals} votesIntroContent={votesIntroContent} />
+const Votes: NextPage<VotesIntroPageProps> = ({ festival, votesIntroContent }) => (
+  <Intro link={'votes2'} festival={festival} votesIntroContent={votesIntroContent} />
+)
 
 export default Votes

@@ -42,6 +42,7 @@
     "mailConfirm": "Potwierdzony email"
   },
   "votes": {
+    "notActive": "Głosowanie nie jest obecnie aktywne",
     "thankYouPage": {
       "title": "Dziękuję!"
     },
