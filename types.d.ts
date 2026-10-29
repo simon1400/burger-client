@@ -203,6 +203,9 @@ interface IFestival {
   contentAfter: string
   place: string
   googleMapsUrl?: string
+  burgerZone?: boolean | null
+  burgerZoneColor?: string | null
+  burgerZoneTextColor?: 'black' | 'white' | null
   galery: IImages
   from: string
   to: string

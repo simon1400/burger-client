@@ -5,6 +5,7 @@ import type { FC } from 'react'
 
 import { Container, FormControlLabel } from '@mui/material'
 import AdditionalLabel from 'components/AdditionalLabel'
+import BurgerZoneLabel from 'components/BurgerZoneLabel'
 import Checkbox from 'components/Checkbox'
 import { CheckboxS } from 'components/Checkbox/styled'
 import FacebookEvent from 'components/FacebookEvent'
@@ -156,6 +157,11 @@ const Lineup: FC<ILineup> = ({
                     </Link>
                   )}
                   {item.name && <p>{item.name}</p>}
+                  {item.burgerZone && (
+                    <span className={'burger-zone-mobile'}>
+                      <BurgerZoneLabel />
+                    </span>
+                  )}
                 </div>
                 {item.labels?.data && (
                   <Labels>
@@ -168,9 +174,14 @@ const Lineup: FC<ILineup> = ({
               {!registration && (
                 <div>
                   {item.showAddLabel && <AdditionalLabel />}
+                  {item.burgerZone && (
+                    <span className={'burger-zone-desktop'}>
+                      <BurgerZoneLabel />
+                    </span>
+                  )}
                   {item.social && <FacebookEvent data={item.social} />}
                   {!modal && !!item.slug && (
-                    <IconButton href={item.slug}>
+                    <IconButton href={item.slug} yellow={!!item.burgerZone}>
                       <ArrowRight />
                     </IconButton>
                   )}

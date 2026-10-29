@@ -5,16 +5,18 @@ import { ButtonS } from './styled'
 
 interface IIconButton extends ButtonProps {
   black?: boolean
+  yellow?: boolean
 }
 
 const IconButton: FC<IIconButton> = ({
   variant = 'contained',
   children,
   black = false,
+  yellow = false,
   ...rest
 }) => {
   return (
-    <ButtonS variant={variant} {...rest} black={black}>
+    <ButtonS variant={variant} {...rest} black={black} yellow={yellow}>
       {children}
     </ButtonS>
   )

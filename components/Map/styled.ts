@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { BURGER_ZONE_BLACK, BURGER_ZONE_YELLOW } from "helpers/burgerZone";
 
 export const MapS = styled.section(({theme}) => `
   height: 713px;
@@ -16,6 +17,14 @@ export const MapS = styled.section(({theme}) => `
         }
         path {
           transition: all .2s ease;
+        }
+        &.burger-zone{
+          path:nth-of-type(1){
+            fill: ${BURGER_ZONE_YELLOW};
+          }
+          path:nth-of-type(2){
+            fill: ${BURGER_ZONE_BLACK};
+          }
         }
         &:hover{
           path:nth-of-type(1){

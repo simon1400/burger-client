@@ -114,6 +114,12 @@ export const LineupS = styled.div<{ paddingTop?: boolean; hp: boolean }>(
         display: flex;
         align-items: center;
       }
+      .burger-zone-desktop{
+        display: flex;
+      }
+      .burger-zone-mobile{
+        display: none;
+      }
     }
   }
   ${theme.breakpoints.down('md')} {
@@ -140,6 +146,13 @@ export const LineupS = styled.div<{ paddingTop?: boolean; hp: boolean }>(
       .title-wrap{
         align-items: start;
         flex-direction: column;
+      }
+      .burger-zone-desktop{
+        display: none;
+      }
+      .burger-zone-mobile{
+        display: flex;
+        margin-top: 6px;
       }
     }
   }

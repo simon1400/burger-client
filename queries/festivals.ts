@@ -9,6 +9,7 @@ export const festivalsQuery = gql`
           slug
           state
           showAddLabel
+          burgerZone
           from
           to
           social
@@ -147,6 +148,9 @@ export const getFestival = gql`
           contentAfter
           place
           googleMapsUrl
+          burgerZone
+          burgerZoneColor
+          burgerZoneTextColor
           galery {
             data {
               attributes {

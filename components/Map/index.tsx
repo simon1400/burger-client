@@ -13,9 +13,12 @@ const MapComponent: FC<{ data: any }> = ({ data }) => {
   useEffect(() => {
     if (data) {
       data.point.map((item: any) => {
-        // eslint-disable-next-line ts/ban-ts-comment
-        // @ts-expect-error
-        document.getElementById(item.idLayer).style.display = 'block'
+        const layer = document.getElementById(item.idLayer)
+        if (!layer) {
+          return
+        }
+        layer.style.display = 'block'
+        layer.classList.toggle('burger-zone', !!item.festival?.data?.attributes?.burgerZone)
       })
     }
   }, [data])

@@ -12,6 +12,7 @@ const mapQuery = gql`
               data {
                 attributes {
                   slug
+                  burgerZone
                 }
               }
             }

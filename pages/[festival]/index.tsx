@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 
 import BlockContent from 'components/BlockContent'
+import BurgerZoneTheme from 'components/BurgerZoneTheme'
 import CalendarEvent from 'components/CalendarEvent'
 import EventActions from 'components/EventActions'
 import FacebookEvent from 'components/FacebookEvent'
@@ -54,49 +55,57 @@ const Festival: NextPage<{ festival: IFestival }> = ({ festival }) => {
   const upcoming = beforeDate(festival.to)
   return (
     <Page>
-      <Head text={festival.title} type={'h1'} bg={'red'} />
-      <BlockContent
-        time={{ from: festival.from, to: festival.to }}
-        head={festival.place}
-        bg={'yellow1'}
-        content={festival.content}
-      />
-      {upcoming && <BlockContent content={festival.contentBefore} />}
-      {!upcoming && <BlockContent content={festival.contentAfter} />}
-      {(upcoming || festival.social || festival.googleMapsUrl) && (
-        <EventActions>
-          {upcoming && slug && <CalendarEvent slug={slug} />}
-          {festival.social && <FacebookEvent single data={festival.social} />}
-          {festival.googleMapsUrl && (
-            <GoogleMapsEvent url={festival.googleMapsUrl} label={t('googleMaps')} />
-          )}
-        </EventActions>
-      )}
-      {!!festival.lineup.data.length && (
-        <Lineup
-          head={'Lineup'}
-          data={festival.lineup.data.map((item: any) => item.attributes)}
-          modal
+      <BurgerZoneTheme
+        enabled={festival.burgerZone}
+        color={festival.burgerZoneColor}
+        textColor={festival.burgerZoneTextColor}
+      >
+        <Head text={festival.title} type={'h1'} bg={'red'} />
+        <BlockContent
+          time={{ from: festival.from, to: festival.to }}
+          head={festival.place}
+          bg={'yellow1'}
+          content={festival.content}
         />
-      )}
-      <Winners
-        winner1={festival.winner1}
-        winner2={festival.winner2}
-        winner3={festival.winner3}
-        margin
-      />
-      {!!festival.vouchers.length && <Lineup head={t('voucherWinners')} data={festival.vouchers} />}
-      {!!festival.galery.data?.length && <Galery images={festival.galery} />}
-      {!!festival.partners?.data?.length && (
-        <Partners
-          items={festival.partners.data
-            .filter((p) => p.attributes.logo?.data)
-            .map((p) => ({
-              url: p.attributes.logo.data!.attributes.url,
-              link: p.attributes.link || undefined,
-            }))}
+        {upcoming && <BlockContent content={festival.contentBefore} />}
+        {!upcoming && <BlockContent content={festival.contentAfter} />}
+        {(upcoming || festival.social || festival.googleMapsUrl) && (
+          <EventActions>
+            {upcoming && slug && <CalendarEvent slug={slug} />}
+            {festival.social && <FacebookEvent single data={festival.social} />}
+            {festival.googleMapsUrl && (
+              <GoogleMapsEvent url={festival.googleMapsUrl} label={t('googleMaps')} />
+            )}
+          </EventActions>
+        )}
+        {!!festival.lineup.data.length && (
+          <Lineup
+            head={'Lineup'}
+            data={festival.lineup.data.map((item: any) => item.attributes)}
+            modal
+          />
+        )}
+        <Winners
+          winner1={festival.winner1}
+          winner2={festival.winner2}
+          winner3={festival.winner3}
+          margin
         />
-      )}
+        {!!festival.vouchers.length && (
+          <Lineup head={t('voucherWinners')} data={festival.vouchers} />
+        )}
+        {!!festival.galery.data?.length && <Galery images={festival.galery} />}
+        {!!festival.partners?.data?.length && (
+          <Partners
+            items={festival.partners.data
+              .filter((p) => p.attributes.logo?.data)
+              .map((p) => ({
+                url: p.attributes.logo.data!.attributes.url,
+                link: p.attributes.link || undefined,
+              }))}
+          />
+        )}
+      </BurgerZoneTheme>
     </Page>
   )
 }
